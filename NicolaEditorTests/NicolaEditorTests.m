@@ -3,7 +3,7 @@
 //  NicolaEditorTests
 //
 //  Created by kishikawa katsumi on 2013/10/08.
-//  Copyright (c) 2013年 kishikawa katsumi. All rights reserved.
+//  Copyright (c) 2013 kishikawa katsumi. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>

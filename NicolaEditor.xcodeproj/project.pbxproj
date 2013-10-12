@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */; };
+		1461746F1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */; };
+		146174711803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146174701803D88700C8763B /* NCLKeyboardAccessoryView.xib */; };
+		146174721803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146174701803D88700C8763B /* NCLKeyboardAccessoryView.xib */; };
+		1461748018058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461747F18058F6B00C8763B /* NCLKeyboardInputEngine.m */; };
+		1461748118058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461747F18058F6B00C8763B /* NCLKeyboardInputEngine.m */; };
+		1461750718072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461750618072E6500C8763B /* NCLKeyboardInputDisplayView.m */; };
+		1461750818072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461750618072E6500C8763B /* NCLKeyboardInputDisplayView.m */; };
+		146B3EE0180857F200418452 /* NCLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EDF180857F200418452 /* NCLSettingsViewController.m */; };
+		146B3EE1180857F200418452 /* NCLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EDF180857F200418452 /* NCLSettingsViewController.m */; };
+		146B3EE4180859A200418452 /* NCLFontSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */; };
+		146B3EE5180859A200418452 /* NCLFontSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */; };
+		146B3EEB18085B8600418452 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 146B3EEE18085B8600418452 /* Localizable.strings */; };
+		146B3EEC18085B8600418452 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 146B3EEE18085B8600418452 /* Localizable.strings */; };
+		146B3EF2180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */; };
+		146B3EF3180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */; };
+		146B3F0018086C5E00418452 /* NCLNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EFF18086C5E00418452 /* NCLNote.m */; };
+		146B3F0118086C5E00418452 /* NCLNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EFF18086C5E00418452 /* NCLNote.m */; };
+		146B3F0418086F5600418452 /* NCLNote+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3F0318086F5600418452 /* NCLNote+Helper.m */; };
+		146B3F0518086F5600418452 /* NCLNote+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3F0318086F5600418452 /* NCLNote+Helper.m */; };
+		146B3F081808740000418452 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3F071808740000418452 /* NSString+Helper.m */; };
+		146B3F091808740000418452 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3F071808740000418452 /* NSString+Helper.m */; };
+		146B3F0F18099F7200418452 /* SampleText.json in Resources */ = {isa = PBXBuildFile; fileRef = 146B3F0E18099F7200418452 /* SampleText.json */; };
+		146B3F1018099F7200418452 /* SampleText.json in Resources */ = {isa = PBXBuildFile; fileRef = 146B3F0E18099F7200418452 /* SampleText.json */; };
 		14B3F42E18030DEC00F7E91A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42D18030DEC00F7E91A /* Foundation.framework */; };
 		14B3F43018030DEC00F7E91A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42F18030DEC00F7E91A /* CoreGraphics.framework */; };
 		14B3F43218030DEC00F7E91A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F43118030DEC00F7E91A /* UIKit.framework */; };
@@ -14,10 +38,8 @@
 		14B3F43A18030DEC00F7E91A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F43818030DEC00F7E91A /* InfoPlist.strings */; };
 		14B3F43C18030DEC00F7E91A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F43B18030DEC00F7E91A /* main.m */; };
 		14B3F44018030DEC00F7E91A /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F43F18030DEC00F7E91A /* NCLAppDelegate.m */; };
-		14B3F44318030DEC00F7E91A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F44118030DEC00F7E91A /* Main.storyboard */; };
 		14B3F44618030DEC00F7E91A /* NicolaEditor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F44418030DEC00F7E91A /* NicolaEditor.xcdatamodeld */; };
-		14B3F44918030DEC00F7E91A /* NCLMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F44818030DEC00F7E91A /* NCLMasterViewController.m */; };
-		14B3F44C18030DEC00F7E91A /* NCLDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F44B18030DEC00F7E91A /* NCLDetailViewController.m */; };
+		14B3F44918030DEC00F7E91A /* NCLNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F44818030DEC00F7E91A /* NCLNotesViewController.m */; };
 		14B3F44E18030DEC00F7E91A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F44D18030DEC00F7E91A /* Images.xcassets */; };
 		14B3F45518030DEC00F7E91A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F45418030DEC00F7E91A /* XCTest.framework */; };
 		14B3F45618030DEC00F7E91A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42D18030DEC00F7E91A /* Foundation.framework */; };
@@ -25,6 +47,19 @@
 		14B3F45818030DEC00F7E91A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F43318030DEC00F7E91A /* CoreData.framework */; };
 		14B3F46018030DEC00F7E91A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F45E18030DEC00F7E91A /* InfoPlist.strings */; };
 		14B3F46218030DEC00F7E91A /* NicolaEditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F46118030DEC00F7E91A /* NicolaEditorTests.m */; };
+		14B3F46C18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F46B18030EAF00F7E91A /* NCLKeyboardView.xib */; };
+		14B3F46D18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F46B18030EAF00F7E91A /* NCLKeyboardView.xib */; };
+		14B3F47218030EB900F7E91A /* NCLKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F46F18030EB900F7E91A /* NCLKeyboardView.m */; };
+		14B3F47318030EB900F7E91A /* NCLKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F46F18030EB900F7E91A /* NCLKeyboardView.m */; };
+		14B3F47418030EB900F7E91A /* NCLKeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F47118030EB900F7E91A /* NCLKeyboardButton.m */; };
+		14B3F47518030EB900F7E91A /* NCLKeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F47118030EB900F7E91A /* NCLKeyboardButton.m */; };
+		14B3F478180310D600F7E91A /* NCLTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F477180310D600F7E91A /* NCLTextViewController.m */; };
+		14B3F479180310D600F7E91A /* NCLTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F477180310D600F7E91A /* NCLTextViewController.m */; };
+		14B3F47B1803121E00F7E91A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47A1803121E00F7E91A /* Main.storyboard */; };
+		14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47A1803121E00F7E91A /* Main.storyboard */; };
+		14B3F47E1803167200F7E91A /* KeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* KeyboardLayouts.json */; };
+		14B3F47F1803167200F7E91A /* KeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* KeyboardLayouts.json */; };
+		C631213B1BE745BBA45EA37C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 405DAA10965C4E299C75719A /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,29 +73,61 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1461746C1803D86200C8763B /* NCLKeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLKeyboardAccessoryView.h; sourceTree = "<group>"; };
+		1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLKeyboardAccessoryView.m; sourceTree = "<group>"; };
+		146174701803D88700C8763B /* NCLKeyboardAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NCLKeyboardAccessoryView.xib; sourceTree = "<group>"; };
+		1461747E18058F6B00C8763B /* NCLKeyboardInputEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLKeyboardInputEngine.h; sourceTree = "<group>"; };
+		1461747F18058F6B00C8763B /* NCLKeyboardInputEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLKeyboardInputEngine.m; sourceTree = "<group>"; };
+		1461750518072E6500C8763B /* NCLKeyboardInputDisplayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLKeyboardInputDisplayView.h; sourceTree = "<group>"; };
+		1461750618072E6500C8763B /* NCLKeyboardInputDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLKeyboardInputDisplayView.m; sourceTree = "<group>"; };
+		146B3EDE180857F200418452 /* NCLSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLSettingsViewController.h; sourceTree = "<group>"; };
+		146B3EDF180857F200418452 /* NCLSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLSettingsViewController.m; sourceTree = "<group>"; };
+		146B3EE2180859A200418452 /* NCLFontSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLFontSettingsViewController.h; sourceTree = "<group>"; };
+		146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLFontSettingsViewController.m; sourceTree = "<group>"; };
+		146B3EE918085B7E00418452 /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		146B3EEA18085B7F00418452 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		146B3EED18085B8600418452 /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		146B3EEF18085B8900418452 /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = file; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		146B3EF0180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLShiftKeyBehaviorSettingsViewController.h; sourceTree = "<group>"; };
+		146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLShiftKeyBehaviorSettingsViewController.m; sourceTree = "<group>"; };
+		146B3EFE18086C5E00418452 /* NCLNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLNote.h; sourceTree = "<group>"; };
+		146B3EFF18086C5E00418452 /* NCLNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLNote.m; sourceTree = "<group>"; };
+		146B3F0218086F5600418452 /* NCLNote+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NCLNote+Helper.h"; sourceTree = "<group>"; };
+		146B3F0318086F5600418452 /* NCLNote+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NCLNote+Helper.m"; sourceTree = "<group>"; };
+		146B3F061808740000418452 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
+		146B3F071808740000418452 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		146B3F0E18099F7200418452 /* SampleText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleText.json; sourceTree = "<group>"; };
 		14B3F42A18030DEC00F7E91A /* NicolaEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NicolaEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B3F42D18030DEC00F7E91A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14B3F42F18030DEC00F7E91A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		14B3F43118030DEC00F7E91A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		14B3F43318030DEC00F7E91A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		14B3F43718030DEC00F7E91A /* NicolaEditor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NicolaEditor-Info.plist"; sourceTree = "<group>"; };
-		14B3F43918030DEC00F7E91A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		14B3F43918030DEC00F7E91A /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14B3F43B18030DEC00F7E91A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		14B3F43D18030DEC00F7E91A /* NicolaEditor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NicolaEditor-Prefix.pch"; sourceTree = "<group>"; };
 		14B3F43E18030DEC00F7E91A /* NCLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLAppDelegate.h; sourceTree = "<group>"; };
 		14B3F43F18030DEC00F7E91A /* NCLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCLAppDelegate.m; sourceTree = "<group>"; };
-		14B3F44218030DEC00F7E91A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		14B3F44518030DEC00F7E91A /* NicolaEditor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NicolaEditor.xcdatamodel; sourceTree = "<group>"; };
-		14B3F44718030DEC00F7E91A /* NCLMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLMasterViewController.h; sourceTree = "<group>"; };
-		14B3F44818030DEC00F7E91A /* NCLMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCLMasterViewController.m; sourceTree = "<group>"; };
-		14B3F44A18030DEC00F7E91A /* NCLDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLDetailViewController.h; sourceTree = "<group>"; };
-		14B3F44B18030DEC00F7E91A /* NCLDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCLDetailViewController.m; sourceTree = "<group>"; };
+		14B3F44718030DEC00F7E91A /* NCLNotesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLNotesViewController.h; sourceTree = "<group>"; };
+		14B3F44818030DEC00F7E91A /* NCLNotesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCLNotesViewController.m; sourceTree = "<group>"; };
 		14B3F44D18030DEC00F7E91A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		14B3F45318030DEC00F7E91A /* NicolaEditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NicolaEditorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B3F45418030DEC00F7E91A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		14B3F45D18030DEC00F7E91A /* NicolaEditorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NicolaEditorTests-Info.plist"; sourceTree = "<group>"; };
 		14B3F45F18030DEC00F7E91A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		14B3F46118030DEC00F7E91A /* NicolaEditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NicolaEditorTests.m; sourceTree = "<group>"; };
+		14B3F46B18030EAF00F7E91A /* NCLKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NCLKeyboardView.xib; sourceTree = "<group>"; };
+		14B3F46E18030EB900F7E91A /* NCLKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLKeyboardView.h; sourceTree = "<group>"; };
+		14B3F46F18030EB900F7E91A /* NCLKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLKeyboardView.m; sourceTree = "<group>"; };
+		14B3F47018030EB900F7E91A /* NCLKeyboardButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLKeyboardButton.h; sourceTree = "<group>"; };
+		14B3F47118030EB900F7E91A /* NCLKeyboardButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLKeyboardButton.m; sourceTree = "<group>"; };
+		14B3F476180310D600F7E91A /* NCLTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLTextViewController.h; sourceTree = "<group>"; };
+		14B3F477180310D600F7E91A /* NCLTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLTextViewController.m; sourceTree = "<group>"; };
+		14B3F47A1803121E00F7E91A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		14B3F47D1803167200F7E91A /* KeyboardLayouts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KeyboardLayouts.json; sourceTree = "<group>"; };
+		405DAA10965C4E299C75719A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +139,7 @@
 				14B3F43418030DEC00F7E91A /* CoreData.framework in Frameworks */,
 				14B3F43218030DEC00F7E91A /* UIKit.framework in Frameworks */,
 				14B3F42E18030DEC00F7E91A /* Foundation.framework in Frameworks */,
+				C631213B1BE745BBA45EA37C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +157,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		146B3EF818086BFC00418452 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				146B3EFE18086C5E00418452 /* NCLNote.h */,
+				146B3EFF18086C5E00418452 /* NCLNote.m */,
+				146B3F0218086F5600418452 /* NCLNote+Helper.h */,
+				146B3F0318086F5600418452 /* NCLNote+Helper.m */,
+				14B3F44418030DEC00F7E91A /* NicolaEditor.xcdatamodeld */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		146B3EF918086C0A00418452 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				14B3F46E18030EB900F7E91A /* NCLKeyboardView.h */,
+				14B3F46F18030EB900F7E91A /* NCLKeyboardView.m */,
+				14B3F46B18030EAF00F7E91A /* NCLKeyboardView.xib */,
+				14B3F47018030EB900F7E91A /* NCLKeyboardButton.h */,
+				14B3F47118030EB900F7E91A /* NCLKeyboardButton.m */,
+				1461750518072E6500C8763B /* NCLKeyboardInputDisplayView.h */,
+				1461750618072E6500C8763B /* NCLKeyboardInputDisplayView.m */,
+				1461746C1803D86200C8763B /* NCLKeyboardAccessoryView.h */,
+				1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */,
+				146174701803D88700C8763B /* NCLKeyboardAccessoryView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		14B3F42118030DEC00F7E91A = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +193,7 @@
 				14B3F45B18030DEC00F7E91A /* NicolaEditorTests */,
 				14B3F42C18030DEC00F7E91A /* Frameworks */,
 				14B3F42B18030DEC00F7E91A /* Products */,
+				FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +214,7 @@
 				14B3F43118030DEC00F7E91A /* UIKit.framework */,
 				14B3F43318030DEC00F7E91A /* CoreData.framework */,
 				14B3F45418030DEC00F7E91A /* XCTest.framework */,
+				405DAA10965C4E299C75719A /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -125,13 +224,24 @@
 			children = (
 				14B3F43E18030DEC00F7E91A /* NCLAppDelegate.h */,
 				14B3F43F18030DEC00F7E91A /* NCLAppDelegate.m */,
-				14B3F44118030DEC00F7E91A /* Main.storyboard */,
-				14B3F44718030DEC00F7E91A /* NCLMasterViewController.h */,
-				14B3F44818030DEC00F7E91A /* NCLMasterViewController.m */,
-				14B3F44A18030DEC00F7E91A /* NCLDetailViewController.h */,
-				14B3F44B18030DEC00F7E91A /* NCLDetailViewController.m */,
+				14B3F44718030DEC00F7E91A /* NCLNotesViewController.h */,
+				14B3F44818030DEC00F7E91A /* NCLNotesViewController.m */,
+				14B3F476180310D600F7E91A /* NCLTextViewController.h */,
+				14B3F477180310D600F7E91A /* NCLTextViewController.m */,
+				146B3EDE180857F200418452 /* NCLSettingsViewController.h */,
+				146B3EDF180857F200418452 /* NCLSettingsViewController.m */,
+				146B3EE2180859A200418452 /* NCLFontSettingsViewController.h */,
+				146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */,
+				146B3EF0180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.h */,
+				146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */,
+				1461747E18058F6B00C8763B /* NCLKeyboardInputEngine.h */,
+				1461747F18058F6B00C8763B /* NCLKeyboardInputEngine.m */,
+				146B3F061808740000418452 /* NSString+Helper.h */,
+				146B3F071808740000418452 /* NSString+Helper.m */,
+				146B3EF918086C0A00418452 /* Views */,
+				146B3EF818086BFC00418452 /* Models */,
+				14B3F47A1803121E00F7E91A /* Main.storyboard */,
 				14B3F44D18030DEC00F7E91A /* Images.xcassets */,
-				14B3F44418030DEC00F7E91A /* NicolaEditor.xcdatamodeld */,
 				14B3F43618030DEC00F7E91A /* Supporting Files */,
 			);
 			path = NicolaEditor;
@@ -142,8 +252,11 @@
 			children = (
 				14B3F43718030DEC00F7E91A /* NicolaEditor-Info.plist */,
 				14B3F43818030DEC00F7E91A /* InfoPlist.strings */,
+				146B3EEE18085B8600418452 /* Localizable.strings */,
 				14B3F43B18030DEC00F7E91A /* main.m */,
 				14B3F43D18030DEC00F7E91A /* NicolaEditor-Prefix.pch */,
+				14B3F47D1803167200F7E91A /* KeyboardLayouts.json */,
+				146B3F0E18099F7200418452 /* SampleText.json */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -173,9 +286,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14B3F46518030DEC00F7E91A /* Build configuration list for PBXNativeTarget "NicolaEditor" */;
 			buildPhases = (
+				CC92CC975BC74A15BD7F8D0D /* Check Pods Manifest.lock */,
 				14B3F42618030DEC00F7E91A /* Sources */,
 				14B3F42718030DEC00F7E91A /* Frameworks */,
 				14B3F42818030DEC00F7E91A /* Resources */,
+				D1958E5B5E1742C5995FCC64 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -226,6 +341,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = 14B3F42118030DEC00F7E91A;
 			productRefGroup = 14B3F42B18030DEC00F7E91A /* Products */;
@@ -243,9 +359,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				146174711803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
 				14B3F44E18030DEC00F7E91A /* Images.xcassets in Resources */,
+				146B3F0F18099F7200418452 /* SampleText.json in Resources */,
+				14B3F46C18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
+				146B3EEB18085B8600418452 /* Localizable.strings in Resources */,
 				14B3F43A18030DEC00F7E91A /* InfoPlist.strings in Resources */,
-				14B3F44318030DEC00F7E91A /* Main.storyboard in Resources */,
+				14B3F47B1803121E00F7E91A /* Main.storyboard in Resources */,
+				14B3F47E1803167200F7E91A /* KeyboardLayouts.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,22 +374,72 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */,
+				146B3F1018099F7200418452 /* SampleText.json in Resources */,
+				146B3EEC18085B8600418452 /* Localizable.strings in Resources */,
 				14B3F46018030DEC00F7E91A /* InfoPlist.strings in Resources */,
+				14B3F47F1803167200F7E91A /* KeyboardLayouts.json in Resources */,
+				146174721803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
+				14B3F46D18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CC92CC975BC74A15BD7F8D0D /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D1958E5B5E1742C5995FCC64 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		14B3F42618030DEC00F7E91A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14B3F44918030DEC00F7E91A /* NCLMasterViewController.m in Sources */,
+				14B3F478180310D600F7E91A /* NCLTextViewController.m in Sources */,
+				14B3F44918030DEC00F7E91A /* NCLNotesViewController.m in Sources */,
+				146B3EE0180857F200418452 /* NCLSettingsViewController.m in Sources */,
+				1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */,
+				14B3F47218030EB900F7E91A /* NCLKeyboardView.m in Sources */,
+				146B3F0018086C5E00418452 /* NCLNote.m in Sources */,
+				1461748018058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */,
+				146B3EE4180859A200418452 /* NCLFontSettingsViewController.m in Sources */,
+				146B3F0418086F5600418452 /* NCLNote+Helper.m in Sources */,
+				146B3EF2180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */,
 				14B3F44018030DEC00F7E91A /* NCLAppDelegate.m in Sources */,
 				14B3F43C18030DEC00F7E91A /* main.m in Sources */,
 				14B3F44618030DEC00F7E91A /* NicolaEditor.xcdatamodeld in Sources */,
-				14B3F44C18030DEC00F7E91A /* NCLDetailViewController.m in Sources */,
+				14B3F47418030EB900F7E91A /* NCLKeyboardButton.m in Sources */,
+				1461750718072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */,
+				146B3F081808740000418452 /* NSString+Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +448,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				14B3F46218030DEC00F7E91A /* NicolaEditorTests.m in Sources */,
+				1461750818072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */,
+				1461748118058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */,
+				146B3EE1180857F200418452 /* NCLSettingsViewController.m in Sources */,
+				14B3F47518030EB900F7E91A /* NCLKeyboardButton.m in Sources */,
+				146B3F0518086F5600418452 /* NCLNote+Helper.m in Sources */,
+				146B3F0118086C5E00418452 /* NCLNote.m in Sources */,
+				1461746F1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */,
+				146B3EE5180859A200418452 /* NCLFontSettingsViewController.m in Sources */,
+				14B3F47318030EB900F7E91A /* NCLKeyboardView.m in Sources */,
+				14B3F479180310D600F7E91A /* NCLTextViewController.m in Sources */,
+				146B3F091808740000418452 /* NSString+Helper.m in Sources */,
+				146B3EF3180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,26 +474,29 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		146B3EEE18085B8600418452 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				146B3EED18085B8600418452 /* en */,
+				146B3EEF18085B8900418452 /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		14B3F43818030DEC00F7E91A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				14B3F43918030DEC00F7E91A /* en */,
+				146B3EE918085B7E00418452 /* ja */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		14B3F44118030DEC00F7E91A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				14B3F44218030DEC00F7E91A /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		14B3F45E18030DEC00F7E91A /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				14B3F45F18030DEC00F7E91A /* en */,
+				146B3EEA18085B7F00418452 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -322,7 +508,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -351,7 +537,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -362,7 +548,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -385,7 +571,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -394,6 +580,7 @@
 		};
 		14B3F46618030DEC00F7E91A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -407,6 +594,7 @@
 		};
 		14B3F46718030DEC00F7E91A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -479,6 +667,7 @@
 				14B3F46718030DEC00F7E91A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		14B3F46818030DEC00F7E91A /* Build configuration list for PBXNativeTarget "NicolaEditorTests" */ = {
 			isa = XCConfigurationList;
@@ -487,6 +676,7 @@
 				14B3F46A18030DEC00F7E91A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
