@@ -199,12 +199,12 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     
     if (UIInterfaceOrientationIsPortrait(orientation)) {
         self.returnKeyButton.frame = CGRectMake(674.0f, 72.0f, 88.0f, keyHeight);
-        self.numberKeyButton.frame = CGRectMake(5.0f, 200.0f, 89.0f, keyHeight);
-        self.alphabetKeyButton.frame = CGRectMake(101.0f, 200.0f, 89.0f, keyHeight);
-        self.leftShiftKeyButton.frame = CGRectMake(197.0f, 200.0f, 184.0f, keyHeight);
-        self.rightShiftKeyButton.frame = CGRectMake(388.0f, 200.0f, 184.0f, keyHeight);
-        self.spaceKeyButton.frame = CGRectMake(579.0f, 200.0f, 119.0f, keyHeight);
-        self.keyboardKeyButton.frame = CGRectMake(705.0f, 200.0f, 57.0f, keyHeight);
+        self.numberKeyButton.frame = CGRectMake(5.0f, 200.0f, keyWidth, keyHeight);
+        self.alphabetKeyButton.frame = CGRectMake(68.5f, 200.0f, keyWidth, keyHeight);
+        self.leftShiftKeyButton.frame = CGRectMake(132.0f, 200.0f, 217.0f, keyHeight);
+        self.rightShiftKeyButton.frame = CGRectMake(356.0f, 200.0f, 216.0f, keyHeight);
+        self.spaceKeyButton.frame = CGRectMake(578.5f, 200.0f, 121.0f, keyHeight);
+        self.keyboardKeyButton.frame = CGRectMake(706.0f, 200.0f, keyWidth, keyHeight);
     } else {
         self.returnKeyButton.frame = CGRectMake(895.0f, 95.0f, 122.0f, keyHeight);
         self.numberKeyButton.frame = CGRectMake(7.0f, 267.0f, keyWidth, keyHeight);

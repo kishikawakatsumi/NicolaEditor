@@ -23,6 +23,8 @@
 @property (nonatomic) UIEdgeInsets textViewContentInset;
 @property (nonatomic) UIEdgeInsets textViewScrollIndicatorInsets;
 
+@property (nonatomic) UIBarButtonItem *shareButton;
+
 @end
 
 @implementation NCLTextViewController
@@ -31,10 +33,16 @@
 {
     [super viewDidLoad];
     
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+    self.shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+    self.shareButton.enabled = NO;
 //    UIBarButtonItem *archiveButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"archive"] style:UIBarButtonItemStyleBordered target:self action:@selector(archive:)];
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
-    self.navigationItem.rightBarButtonItems = @[addButton, shareButton];
+    
+    if (NSClassFromString(@"UIActivityViewController")) {
+        self.navigationItem.rightBarButtonItems = @[addButton, self.shareButton];
+    } else {
+        self.navigationItem.rightBarButtonItems = @[addButton];
+    }
     
     self.inputView = [[[UINib nibWithNibName:NSStringFromClass([NCLKeyboardView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
     self.inputView.delegate = self;
@@ -81,6 +89,7 @@
     if (self.note) {
         self.navigationItem.title = self.note.title;
         
+        self.shareButton.enabled = self.note.content.length > 0;
         self.textView.userInteractionEnabled = YES;
         
         self.textView.text = self.note.content;
@@ -102,9 +111,11 @@
     }];
     
     self.navigationItem.title = title;
+    self.shareButton.enabled = text.length > 0;
     
     self.note.title = title;
     self.note.content = text;
+    
     
     [self.note.managedObjectContext saveNested];
 }
