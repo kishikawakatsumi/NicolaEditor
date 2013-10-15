@@ -7,19 +7,23 @@
 //
 
 #import "NCLSettingsViewController.h"
+#import "NCLShiftKeyFunctionsSettingsViewController.h"
 
 NSString * const NCLFontSettingsChanged = @"NCLFontSettingsChanged";
 NSString * const NCLShiftKeyBehaviorSettingsChanged = @"NCLShiftKeyBehaviorSettingsChanged";
+NSString * const NCLShiftKeyFunctionSettingsChanged = @"NCLShiftKeyFunctionSettingsChanged";
 
 @interface NCLSettingsViewController ()
 
 @property (nonatomic, weak) IBOutlet UILabel *fontNameLabel;
 
+@property (nonatomic, weak) IBOutlet UITableViewCell *fontSizeCell;
 @property (nonatomic, weak) IBOutlet UIStepper *fontSizeStepper;
 @property (nonatomic, weak) IBOutlet UILabel *fontSizeLabel;
 
 @property (nonatomic, weak) IBOutlet UILabel *shiftKeyBehaviorLabel;
 @property (nonatomic, weak) IBOutlet UISlider *timeShiftDurationSlider;
+@property (nonatomic, weak) IBOutlet UITableViewCell *timeShiftSliderCell;
 
 @end
 
@@ -31,9 +35,17 @@ NSString * const NCLShiftKeyBehaviorSettingsChanged = @"NCLShiftKeyBehaviorSetti
     
     self.navigationItem.title = NSLocalizedString(@"Settings", nil);
     
+    [self.fontSizeStepper removeFromSuperview];
+    self.fontSizeCell.accessoryView = self.fontSizeStepper;
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     double fontSize = [userDefaults doubleForKey:@"font-size"];
     self.fontSizeStepper.value = fontSize;
+    
+//    CGRect timeShiftDurationSliderFrame = self.timeShiftDurationSlider.frame;
+//    timeShiftDurationSliderFrame.origin.x = CGRectGetMinX(self.timeShiftSliderCell.contentView.frame) + 10.0f;
+//    timeShiftDurationSliderFrame.size.width = CGRectGetWidth(self.timeShiftSliderCell.contentView.frame) - CGRectGetMinX(timeShiftDurationSliderFrame) * 2 - 20.0f;
+//    self.timeShiftDurationSlider.frame = timeShiftDurationSliderFrame;
     
     float timeShiftDuration = [userDefaults doubleForKey:@"time-shift-duration"];
     self.timeShiftDurationSlider.value = timeShiftDuration;
@@ -52,6 +64,17 @@ NSString * const NCLShiftKeyBehaviorSettingsChanged = @"NCLShiftKeyBehaviorSetti
     
     NSString *shiftKeyBehavior = [userDefaults stringForKey:@"shift-key-behavior"];
     self.shiftKeyBehaviorLabel.text = NSLocalizedString(shiftKeyBehavior, nil);
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:NSStringFromClass([NCLShiftKeyFunctionsSettingsViewController class])]) {
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
+        if (indexPath.section == 2 && indexPath.row == 0) {
+            NCLShiftKeyFunctionsSettingsViewController *controller = segue.destinationViewController;
+            controller.left = YES;
+        }
+    }
 }
 
 #pragma mark -
@@ -86,6 +109,8 @@ NSString * const NCLShiftKeyBehaviorSettingsChanged = @"NCLShiftKeyBehaviorSetti
         return NSLocalizedString(@"Font", nil);
     } else if (section == 1) {
         return NSLocalizedString(@"Shift Key Behavior", nil);
+    } else if (section == 2) {
+        return NSLocalizedString(@"Shift Key Functions", nil);
     }
     
     return nil;
@@ -99,6 +124,13 @@ NSString * const NCLShiftKeyBehaviorSettingsChanged = @"NCLShiftKeyBehaviorSetti
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *shiftKeyBehavior = [userDefaults stringForKey:@"shift-key-behavior"];
         cell.textLabel.text = NSLocalizedString(shiftKeyBehavior, nil);
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 2) {
+        [self performSegueWithIdentifier:NSStringFromClass([NCLShiftKeyFunctionsSettingsViewController class]) sender:self];
     }
 }
 

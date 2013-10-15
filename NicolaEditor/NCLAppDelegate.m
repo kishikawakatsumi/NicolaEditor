@@ -8,6 +8,7 @@
 
 #import "NCLAppDelegate.h"
 #import "NCLNote.h"
+#import "NCLKeyboardView.h"
 #import "NSString+Helper.h"
 #import <NLCoreData/NLCoreData.h>
 #import <TestFlightSDK/TestFlight.h>
@@ -18,7 +19,7 @@
 {
     [TestFlight takeOff:@"7a1ada1b-6b67-4907-af62-ee07d5387caa"];
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"font-name": @"HiraMinProN-W3", @"font-size": @(18.0), @"shift-key-behavior": @"Time-Shift", @"time-shift-duration": @(0.1)}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"font-name": @"HiraMinProN-W3", @"font-size": @(18.0), @"shift-key-behavior": NCLKeyboardShiftKeyBehaviorTimeShift, @"time-shift-duration": @(0.1), @"shift-key-function-left": NCLKeyboardShiftKeyFunctionNextCandidate, @"shift-key-function-right": NCLKeyboardShiftKeyFunctionAcceptCandidate}];
     
     if (![[NSUserDefaults standardUserDefaults] stringForKey:@"installation-identifier"]) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSString UUIDString] forKey:@"installation-identifier"];
@@ -41,6 +42,13 @@
         }
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        [[UIToolbar appearance] setBackgroundImage:[[UIImage imageNamed:@"toolbar_bg"] resizableImageWithCapInsets:UIEdgeInsetsZero] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+        if ([UIToolbar instancesRespondToSelector:@selector(setShadowImage:forToolbarPosition:)]) {
+            [[UIToolbar appearance] setShadowImage:[UIImage imageNamed:@"clear"] forToolbarPosition:UIBarPositionAny];
+        }
+    }
     
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
     UINavigationController *navigationController = splitViewController.viewControllers.lastObject;

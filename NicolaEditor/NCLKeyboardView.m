@@ -16,6 +16,10 @@ NSString * const NCLKeyboardShiftKeyBehaviorTimeShift = @"Time-Shift";
 NSString * const NCLKeyboardShiftKeyBehaviorContinuityShift = @"Continuity-Shift";
 NSString * const NCLKeyboardShiftKeyBehaviorPrefixShift = @"Prefix-Shift";
 
+NSString * const NCLKeyboardShiftKeyFunctionNextCandidate = @"Next-Candidate";
+NSString * const NCLKeyboardShiftKeyFunctionAcceptCandidate = @"Accept-Candidate";
+NSString * const NCLKeyboardShiftKeyFunctionNone = @"None";
+
 NSInteger const NCLKeyboardViewSpecialKeyDelete = 11;
 NSInteger const NCLKeyboardViewSpecialKeyShift1 = 22;
 NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
@@ -68,10 +72,14 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     [self setupInputEngine];
     [self setupKeyboardView];
     
-//    self.ipnutDisplayView = [[NCLKeyboardInputDisplayView alloc] init];
-//    [self addSubview:self.ipnutDisplayView];
+    self.inputMode = NCLKeyboardInputModeKana;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shiftKeyBehaviorSettingsChanged:) name:NCLShiftKeyBehaviorSettingsChanged object:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -
@@ -93,6 +101,29 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
         [self.internalKeyboard performSelector:@selector(setInputMode:) withObject:@"ja_JP-Kana@sw=Kana-Flick;hw=US"];
         [self.internalKeyboard performSelector:@selector(setShowsCandidateInline:) withObject:@YES];
     }
+}
+
+#pragma mark -
+
+- (void)setInputMode:(NSString *)inputMode
+{
+    _inputMode = inputMode;
+    self.inputEngine.inputMode = inputMode;
+    
+    if ([inputMode isEqualToString:NCLKeyboardInputModeAlphabet]) {
+        [self.internalKeyboard performSelector:@selector(setInputMode:) withObject:@"en_US@hw=US;sw=QWERTY"];
+    } else if ([inputMode isEqualToString:NCLKeyboardInputModeNumber]) {
+        [self.internalKeyboard performSelector:@selector(setInputMode:) withObject:@"en_US@hw=US;sw=QWERTY"];
+    } else if ([inputMode isEqualToString:NCLKeyboardInputModeKana]) {
+        [self.internalKeyboard performSelector:@selector(setInputMode:) withObject:@"ja_JP-Kana@sw=Kana-Flick;hw=US"];
+    }
+    
+    BOOL kana = [inputMode isEqualToString:NCLKeyboardInputModeKana];
+    for (NCLKeyboardButton *button in self.keyButtons) {
+        button.selected = !kana;
+    }
+    
+    self.alphabetKeyButton.selected = !kana;
 }
 
 #pragma mark -
@@ -255,13 +286,12 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
 
 - (IBAction)touchUpReturnKey:(id)sender
 {
-    UITextRange *markedTextRange = self.textView.markedTextRange;
-    if (markedTextRange) {
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:@"_hasCandidates"] boolValue];
+    if (hasCandidates) {
         [self.internalKeyboard performSelector:@selector(acceptCurrentCandidate) withObject:nil];
         return;
     }
     
-    [self.internalKeyboard performSelector:@selector(addInputString:) withObject:@""];
     [self.internalKeyboard performSelector:@selector(addInputString:) withObject:@"\n"];
 }
 
@@ -278,29 +308,19 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
 
 - (IBAction)touchDownNumberKey:(id)sender
 {
-    [[UIDevice currentDevice] playInputClick];
-//    [self.inputEngine setInputMode:NCLKeyboardInputModeNumber];
+//    [[UIDevice currentDevice] playInputClick];
+//    self.inputMode = NCLKeyboardInputModeNumber;
 }
 
 - (IBAction)touchDownAlphabetKey:(id)sender
 {
     [[UIDevice currentDevice] playInputClick];
     
-    for (NCLKeyboardButton *button in self.keyButtons) {
-        button.selected = !button.selected;
-    }
-    
-    self.alphabetKeyButton.selected = !self.alphabetKeyButton.selected;
-    
-    if ([self.inputEngine.inputMode isEqualToString:NCLKeyboardInputModeKana]) {
-        self.inputEngine.inputMode = NCLKeyboardInputModeAlphabet;
-        [self.internalKeyboard performSelector:@selector(setInputMode:) withObject:@"en_US@hw=US;sw=QWERTY"];
+    if ([self.inputMode isEqualToString:NCLKeyboardInputModeKana]) {
+        self.inputMode = NCLKeyboardInputModeAlphabet;
     } else {
-        self.inputEngine.inputMode = NCLKeyboardInputModeKana;
-        [self.internalKeyboard performSelector:@selector(setInputMode:) withObject:@"ja_JP-Kana@sw=Kana-Flick;hw=US"];
+        self.inputMode = NCLKeyboardInputModeKana;
     }
-    
-    return;
 }
 
 #pragma mark -
@@ -339,7 +359,7 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
 
 - (IBAction)touchUpKeyboardKey:(id)sender
 {
-    [self.textView resignFirstResponder];
+    [self.textView endEditing:NO];
 }
 
 #pragma mark -
@@ -348,14 +368,34 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
 {
     if (text.length > 0) {
         [self.internalKeyboard performSelector:@selector(addInputString:) withObject:text];
-        
-//        NCLKeyboardButton *button = self.keyButtons[keyIndex];
-//        CGRect frame = button.frame;
-//        frame.origin.y -= (CGRectGetHeight(frame) + 2.0f);
-//        self.ipnutDisplayView.frame = frame;
-//        self.ipnutDisplayView.input = text;
-//        [self bringSubviewToFront:self.ipnutDisplayView];
-//        [self.ipnutDisplayView show];
+    }
+}
+
+- (void)keyboardInputEngineDidInputLeftShiftKey:(NCLKeyboardInputEngine *)engine
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *shiftKeyFunction = [userDefaults stringForKey:@"shift-key-function-left"];
+    if ([shiftKeyFunction isEqualToString:NCLKeyboardShiftKeyFunctionNextCandidate]) {
+        [self.internalKeyboard performSelector:@selector(showNextCandidates) withObject:nil];
+    } else if ([shiftKeyFunction isEqualToString:NCLKeyboardShiftKeyFunctionAcceptCandidate]) {
+        BOOL hasCandidates = [[self.internalKeyboard valueForKey:@"_hasCandidates"] boolValue];
+        if (hasCandidates) {
+            [self.internalKeyboard performSelector:@selector(acceptCurrentCandidate) withObject:nil];
+        }
+    }
+}
+
+- (void)keyboardInputEngineDidInputRightShiftKey:(NCLKeyboardInputEngine *)engine
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *shiftKeyFunction = [userDefaults stringForKey:@"shift-key-function-right"];
+    if ([shiftKeyFunction isEqualToString:NCLKeyboardShiftKeyFunctionNextCandidate]) {
+        [self.internalKeyboard performSelector:@selector(showNextCandidates) withObject:nil];
+    } else if ([shiftKeyFunction isEqualToString:NCLKeyboardShiftKeyFunctionAcceptCandidate]) {
+        BOOL hasCandidates = [[self.internalKeyboard valueForKey:@"_hasCandidates"] boolValue];
+        if (hasCandidates) {
+            [self.internalKeyboard performSelector:@selector(acceptCurrentCandidate) withObject:nil];
+        }
     }
 }
 

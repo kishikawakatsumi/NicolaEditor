@@ -38,5 +38,7 @@ extern NSString * const NCLKeyboardInputModeNumber;
 @protocol NCLKeyboardInputEngineDelegate <NSObject>
 
 - (void)keyboardInputEngine:(NCLKeyboardInputEngine *)engine processedText:(NSString *)text keyIndex:(NSInteger)keyIndex;
+- (void)keyboardInputEngineDidInputLeftShiftKey:(NCLKeyboardInputEngine *)engine;
+- (void)keyboardInputEngineDidInputRightShiftKey:(NCLKeyboardInputEngine *)engine;
 
 @end

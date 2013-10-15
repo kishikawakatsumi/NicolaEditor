@@ -10,6 +10,7 @@
 
 extern NSString * const NCLFontSettingsChanged;
 extern NSString * const NCLShiftKeyBehaviorSettingsChanged;
+extern NSString * const NCLShiftKeyFunctionSettingsChanged;
 
 @interface NCLSettingsViewController : UITableViewController
 

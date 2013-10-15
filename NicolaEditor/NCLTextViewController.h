@@ -15,3 +15,7 @@
 @property (nonatomic) NCLNote *note;
 
 @end
+
+@interface NCLTextView : UITextView
+
+@end

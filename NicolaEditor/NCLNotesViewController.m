@@ -39,13 +39,28 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Notes", nil);
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
+        [settingsButton sizeToFit];
+        CGRect frame = settingsButton.frame;
+        frame.size.width = 44.0f;
+        settingsButton.frame = frame;
+        settingsButton.showsTouchWhenHighlighted = YES;
+        [settingsButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
+        self.navigationItem.leftBarButtonItem = settingsBarButton;
+    }
+    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.textViewController = (NCLTextViewController *)[self.splitViewController.viewControllers.lastObject topViewController];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
     self.dateFormatter.dateStyle = NSDateFormatterShortStyle;
-    self.dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
     
     NSManagedObjectContext *managedObjectContext = [NSManagedObjectContext mainContext];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntity:[NCLNote class] context:managedObjectContext];
@@ -83,7 +98,8 @@
     if (self.settingsPopoverController.isPopoverVisible) {
         [self.settingsPopoverController dismissPopoverAnimated:YES];
     } else {
-        [self.settingsPopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [self.textViewController.view endEditing:YES];
+        [self.settingsPopoverController presentPopoverFromBarButtonItem:self.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
 }
 

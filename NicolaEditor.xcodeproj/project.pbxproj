@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		145E657B180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */; };
+		145E657C180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */; };
 		1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */; };
 		1461746F1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */; };
 		146174711803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146174701803D88700C8763B /* NCLKeyboardAccessoryView.xib */; };
@@ -73,6 +75,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		145E6579180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLShiftKeyFunctionsSettingsViewController.h; sourceTree = "<group>"; };
+		145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLShiftKeyFunctionsSettingsViewController.m; sourceTree = "<group>"; };
 		1461746C1803D86200C8763B /* NCLKeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLKeyboardAccessoryView.h; sourceTree = "<group>"; };
 		1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLKeyboardAccessoryView.m; sourceTree = "<group>"; };
 		146174701803D88700C8763B /* NCLKeyboardAccessoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NCLKeyboardAccessoryView.xib; sourceTree = "<group>"; };
@@ -234,6 +238,8 @@
 				146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */,
 				146B3EF0180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.h */,
 				146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */,
+				145E6579180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.h */,
+				145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */,
 				1461747E18058F6B00C8763B /* NCLKeyboardInputEngine.h */,
 				1461747F18058F6B00C8763B /* NCLKeyboardInputEngine.m */,
 				146B3F061808740000418452 /* NSString+Helper.h */,
@@ -437,6 +443,7 @@
 				146B3EE4180859A200418452 /* NCLFontSettingsViewController.m in Sources */,
 				146B3F0418086F5600418452 /* NCLNote+Helper.m in Sources */,
 				146B3EF2180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */,
+				145E657B180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */,
 				14B3F44018030DEC00F7E91A /* NCLAppDelegate.m in Sources */,
 				14B3F43C18030DEC00F7E91A /* main.m in Sources */,
 				14B3F44618030DEC00F7E91A /* NicolaEditor.xcdatamodeld in Sources */,
@@ -452,6 +459,7 @@
 			files = (
 				14B3F46218030DEC00F7E91A /* NicolaEditorTests.m in Sources */,
 				1461750818072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */,
+				145E657C180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */,
 				1461748118058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */,
 				146B3EE1180857F200418452 /* NCLSettingsViewController.m in Sources */,
 				14B3F47518030EB900F7E91A /* NCLKeyboardButton.m in Sources */,
@@ -542,7 +550,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "B11054AA-54A4-40FA-B02B-4F5475C61635";
+				PROVISIONING_PROFILE = "57D8BADA-B8C8-455D-8064-1C1FB4748221";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -576,7 +584,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "B11054AA-54A4-40FA-B02B-4F5475C61635";
+				PROVISIONING_PROFILE = "57D8BADA-B8C8-455D-8064-1C1FB4748221";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

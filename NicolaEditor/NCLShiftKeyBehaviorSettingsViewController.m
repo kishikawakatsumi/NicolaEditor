@@ -49,11 +49,11 @@
     
     NSInteger row = indexPath.row;
     if (row == 0) {
-        [userDefaults setObject:@"Time-Shift" forKey:key];
+        [userDefaults setObject:NCLKeyboardShiftKeyBehaviorTimeShift forKey:key];
     } else if (row == 1) {
-        [userDefaults setObject:@"Continuity-Shift" forKey:key];
+        [userDefaults setObject:NCLKeyboardShiftKeyBehaviorContinuityShift forKey:key];
     } else if (row == 2) {
-        [userDefaults setObject:@"Prefix-Shift" forKey:key];
+        [userDefaults setObject:NCLKeyboardShiftKeyBehaviorPrefixShift forKey:key];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
