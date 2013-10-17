@@ -7,8 +7,7 @@
 //
 
 #import "NCLShiftKeyBehaviorSettingsViewController.h"
-#import "NCLSettingsViewController.h"
-#import "NCLKeyboardView.h"
+#import "NCLConstants.h"
 
 @interface NCLShiftKeyBehaviorSettingsViewController ()
 
@@ -26,14 +25,14 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *shiftKeyBehavior = [userDefaults stringForKey:@"shift-key-behavior"];
+    NSString *shiftKeyBehavior = [userDefaults stringForKey:NCLSettingsShiftKeyBehaviorKey];
     
     NSInteger row = indexPath.row;
-    if (row == 0 && [shiftKeyBehavior isEqualToString:NCLKeyboardShiftKeyBehaviorTimeShift]) {
+    if (row == 0 && [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else if (row == 1 && [shiftKeyBehavior isEqualToString:NCLKeyboardShiftKeyBehaviorContinuityShift]) {
+    } else if (row == 1 && [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorContinuityShift]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else if (row == 2 && [shiftKeyBehavior isEqualToString:NCLKeyboardShiftKeyBehaviorPrefixShift]) {
+    } else if (row == 2 && [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorPrefixShift]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -45,21 +44,21 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:tableView];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = @"shift-key-behavior";
+    NSString *key = NCLSettingsShiftKeyBehaviorKey;
     
     NSInteger row = indexPath.row;
     if (row == 0) {
-        [userDefaults setObject:NCLKeyboardShiftKeyBehaviorTimeShift forKey:key];
+        [userDefaults setObject:NCLShiftKeyBehaviorTimeShift forKey:key];
     } else if (row == 1) {
-        [userDefaults setObject:NCLKeyboardShiftKeyBehaviorContinuityShift forKey:key];
+        [userDefaults setObject:NCLShiftKeyBehaviorContinuityShift forKey:key];
     } else if (row == 2) {
-        [userDefaults setObject:NCLKeyboardShiftKeyBehaviorPrefixShift forKey:key];
+        [userDefaults setObject:NCLShiftKeyBehaviorPrefixShift forKey:key];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLShiftKeyBehaviorSettingsChanged object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
 }
 
 @end

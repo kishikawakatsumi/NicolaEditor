@@ -8,6 +8,7 @@
 
 #import "NCLFontSettingsViewController.h"
 #import "NCLSettingsViewController.h"
+#import "NCLConstants.h"
 
 @interface NCLFontSettingsViewController ()
 
@@ -25,7 +26,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *fontName = [userDefaults stringForKey:@"font-name"];
+    NSString *fontName = [userDefaults stringForKey:NCLSettingsFontNameKey];
     
     NSInteger row = indexPath.row;
     if (row == 0 && [fontName isEqualToString:@"HiraMinProN-W3"]) {
@@ -42,7 +43,7 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:tableView];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *key = @"font-name";
+    NSString *key = NCLSettingsFontNameKey;
     
     NSInteger row = indexPath.row;
     if (row == 0) {
@@ -54,7 +55,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLShiftKeyBehaviorSettingsChanged object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:nil];
 }
 
 @end

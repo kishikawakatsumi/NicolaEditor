@@ -21,7 +21,7 @@ extern NSString * const NCLKeyboardInputModeNumber;
 
 @property (nonatomic, weak) id delegate;
 
-@property (nonatomic) NSString *inputMode;
+@property (nonatomic) NSString *inputMethod;
 @property (nonatomic) NSTimeInterval delay;
 
 @property (nonatomic, getter = isShifted) BOOL shifted;

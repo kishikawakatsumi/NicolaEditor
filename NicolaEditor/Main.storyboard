@@ -50,7 +50,7 @@
                     <navigationItem key="navigationItem" id="Hbn-FH-S03">
                         <barButtonItem key="leftBarButtonItem" image="settings" id="9gj-Gl-L6b">
                             <connections>
-                                <action selector="showSettings:" destination="01K-C1-VTa" id="eOT-a1-AcG"/>
+                                <action selector="presentSettings:" destination="01K-C1-VTa" id="8YR-Is-cLk"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -490,25 +490,10 @@
                     <view key="view" contentMode="scaleToFill" id="HFx-s7-ZuE">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" id="U4g-Fv-BiL" customClass="NCLTextView">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="RQB-s7-4cX" id="Q2D-VT-PF7"/>
-                                </connections>
-                            </textView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="tRu-V9-yhW"/>
-                    <connections>
-                        <outlet property="textView" destination="U4g-Fv-BiL" id="rOz-W1-OW8"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nG1-LU-5EQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

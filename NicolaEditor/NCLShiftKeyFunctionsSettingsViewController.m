@@ -7,8 +7,7 @@
 //
 
 #import "NCLShiftKeyFunctionsSettingsViewController.h"
-#import "NCLSettingsViewController.h"
-#import "NCLKeyboardView.h"
+#import "NCLConstants.h"
 
 @interface NCLShiftKeyFunctionsSettingsViewController ()
 
@@ -28,17 +27,17 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *shiftKeyFunction;
     if (self.isLeft) {
-        shiftKeyFunction = [userDefaults stringForKey:@"shift-key-function-left"];
+        shiftKeyFunction = [userDefaults stringForKey:NCLSettingsLeftShiftFunctionKey];
     } else {
-        shiftKeyFunction = [userDefaults stringForKey:@"shift-key-function-right"];
+        shiftKeyFunction = [userDefaults stringForKey:NCLSettingsRightShiftFunctionKey];
     }
     
     NSInteger row = indexPath.row;
-    if (row == 0 && [shiftKeyFunction isEqualToString:NCLKeyboardShiftKeyFunctionNextCandidate]) {
+    if (row == 0 && [shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else if (row == 1 && [shiftKeyFunction isEqualToString:NCLKeyboardShiftKeyFunctionAcceptCandidate]) {
+    } else if (row == 1 && [shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else if (row == 2 && [shiftKeyFunction isEqualToString:NCLKeyboardShiftKeyFunctionNone]) {
+    } else if (row == 2 && [shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNone]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -52,24 +51,24 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *key;
     if (self.isLeft) {
-        key = @"shift-key-function-left";
+        key = NCLSettingsLeftShiftFunctionKey;
     } else {
-        key = @"shift-key-function-right";
+        key = NCLSettingsRightShiftFunctionKey;
     }
     
     NSInteger row = indexPath.row;
     if (row == 0) {
-        [userDefaults setObject:NCLKeyboardShiftKeyFunctionNextCandidate forKey:key];
+        [userDefaults setObject:NCLShiftKeyFunctionNextCandidate forKey:key];
     } else if (row == 1) {
-        [userDefaults setObject:NCLKeyboardShiftKeyFunctionAcceptCandidate forKey:key];
+        [userDefaults setObject:NCLShiftKeyFunctionAcceptCandidate forKey:key];
     } else if (row == 2) {
-        [userDefaults setObject:NCLKeyboardShiftKeyFunctionNone forKey:key];
+        [userDefaults setObject:NCLShiftKeyFunctionNone forKey:key];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLShiftKeyFunctionSettingsChanged object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsShiftKeyFunctionDidChangeNodification object:nil];
 }
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "NCLKeyboardInputEngine.h"
-#import "NCLKeyboardView.h"
+#import "NCLConstants.h"
 
 typedef NS_ENUM(NSInteger, NCLKeyboardKeyType) {
     NCLKeyboardKeyTypeCharacter = 0,
@@ -63,11 +63,11 @@ NSString * const NCLKeyboardInputModeNumber = @"Number";
 
 + (id)inputEngineWithShiftKeyBehavior:(NSString *)shiftKeyBehavior
 {
-    if ([shiftKeyBehavior isEqualToString:NCLKeyboardShiftKeyBehaviorTimeShift]) {
+    if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift]) {
         return [[NCLKeyboardTimeShiftInputEngine alloc] init];
-    } else if ([shiftKeyBehavior isEqualToString:NCLKeyboardShiftKeyBehaviorContinuityShift]) {
+    } else if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorContinuityShift]) {
         return [[NCLKeyboardContinuityShiftInputEngine alloc] init];
-    } else if ([shiftKeyBehavior isEqualToString:NCLKeyboardShiftKeyBehaviorPrefixShift]) {
+    } else if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorPrefixShift]) {
         return [[NCLKeyboardPrefixShiftInputEngine alloc] init];
     }
     
@@ -210,7 +210,7 @@ NSString * const NCLKeyboardInputModeNumber = @"Number";
         }
         
         NSInteger keyIndex = keyInput.index;
-        NSArray *keyboardLayout = self.keyboardLayouts[self.inputMode];
+        NSArray *keyboardLayout = self.keyboardLayouts[self.inputMethod];
         NSString *text = keyboardLayout[shiftState][keyIndex];
         
         if (self.shifted) {
@@ -310,7 +310,7 @@ NSString * const NCLKeyboardInputModeNumber = @"Number";
 - (void)proccessInput:(NCLKeyboardInput *)keyInput
 {
     NSInteger keyIndex = keyInput.index;
-    NSArray *keyboardLayout = self.keyboardLayouts[self.inputMode];
+    NSArray *keyboardLayout = self.keyboardLayouts[self.inputMethod];
     NSString *text = keyboardLayout[_shiftState][keyIndex];
     
     if (self.shifted) {

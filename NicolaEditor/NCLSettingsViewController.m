@@ -8,10 +8,7 @@
 
 #import "NCLSettingsViewController.h"
 #import "NCLShiftKeyFunctionsSettingsViewController.h"
-
-NSString * const NCLFontSettingsChanged = @"NCLFontSettingsChanged";
-NSString * const NCLShiftKeyBehaviorSettingsChanged = @"NCLShiftKeyBehaviorSettingsChanged";
-NSString * const NCLShiftKeyFunctionSettingsChanged = @"NCLShiftKeyFunctionSettingsChanged";
+#import "NCLConstants.h"
 
 @interface NCLSettingsViewController ()
 
@@ -39,15 +36,10 @@ NSString * const NCLShiftKeyFunctionSettingsChanged = @"NCLShiftKeyFunctionSetti
     self.fontSizeCell.accessoryView = self.fontSizeStepper;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    double fontSize = [userDefaults doubleForKey:@"font-size"];
+    double fontSize = [userDefaults doubleForKey:NCLSettingsFontSizeKey];
     self.fontSizeStepper.value = fontSize;
     
-//    CGRect timeShiftDurationSliderFrame = self.timeShiftDurationSlider.frame;
-//    timeShiftDurationSliderFrame.origin.x = CGRectGetMinX(self.timeShiftSliderCell.contentView.frame) + 10.0f;
-//    timeShiftDurationSliderFrame.size.width = CGRectGetWidth(self.timeShiftSliderCell.contentView.frame) - CGRectGetMinX(timeShiftDurationSliderFrame) * 2 - 20.0f;
-//    self.timeShiftDurationSlider.frame = timeShiftDurationSliderFrame;
-    
-    float timeShiftDuration = [userDefaults doubleForKey:@"time-shift-duration"];
+    float timeShiftDuration = [userDefaults doubleForKey:NCLSettingsTimeShiftDurationKey];
     self.timeShiftDurationSlider.value = timeShiftDuration;
 }
 
@@ -56,13 +48,13 @@ NSString * const NCLShiftKeyFunctionSettingsChanged = @"NCLShiftKeyFunctionSetti
     [super viewWillAppear:animated];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *fontName = [userDefaults stringForKey:@"font-name"];
+    NSString *fontName = [userDefaults stringForKey:NCLSettingsFontNameKey];
     self.fontNameLabel.text = NSLocalizedString(fontName, nil);
     
-    double fontSize = [userDefaults doubleForKey:@"font-size"];
+    double fontSize = [userDefaults doubleForKey:NCLSettingsFontSizeKey];
     self.fontSizeLabel.text = [NSString stringWithFormat:@"%d pt", (NSInteger)fontSize];
     
-    NSString *shiftKeyBehavior = [userDefaults stringForKey:@"shift-key-behavior"];
+    NSString *shiftKeyBehavior = [userDefaults stringForKey:NCLSettingsShiftKeyBehaviorKey];
     self.shiftKeyBehaviorLabel.text = NSLocalizedString(shiftKeyBehavior, nil);
 }
 
@@ -84,11 +76,11 @@ NSString * const NCLShiftKeyFunctionSettingsChanged = @"NCLShiftKeyFunctionSetti
     double fontSize = self.fontSizeStepper.value;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setDouble:fontSize forKey:@"font-size"];
+    [userDefaults setDouble:fontSize forKey:NCLSettingsFontSizeKey];
     
     self.fontSizeLabel.text = [NSString stringWithFormat:@"%d pt", (NSInteger)fontSize];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLShiftKeyBehaviorSettingsChanged object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:nil];
 }
 
 - (IBAction)timeShiftDurationChanged:(id)sender
@@ -96,9 +88,9 @@ NSString * const NCLShiftKeyFunctionSettingsChanged = @"NCLShiftKeyFunctionSetti
     float timeShiftDuration = self.timeShiftDurationSlider.value;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults setFloat:timeShiftDuration forKey:@"time-shift-duration"];
+    [userDefaults setFloat:timeShiftDuration forKey:NCLSettingsTimeShiftDurationKey];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLShiftKeyBehaviorSettingsChanged object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
 }
 
 #pragma mark -
@@ -122,7 +114,7 @@ NSString * const NCLShiftKeyFunctionSettingsChanged = @"NCLShiftKeyFunctionSetti
     NSInteger row = indexPath.row;
     if (section == 1 && row == 0) {
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        NSString *shiftKeyBehavior = [userDefaults stringForKey:@"shift-key-behavior"];
+        NSString *shiftKeyBehavior = [userDefaults stringForKey:NCLSettingsShiftKeyBehaviorKey];
         cell.textLabel.text = NSLocalizedString(shiftKeyBehavior, nil);
     }
 }

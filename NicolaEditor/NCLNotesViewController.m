@@ -9,6 +9,7 @@
 #import "NCLNotesViewController.h"
 #import "NCLTextViewController.h"
 #import "NCLSettingsViewController.h"
+#import "NCLPopoverManager.h"
 #import "NCLNote.h"
 #import <NLCoreData/NLCoreData.h>
 
@@ -48,7 +49,7 @@
         frame.size.width = 44.0f;
         settingsButton.frame = frame;
         settingsButton.showsTouchWhenHighlighted = YES;
-        [settingsButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
+        [settingsButton addTarget:self action:@selector(presentSettings:) forControlEvents:UIControlEventTouchUpInside];
         
         UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
         self.navigationItem.leftBarButtonItem = settingsBarButton;
@@ -76,17 +77,12 @@
     [self.fetchedResultsController performFetch:&error];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;
 }
 
-- (IBAction)showSettings:(id)sender
+- (IBAction)presentSettings:(id)sender
 {
     if (!self.settingsPopoverController) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -99,7 +95,7 @@
         [self.settingsPopoverController dismissPopoverAnimated:YES];
     } else {
         [self.textViewController.view endEditing:YES];
-        [self.settingsPopoverController presentPopoverFromBarButtonItem:self.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [[NCLPopoverManager sharedManager] presentPopover:self.settingsPopoverController fromBarButtonItem:self.navigationItem.leftBarButtonItem];
     }
 }
 

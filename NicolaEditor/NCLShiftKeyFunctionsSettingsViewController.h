@@ -6,7 +6,7 @@
 //  Copyright (c) 2013年 kishikawa katsumi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface NCLShiftKeyFunctionsSettingsViewController : UITableViewController
 

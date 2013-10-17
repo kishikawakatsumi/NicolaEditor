@@ -10,6 +10,7 @@
 #import "NCLNote.h"
 #import "NCLKeyboardView.h"
 #import "NSString+Helper.h"
+#import "NCLConstants.h"
 #import <NLCoreData/NLCoreData.h>
 #import <TestFlightSDK/TestFlight.h>
 
@@ -19,7 +20,7 @@
 {
     [TestFlight takeOff:@"7a1ada1b-6b67-4907-af62-ee07d5387caa"];
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{@"font-name": @"HiraMinProN-W3", @"font-size": @(18.0), @"shift-key-behavior": NCLKeyboardShiftKeyBehaviorTimeShift, @"time-shift-duration": @(0.1), @"shift-key-function-left": NCLKeyboardShiftKeyFunctionNextCandidate, @"shift-key-function-right": NCLKeyboardShiftKeyFunctionAcceptCandidate}];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:@{NCLSettingsFontNameKey: @"HiraMinProN-W3", NCLSettingsFontSizeKey: @(18.0), NCLSettingsShiftKeyBehaviorKey: NCLShiftKeyBehaviorTimeShift, NCLSettingsTimeShiftDurationKey: @(0.1), NCLSettingsLeftShiftFunctionKey: NCLShiftKeyFunctionNextCandidate, NCLSettingsRightShiftFunctionKey: NCLShiftKeyFunctionAcceptCandidate}];
     
     if (![[NSUserDefaults standardUserDefaults] stringForKey:@"installation-identifier"]) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSString UUIDString] forKey:@"installation-identifier"];

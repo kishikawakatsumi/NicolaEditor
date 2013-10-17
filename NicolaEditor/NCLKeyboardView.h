@@ -6,22 +6,14 @@
 //  Copyright (c) 2013 kishikawa katsumi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-extern NSString * const NCLKeyboardShiftKeyBehaviorTimeShift;
-extern NSString * const NCLKeyboardShiftKeyBehaviorContinuityShift;
-extern NSString * const NCLKeyboardShiftKeyBehaviorPrefixShift;
-
-extern NSString * const NCLKeyboardShiftKeyFunctionNextCandidate;
-extern NSString * const NCLKeyboardShiftKeyFunctionAcceptCandidate;
-extern NSString * const NCLKeyboardShiftKeyFunctionNone;
+@import UIKit;
 
 @interface NCLKeyboardView : UIView
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, weak) UITextView *textView;
 
-@property (nonatomic) NSString *inputMode;
+@property (nonatomic) NSString *keyboardInputMethod;
 
 @end
 

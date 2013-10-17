@@ -6,16 +6,12 @@
 //  Copyright (c) 2013 kishikawa katsumi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @class NCLNote;
 
 @interface NCLTextViewController : UIViewController
 
 @property (nonatomic) NCLNote *note;
-
-@end
-
-@interface NCLTextView : UITextView
 
 @end
