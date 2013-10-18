@@ -51,6 +51,10 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
 
 @interface NCLKeyboardContinuityShiftInputEngine : NCLKeyboardInputEngine
 
+@property (nonatomic) NSMutableArray *keyInputQueue;
+@property (nonatomic) NCLKeyboardInput *lastLeftShiftKeyInput;
+@property (nonatomic) NCLKeyboardInput *lastRightShiftKeyInput;
+
 @end
 
 @interface NCLKeyboardPrefixShiftInputEngine : NCLKeyboardInputEngine
@@ -265,6 +269,175 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
 @end
 
 @implementation NCLKeyboardContinuityShiftInputEngine
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.keyInputQueue = [[NSMutableArray alloc] init];
+    }
+    
+    return self;
+}
+
+- (void)addKeyInput:(NSInteger)input
+{
+    NCLKeyboardInput *keyInput = [[NCLKeyboardInput alloc] init];
+    keyInput.index = input;
+    keyInput.type = NCLKeyboardKeyTypeCharacter;
+    keyInput.timestamp = CACurrentMediaTime();
+    [_keyInputQueue addObject:keyInput];
+    
+    double delayInSeconds = self.delay;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self proccessInput:keyInput];
+    });
+}
+
+#pragma mark -
+
+- (void)addLeftShiftKeyEvent:(NCLKeyboardEvent)event
+{
+    if (event == NCLKeyboardEventKeyPressed) {
+        NCLKeyboardInput *keyInput = [[NCLKeyboardInput alloc] init];
+        keyInput.type = NCLKeyboardKeyTypeLeftShift;
+        keyInput.timestamp = CACurrentMediaTime();
+        [_keyInputQueue addObject:keyInput];
+        
+        _lastLeftShiftKeyInput = keyInput;
+    } else if (event == NCLKeyboardEventKeyUp) {
+        NSTimeInterval delta = CACurrentMediaTime() - _lastLeftShiftKeyInput.timestamp;
+        if (self.delay > delta) {
+            [self proccessInput:_lastLeftShiftKeyInput];
+        }
+        _lastLeftShiftKeyInput = nil;
+    }
+}
+
+- (void)addRightShiftKeyEvent:(NCLKeyboardEvent)event
+{
+    if (event == NCLKeyboardEventKeyPressed) {
+        NCLKeyboardInput *keyInput = [[NCLKeyboardInput alloc] init];
+        keyInput.type = NCLKeyboardKeyTypeRightShift;
+        keyInput.timestamp = CACurrentMediaTime();
+        [_keyInputQueue addObject:keyInput];
+        
+        _lastRightShiftKeyInput = keyInput;
+    } else if (event == NCLKeyboardEventKeyUp) {
+        NSTimeInterval delta = CACurrentMediaTime() - _lastRightShiftKeyInput.timestamp;
+        if (self.delay > delta) {
+            [self proccessInput:_lastRightShiftKeyInput];
+        }
+        _lastRightShiftKeyInput = nil;
+    }
+}
+
+#pragma mark -
+
+- (void)proccessInput:(NCLKeyboardInput *)keyInput
+{
+    NSInteger queueIndex = [_keyInputQueue indexOfObject:keyInput];
+    if (queueIndex == NSNotFound) {
+        return;
+    }
+    
+    if (keyInput.type == NCLKeyboardKeyTypeCharacter) {
+        NCLKeyboardShiftState shiftState = NCLKeyboardShiftStateNone;
+        
+        if (_lastLeftShiftKeyInput) {
+            shiftState = NCLKeyboardShiftStateLeftShifted;
+        }
+        
+        if (shiftState == NCLKeyboardShiftStateNone) {
+            if (_lastRightShiftKeyInput) {
+                shiftState = NCLKeyboardShiftStateRightShifted;
+            }
+        }
+        
+        if (shiftState == NCLKeyboardShiftStateNone) {
+            if (_keyInputQueue.count > queueIndex - 1) {
+                NCLKeyboardInput *previousKeyInput = _keyInputQueue[queueIndex - 1];
+                NSTimeInterval delta = keyInput.timestamp - previousKeyInput.timestamp;
+                
+                if (self.delay > delta) {
+                    if (previousKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
+                        shiftState = NCLKeyboardShiftStateLeftShifted;
+                        [_keyInputQueue removeObject:previousKeyInput];
+                    } else if (previousKeyInput.type == NCLKeyboardKeyTypeRightShift) {
+                        shiftState = NCLKeyboardShiftStateRightShifted;
+                        [_keyInputQueue removeObject:previousKeyInput];
+                    }
+                }
+            }
+            if (shiftState == NCLKeyboardShiftStateNone && _keyInputQueue.count > queueIndex + 1) {
+                NCLKeyboardInput *nextKeyInput = _keyInputQueue[queueIndex + 1];
+                NSTimeInterval delta = nextKeyInput.timestamp - keyInput.timestamp;
+                
+                if (self.delay > delta) {
+                    if (nextKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
+                        shiftState = NCLKeyboardShiftStateLeftShifted;
+                        [_keyInputQueue removeObject:nextKeyInput];
+                    } else if (nextKeyInput.type == NCLKeyboardKeyTypeRightShift) {
+                        shiftState = NCLKeyboardShiftStateRightShifted;
+                        [_keyInputQueue removeObject:nextKeyInput];
+                    }
+                }
+            }
+        }
+        
+        NSInteger keyIndex = keyInput.index;
+        NSArray *keyboardLayout = self.keyboardLayouts[self.inputMethod];
+        NSString *text = keyboardLayout[shiftState][keyIndex];
+        
+        if (self.shifted) {
+            text = [text capitalizedString];
+        }
+        
+        [self.delegate keyboardInputEngine:self processedText:text keyIndex:keyIndex];
+        
+        [_keyInputQueue removeObject:keyInput];
+    } else {
+        NCLKeyboardShiftState shiftState = NCLKeyboardShiftStateNone;
+        
+        if (_keyInputQueue.count > queueIndex - 1) {
+            NCLKeyboardInput *previousKeyInput = _keyInputQueue[queueIndex - 1];
+            NSTimeInterval delta = keyInput.timestamp - previousKeyInput.timestamp;
+            
+            if (self.delay > delta) {
+                if (previousKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
+                    shiftState = NCLKeyboardShiftStateLeftShifted;
+                    [_keyInputQueue removeObject:previousKeyInput];
+                } else if (previousKeyInput.type == NCLKeyboardKeyTypeRightShift) {
+                    shiftState = NCLKeyboardShiftStateRightShifted;
+                    [_keyInputQueue removeObject:previousKeyInput];
+                }
+            }
+        }
+        if (shiftState == NCLKeyboardShiftStateNone && _keyInputQueue.count > queueIndex + 1) {
+            NCLKeyboardInput *nextKeyInput = _keyInputQueue[queueIndex + 1];
+            NSTimeInterval delta = nextKeyInput.timestamp - keyInput.timestamp;
+            
+            if (self.delay > delta) {
+                if (nextKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
+                    shiftState = NCLKeyboardShiftStateLeftShifted;
+                    [_keyInputQueue removeObject:nextKeyInput];
+                } else if (nextKeyInput.type == NCLKeyboardKeyTypeRightShift) {
+                    shiftState = NCLKeyboardShiftStateRightShifted;
+                    [_keyInputQueue removeObject:nextKeyInput];
+                }
+            }
+        }
+        
+        if (shiftState == NCLKeyboardShiftStateNone) {
+            if (keyInput.type == NCLKeyboardKeyTypeLeftShift) {
+                [self.delegate keyboardInputEngineDidInputLeftShiftKey:self];
+            } else if (keyInput.type == NCLKeyboardKeyTypeRightShift) {
+                [self.delegate keyboardInputEngineDidInputRightShiftKey:self];
+            }
+        }
+    }
+}
 
 @end
 

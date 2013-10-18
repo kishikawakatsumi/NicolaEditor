@@ -78,7 +78,10 @@
     
     NSString *shiftKeyBehavior = [userDefaults stringForKey:NCLSettingsShiftKeyBehaviorKey];
     self.shiftKeyBehaviorLabel.text = NSLocalizedString(shiftKeyBehavior, nil);
-    self.timeShiftDurationSlider.enabled = [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift];
+    
+    BOOL isTimeShift = [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift] || [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorContinuityShift];
+    self.timeShiftDurationLabel.textColor = isTimeShift ? [UIColor blackColor] : [UIColor lightGrayColor];
+    self.timeShiftDurationSlider.enabled = isTimeShift;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -195,13 +198,6 @@
         } else {
             cell.textLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:16.0f];
         }
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 2) {
-        [self performSegueWithIdentifier:NSStringFromClass([NCLShiftKeyFunctionsSettingsViewController class]) sender:self];
     }
 }
 

@@ -60,6 +60,7 @@
         }
         
         UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        settingsButton.exclusiveTouch = NO;
         [settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
         [settingsButton sizeToFit];
         CGRect frame = settingsButton.frame;

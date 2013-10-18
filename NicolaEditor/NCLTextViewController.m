@@ -162,18 +162,22 @@ static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
         textView = [[UITextView alloc] initWithFrame:self.view.bounds];
         
         UIButton *addButtonView = [self customButtonWithImage:[UIImage imageNamed:@"add"]];
+        addButtonView.exclusiveTouch = YES;
         [addButtonView addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
         addButton = [[UIBarButtonItem alloc] initWithCustomView:addButtonView];
         
         UIButton *shareButtonView = [self customButtonWithImage:[UIImage imageNamed:@"share"]];
+        shareButtonView.exclusiveTouch = YES;
         [shareButtonView addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         shareButton = [[UIBarButtonItem alloc] initWithCustomView:shareButtonView];
         
         UIButton *actionButtonView = [self customButtonWithImage:[UIImage imageNamed:@"action"]];
+        actionButtonView.exclusiveTouch = YES;
         [actionButtonView addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
         actionButton = [[UIBarButtonItem alloc] initWithCustomView:actionButtonView];
         
         UIButton *cloudUploadButtonView = [self customButtonWithImage:[UIImage imageNamed:@"cloud_upload"]];
+        cloudUploadButtonView.exclusiveTouch = YES;
         [cloudUploadButtonView addTarget:self action:@selector(cloudUpload:) forControlEvents:UIControlEventTouchUpInside];
         cloudUploadButton = [[UIBarButtonItem alloc] initWithCustomView:cloudUploadButtonView];
     } else {

@@ -57,7 +57,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XZB-eu-RLR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="403" y="-1067"/>
+            <point key="canvasLocation" x="317" y="-715"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YEJ-cP-HTA">
@@ -77,7 +77,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFV-0g-G6M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-131" y="-1067"/>
+            <point key="canvasLocation" x="-131" y="-715"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="iqS-G4-tf5">
@@ -91,7 +91,7 @@
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xUj-JE-cxG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1113" y="-598"/>
+            <point key="canvasLocation" x="-1097" y="-230"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gFN-a7-Tpy">
@@ -110,7 +110,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HUp-Fp-Wnv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-131" y="-33"/>
+            <point key="canvasLocation" x="-131" y="279"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="OaV-CA-Kwi">
@@ -238,6 +238,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="JZw-RW-LKM" kind="push" identifier="NCLShiftKeyFunctionsSettingsViewController" id="oRM-2I-Uif"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="3H1-3A-xSh" style="IBUITableViewCellStyleDefault" id="L0r-nY-8DY">
                                         <rect key="frame" x="0.0" y="387" width="320" height="44"/>
@@ -255,6 +258,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="JZw-RW-LKM" kind="push" identifier="NCLShiftKeyFunctionsSettingsViewController" id="w7M-GA-Rta"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -305,7 +311,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="q5c-Yc-oET" kind="push" id="3Sh-u0-6Wp"/>
+                                            <segue destination="q5c-Yc-oET" kind="push" identifier="NCLHelpViewController" id="3Sh-u0-6Wp"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -328,12 +334,11 @@
                         <outlet property="swapKeySwitch" destination="S8l-c7-R1d" id="ReB-2h-CwB"/>
                         <outlet property="timeShiftDurationLabel" destination="Bv3-Aj-VRX" id="0LB-37-EnN"/>
                         <outlet property="timeShiftDurationSlider" destination="9nE-lj-AgR" id="eyU-y0-hLX"/>
-                        <segue destination="JZw-RW-LKM" kind="push" identifier="NCLShiftKeyFunctionsSettingsViewController" id="8IV-0l-CT0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dEt-el-xQ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="403" y="-1857"/>
+            <point key="canvasLocation" x="317" y="-1833"/>
         </scene>
         <!--Font Settings View Controller - Font-->
         <scene sceneID="YPJ-hL-Xq8">
@@ -393,7 +398,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MVF-BA-RaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="-2579"/>
+            <point key="canvasLocation" x="854" y="-2739"/>
         </scene>
         <!--Shift Key Behavior Settings View Controller-->
         <scene sceneID="Ipw-J0-gJ3">
@@ -423,7 +428,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Uc7-D2-Zwa" style="IBUITableViewCellStyleDefault" id="rAi-DN-Tic">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="Uc7-D2-Zwa" style="IBUITableViewCellStyleDefault" id="rAi-DN-Tic">
                                         <rect key="frame" x="0.0" y="79" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rAi-DN-Tic" id="GRU-Sq-4Gd">
@@ -434,7 +439,6 @@
                                                     <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -470,7 +474,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Uq-dZ-FCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="-2222"/>
+            <point key="canvasLocation" x="854" y="-2294"/>
         </scene>
         <!--Shift Key Functions Settings View Controller-->
         <scene sceneID="mVR-Yu-bzC">
@@ -546,7 +550,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8x-BT-1LY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="-1857"/>
+            <point key="canvasLocation" x="854" y="-1833"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="3FA-4F-4r8">
@@ -663,7 +667,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ADU-lD-Nou" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886" y="-1106"/>
+            <point key="canvasLocation" x="854" y="-1006"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="XzN-dO-Ig5">
@@ -687,7 +691,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fkY-65-3OK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1370" y="-1106"/>
+            <point key="canvasLocation" x="1358" y="-1006"/>
         </scene>
         <!--Text View Controller-->
         <scene sceneID="C7f-8p-HX4">
@@ -703,7 +707,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nG1-LU-5EQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="830" y="-33"/>
+            <point key="canvasLocation" x="830" y="279"/>
         </scene>
     </scenes>
     <resources>
@@ -714,4 +718,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="oRM-2I-Uif"/>
+    </inferredMetricsTieBreakers>
 </document>
