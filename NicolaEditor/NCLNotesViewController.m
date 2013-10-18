@@ -44,9 +44,8 @@
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]) {
-            [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"navbar_bg"] resizableImageWithCapInsets:UIEdgeInsetsZero] forBarMetrics:UIBarMetricsDefault];
+            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
             [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"shadow"]];
-            [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"selected_background_view"]];
             
             UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
             backgroundView.backgroundColor = [UIColor clearColor];
@@ -57,7 +56,7 @@
             
             self.tableView.backgroundView = backgroundView;
         } else {
-            [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"navbar_with_shadow"] resizableImageWithCapInsets:UIEdgeInsetsZero] forBarMetrics:UIBarMetricsDefault];
+            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg_with_shadow"] forBarMetrics:UIBarMetricsDefault];
         }
         
         UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];

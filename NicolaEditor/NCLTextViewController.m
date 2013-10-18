@@ -97,10 +97,10 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 {
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]) {
-            [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"navbar_bg"] resizableImageWithCapInsets:UIEdgeInsetsZero] forBarMetrics:UIBarMetricsDefault];
+            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
             [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"shadow"]];
         } else {
-            [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"navbar_bg_with_shadow"] resizableImageWithCapInsets:UIEdgeInsetsZero] forBarMetrics:UIBarMetricsDefault];
+            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg_with_shadow"] forBarMetrics:UIBarMetricsDefault];
         }
     }
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
@@ -159,6 +159,7 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
     
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     textView.delegate = self;
+    textView.userInteractionEnabled = NO;
     [self.view addSubview:textView];
     self.textView = textView;
     
@@ -416,21 +417,25 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 {
     EvernoteSession *session = [EvernoteSession sharedSession];
     [session authenticateWithViewController:self completionHandler:^(NSError *error) {
-        if (error || !session.isAuthenticated){
-            if (error) {
-                [self presentError:error message:@"Error authenticating with Evernote Cloud API"];
+        if (error) {
+            if (error.code == EvernoteSDKErrorCode_USER_CANCELLED) {
+                return;
             }
-            if (!session.isAuthenticated) {
-                [self presentError:nil message:@"Session not authenticated"];
-            }
-        } else {
-            EvernoteUserStore *userStore = [EvernoteUserStore userStore];
-            [userStore getUserWithSuccess:^(EDAMUser *user) {
-                [self sendToEvernote:nil];
-            } failure:^(NSError *error) {
-                [self presentError:error message:@"Error getting user"];
-            }];
+            
+            [self presentError:error message:@"Error authenticating with Evernote Cloud API"];
+            return;
         }
+        if (!session.isAuthenticated) {
+            [self presentError:nil message:@"Session not authenticated"];
+            return;
+        }
+        
+        EvernoteUserStore *userStore = [EvernoteUserStore userStore];
+        [userStore getUserWithSuccess:^(EDAMUser *user) {
+            [self sendToEvernote:nil];
+        } failure:^(NSError *error) {
+            [self presentError:error message:@"Error getting user"];
+        }];
     }];
 }
 

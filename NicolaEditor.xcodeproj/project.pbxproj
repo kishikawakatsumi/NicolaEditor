@@ -47,8 +47,10 @@
 		14A57E77181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
 		14A57E7A1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */; };
 		14A57E7B1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */; };
-		14A57E7E181112B800F1A7D9 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E7D181112B800F1A7D9 /* UIImage+Tint.m */; };
-		14A57E7F181112B800F1A7D9 /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E7D181112B800F1A7D9 /* UIImage+Tint.m */; };
+		14A57E881811255D00F1A7D9 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A57E861811255D00F1A7D9 /* Icon-72.png */; };
+		14A57E891811255D00F1A7D9 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A57E861811255D00F1A7D9 /* Icon-72.png */; };
+		14A57E8A1811255D00F1A7D9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A57E871811255D00F1A7D9 /* Icon-72@2x.png */; };
+		14A57E8B1811255D00F1A7D9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A57E871811255D00F1A7D9 /* Icon-72@2x.png */; };
 		14B3F42E18030DEC00F7E91A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42D18030DEC00F7E91A /* Foundation.framework */; };
 		14B3F43018030DEC00F7E91A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42F18030DEC00F7E91A /* CoreGraphics.framework */; };
 		14B3F43218030DEC00F7E91A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F43118030DEC00F7E91A /* UIKit.framework */; };
@@ -130,8 +132,8 @@
 		14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLHelpViewController.m; sourceTree = "<group>"; };
 		14A57E781810FEB700F1A7D9 /* NCLNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLNoteCell.h; sourceTree = "<group>"; };
 		14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLNoteCell.m; sourceTree = "<group>"; };
-		14A57E7C181112B700F1A7D9 /* UIImage+Tint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Tint.h"; sourceTree = "<group>"; };
-		14A57E7D181112B800F1A7D9 /* UIImage+Tint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Tint.m"; sourceTree = "<group>"; };
+		14A57E861811255D00F1A7D9 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		14A57E871811255D00F1A7D9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		14B3F42A18030DEC00F7E91A /* NicolaEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NicolaEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B3F42D18030DEC00F7E91A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14B3F42F18030DEC00F7E91A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -262,8 +264,6 @@
 		14B3F43518030DEC00F7E91A /* NicolaEditor */ = {
 			isa = PBXGroup;
 			children = (
-				14A57E7C181112B700F1A7D9 /* UIImage+Tint.h */,
-				14A57E7D181112B800F1A7D9 /* UIImage+Tint.m */,
 				14B3F43E18030DEC00F7E91A /* NCLAppDelegate.h */,
 				14B3F43F18030DEC00F7E91A /* NCLAppDelegate.m */,
 				14B3F44718030DEC00F7E91A /* NCLNotesViewController.h */,
@@ -294,6 +294,7 @@
 				146B3EF818086BFC00418452 /* Models */,
 				14B3F47A1803121E00F7E91A /* Main.storyboard */,
 				14B3F44D18030DEC00F7E91A /* Images.xcassets */,
+				14D140C518112642000AD695 /* Icons */,
 				14B3F43618030DEC00F7E91A /* Supporting Files */,
 			);
 			path = NicolaEditor;
@@ -329,6 +330,15 @@
 				14B3F45E18030DEC00F7E91A /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14D140C518112642000AD695 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				14A57E861811255D00F1A7D9 /* Icon-72.png */,
+				14A57E871811255D00F1A7D9 /* Icon-72@2x.png */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,6 +425,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				146174711803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
+				14A57E881811255D00F1A7D9 /* Icon-72.png in Resources */,
 				14B3F44E18030DEC00F7E91A /* Images.xcassets in Resources */,
 				146B3F0F18099F7200418452 /* SampleText.json in Resources */,
 				14B3F46C18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
@@ -423,6 +434,7 @@
 				14B3F43A18030DEC00F7E91A /* InfoPlist.strings in Resources */,
 				14B3F47B1803121E00F7E91A /* Main.storyboard in Resources */,
 				14B3F47E1803167200F7E91A /* KeyboardLayouts.json in Resources */,
+				14A57E8A1811255D00F1A7D9 /* Icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +444,8 @@
 			files = (
 				14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */,
 				146B3F1018099F7200418452 /* SampleText.json in Resources */,
+				14A57E8B1811255D00F1A7D9 /* Icon-72@2x.png in Resources */,
+				14A57E891811255D00F1A7D9 /* Icon-72.png in Resources */,
 				146B3EEC18085B8600418452 /* Localizable.strings in Resources */,
 				14B3F46018030DEC00F7E91A /* InfoPlist.strings in Resources */,
 				14B3F47F1803167200F7E91A /* KeyboardLayouts.json in Resources */,
@@ -493,7 +507,6 @@
 				146B3EF2180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */,
 				145E657B180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */,
 				14B3F44018030DEC00F7E91A /* NCLAppDelegate.m in Sources */,
-				14A57E7E181112B800F1A7D9 /* UIImage+Tint.m in Sources */,
 				14326836181027120001BDBC /* NCLSliderPopup.m in Sources */,
 				14A57E76181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */,
 				14B3F43C18030DEC00F7E91A /* main.m in Sources */,
@@ -527,7 +540,6 @@
 				1461746F1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */,
 				14326817180FB7990001BDBC /* UIFont+Helper.m in Sources */,
 				146B3EE5180859A200418452 /* NCLFontSettingsViewController.m in Sources */,
-				14A57E7F181112B800F1A7D9 /* UIImage+Tint.m in Sources */,
 				14B3F47318030EB900F7E91A /* NCLKeyboardView.m in Sources */,
 				14B3F479180310D600F7E91A /* NCLTextViewController.m in Sources */,
 				1432681B180FBF910001BDBC /* NCLPopoverManager.m in Sources */,
