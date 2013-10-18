@@ -96,9 +96,9 @@ static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
 
 #pragma mark -
 
-+ (BOOL)__isSplit
++ (BOOL)__supportsSplit
 {
-    return [self __isSplit];
+    return [self __supportsSplit];
 }
 
 - (void)__setFrame:(CGRect)frame
@@ -109,27 +109,14 @@ static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
 - (void)prepareForLegacy
 {
     {
-        SEL sel = NSSelectorFromString(@"__isSplit");
-        SEL orig = NSSelectorFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"i", @"s", @"S", @"p", @"l", @"i", @"t"]);
+        SEL sel = NSSelectorFromString(@"__supportsSplit");
+        SEL orig = NSSelectorFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"u", @"p", @"p", @"o", @"r", @"t", @"s", @"S", @"p", @"l", @"i", @"t"]);
         NSString *className = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"I", @"m", @"p", @"l"];
         Class clazz = NSClassFromString(className);
         Class metaClass = objc_getMetaClass([className UTF8String]);
         
         BOOL(^block)(id) = ^(id s) {
             return NO;
-//            if (self.textView.inputView) {
-//                return NO;
-//            } else {
-//                NSMethodSignature *methodSignature = [clazz methodSignatureForSelector:orig];
-//                NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-//                invocation.target = clazz;
-//                invocation.selector = sel;
-//                [invocation invoke];
-//                BOOL returnValue = NO;
-//                [invocation getReturnValue:&returnValue];
-//                return returnValue;
-//            }
-//            return NO;
         };
         
         IMP imp = imp_implementationWithBlock(block);

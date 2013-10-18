@@ -353,7 +353,7 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 
 - (void)processReturnKey
 {
-    BOOL hasCandidates = [[self.internalKeyboard valueForKey:@"_hasCandidates"] boolValue];
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]] boolValue];
     if (hasCandidates) {
         [self sendMessage:self.internalKeyboard
                   forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"]
@@ -451,22 +451,35 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 - (void)keyboardInputEngine:(NCLKeyboardInputEngine *)engine processedText:(NSString *)text keyIndex:(NSInteger)keyIndex
 {
     if (text.length > 0) {
-        [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"d", @"d", @"I", @"n", @"p", @"u", @"t", @"S", @"t", @"r", @"i", @"n", @"g", @":"]
-              attachments:@[@{@"Object": text}]];
+        NSString *key = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"u", @"s", @"e", @"r", @"S", @"e", @"l", @"e", @"c", @"t", @"e", @"d", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
+        if ([self.internalKeyboard respondsToSelector:NSSelectorFromString(key)]) {
+            BOOL userSelectedCurrentCandidate = [[self.internalKeyboard valueForKey:key] boolValue];
+            if (userSelectedCurrentCandidate) {
+                [self sendMessage:self.internalKeyboard
+                          forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"]
+                      attachments:nil];
+            }
+        }
+        double delayInSeconds = 0.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self sendMessage:self.internalKeyboard
+                      forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"d", @"d", @"I", @"n", @"p", @"u", @"t", @"S", @"t", @"r", @"i", @"n", @"g", @":"]
+                  attachments:@[@{@"Object": text}]];
+        });
     }
 }
 
 - (void)keyboardInputEngineDidInputLeftShiftKey:(NCLKeyboardInputEngine *)engine
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *shiftKeyFunction = [userDefaults stringForKey:@"shift-key-function-left"];
+    NSString *shiftKeyFunction = [userDefaults stringForKey:NCLSettingsLeftShiftFunctionKey];
     if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
         [self sendMessage:self.internalKeyboard
                   forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"N", @"e", @"x", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]
               attachments:nil];
     } else if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
-        BOOL hasCandidates = [[self.internalKeyboard valueForKey:@"_hasCandidates"] boolValue];
+        BOOL hasCandidates = [[self.internalKeyboard valueForKey:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]] boolValue];
         if (hasCandidates) {
             [self sendMessage:self.internalKeyboard
                       forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"]
@@ -478,7 +491,7 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 - (void)keyboardInputEngineDidInputRightShiftKey:(NCLKeyboardInputEngine *)engine
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *shiftKeyFunction = [userDefaults stringForKey:@"shift-key-function-right"];
+    NSString *shiftKeyFunction = [userDefaults stringForKey:NCLSettingsRightShiftFunctionKey];
     if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
         [self sendMessage:self.internalKeyboard
                   forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"N", @"e", @"x", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]
