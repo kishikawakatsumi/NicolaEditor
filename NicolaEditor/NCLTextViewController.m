@@ -22,6 +22,20 @@
 
 static NSString * const ZERO_WIDTH_SPACE = @"\u200B";
 
+static void swizzleClassMethod(Class c, SEL orig, SEL new)
+{
+    Method origMethod = class_getClassMethod(c, orig);
+    Method newMethod = class_getClassMethod(c, new);
+    method_exchangeImplementations(origMethod, newMethod);
+}
+
+static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
+{
+    Method origMethod = class_getInstanceMethod(c, orig);
+    Method newMethod = class_getInstanceMethod(c, new);
+    method_exchangeImplementations(origMethod, newMethod);
+}
+
 @interface NCLTextViewController () <UITextViewDelegate, UIDocumentInteractionControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 
 @property (nonatomic) UIBarButtonItem *addButton;
@@ -46,13 +60,6 @@ static NSString * const ZERO_WIDTH_SPACE = @"\u200B";
 @property (nonatomic) UIEdgeInsets textViewScrollIndicatorInsets;
 
 @end
-
-static void SwizzleMethod(Class c, SEL orig, SEL new)
-{
-    Method origMethod = class_getInstanceMethod(c, orig);
-    Method newMethod = class_getInstanceMethod(c, new);
-    method_exchangeImplementations(origMethod, newMethod);
-}
 
 @implementation NCLTextViewController
 
@@ -88,6 +95,11 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 
 #pragma mark -
 
++ (BOOL)__isSplit
+{
+    return [self __isSplit];
+}
+
 - (void)__setFrame:(CGRect)frame
 {
     [self __setFrame:frame];
@@ -95,6 +107,34 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 
 - (void)prepareForLegacy
 {
+    {
+        SEL sel = NSSelectorFromString(@"__isSplit");
+        SEL orig = NSSelectorFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@", @"i", @"s", @"S", @"p", @"l", @"i", @"t"]);
+        NSString *className = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"I", @"m", @"p", @"l"];
+        Class clazz = NSClassFromString(className);
+        Class metaClass = objc_getMetaClass([className UTF8String]);
+        
+        BOOL(^block)(id) = ^(id s) {
+            return NO;
+//            if (self.textView.inputView) {
+//                return NO;
+//            } else {
+//                NSMethodSignature *methodSignature = [clazz methodSignatureForSelector:orig];
+//                NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+//                invocation.target = clazz;
+//                invocation.selector = sel;
+//                [invocation invoke];
+//                BOOL returnValue = NO;
+//                [invocation getReturnValue:&returnValue];
+//                return returnValue;
+//            }
+//            return NO;
+        };
+        
+        IMP imp = imp_implementationWithBlock(block);
+        class_addMethod(metaClass, sel, imp, "c@:");
+        swizzleClassMethod(clazz, orig, sel);
+    }
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]) {
             [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
@@ -118,7 +158,7 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
         IMP imp = imp_implementationWithBlock(block);
         Class clazz = NSClassFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @"F", @"l", @"o", @"a", @"t", @"i", @"n", @"g", @"V", @"i", @"e", @"w"]);
         class_addMethod(clazz, sel, imp, "v@:*");
-        SwizzleMethod(clazz, @selector(setFrame:), sel);
+        swizzleInstanceMethod(clazz, @selector(setFrame:), sel);
     }
 }
 
@@ -205,9 +245,10 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
     self.textView.inputView = inputView;
     self.inputView = inputView;
     
-    NCLKeyboardAccessoryView *accessoryView = [[[UINib nibWithNibName:NSStringFromClass([NCLKeyboardAccessoryView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
-    accessoryView.delegate = self;
-    self.textView.inputAccessoryView = accessoryView;
+    NCLKeyboardAccessoryView *inputAccessoryView = [[[UINib nibWithNibName:NSStringFromClass([NCLKeyboardAccessoryView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+    inputAccessoryView.delegate = self;
+    self.textView.inputAccessoryView = inputAccessoryView;
+    self.inputAccessoryView = inputAccessoryView;
 }
 
 - (void)setupNotifications
@@ -569,10 +610,7 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 - (void)accessoryView:(NCLKeyboardAccessoryView *)accessoryView keyboardTypeDidChange:(NSInteger)keyboardType
 {
     if (keyboardType == NCLKeyboardTypeNICOLA) {
-        if (self.inputView.keyboardInputMethod) {
-            self.inputView.keyboardInputMethod = self.inputView.keyboardInputMethod;
-        }
-        self.textView.inputView = self.inputView;
+        [self setupInputView];
     } else {
         self.previousKeyboardInputMethod = self.inputView.keyboardInputMethod;
         self.textView.inputView = nil;

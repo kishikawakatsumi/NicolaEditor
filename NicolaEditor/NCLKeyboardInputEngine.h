@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 kishikawa katsumi. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 typedef NS_ENUM(NSInteger, NCLKeyboardEvent) {
     NCLKeyboardEventKeyPressed = 0,

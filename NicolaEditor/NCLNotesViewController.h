@@ -6,8 +6,7 @@
 //  Copyright (c) 2013 kishikawa katsumi. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import <CoreData/CoreData.h>
+@import UIKit;
 
 @class NCLTextViewController;
 

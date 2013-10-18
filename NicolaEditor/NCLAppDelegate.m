@@ -32,7 +32,8 @@
                                                               NCLSettingsShiftKeyBehaviorKey: NCLShiftKeyBehaviorTimeShift,
                                                               NCLSettingsTimeShiftDurationKey: @(0.1),
                                                               NCLSettingsLeftShiftFunctionKey: NCLShiftKeyFunctionNextCandidate,
-                                                              NCLSettingsRightShiftFunctionKey: NCLShiftKeyFunctionAcceptCandidate}];
+                                                              NCLSettingsRightShiftFunctionKey: NCLShiftKeyFunctionAcceptCandidate,
+                                                              NCLSettingsSwapBackspaceReturnEnabledKey: @NO}];
     
     if (![[NSUserDefaults standardUserDefaults] stringForKey:@"installation-identifier"]) {
         [[NSUserDefaults standardUserDefaults] setObject:[NSString UUIDString] forKey:@"installation-identifier"];

@@ -17,9 +17,12 @@ extern NSString * const NCLSettingsTimeShiftDurationKey;
 extern NSString * const NCLSettingsLeftShiftFunctionKey;
 extern NSString * const NCLSettingsRightShiftFunctionKey;
 
+extern NSString * const NCLSettingsSwapBackspaceReturnEnabledKey;
+
 extern NSString * const NCLSettingsFontDidChangeNodification;
 extern NSString * const NCLSettingsShiftKeyBehaviorDidChangeNodification;
 extern NSString * const NCLSettingsShiftKeyFunctionDidChangeNodification;
+extern NSString * const NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification;
 
 extern NSString * const NCLShiftKeyBehaviorTimeShift;
 extern NSString * const NCLShiftKeyBehaviorContinuityShift;

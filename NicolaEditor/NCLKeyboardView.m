@@ -11,9 +11,11 @@
 #import "NCLKeyboardInputEngine.h"
 #import "NCLConstants.h"
 
-NSInteger const NCLKeyboardViewSpecialKeyDelete = 11;
-NSInteger const NCLKeyboardViewSpecialKeyShift1 = 22;
-NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
+@import ObjectiveC;
+
+NSInteger const NCLKeyButtonIndexSpecialKeyDelete = 11;
+NSInteger const NCLKeyButtonIndexSpecialKeyShift1 = 22;
+NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 
 @interface NCLKeyboardView () <UIInputViewAudioFeedback>
 
@@ -32,6 +34,7 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
 @property (nonatomic) NCLKeyboardInputEngine *inputEngine;
 
 @property (nonatomic) NSString *previousKeyboardInputMethod;
+@property (nonatomic) BOOL swapBackspaceReturnEnabled;
 
 @end
 
@@ -65,6 +68,8 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     self.keyboardInputMethod = NCLKeyboardInputMethodKana;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shiftKeyBehaviorDidChange:) name:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swapBackspaceReturnEnabledDidChange:) name:NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification object:nil];
+    
 }
 
 - (void)dealloc
@@ -85,6 +90,7 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     
     [self layoutKeyButtons];
     [self setupKeyboardIfNeeded];
+    [self applySwapBackspaceReturnState];
 }
 
 #pragma mark -
@@ -133,12 +139,12 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
 - (void)setupInputEngine
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    NSString *shiftKeyBehavior = [userDefaults stringForKey:@"shift-key-behavior"];
+    NSString *shiftKeyBehavior = [userDefaults stringForKey:NCLSettingsShiftKeyBehaviorKey];
     self.inputEngine = [NCLKeyboardInputEngine inputEngineWithShiftKeyBehavior:shiftKeyBehavior];
     self.inputEngine.delegate = self;
     self.inputEngine.inputMethod = NCLKeyboardInputMethodKana;
     
-    float timeShiftDuration = [userDefaults doubleForKey:@"time-shift-duration"];
+    float timeShiftDuration = [userDefaults doubleForKey:NCLSettingsTimeShiftDurationKey];
     self.inputEngine.delay = timeShiftDuration;
 }
 
@@ -148,10 +154,10 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     
     for (NSInteger i = 0; i < 35; i++) {
         NCLKeyboardButton *keyButton = [[NCLKeyboardButton alloc] initWithIndex:i];
-        if (i == NCLKeyboardViewSpecialKeyDelete) {
+        if (i == NCLKeyButtonIndexSpecialKeyDelete) {
             [keyButton addTarget:self action:@selector(touchDownDeleteKey:) forControlEvents:UIControlEventTouchDown];
             [keyButton addTarget:self action:@selector(touchUpDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
-        } else if (i == NCLKeyboardViewSpecialKeyShift1 || i == NCLKeyboardViewSpecialKeyShift2) {
+        } else if (i == NCLKeyButtonIndexSpecialKeyShift1 || i == NCLKeyButtonIndexSpecialKeyShift2) {
             [keyButton addTarget:self action:@selector(touchDownShiftKey:) forControlEvents:UIControlEventTouchDown];
             [keyButton addTarget:self action:@selector(touchUpShiftKey:) forControlEvents:UIControlEventTouchUpInside];
         } else {
@@ -162,8 +168,6 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
         [self.keyboardBackgroundView addSubview:keyButton];
         [self.keyButtons addObject:keyButton];
     }
-    
-    [self.alphabetKeyButton setImage:[UIImage imageNamed:@"key_kana_highlighted"] forState:UIControlStateSelected | UIControlStateHighlighted];
 }
 
 - (void)setupKeyboardIfNeeded
@@ -261,6 +265,38 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     [self setupInputEngine];
 }
 
+- (void)swapBackspaceReturnEnabledDidChange:(NSNotification *)notification
+{
+    [self applySwapBackspaceReturnState];
+}
+
+- (void)applySwapBackspaceReturnState
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL enabled = [userDefaults boolForKey:NCLSettingsSwapBackspaceReturnEnabledKey];
+    self.swapBackspaceReturnEnabled = enabled;
+}
+
+- (void)setSwapBackspaceReturnEnabled:(BOOL)swapBackspaceReturnEnabled
+{
+    _swapBackspaceReturnEnabled = swapBackspaceReturnEnabled;
+    if (swapBackspaceReturnEnabled) {
+        NCLKeyboardButton *deleteKeyButton = self.keyButtons[NCLKeyButtonIndexSpecialKeyDelete];
+        [deleteKeyButton setImage:[UIImage imageNamed:@"key_return_swapped"] forState:UIControlStateNormal];
+        [deleteKeyButton setImage:[UIImage imageNamed:@"key_return_swapped_highlighted"] forState:UIControlStateHighlighted];
+        
+        [self.returnKeyButton setImage:[UIImage imageNamed:@"key_delete_swapped"] forState:UIControlStateNormal];
+        [self.returnKeyButton setImage:[UIImage imageNamed:@"key_delete_swapped_highlighted"] forState:UIControlStateHighlighted];
+    } else {
+        NCLKeyboardButton *deleteKeyButton = self.keyButtons[NCLKeyButtonIndexSpecialKeyDelete];
+        [deleteKeyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_kana_%02d", NCLKeyButtonIndexSpecialKeyDelete]] forState:UIControlStateNormal];
+        [deleteKeyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_kana_%02d_highlighted", NCLKeyButtonIndexSpecialKeyDelete]] forState:UIControlStateHighlighted];
+        
+        [self.returnKeyButton setImage:[UIImage imageNamed:@"key_return"] forState:UIControlStateNormal];
+        [self.returnKeyButton setImage:[UIImage imageNamed:@"key_return_highlighted"] forState:UIControlStateHighlighted];
+    }
+}
+
 #pragma mark -
 
 - (void)touchDownKey:(id)sender
@@ -280,22 +316,42 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
 - (IBAction)touchDownDeleteKey:(id)sender
 {
     [[UIDevice currentDevice] playInputClick];
-    [self sendMessage:self.internalKeyboard
-              forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"d", @"e", @"l", @"e", @"t", @"e", @"F", @"r", @"o", @"m", @"I", @"n", @"p", @"u", @"t"]
-          attachments:nil];
+    
+    if (!self.swapBackspaceReturnEnabled) {
+        [self processDeleteKey];
+    }
 }
 
 - (IBAction)touchUpDeleteKey:(id)sender
 {
-    
+    if (self.swapBackspaceReturnEnabled) {
+        [self processReturnKey];
+    }
 }
 
 - (IBAction)touchDownReturnKey:(id)sender
 {
     [[UIDevice currentDevice] playInputClick];
+    if (self.swapBackspaceReturnEnabled) {
+        [self processDeleteKey];
+    }
 }
 
 - (IBAction)touchUpReturnKey:(id)sender
+{
+    if (!self.swapBackspaceReturnEnabled) {
+        [self processReturnKey];
+    }
+}
+
+- (void)processDeleteKey
+{
+    [self sendMessage:self.internalKeyboard
+              forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"d", @"e", @"l", @"e", @"t", @"e", @"F", @"r", @"o", @"m", @"I", @"n", @"p", @"u", @"t"]
+          attachments:nil];
+}
+
+- (void)processReturnKey
 {
     BOOL hasCandidates = [[self.internalKeyboard valueForKey:@"_hasCandidates"] boolValue];
     if (hasCandidates) {

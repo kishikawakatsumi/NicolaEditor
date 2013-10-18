@@ -17,9 +17,12 @@ NSString * const NCLSettingsTimeShiftDurationKey = @"time-shift-duration";
 NSString * const NCLSettingsLeftShiftFunctionKey = @"shift-key-function-left";
 NSString * const NCLSettingsRightShiftFunctionKey = @"shift-key-function-right";
 
+NSString * const NCLSettingsSwapBackspaceReturnEnabledKey = @"swap-backspase-return-enabled";
+
 NSString * const NCLSettingsFontDidChangeNodification = @"NCLSettingsFontDidChangeNodification";
 NSString * const NCLSettingsShiftKeyBehaviorDidChangeNodification = @"NCLSettingsShiftKeyBehaviorDidChangeNodification";
 NSString * const NCLSettingsShiftKeyFunctionDidChangeNodification = @"NCLSettingsShiftKeyFunctionDidChangeNodification";
+NSString * const NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification = @"NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification";
 
 NSString * const NCLShiftKeyBehaviorTimeShift = @"Time-Shift";
 NSString * const NCLShiftKeyBehaviorContinuityShift = @"Continuity-Shift";

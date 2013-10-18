@@ -25,6 +25,9 @@
 @property (nonatomic, weak) IBOutlet UISlider *timeShiftDurationSlider;
 @property (nonatomic, weak) IBOutlet UITableViewCell *timeShiftSliderCell;
 
+@property (nonatomic, weak) IBOutlet UITableViewCell *swapKeyCell;
+@property (nonatomic, weak) IBOutlet UISwitch *swapKeySwitch;
+
 @property (nonatomic) NCLSliderPopup *popup;
 
 @end
@@ -40,6 +43,10 @@
     UIStepper *stepper = self.fontSizeStepper;
     [stepper removeFromSuperview];
     self.fontSizeCell.accessoryView = stepper;
+    
+    UISwitch *sw = self.swapKeySwitch;
+    [sw removeFromSuperview];
+    self.swapKeyCell.accessoryView = sw;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     double fontSize = [userDefaults doubleForKey:NCLSettingsFontSizeKey];
@@ -137,6 +144,14 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
 }
 
+- (IBAction)swapKeySwitchValueChanged:(id)sender
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setBool:self.swapKeySwitch.isOn forKey:NCLSettingsSwapBackspaceReturnEnabledKey];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification object:nil];
+}
+
 #pragma mark -
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -148,6 +163,8 @@
     } else if (section == 2) {
         return NSLocalizedString(@"Shift Key Functions", nil);
     } else if (section == 3) {
+        return NSLocalizedString(@"Special", nil);
+    } else if (section == 4) {
         return NSLocalizedString(@"Help", nil);
     }
     
@@ -166,12 +183,18 @@
         cell.textLabel.text = NSLocalizedString(@"Left Shift Key", nil);
     } else if (section == 2 && row == 1) {
         cell.textLabel.text = NSLocalizedString(@"Right Shift Key", nil);
-    } else if (section == 3 && row == 0) {
+    } else if (section == 3) {
+        cell.textLabel.text = NSLocalizedString(@"Swap ⌫ key for ⏎ key", nil);
+    } else if (section == 4) {
         cell.textLabel.text = NSLocalizedString(@"Help", nil);
     }
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
+        if (section != 3) {
+            cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
+        } else {
+            cell.textLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:16.0f];
+        }
     }
 }
 

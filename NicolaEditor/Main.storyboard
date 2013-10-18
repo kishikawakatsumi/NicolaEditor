@@ -117,7 +117,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="NCLSettingsViewController" id="fvI-u9-5cG" customClass="NCLSettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="nIC-5W-8Pj">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -258,16 +258,44 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Help" id="esk-CS-0R0">
+                            <tableViewSection headerTitle="SPECIAL" id="esk-CS-0R0">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="1Nl-oJ-Ldy" style="IBUITableViewCellStyleDefault" id="2eH-xH-MQN">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="1Nl-oJ-Ldy" style="IBUITableViewCellStyleDefault" id="2eH-xH-MQN">
                                         <rect key="frame" x="0.0" y="479" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2eH-xH-MQN" id="o1d-AC-qOg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="⌫キーと⏎キーを入れ替える" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" id="1Nl-oJ-Ldy">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" name="HiraKakuProN-W3" family="Hiragino Kaku Gothic ProN" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="S8l-c7-R1d">
+                                                    <rect key="frame" x="255" y="6" width="51" height="31"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <connections>
+                                                        <action selector="swapKeySwitchValueChanged:" destination="fvI-u9-5cG" eventType="valueChanged" id="fJa-nR-YhJ"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Help" id="dwf-EE-YDb">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="gray" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="IM4-Aw-jcX" style="IBUITableViewCellStyleDefault" id="qTx-3s-9aH">
+                                        <rect key="frame" x="0.0" y="571" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qTx-3s-9aH" id="Rq3-mA-Q8T">
                                             <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="ヘルプ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Nl-oJ-Ldy">
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="ヘルプ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IM4-Aw-jcX">
                                                     <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -277,7 +305,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="q5c-Yc-oET" kind="push" identifier="NCLHelpViewController" id="vEi-HF-b0W"/>
+                                            <segue destination="q5c-Yc-oET" kind="push" id="3Sh-u0-6Wp"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -296,6 +324,8 @@
                         <outlet property="fontSizeLabel" destination="5QZ-GM-QPU" id="jnk-hc-dnG"/>
                         <outlet property="fontSizeStepper" destination="BgI-GT-S25" id="cqZ-yJ-tol"/>
                         <outlet property="shiftKeyBehaviorLabel" destination="KjY-jw-Ut9" id="vhs-tt-YFF"/>
+                        <outlet property="swapKeyCell" destination="2eH-xH-MQN" id="6GG-sq-2Cp"/>
+                        <outlet property="swapKeySwitch" destination="S8l-c7-R1d" id="ReB-2h-CwB"/>
                         <outlet property="timeShiftDurationLabel" destination="Bv3-Aj-VRX" id="0LB-37-EnN"/>
                         <outlet property="timeShiftDurationSlider" destination="9nE-lj-AgR" id="eyU-y0-hLX"/>
                         <segue destination="JZw-RW-LKM" kind="push" identifier="NCLShiftKeyFunctionsSettingsViewController" id="8IV-0l-CT0"/>
@@ -447,7 +477,7 @@
             <objects>
                 <tableViewController id="JZw-RW-LKM" customClass="NCLShiftKeyFunctionsSettingsViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Ifz-99-HCx">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -523,7 +553,7 @@
             <objects>
                 <tableViewController id="q5c-Yc-oET" customClass="NCLHelpViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="FkY-8x-4ub">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -640,7 +670,7 @@
             <objects>
                 <tableViewController id="dsV-67-CFS" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="wDK-zz-T7g">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="640"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
