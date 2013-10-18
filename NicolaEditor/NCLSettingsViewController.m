@@ -8,6 +8,8 @@
 
 #import "NCLSettingsViewController.h"
 #import "NCLShiftKeyFunctionsSettingsViewController.h"
+#import "NCLHelpViewController.h"
+#import "NCLSliderPopup.h"
 #import "NCLConstants.h"
 
 @interface NCLSettingsViewController ()
@@ -19,8 +21,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *fontSizeLabel;
 
 @property (nonatomic, weak) IBOutlet UILabel *shiftKeyBehaviorLabel;
+@property (nonatomic, weak) IBOutlet UILabel *timeShiftDurationLabel;
 @property (nonatomic, weak) IBOutlet UISlider *timeShiftDurationSlider;
 @property (nonatomic, weak) IBOutlet UITableViewCell *timeShiftSliderCell;
+
+@property (nonatomic) NCLSliderPopup *popup;
 
 @end
 
@@ -32,15 +37,25 @@
     
     self.navigationItem.title = NSLocalizedString(@"Settings", nil);
     
-    [self.fontSizeStepper removeFromSuperview];
-    self.fontSizeCell.accessoryView = self.fontSizeStepper;
+    UIStepper *stepper = self.fontSizeStepper;
+    [stepper removeFromSuperview];
+    self.fontSizeCell.accessoryView = stepper;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     double fontSize = [userDefaults doubleForKey:NCLSettingsFontSizeKey];
     self.fontSizeStepper.value = fontSize;
     
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        CGRect frame = self.timeShiftDurationLabel.frame;
+        frame.origin.x = 10.0f;
+        self.timeShiftDurationLabel.frame = frame;
+    }
     float timeShiftDuration = [userDefaults doubleForKey:NCLSettingsTimeShiftDurationKey];
     self.timeShiftDurationSlider.value = timeShiftDuration;
+    
+    self.popup = [[[UINib nibWithNibName:NSStringFromClass([NCLSliderPopup class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+    self.popup.alpha = 0.0f;
+    [self.view addSubview:self.popup];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -56,6 +71,7 @@
     
     NSString *shiftKeyBehavior = [userDefaults stringForKey:NCLSettingsShiftKeyBehaviorKey];
     self.shiftKeyBehaviorLabel.text = NSLocalizedString(shiftKeyBehavior, nil);
+    self.timeShiftDurationSlider.enabled = [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -66,6 +82,9 @@
             NCLShiftKeyFunctionsSettingsViewController *controller = segue.destinationViewController;
             controller.left = YES;
         }
+    } else if ([segue.identifier isEqualToString:NSStringFromClass([NCLHelpViewController class])]) {
+        NCLHelpViewController *controller = segue.destinationViewController;
+        controller.delegate = self;
     }
 }
 
@@ -83,9 +102,34 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:nil];
 }
 
+- (IBAction)timeShiftSliderTouchUp:(id)sender
+{
+    [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.popup.alpha = 0.0f;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 - (IBAction)timeShiftDurationChanged:(id)sender
 {
     float timeShiftDuration = self.timeShiftDurationSlider.value;
+
+    CGRect trackRect = [self.timeShiftDurationSlider trackRectForBounds:self.timeShiftDurationSlider.bounds];
+    CGRect thumbRect = [self.timeShiftDurationSlider thumbRectForBounds:self.timeShiftDurationSlider.bounds
+                                                              trackRect:trackRect
+                                                                  value:timeShiftDuration];
+    CGPoint center = CGPointMake(CGRectGetMinX(thumbRect) + CGRectGetMinX(self.timeShiftDurationSlider.frame),
+                                 CGRectGetMinY(self.timeShiftDurationSlider.frame) - 44.0f);
+    center = [self.timeShiftDurationSlider convertPoint:center toView:self.view];
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        center.x -= CGRectGetWidth(thumbRect) / 4;
+    } else {
+        center.x -= 2.0f;
+    }
+    self.popup.center = center;
+    self.popup.alpha = 1.0f;
+    self.popup.valueLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)(timeShiftDuration * 1000)];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setFloat:timeShiftDuration forKey:NCLSettingsTimeShiftDurationKey];
@@ -103,6 +147,8 @@
         return NSLocalizedString(@"Shift Key Behavior", nil);
     } else if (section == 2) {
         return NSLocalizedString(@"Shift Key Functions", nil);
+    } else if (section == 3) {
+        return NSLocalizedString(@"Help", nil);
     }
     
     return nil;
@@ -116,6 +162,16 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         NSString *shiftKeyBehavior = [userDefaults stringForKey:NCLSettingsShiftKeyBehaviorKey];
         cell.textLabel.text = NSLocalizedString(shiftKeyBehavior, nil);
+    } else if (section == 2 && row == 0) {
+        cell.textLabel.text = NSLocalizedString(@"Left Shift Key", nil);
+    } else if (section == 2 && row == 1) {
+        cell.textLabel.text = NSLocalizedString(@"Right Shift Key", nil);
+    } else if (section == 3 && row == 0) {
+        cell.textLabel.text = NSLocalizedString(@"Help", nil);
+    }
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
     }
 }
 
@@ -123,6 +179,36 @@
 {
     if (indexPath.section == 2) {
         [self performSegueWithIdentifier:NSStringFromClass([NCLShiftKeyFunctionsSettingsViewController class]) sender:self];
+    }
+}
+
+#pragma mark -
+
+- (void)helpViewControllerShouldShowSupport:(NCLHelpViewController *)controller
+{
+    if ([self.delegate respondsToSelector:@selector(settingsViewControllerShouldShowSupport:)]) {
+        [self.delegate settingsViewControllerShouldShowSupport:self];
+    }
+}
+
+- (void)helpViewControllerShouldShowReportIssue:(NCLHelpViewController *)controller
+{
+    if ([self.delegate respondsToSelector:@selector(settingsViewControllerShouldShowReportIssue:)]) {
+        [self.delegate settingsViewControllerShouldShowReportIssue:self];
+    }
+}
+
+- (void)helpViewControllerShouldShowInbox:(NCLHelpViewController *)controller
+{
+    if ([self.delegate respondsToSelector:@selector(settingsViewControllerShouldShowInbox:)]) {
+        [self.delegate settingsViewControllerShouldShowInbox:self];
+    }
+}
+
+- (void)helpViewControllerShouldShowFAQs:(NCLHelpViewController *)controller
+{
+    if ([self.delegate respondsToSelector:@selector(settingsViewControllerShouldShowFAQs:)]) {
+        [self.delegate settingsViewControllerShouldShowFAQs:self];
     }
 }
 

@@ -15,7 +15,13 @@
 + (NSString *)postscriptNameFromFullName:(NSString *)fullName
 {
 	UIFont *font = [UIFont fontWithName:fullName size:1];
-	return (__bridge NSString *)(CTFontCopyPostScriptName((__bridge CTFontRef)(font)));
+    CFStringRef fontName = (__bridge CFStringRef)font.fontName;
+    CGFloat fontSize = font.pointSize;
+    
+    CTFontRef ctfont = CTFontCreateWithName(fontName, fontSize, NULL);
+    NSString *postscriptName = (__bridge NSString *)CTFontCopyPostScriptName(ctfont);
+    CFRelease(ctfont);
+	return postscriptName;
 }
 
 + (UIFont *)fontWithName:(NSString *)name size:(CGFloat)size boldTrait:(BOOL)isBold italicTrait:(BOOL)isItalic
@@ -24,7 +30,7 @@
 	
 	CTFontSymbolicTraits traits = 0;
 	CTFontRef newFontRef;
-	CTFontRef fontWithoutTrait = CTFontCreateWithName((__bridge CFStringRef)(postScriptName), size, NULL);
+	CTFontRef fontWithoutTrait = CTFontCreateWithName((__bridge CFStringRef)postScriptName, size, NULL);
 	
 	if (isItalic)
 		traits |= kCTFontItalicTrait;
@@ -48,8 +54,13 @@
 
 - (UIFont *)fontWithBoldTrait:(BOOL)bold italicTrait:(BOOL)italic andSize:(CGFloat)size
 {
-	CTFontRef fontRef = (__bridge CTFontRef)self;
-	NSString *familyName = (__bridge NSString *)(CTFontCopyName(fontRef, kCTFontFamilyNameKey));
+    CFStringRef fontName = (__bridge CFStringRef)self.fontName;
+    CGFloat fontSize = self.pointSize;
+    CTFontRef font = CTFontCreateWithName(fontName, fontSize, NULL);
+    
+	NSString *familyName = (__bridge NSString *)CTFontCopyName(font, kCTFontFamilyNameKey);
+    CFRelease(font);
+    
 	NSString *postScriptName = [UIFont postscriptNameFromFullName:familyName];
 	return [[self class] fontWithName:postScriptName size:size boldTrait:bold italicTrait:italic];
 }

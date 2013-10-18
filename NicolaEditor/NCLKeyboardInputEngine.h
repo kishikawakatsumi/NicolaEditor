@@ -13,9 +13,9 @@ typedef NS_ENUM(NSInteger, NCLKeyboardEvent) {
     NCLKeyboardEventKeyUp
 };
 
-extern NSString * const NCLKeyboardInputModeKana;
-extern NSString * const NCLKeyboardInputModeAlphabet;
-extern NSString * const NCLKeyboardInputModeNumber;
+extern NSString * const NCLKeyboardInputMethodKana;
+extern NSString * const NCLKeyboardInputMethodAlphabet;
+extern NSString * const NCLKeyboardInputMethodNumberPunctuation;
 
 @interface NCLKeyboardInputEngine : NSObject
 
@@ -28,7 +28,7 @@ extern NSString * const NCLKeyboardInputModeNumber;
 
 + (id)inputEngineWithShiftKeyBehavior:(NSString *)shiftKeyBehavior;
 
-- (void)addInput:(NSInteger)input;
+- (void)addKeyInput:(NSInteger)input;
 
 - (void)addLeftShiftKeyEvent:(NCLKeyboardEvent)event;
 - (void)addRightShiftKeyEvent:(NCLKeyboardEvent)event;

@@ -12,6 +12,7 @@
 #import "NCLPopoverManager.h"
 #import "NCLNote.h"
 #import <NLCoreData/NLCoreData.h>
+#import <Helpshift/Helpshift.h>
 
 @interface NCLNotesViewController ()
 
@@ -19,6 +20,8 @@
 
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic) NSDateFormatter *dateFormatter;
+
+@property (nonatomic) NSIndexPath *selectedIndexPath;
 
 @end
 
@@ -39,9 +42,24 @@
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = NSLocalizedString(@"Notes", nil);
-    
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]) {
+            [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"navbar_bg"] resizableImageWithCapInsets:UIEdgeInsetsZero] forBarMetrics:UIBarMetricsDefault];
+            [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"shadow"]];
+            [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"selected_background_view"]];
+            
+            UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
+            backgroundView.backgroundColor = [UIColor clearColor];
+            
+            UIImageView *shadowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.navigationController.navigationBar.bounds), 1.0f / [[UIScreen mainScreen] scale])];
+            shadowImageView.image = [[UIImage imageNamed:@"shadow"] resizableImageWithCapInsets:UIEdgeInsetsZero];
+            [backgroundView addSubview:shadowImageView];
+            
+            self.tableView.backgroundView = backgroundView;
+        } else {
+            [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"navbar_with_shadow"] resizableImageWithCapInsets:UIEdgeInsetsZero] forBarMetrics:UIBarMetricsDefault];
+        }
+        
         UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
         [settingsButton sizeToFit];
@@ -55,13 +73,14 @@
         self.navigationItem.leftBarButtonItem = settingsBarButton;
     }
     
+    self.navigationItem.title = NSLocalizedString(@"Notes", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     self.textViewController = (NCLTextViewController *)[self.splitViewController.viewControllers.lastObject topViewController];
     
     self.dateFormatter = [[NSDateFormatter alloc] init];
-    self.dateFormatter.dateStyle = NSDateFormatterShortStyle;
-    self.dateFormatter.timeStyle = NSDateFormatterShortStyle;
+    self.dateFormatter.dateStyle = NSDateFormatterMediumStyle;
+    self.dateFormatter.timeStyle = NSDateFormatterMediumStyle;
     
     NSManagedObjectContext *managedObjectContext = [NSManagedObjectContext mainContext];
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntity:[NCLNote class] context:managedObjectContext];
@@ -86,7 +105,10 @@
 {
     if (!self.settingsPopoverController) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *controller = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([NCLSettingsViewController class])];
+        
+        NCLSettingsViewController *controller = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([NCLSettingsViewController class])];
+        controller.delegate = self;
+        
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
         self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:navigationController];
     }
@@ -97,6 +119,28 @@
         [self.textViewController.view endEditing:YES];
         [[NCLPopoverManager sharedManager] presentPopover:self.settingsPopoverController fromBarButtonItem:self.navigationItem.leftBarButtonItem];
     }
+}
+
+- (void)setEditing:(BOOL)editing
+{
+    [super setEditing:editing];
+    
+    double delayInSeconds = 0.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.tableView selectRowAtIndexPath:self.selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    });
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
+    
+    double delayInSeconds = 0.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self.tableView selectRowAtIndexPath:self.selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    });
 }
 
 #pragma mark -
@@ -144,6 +188,11 @@
 {
     NCLNote *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     self.textViewController.note = note;
+    
+    self.selectedIndexPath = indexPath;
+    
+    [tableView reloadData];
+    [tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
 }
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
@@ -151,6 +200,11 @@
     NCLNote *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = note.title;
     cell.detailTextLabel.text = [self.dateFormatter stringFromDate:note.createdAt];
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
+    }
+    
+    [cell setNeedsLayout];
 }
 
 #pragma mark -
@@ -179,7 +233,7 @@
     
     switch(type) {
         case NSFetchedResultsChangeInsert: {
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             double delayInSeconds = 0.0;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
@@ -187,17 +241,21 @@
             });
             break;
         }
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+        case NSFetchedResultsChangeDelete: {
+            if ([tableView.indexPathForSelectedRow isEqual:indexPath]) {
+                self.textViewController.note = nil;
+            }
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
+        }
             
         case NSFetchedResultsChangeUpdate:
             [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
             break;
             
         case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
             break;
     }
 }
@@ -205,6 +263,48 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
+}
+
+#pragma mark -
+
+- (void)settingsViewControllerShouldShowSupport:(NCLSettingsViewController *)controller
+{
+    [[NCLPopoverManager sharedManager] dismissPopovers];
+    if (self.textViewController.masterPopoverController.isPopoverVisible) {
+        [self.textViewController.masterPopoverController dismissPopoverAnimated:YES];
+    }
+    
+    [[Helpshift sharedInstance] showSupport:self.textViewController];
+}
+
+- (void)settingsViewControllerShouldShowReportIssue:(NCLSettingsViewController *)controller
+{
+    [[NCLPopoverManager sharedManager] dismissPopovers];
+    if (self.textViewController.masterPopoverController.isPopoverVisible) {
+        [self.textViewController.masterPopoverController dismissPopoverAnimated:YES];
+    }
+    
+    [[Helpshift sharedInstance] reportIssue:self.textViewController];
+}
+
+- (void)settingsViewControllerShouldShowInbox:(NCLSettingsViewController *)controller
+{
+    [[NCLPopoverManager sharedManager] dismissPopovers];
+    if (self.textViewController.masterPopoverController.isPopoverVisible) {
+        [self.textViewController.masterPopoverController dismissPopoverAnimated:YES];
+    }
+    
+    [[Helpshift sharedInstance] showInbox:self.textViewController];
+}
+
+- (void)settingsViewControllerShouldShowFAQs:(NCLSettingsViewController *)controller
+{
+    [[NCLPopoverManager sharedManager] dismissPopovers];
+    if (self.textViewController.masterPopoverController.isPopoverVisible) {
+        [self.textViewController.masterPopoverController dismissPopoverAnimated:YES];
+    }
+    
+    [[Helpshift sharedInstance] showFAQs:self.textViewController];
 }
 
 @end

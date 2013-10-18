@@ -11,10 +11,28 @@
 @interface NCLKeyboardAccessoryView ()
 
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, weak) IBOutlet UISegmentedControl *keyboardChooser;
 
 @end
 
 @implementation NCLKeyboardAccessoryView
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        if ([UIToolbar instancesRespondToSelector:@selector(setShadowImage:forToolbarPosition:)]) {
+            [self.toolbar setBackgroundImage:[[UIImage imageNamed:@"toolbar_bg"] resizableImageWithCapInsets:UIEdgeInsetsZero] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+            [self.toolbar setShadowImage:[UIImage imageNamed:@"shadow"] forToolbarPosition:UIBarPositionAny];
+        } else {
+            [self.toolbar setBackgroundImage:[[UIImage imageNamed:@"toolbar_bg_with_shadow"] resizableImageWithCapInsets:UIEdgeInsetsZero] forToolbarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+        }
+    } else {
+        [self.keyboardChooser setContentOffset:CGSizeMake(0.0f, 1.0f) forSegmentAtIndex:0];
+        [self.keyboardChooser setContentOffset:CGSizeMake(0.0f, 1.0f) forSegmentAtIndex:1];
+    }
+}
 
 - (IBAction)selectionChanged:(id)sender
 {

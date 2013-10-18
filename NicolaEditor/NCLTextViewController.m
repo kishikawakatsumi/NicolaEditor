@@ -15,22 +15,29 @@
 #import "NCLConstants.h"
 #import "UIFont+Helper.h"
 #import <NLCoreData/NLCoreData.h>
+#import <Evernote-SDK-iOS/EvernoteSDK.h>
 
+@import MobileCoreServices;
 @import ObjectiveC;
 
 static NSString * const ZERO_WIDTH_SPACE = @"\u200B";
 
-@interface NCLTextViewController () <UITextViewDelegate>
+@interface NCLTextViewController () <UITextViewDelegate, UIDocumentInteractionControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 
-@property (nonatomic) UIBarButtonItem *shareButton;
 @property (nonatomic) UIBarButtonItem *addButton;
+@property (nonatomic) UIBarButtonItem *shareButton;
+@property (nonatomic) UIBarButtonItem *actionButton;
+@property (nonatomic) UIBarButtonItem *cloudUploadButton;
 
 @property (nonatomic) UITextView *textView;
 @property (nonatomic) NCLKeyboardView *inputView;
 @property (nonatomic) NCLKeyboardAccessoryView *inputAccessoryView;
 
-@property (nonatomic) UIPopoverController *masterPopoverController;
 @property (nonatomic) UIPopoverController *sharePopoverController;
+@property (nonatomic) UIDocumentInteractionController *interactionController;
+
+@property (nonatomic) UIActionSheet *actionSheet;
+@property (nonatomic) UIAlertView *alertView;
 
 @property (nonatomic) NSString *previousKeyboardInputMethod;
 @property (nonatomic) BOOL wasTextViewEditing;
@@ -69,6 +76,16 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
     return YES;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    self.inputAccessoryView.hidden = YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    self.inputAccessoryView.hidden = NO;
+}
+
 #pragma mark -
 
 - (void)__setFrame:(CGRect)frame
@@ -78,6 +95,14 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 
 - (void)prepareForLegacy
 {
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]) {
+            [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"navbar_bg"] resizableImageWithCapInsets:UIEdgeInsetsZero] forBarMetrics:UIBarMetricsDefault];
+            [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"shadow"]];
+        } else {
+            [self.navigationController.navigationBar setBackgroundImage:[[UIImage imageNamed:@"navbar_bg_with_shadow"] resizableImageWithCapInsets:UIEdgeInsetsZero] forBarMetrics:UIBarMetricsDefault];
+        }
+    }
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
         void (^block)(id, CGRect) = ^(id s, CGRect frame)
         {
@@ -100,24 +125,36 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 - (void)setupUI
 {
     UITextView *textView;
-    UIBarButtonItem *shareButton;
     UIBarButtonItem *addButton;
+    UIBarButtonItem *shareButton;
+    UIBarButtonItem *actionButton;
+    UIBarButtonItem *cloudUploadButton;
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         textView = [[UITextView alloc] initWithFrame:self.view.bounds];
+        
+        UIButton *addButtonView = [self customButtonWithImage:[UIImage imageNamed:@"add"]];
+        [addButtonView addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
+        addButton = [[UIBarButtonItem alloc] initWithCustomView:addButtonView];
         
         UIButton *shareButtonView = [self customButtonWithImage:[UIImage imageNamed:@"share"]];
         [shareButtonView addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
         shareButton = [[UIBarButtonItem alloc] initWithCustomView:shareButtonView];
         
-        UIButton *addButtonView = [self customButtonWithImage:[UIImage imageNamed:@"add"]];
-        [addButtonView addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
-        addButton = [[UIBarButtonItem alloc] initWithCustomView:addButtonView];
+        UIButton *actionButtonView = [self customButtonWithImage:[UIImage imageNamed:@"action"]];
+        [actionButtonView addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
+        actionButton = [[UIBarButtonItem alloc] initWithCustomView:actionButtonView];
+        
+        UIButton *cloudUploadButtonView = [self customButtonWithImage:[UIImage imageNamed:@"cloud_upload"]];
+        [cloudUploadButtonView addTarget:self action:@selector(cloudUpload:) forControlEvents:UIControlEventTouchUpInside];
+        cloudUploadButton = [[UIBarButtonItem alloc] initWithCustomView:cloudUploadButtonView];
     } else {
         textView = [[NSClassFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"U", @"I", @"C", @"o", @"m", @"p", @"a", @"t", @"i", @"b", @"i", @"l", @"i", @"t", @"y", @"T", @"e", @"x", @"t", @"V", @"i", @"e", @"w"]) alloc] initWithFrame:self.view.bounds];
         
-        shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
         addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+        shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+        actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(action:)];
+        cloudUploadButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cloud_upload"] style:UIBarButtonItemStylePlain target:self action:@selector(cloudUpload:)];
     }
     
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -125,12 +162,20 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
     [self.view addSubview:textView];
     self.textView = textView;
     
-    shareButton.enabled = NO;
     addButton.enabled = YES;
+    shareButton.enabled = NO;
+    actionButton.enabled = NO;
+    cloudUploadButton.enabled = NO;
     
-    self.navigationItem.rightBarButtonItems = @[addButton, shareButton];
-    self.shareButton = shareButton;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
+        self.navigationItem.rightBarButtonItems = @[addButton, actionButton, cloudUploadButton];
+    } else {
+        self.navigationItem.rightBarButtonItems = @[addButton, shareButton, actionButton, cloudUploadButton];
+    }
     self.addButton = addButton;
+    self.shareButton = shareButton;
+    self.actionButton = actionButton;
+    self.cloudUploadButton = cloudUploadButton;
 }
 
 - (UIButton *)customButtonWithImage:(UIImage *)image
@@ -193,16 +238,12 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 - (void)updateUI
 {
     self.title = self.note.title;
-    self.shareButton.enabled = self.note.content.length > 0 && ![self.textView.text isEqualToString:ZERO_WIDTH_SPACE];
+    self.shareButton.enabled = self.actionButton.enabled = self.cloudUploadButton.enabled = self.note.content.length > 0;
 }
 
 - (void)updateText
 {
     self.textView.text = self.note.content;
-    
-    if (self.textView.text.length == 0) {
-        self.textView.text = ZERO_WIDTH_SPACE;
-    }
 }
 
 - (void)applyFontSettings
@@ -286,6 +327,113 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
     }
 }
 
+- (void)action:(id)sender
+{
+    NSString *identifier = self.note.identifier;
+    NSString *content = self.note.content;
+    
+    NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+    NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:identifier] URLByAppendingPathExtension:@"txt"];
+    
+    [[content dataUsingEncoding:NSUTF8StringEncoding] writeToURL:fileURL atomically:YES];
+    
+    if (!self.interactionController) {
+        [[NCLPopoverManager sharedManager] dismissPopovers];
+    } else {
+        [self.interactionController dismissMenuAnimated:YES];
+        self.interactionController = nil;
+        return;
+    }
+    
+    self.interactionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+    self.interactionController.UTI = (__bridge NSString *)kUTTypeUTF8PlainText;
+    self.interactionController.delegate = self;
+    [self.interactionController presentOptionsMenuFromBarButtonItem:self.actionButton animated:YES];
+    
+    [[NCLPopoverManager sharedManager] setInteractionController:self.interactionController];
+}
+
+- (void)cloudUpload:(id)sender
+{
+    if (!self.actionSheet) {
+        [[NCLPopoverManager sharedManager] dismissPopovers];
+    } else {
+        [self.actionSheet dismissWithClickedButtonIndex:self.actionSheet.cancelButtonIndex animated:YES];
+        self.actionSheet = nil;
+        return;
+    }
+    
+    self.actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), nil];
+    [self.actionSheet showFromBarButtonItem:self.cloudUploadButton animated:YES];
+    
+    [[NCLPopoverManager sharedManager] setActionSheet:self.actionSheet];
+}
+
+- (void)sendToEvernote:(NCLNote *)note
+{
+    EvernoteSession *session = [EvernoteSession sharedSession];
+    if (session.isAuthenticated) {
+        NSString *title = note.title;
+        NSString *content = note.content;
+        
+        NSMutableString *contentBody = [[NSMutableString alloc] init];
+        [content enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+            [contentBody appendFormat:@"%@<br/>", line];
+        }];
+        
+        NSArray *tagNames = @[];
+        [self evernoteCreateNote:title image:nil contentBody:contentBody tagNames:tagNames];
+    } else {
+        [self authenticateEvernote];
+    }
+}
+- (void)evernoteCreateNote:(NSString *)title image:(UIImage *)image contentBody:(NSString *)contentBody tagNames:(NSArray *)tagNames
+{
+    NSMutableString *content = [[NSMutableString alloc] init];
+    [content setString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
+    [content appendString:@"<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"];
+    [content appendString:@"<en-note>"];
+    [content appendString:contentBody];
+    [content appendString:@"</en-note>"];
+    
+    EDAMNoteAttributes *noteAttributes = [[EDAMNoteAttributes alloc] init];
+    EDAMNote *note = [[EDAMNote alloc] init];
+    note.title = title;
+    note.content = content;
+//    note.tagNames = tagNames.mutableCopy;
+    note.attributes = noteAttributes;
+    note.created = (long long)[[NSDate date] timeIntervalSince1970] * 1000;
+    
+    EvernoteNoteStore *noteStore = [EvernoteNoteStore noteStore];
+    [noteStore createNote:note success:^(EDAMNote *note) {
+        
+    } failure:^(NSError *error) {
+        [self presentError:error message:nil];
+    }];
+}
+
+- (void)authenticateEvernote
+{
+    EvernoteSession *session = [EvernoteSession sharedSession];
+    [session authenticateWithViewController:self completionHandler:^(NSError *error) {
+        if (error || !session.isAuthenticated){
+            if (error) {
+                [self presentError:error message:@"Error authenticating with Evernote Cloud API"];
+            }
+            if (!session.isAuthenticated) {
+                [self presentError:nil message:@"Session not authenticated"];
+            }
+        } else {
+            EvernoteUserStore *userStore = [EvernoteUserStore userStore];
+            [userStore getUserWithSuccess:^(EDAMUser *user) {
+                [self sendToEvernote:nil];
+            } failure:^(NSError *error) {
+                [self presentError:error message:@"Error getting user"];
+            }];
+        }
+    }];
+}
+
 #pragma mark -
 
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
@@ -306,7 +454,6 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
     if ([text isEqualToString:@"\n"]) {
-        self.note.content = [textView.text stringByReplacingCharactersInRange:range withString:text];
         [self.note.managedObjectContext saveNested];
     }
     
@@ -328,6 +475,8 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
     
     [self updateUI];
     [self applyFontSettings];
+
+    [[NCLPopoverManager sharedManager] dismissPopovers];
     
     [self.note.managedObjectContext save];
 }
@@ -389,6 +538,11 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {
+    [[NCLPopoverManager sharedManager] dismissPopoversWithoutAnimation];
+    
+    [self.alertView dismissWithClickedButtonIndex:self.alertView.cancelButtonIndex animated:NO];
+    self.alertView = nil;
+    
     self.wasTextViewEditing = self.textView.isFirstResponder;
     [self.textView endEditing:YES];
 }
@@ -410,8 +564,12 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
 - (void)accessoryView:(NCLKeyboardAccessoryView *)accessoryView keyboardTypeDidChange:(NSInteger)keyboardType
 {
     if (keyboardType == NCLKeyboardTypeNICOLA) {
+        if (self.inputView.keyboardInputMethod) {
+            self.inputView.keyboardInputMethod = self.inputView.keyboardInputMethod;
+        }
         self.textView.inputView = self.inputView;
     } else {
+        self.previousKeyboardInputMethod = self.inputView.keyboardInputMethod;
         self.textView.inputView = nil;
     }
     
@@ -435,6 +593,60 @@ static void SwizzleMethod(Class c, SEL orig, SEL new)
     
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
+}
+
+#pragma mark -
+
+- (void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller
+{
+    self.interactionController = nil;
+}
+
+- (void)documentInteractionControllerDidDismissOptionsMenu:(UIDocumentInteractionController *)controller
+{
+    self.interactionController = nil;
+}
+
+- (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application
+{
+    self.interactionController = nil;
+}
+
+#pragma mark -
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Send to Evernote", nil)]) {
+        [self sendToEvernote:self.note];
+    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    self.actionSheet = nil;
+}
+
+#pragma mark -
+
+- (void)presentError:(NSError *)error message:(NSString *) message
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSBundle *bundle = [NSBundle mainBundle];
+        NSDictionary *infoDictionary = bundle.localizedInfoDictionary;
+        if (infoDictionary.count == 0) {
+            infoDictionary = bundle.infoDictionary;
+        }
+        NSString *appName = infoDictionary[(id)kCFBundleNameKey];
+        NSString *description;
+        if (error) {
+            description = [NSString stringWithFormat:@"%@: %@", message, error.localizedDescription];
+        } else {
+            description = message;
+        }
+        
+        self.alertView = [[UIAlertView alloc] initWithTitle:appName message:description delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"OK", nil), nil];
+        [self.alertView show];
+    });
 }
 
 @end

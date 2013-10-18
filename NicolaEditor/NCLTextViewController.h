@@ -13,5 +13,6 @@
 @interface NCLTextViewController : UIViewController
 
 @property (nonatomic) NCLNote *note;
+@property (nonatomic) UIPopoverController *masterPopoverController;
 
 @end

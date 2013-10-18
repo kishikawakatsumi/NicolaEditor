@@ -10,4 +10,15 @@
 
 @interface NCLSettingsViewController : UITableViewController
 
+@property (nonatomic, weak) id delegate;
+
+@end
+
+@protocol NCLSettingsViewControllerDelegate <NSObject>
+
+- (void)settingsViewControllerShouldShowSupport:(NCLSettingsViewController *)controller;
+- (void)settingsViewControllerShouldShowReportIssue:(NCLSettingsViewController *)controller;
+- (void)settingsViewControllerShouldShowInbox:(NCLSettingsViewController *)controller;
+- (void)settingsViewControllerShouldShowFAQs:(NCLSettingsViewController *)controller;
+
 @end

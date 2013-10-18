@@ -21,9 +21,9 @@ typedef NS_ENUM(NSInteger, NCLKeyboardShiftState) {
     NCLKeyboardShiftStateRightShifted
 };
 
-NSString * const NCLKeyboardInputModeKana = @"Kana";
-NSString * const NCLKeyboardInputModeAlphabet = @"Alphabet";
-NSString * const NCLKeyboardInputModeNumber = @"Number";
+NSString * const NCLKeyboardInputMethodKana = @"Kana";
+NSString * const NCLKeyboardInputMethodAlphabet = @"Alphabet";
+NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
 
 @interface NCLKeyboardInput : NSObject
 
@@ -86,7 +86,7 @@ NSString * const NCLKeyboardInputModeNumber = @"Number";
     return self;
 }
 
-- (void)addInput:(NSInteger)input
+- (void)addKeyInput:(NSInteger)input
 {
     
 }
@@ -115,7 +115,7 @@ NSString * const NCLKeyboardInputModeNumber = @"Number";
     return self;
 }
 
-- (void)addInput:(NSInteger)input
+- (void)addKeyInput:(NSInteger)input
 {
     NCLKeyboardInput *keyInput = [[NCLKeyboardInput alloc] init];
     keyInput.index = input;
@@ -270,7 +270,7 @@ NSString * const NCLKeyboardInputModeNumber = @"Number";
 
 @implementation NCLKeyboardPrefixShiftInputEngine
 
-- (void)addInput:(NSInteger)input
+- (void)addKeyInput:(NSInteger)input
 {
     NCLKeyboardInput *keyInput = [[NCLKeyboardInput alloc] init];
     keyInput.index = input;

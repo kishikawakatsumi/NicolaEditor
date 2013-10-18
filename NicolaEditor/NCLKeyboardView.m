@@ -8,7 +8,6 @@
 
 #import "NCLKeyboardView.h"
 #import "NCLKeyboardButton.h"
-#import "NCLKeyboardInputDisplayView.h"
 #import "NCLKeyboardInputEngine.h"
 #import "NCLConstants.h"
 
@@ -29,11 +28,10 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
 @property (nonatomic, weak) IBOutlet UIButton *spaceKeyButton;
 @property (nonatomic, weak) IBOutlet UIButton *keyboardKeyButton;
 
-@property (nonatomic) NCLKeyboardInputDisplayView *ipnutDisplayView;
-
 @property (nonatomic, weak) id internalKeyboard;
-
 @property (nonatomic) NCLKeyboardInputEngine *inputEngine;
+
+@property (nonatomic) NSString *previousKeyboardInputMethod;
 
 @end
 
@@ -64,7 +62,7 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     [self setupInputEngine];
     [self setupKeyboardView];
     
-    self.keyboardInputMethod = NCLKeyboardInputModeKana;
+    self.keyboardInputMethod = NCLKeyboardInputMethodKana;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shiftKeyBehaviorDidChange:) name:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
 }
@@ -96,26 +94,38 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     _keyboardInputMethod = inputMethod;
     self.inputEngine.inputMethod = inputMethod;
     
-    if ([inputMethod isEqualToString:NCLKeyboardInputModeAlphabet]) {
+    if ([inputMethod isEqualToString:NCLKeyboardInputMethodAlphabet]) {
         [self sendMessage:self.internalKeyboard
                   forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"]
               attachments:@[@{@"Object": [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"e", @"n", @"_", @"U", @"S", @"@", @"h", @"w", @"=", @"U", @"S", @";", @"s", @"w", @"=", @"Q", @"W", @"E", @"R", @"T", @"Y"]}]];
-    } else if ([inputMethod isEqualToString:NCLKeyboardInputModeNumber]) {
+    } else if ([inputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
         [self sendMessage:self.internalKeyboard
                   forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"]
               attachments:@[@{@"Object": [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"e", @"n", @"_", @"U", @"S", @"@", @"h", @"w", @"=", @"U", @"S", @";", @"s", @"w", @"=", @"Q", @"W", @"E", @"R", @"T", @"Y"]}]];
-    } else if ([inputMethod isEqualToString:NCLKeyboardInputModeKana]) {
+    } else if ([inputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
         [self sendMessage:self.internalKeyboard
                   forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"]
               attachments:@[@{@"Object": [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"j", @"a", @"_", @"J", @"P", @"-", @"K", @"a", @"n", @"a", @"@", @"s", @"w", @"=", @"K", @"a", @"n", @"a", @"-", @"F", @"l", @"i", @"c", @"k", @";", @"h", @"w", @"=", @"U", @"S"]}]];
     }
     
-    BOOL kana = [inputMethod isEqualToString:NCLKeyboardInputModeKana];
-    for (NCLKeyboardButton *button in self.keyButtons) {
-        button.selected = !kana;
+    NSString *keyboardType;
+    if ([inputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
+        keyboardType = @"kana";
+        [self.alphabetKeyButton setImage:[UIImage imageNamed:@"key_alphabet"] forState:UIControlStateNormal];
+        [self.alphabetKeyButton setImage:[UIImage imageNamed:@"key_alphabet_highlighted"] forState:UIControlStateHighlighted];
+    } else if ([inputMethod isEqualToString:NCLKeyboardInputMethodAlphabet]) {
+        keyboardType = @"alphabet";
+        [self.alphabetKeyButton setImage:[UIImage imageNamed:@"key_kana"] forState:UIControlStateNormal];
+        [self.alphabetKeyButton setImage:[UIImage imageNamed:@"key_kana_highlighted"] forState:UIControlStateHighlighted];
+    } else if ([inputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
+        keyboardType = @"number";
     }
-    
-    self.alphabetKeyButton.selected = !kana;
+    NSInteger i = 0;
+    for (NCLKeyboardButton *keyButton in self.keyButtons) {
+        [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d", keyboardType, i]] forState:UIControlStateNormal];
+        [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d_highlighted", keyboardType, i]] forState:UIControlStateHighlighted];
+        i++;
+    }
 }
 
 #pragma mark -
@@ -126,7 +136,7 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     NSString *shiftKeyBehavior = [userDefaults stringForKey:@"shift-key-behavior"];
     self.inputEngine = [NCLKeyboardInputEngine inputEngineWithShiftKeyBehavior:shiftKeyBehavior];
     self.inputEngine.delegate = self;
-    self.inputEngine.inputMethod = NCLKeyboardInputModeKana;
+    self.inputEngine.inputMethod = NCLKeyboardInputMethodKana;
     
     float timeShiftDuration = [userDefaults doubleForKey:@"time-shift-duration"];
     self.inputEngine.delay = timeShiftDuration;
@@ -138,12 +148,6 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     
     for (NSInteger i = 0; i < 35; i++) {
         NCLKeyboardButton *keyButton = [[NCLKeyboardButton alloc] initWithIndex:i];
-        
-        [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_kana_%02d", i]] forState:UIControlStateNormal];
-        [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_kana_%02d_highlighted", i]] forState:UIControlStateHighlighted];
-        [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_alphabet_%02d", i]] forState:UIControlStateSelected];
-        [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_alphabet_%02d_highlighted", i]] forState:UIControlStateSelected | UIControlStateHighlighted];
-        
         if (i == NCLKeyboardViewSpecialKeyDelete) {
             [keyButton addTarget:self action:@selector(touchDownDeleteKey:) forControlEvents:UIControlEventTouchDown];
             [keyButton addTarget:self action:@selector(touchUpDeleteKey:) forControlEvents:UIControlEventTouchUpInside];
@@ -265,7 +269,7 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
     
     NCLKeyboardButton *keyButton = sender;
     NSInteger keyIndex = keyButton.index;
-    [self.inputEngine addInput:keyIndex];
+    [self.inputEngine addKeyInput:keyIndex];
 }
 
 - (void)touchUpKey:(id)sender
@@ -319,18 +323,29 @@ NSInteger const NCLKeyboardViewSpecialKeyShift2 = 33;
 
 - (IBAction)touchDownNumberKey:(id)sender
 {
-//    [[UIDevice currentDevice] playInputClick];
-//    self.inputMode = NCLKeyboardInputModeNumber;
+    [[UIDevice currentDevice] playInputClick];
+    if (![self.keyboardInputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
+        self.previousKeyboardInputMethod = self.keyboardInputMethod;
+    }
+    self.keyboardInputMethod = NCLKeyboardInputMethodNumberPunctuation;
 }
 
 - (IBAction)touchDownAlphabetKey:(id)sender
 {
     [[UIDevice currentDevice] playInputClick];
     
-    if ([self.keyboardInputMethod isEqualToString:NCLKeyboardInputModeKana]) {
-        self.keyboardInputMethod = NCLKeyboardInputModeAlphabet;
+    if ([self.keyboardInputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
+        if ([self.previousKeyboardInputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
+            self.keyboardInputMethod = NCLKeyboardInputMethodAlphabet;
+        } else {
+            self.keyboardInputMethod = NCLKeyboardInputMethodKana;
+        }
     } else {
-        self.keyboardInputMethod = NCLKeyboardInputModeKana;
+        if ([self.keyboardInputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
+            self.keyboardInputMethod = NCLKeyboardInputMethodAlphabet;
+        } else {
+            self.keyboardInputMethod = NCLKeyboardInputMethodKana;
+        }
     }
 }
 

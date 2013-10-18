@@ -41,6 +41,7 @@
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="keyboardChooser" destination="a5e-iO-5BA" id="l3Q-nI-oR2"/>
                 <outlet property="toolbar" destination="7Dr-WV-5XJ" id="w17-8B-cMI"/>
             </connections>
         </view>

@@ -11,6 +11,8 @@
 
 @interface NCLShiftKeyFunctionsSettingsViewController ()
 
+@property (nonatomic) NSArray *functions;
+
 @end
 
 @implementation NCLShiftKeyFunctionsSettingsViewController
@@ -20,6 +22,7 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Shift Key Function", nil);
+    self.functions = @[NCLShiftKeyFunctionNextCandidate, NCLShiftKeyFunctionAcceptCandidate, NCLShiftKeyFunctionNone];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -32,12 +35,14 @@
         shiftKeyFunction = [userDefaults stringForKey:NCLSettingsRightShiftFunctionKey];
     }
     
-    NSInteger row = indexPath.row;
-    if (row == 0 && [shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else if (row == 1 && [shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else if (row == 2 && [shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNone]) {
+    NSString *function = self.functions[indexPath.row];
+    cell.textLabel.text = NSLocalizedString(function, nil);
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
+    }
+    
+    if ([shiftKeyFunction isEqualToString:function]) {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     } else {
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -56,14 +61,8 @@
         key = NCLSettingsRightShiftFunctionKey;
     }
     
-    NSInteger row = indexPath.row;
-    if (row == 0) {
-        [userDefaults setObject:NCLShiftKeyFunctionNextCandidate forKey:key];
-    } else if (row == 1) {
-        [userDefaults setObject:NCLShiftKeyFunctionAcceptCandidate forKey:key];
-    } else if (row == 2) {
-        [userDefaults setObject:NCLShiftKeyFunctionNone forKey:key];
-    }
+    NSString *function = self.functions[indexPath.row];
+    [userDefaults setObject:function forKey:key];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
