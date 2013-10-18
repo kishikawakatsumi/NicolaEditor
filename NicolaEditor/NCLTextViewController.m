@@ -14,6 +14,7 @@
 #import "NCLNote.h"
 #import "NCLConstants.h"
 #import "UIFont+Helper.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import <NLCoreData/NLCoreData.h>
 #import <Evernote-SDK-iOS/EvernoteSDK.h>
 
@@ -431,6 +432,8 @@ static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
 }
 - (void)evernoteCreateNote:(NSString *)title image:(UIImage *)image contentBody:(NSString *)contentBody tagNames:(NSArray *)tagNames
 {
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
     NSMutableString *content = [[NSMutableString alloc] init];
     [content setString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
     [content appendString:@"<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"];
@@ -448,9 +451,11 @@ static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
     
     EvernoteNoteStore *noteStore = [EvernoteNoteStore noteStore];
     [noteStore createNote:note success:^(EDAMNote *note) {
-        
+        [SVProgressHUD dismiss];
+        [SVProgressHUD showSuccessWithStatus:nil];
     } failure:^(NSError *error) {
-        [self presentError:error message:nil];
+        [SVProgressHUD dismiss];
+        [SVProgressHUD showErrorWithStatus:nil];
     }];
 }
 
