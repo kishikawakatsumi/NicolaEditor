@@ -4,5 +4,13 @@ pod 'SVProgressHUD'
 pod 'NLCoreData'
 pod 'Evernote-SDK-iOS'
 pod 'Helpshift'
-pod 'TestFlightSDK'
 pod 'BugSense'
+
+configuration 'AdHoc' do
+  pod 'TestFlightSDK'
+end
+
+post_install do | installer |
+  require 'fileutils'
+  FileUtils.cp_r('Pods/Pods-acknowledgements.plist', 'NicolaEditor/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+end

@@ -79,6 +79,8 @@
 		14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47A1803121E00F7E91A /* Main.storyboard */; };
 		14B3F47E1803167200F7E91A /* KeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* KeyboardLayouts.json */; };
 		14B3F47F1803167200F7E91A /* KeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* KeyboardLayouts.json */; };
+		14BD796B1811BBBE005A6387 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14BD796A1811BBBE005A6387 /* Settings.bundle */; };
+		14BD796C1811BBBE005A6387 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14BD796A1811BBBE005A6387 /* Settings.bundle */; };
 		C631213B1BE745BBA45EA37C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 405DAA10965C4E299C75719A /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -163,6 +165,7 @@
 		14B3F477180310D600F7E91A /* NCLTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLTextViewController.m; sourceTree = "<group>"; };
 		14B3F47A1803121E00F7E91A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		14B3F47D1803167200F7E91A /* KeyboardLayouts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KeyboardLayouts.json; sourceTree = "<group>"; };
+		14BD796A1811BBBE005A6387 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		405DAA10965C4E299C75719A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -304,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				14B3F43718030DEC00F7E91A /* NicolaEditor-Info.plist */,
+				14BD796A1811BBBE005A6387 /* Settings.bundle */,
 				14B3F43818030DEC00F7E91A /* InfoPlist.strings */,
 				146B3EEE18085B8600418452 /* Localizable.strings */,
 				14B3F43B18030DEC00F7E91A /* main.m */,
@@ -428,6 +432,7 @@
 				14A57E881811255D00F1A7D9 /* Icon-72.png in Resources */,
 				14B3F44E18030DEC00F7E91A /* Images.xcassets in Resources */,
 				146B3F0F18099F7200418452 /* SampleText.json in Resources */,
+				14BD796B1811BBBE005A6387 /* Settings.bundle in Resources */,
 				14B3F46C18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
 				146B3EEB18085B8600418452 /* Localizable.strings in Resources */,
 				143268391810272E0001BDBC /* NCLSliderPopup.xib in Resources */,
@@ -451,6 +456,7 @@
 				14B3F47F1803167200F7E91A /* KeyboardLayouts.json in Resources */,
 				146174721803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
 				14B3F46D18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
+				14BD796C1811BBBE005A6387 /* Settings.bundle in Resources */,
 				1432683A1810272E0001BDBC /* NCLSliderPopup.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

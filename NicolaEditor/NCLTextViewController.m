@@ -23,18 +23,43 @@
 
 static NSString * const ZERO_WIDTH_SPACE = @"\u200B";
 
-static void swizzleClassMethod(Class c, SEL orig, SEL new)
+static void swizzleClassMethod(NSString *className, NSString *original, NSString *replacement)
 {
-    Method origMethod = class_getClassMethod(c, orig);
-    Method newMethod = class_getClassMethod(c, new);
-    method_exchangeImplementations(origMethod, newMethod);
+    Class c = NSClassFromString(className);
+    SEL orig = NSSelectorFromString(original);
+    SEL rep = NSSelectorFromString(replacement);
+    Method originalMethod = class_getClassMethod(c, orig);
+    Method replacementMethod = class_getClassMethod(c, rep);
+    method_exchangeImplementations(originalMethod, replacementMethod);
 }
 
-static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
+static void swizzleInstanceMethod(NSString *className, NSString *original, NSString *replacement)
 {
-    Method origMethod = class_getInstanceMethod(c, orig);
-    Method newMethod = class_getInstanceMethod(c, new);
-    method_exchangeImplementations(origMethod, newMethod);
+    Class c = NSClassFromString(className);
+    SEL orig = NSSelectorFromString(original);
+    SEL rep = NSSelectorFromString(replacement);
+    Method originalMethod = class_getInstanceMethod(c, orig);
+    Method replacementMethod = class_getInstanceMethod(c, rep);
+    method_exchangeImplementations(originalMethod, replacementMethod);
+}
+
+static void _addMethod(Class c, NSString *selector, id block, NSString *sig)
+{
+    SEL sel = NSSelectorFromString(selector);
+    IMP imp = imp_implementationWithBlock(block);
+    class_addMethod(c, sel, imp, sig.UTF8String);
+}
+
+static void addClassMethod(NSString *className, NSString *selector, id block, NSString *signature)
+{
+    Class metaClass = objc_getMetaClass([className UTF8String]);
+    _addMethod(metaClass, selector, block, signature);
+}
+
+static void addInstanceMethod(NSString *className, NSString *selector, id block, NSString *signature)
+{
+    Class clazz = NSClassFromString(className);
+    _addMethod(clazz, selector, block, signature);
 }
 
 @interface NCLTextViewController () <UITextViewDelegate, UIDocumentInteractionControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
@@ -109,19 +134,16 @@ static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
 - (void)prepareForLegacy
 {
     {
-        SEL sel = NSSelectorFromString(@"__supportsSplit");
-        SEL orig = NSSelectorFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"u", @"p", @"p", @"o", @"r", @"t", @"s", @"S", @"p", @"l", @"i", @"t"]);
         NSString *className = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"I", @"m", @"p", @"l"];
-        Class clazz = NSClassFromString(className);
-        Class metaClass = objc_getMetaClass([className UTF8String]);
+        NSString *original = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"u", @"p", @"p", @"o", @"r", @"t", @"s", @"S", @"p", @"l", @"i", @"t"];
+        NSString *replacement = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",  @"_", @"_", @"s", @"u", @"p", @"p", @"o", @"r", @"t", @"s", @"S", @"p", @"l", @"i", @"t"];
         
-        BOOL(^block)(id) = ^(id s) {
+        BOOL (^block)(id) = ^(id s) {
             return NO;
         };
         
-        IMP imp = imp_implementationWithBlock(block);
-        class_addMethod(metaClass, sel, imp, "c@:");
-        swizzleClassMethod(clazz, orig, sel);
+        addClassMethod(className, replacement, block, @"c@:");
+        swizzleClassMethod(className, original, replacement);
     }
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]) {
@@ -132,21 +154,49 @@ static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
         }
     }
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
-        void (^block)(id, CGRect) = ^(id s, CGRect frame)
         {
-            if (CGRectGetMaxY([self.textView convertRect:frame toView:self.inputView.superview]) > 0.0f) {
-                CGRect rect = [self.textView caretRectForPosition:self.textView.selectedTextRange.end];
-                frame.origin.y = rect.origin.y - CGRectGetHeight(frame);
-            }
+            NSString *className = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @"F", @"l", @"o", @"a", @"t", @"i", @"n", @"g", @"V", @"i", @"e", @"w"];
+            NSString *original = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"F", @"r", @"a", @"m", @"e", @":"];
+            NSString *replacement = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@", @"_", @"_", @"s", @"e", @"t", @"F", @"r", @"a", @"m", @"e", @":"];
+           
+            void (^block)(id, CGRect) = ^(id s, CGRect frame)
+            {
+                if (CGRectGetMaxY([self.textView convertRect:frame toView:self.inputView.superview]) > 0.0f) {
+                    CGRect rect = [self.textView caretRectForPosition:self.textView.selectedTextRange.end];
+                    frame.origin.y = rect.origin.y - CGRectGetHeight(frame);
+                }
+                
+                [s __setFrame:frame];
+            };
             
-            [s __setFrame:frame];
-        };
-        
-        SEL sel = NSSelectorFromString(@"__setFrame:");
-        IMP imp = imp_implementationWithBlock(block);
-        Class clazz = NSClassFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @"F", @"l", @"o", @"a", @"t", @"i", @"n", @"g", @"V", @"i", @"e", @"w"]);
-        class_addMethod(clazz, sel, imp, "v@:*");
-        swizzleInstanceMethod(clazz, @selector(setFrame:), sel);
+            addInstanceMethod(className, replacement, block, @"v@:*");
+            swizzleInstanceMethod(className, original, replacement);
+        }
+        {
+            BOOL (^block)(id, UIDocumentInteractionController *, SEL) = ^(id s, UIDocumentInteractionController *controller, SEL action)
+            {
+                if (action == @selector(copy:)) {
+                    return YES;
+                }
+                return NO;
+            };
+            
+            addInstanceMethod(NSStringFromClass(self.class), @"documentInteractionController:canPerformAction:", block, @"c@:@:");
+        }
+        {
+            BOOL (^block)(id, UIDocumentInteractionController *, SEL) = ^(id s, UIDocumentInteractionController *controller, SEL action)
+            {
+                if (action == @selector(copy:)) {
+                    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+                    pasteboard.string = self.note.content;
+                    return YES;
+                }
+                
+                return NO;
+            };
+            
+            addInstanceMethod(NSStringFromClass(self.class), @"documentInteractionController:performAction:", block, @"c@:@:");
+        }
     }
 }
 
@@ -459,11 +509,11 @@ static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
                 return;
             }
             
-            [self presentError:error message:@"Error authenticating with Evernote Cloud API"];
+            [self presentError:error message:nil];
             return;
         }
         if (!session.isAuthenticated) {
-            [self presentError:nil message:@"Session not authenticated"];
+            [self presentError:nil message:NSLocalizedString(@"Session not authenticated", nil)];
             return;
         }
         
@@ -471,7 +521,7 @@ static void swizzleInstanceMethod(Class c, SEL orig, SEL new)
         [userStore getUserWithSuccess:^(EDAMUser *user) {
             [self sendToEvernote:nil];
         } failure:^(NSError *error) {
-            [self presentError:error message:@"Error getting user"];
+            [self presentError:error message:nil];
         }];
     }];
 }
