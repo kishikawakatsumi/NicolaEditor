@@ -10,6 +10,9 @@
 
 @interface NCLPopoverManager ()
 
+@property (nonatomic) UIDocumentInteractionController *interactionController;
+@property (nonatomic) UIActionSheet *actionSheet;
+
 @property (nonatomic) NSMutableSet *popoverControllers;
 
 @end
@@ -37,16 +40,47 @@
     return self;
 }
 
+- (BOOL)isPopoverVisible
+{
+    for (UIPopoverController *popoverController in self.popoverControllers) {
+        if (popoverController.isPopoverVisible) {
+            return YES;
+        }
+    }
+    if (self.interactionController || self.actionSheet) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 - (void)presentPopover:(UIPopoverController *)popoverController fromBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
-    if (popoverController.isPopoverVisible || self.interactionController) {
-        [popoverController dismissPopoverAnimated:YES];
-        [self.popoverControllers removeObject:popoverController];
-        
-        [self dismissSystemPopovers];
+    if (self.isPopoverVisible) {
+        [self dismissPopovers];
     } else {
         [popoverController presentPopoverFromBarButtonItem:barButtonItem permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
         [self.popoverControllers addObject:popoverController];
+    }
+}
+
+- (void)presentInteractionController:(UIDocumentInteractionController *)interactionController fromBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    if (self.isPopoverVisible) {
+        [self dismissPopovers];
+    } else {
+        [interactionController presentOptionsMenuFromBarButtonItem:barButtonItem animated:YES];
+        self.interactionController = interactionController;
+    }
+}
+
+- (void)presentActionSheet:(UIActionSheet *)actionSheet fromBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    if (self.isPopoverVisible) {
+        [self dismissPopovers];
+    } else {
+        [actionSheet showFromBarButtonItem:barButtonItem animated:YES];
+        self.actionSheet = actionSheet;
     }
 }
 

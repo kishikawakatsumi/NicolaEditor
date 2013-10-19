@@ -103,6 +103,11 @@
 
 - (IBAction)presentSettings:(id)sender
 {
+    if ([[NCLPopoverManager sharedManager] isPopoverVisible]) {
+        [[NCLPopoverManager sharedManager] dismissPopovers];
+        return;
+    }
+    
     if (!self.settingsPopoverController) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
@@ -113,34 +118,40 @@
         self.settingsPopoverController = [[UIPopoverController alloc] initWithContentViewController:navigationController];
     }
     
-    if (self.settingsPopoverController.isPopoverVisible) {
-        [self.settingsPopoverController dismissPopoverAnimated:YES];
-    } else {
-        [self.textViewController.view endEditing:YES];
-        [[NCLPopoverManager sharedManager] presentPopover:self.settingsPopoverController fromBarButtonItem:self.navigationItem.leftBarButtonItem];
-    }
+    [self.textViewController.view endEditing:YES];
+    [[NCLPopoverManager sharedManager] presentPopover:self.settingsPopoverController fromBarButtonItem:self.navigationItem.leftBarButtonItem];
 }
 
 - (void)setEditing:(BOOL)editing
 {
-    [super setEditing:editing];
+    if ([[NCLPopoverManager sharedManager] isPopoverVisible]) {
+        [[NCLPopoverManager sharedManager] dismissPopovers];
+        return;
+    }
     
     double delayInSeconds = 0.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self.tableView selectRowAtIndexPath:self.selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     });
+    
+    [super setEditing:editing];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
-    [super setEditing:editing animated:animated];
+    if ([[NCLPopoverManager sharedManager] isPopoverVisible]) {
+        [[NCLPopoverManager sharedManager] dismissPopovers];
+        return;
+    }
     
     double delayInSeconds = 0.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self.tableView selectRowAtIndexPath:self.selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
     });
+    
+    [super setEditing:editing animated:animated];
 }
 
 #pragma mark -

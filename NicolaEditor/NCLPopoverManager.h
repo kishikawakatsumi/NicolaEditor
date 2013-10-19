@@ -10,12 +10,13 @@
 
 @interface NCLPopoverManager : NSObject
 
-@property (nonatomic, weak) UIDocumentInteractionController *interactionController;
-@property (nonatomic, weak) UIActionSheet *actionSheet;
+@property (nonatomic, getter = isPopoverVisible) BOOL popoverVisible;
 
 + (instancetype)sharedManager;
 
 - (void)presentPopover:(UIPopoverController *)popoverController fromBarButtonItem:(UIBarButtonItem *)barButtonItem;
+- (void)presentInteractionController:(UIDocumentInteractionController *)interactionController fromBarButtonItem:(UIBarButtonItem *)barButtonItem;
+- (void)presentActionSheet:(UIActionSheet *)actionSheet fromBarButtonItem:(UIBarButtonItem *)barButtonItem;
 
 - (void)dismissPopovers;
 - (void)dismissPopoversWithoutAnimation;

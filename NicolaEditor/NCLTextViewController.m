@@ -73,10 +73,6 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 @property (nonatomic) NCLKeyboardView *inputView;
 @property (nonatomic) NCLKeyboardAccessoryView *inputAccessoryView;
 
-@property (nonatomic) UIPopoverController *sharePopoverController;
-@property (nonatomic) UIDocumentInteractionController *interactionController;
-
-@property (nonatomic) UIActionSheet *actionSheet;
 @property (nonatomic) UIAlertView *alertView;
 
 @property (nonatomic) NSString *previousKeyboardInputMethod;
@@ -383,6 +379,11 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 - (void)add:(id)sender
 {
+    if ([[NCLPopoverManager sharedManager] isPopoverVisible]) {
+        [[NCLPopoverManager sharedManager] dismissPopovers];
+        return;
+    }
+    
     NSManagedObjectContext *managedObjectContext = [NSManagedObjectContext mainContext];
     
     NCLNote *note = [NCLNote insertInContext:managedObjectContext];
@@ -393,26 +394,25 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 - (void)share:(id)sender
 {
-    if (self.sharePopoverController.isPopoverVisible) {
-        [self.sharePopoverController dismissPopoverAnimated:YES];
+    if ([[NCLPopoverManager sharedManager] isPopoverVisible]) {
+        [[NCLPopoverManager sharedManager] dismissPopovers];
         return;
     }
     
-    [[NCLPopoverManager sharedManager] dismissPopovers];
+    NSArray *activityItems = @[self.note.content];
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
     
-    if (NSClassFromString(@"UIActivityViewController")) {
-        NSArray *activityItems = @[self.note.content];
-        UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-        
-        self.sharePopoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
-        [[NCLPopoverManager sharedManager] presentPopover:self.sharePopoverController fromBarButtonItem:self.shareButton];
-    } else {
-        
-    }
+    UIPopoverController *popoverController = [[UIPopoverController alloc] initWithContentViewController:controller];
+    [[NCLPopoverManager sharedManager] presentPopover:popoverController fromBarButtonItem:self.shareButton];
 }
 
 - (void)action:(id)sender
 {
+    if ([[NCLPopoverManager sharedManager] isPopoverVisible]) {
+        [[NCLPopoverManager sharedManager] dismissPopovers];
+        return;
+    }
+    
     NSString *identifier = self.note.identifier;
     NSString *content = self.note.content;
     
@@ -421,36 +421,22 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     
     [[content dataUsingEncoding:NSUTF8StringEncoding] writeToURL:fileURL atomically:YES];
     
-    if (!self.interactionController) {
-        [[NCLPopoverManager sharedManager] dismissPopovers];
-    } else {
-        [self.interactionController dismissMenuAnimated:YES];
-        self.interactionController = nil;
-        return;
-    }
+    UIDocumentInteractionController *interactionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
+    interactionController.UTI = (__bridge NSString *)kUTTypeUTF8PlainText;
+    interactionController.delegate = self;
     
-    self.interactionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
-    self.interactionController.UTI = (__bridge NSString *)kUTTypeUTF8PlainText;
-    self.interactionController.delegate = self;
-    [self.interactionController presentOptionsMenuFromBarButtonItem:self.actionButton animated:YES];
-    
-    [[NCLPopoverManager sharedManager] setInteractionController:self.interactionController];
+    [[NCLPopoverManager sharedManager] presentInteractionController:interactionController fromBarButtonItem:self.actionButton];
 }
 
 - (void)cloudUpload:(id)sender
 {
-    if (!self.actionSheet) {
+    if ([[NCLPopoverManager sharedManager] isPopoverVisible]) {
         [[NCLPopoverManager sharedManager] dismissPopovers];
-    } else {
-        [self.actionSheet dismissWithClickedButtonIndex:self.actionSheet.cancelButtonIndex animated:YES];
-        self.actionSheet = nil;
         return;
     }
     
-    self.actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), nil];
-    [self.actionSheet showFromBarButtonItem:self.cloudUploadButton animated:YES];
-    
-    [[NCLPopoverManager sharedManager] setActionSheet:self.actionSheet];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), nil];
+    [[NCLPopoverManager sharedManager] presentActionSheet:actionSheet fromBarButtonItem:self.cloudUploadButton];
 }
 
 - (void)sendToEvernote:(NCLNote *)note
@@ -648,11 +634,6 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 #pragma mark -
 
-- (void)accessoryViewDidComplete:(NCLKeyboardAccessoryView *)accessoryView
-{
-    [self.textView endEditing:NO];
-}
-
 - (void)accessoryView:(NCLKeyboardAccessoryView *)accessoryView keyboardTypeDidChange:(NSInteger)keyboardType
 {
     if (keyboardType == NCLKeyboardTypeNICOLA) {
@@ -665,11 +646,51 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     [self.textView reloadInputViews];
 }
 
+- (void)accessoryViewDidComplete:(NCLKeyboardAccessoryView *)accessoryView
+{
+    [self.textView endEditing:NO];
+}
+
+- (void)accessoryViewArrowUp:(NCLKeyboardAccessoryView *)accessoryView
+{
+    [self.inputView cursorUp];
+}
+
+- (void)accessoryViewArrowDown:(NCLKeyboardAccessoryView *)accessoryView
+{
+    [self.inputView cursorDown];
+}
+
+- (void)accessoryViewArrowLeft:(NCLKeyboardAccessoryView *)accessoryView
+{
+    [self.inputView cursorLeft];
+}
+
+- (void)accessoryViewArrowRight:(NCLKeyboardAccessoryView *)accessoryView
+{
+    [self.inputView cursorRight];
+}
+
+- (void)accessoryViewCut:(NCLKeyboardAccessoryView *)accessoryView
+{
+    [self.textView cut:nil];
+}
+
+- (void)accessoryViewCopy:(NCLKeyboardAccessoryView *)accessoryView
+{
+    [self.textView copy:nil];
+}
+
+- (void)accessoryViewPaste:(NCLKeyboardAccessoryView *)accessoryView
+{
+    [self.textView paste:nil];
+}
+
 #pragma mark -
 
 - (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
-    [[NCLPopoverManager sharedManager] dismissPopovers];
+    [[NCLPopoverManager sharedManager] dismissPopoversWithoutAnimation];
 
     barButtonItem.title = NSLocalizedString(@"Notes", nil);
     [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
@@ -678,7 +699,7 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 - (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
-    [[NCLPopoverManager sharedManager] dismissPopovers];
+    [[NCLPopoverManager sharedManager] dismissPopoversWithoutAnimation];
     
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
@@ -688,17 +709,17 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 - (void)documentInteractionControllerDidDismissOpenInMenu:(UIDocumentInteractionController *)controller
 {
-    self.interactionController = nil;
+    [[NCLPopoverManager sharedManager] dismissPopoversWithoutAnimation];
 }
 
 - (void)documentInteractionControllerDidDismissOptionsMenu:(UIDocumentInteractionController *)controller
 {
-    self.interactionController = nil;
+    [[NCLPopoverManager sharedManager] dismissPopoversWithoutAnimation];
 }
 
 - (void)documentInteractionController:(UIDocumentInteractionController *)controller didEndSendingToApplication:(NSString *)application
 {
-    self.interactionController = nil;
+    [[NCLPopoverManager sharedManager] dismissPopoversWithoutAnimation];
 }
 
 #pragma mark -
@@ -712,7 +733,7 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 - (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    self.actionSheet = nil;
+    [[NCLPopoverManager sharedManager] dismissPopoversWithoutAnimation];
 }
 
 #pragma mark -

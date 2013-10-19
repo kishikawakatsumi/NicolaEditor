@@ -34,6 +34,10 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 @property (nonatomic) NCLKeyboardInputEngine *inputEngine;
 
 @property (nonatomic) NSString *previousKeyboardInputMethod;
+
+@property (nonatomic, getter = isShifted) BOOL shifted;
+@property (nonatomic, getter = isShiftLocked) BOOL shiftLocked;
+
 @property (nonatomic) BOOL swapBackspaceReturnEnabled;
 
 @end
@@ -130,7 +134,119 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
     for (NCLKeyboardButton *keyButton in self.keyButtons) {
         [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d", keyboardType, i]] forState:UIControlStateNormal];
         [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d_highlighted", keyboardType, i]] forState:UIControlStateHighlighted];
+        [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d_highlighted", keyboardType, i]] forState:UIControlStateSelected];
+        [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d_highlighted", keyboardType, i]] forState:UIControlStateSelected | UIControlStateHighlighted];
         i++;
+    }
+}
+
+- (void)cursorUp
+{
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]] boolValue];
+    if (hasCandidates) {
+        [self sendMessage:self.internalKeyboard
+                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"P", @"r", @"e", @"v", @"i", @"o", @"u", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"]
+              attachments:nil];
+    } else {
+        UITextRange *selectedTextRange = self.textView.selectedTextRange;
+        CGRect rect = [self.textView caretRectForPosition:selectedTextRange.start];
+        
+        CGPoint origin = rect.origin;
+        origin.y -= CGRectGetHeight(rect) / 2;
+        UITextPosition *position = [self.textView closestPositionToPoint:origin];
+        UITextRange *textRange = [self.textView textRangeFromPosition:position toPosition:position];
+        self.textView.selectedTextRange = textRange;
+    }
+}
+
+- (void)cursorDown
+{
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]] boolValue];
+    if (hasCandidates) {
+        [self sendMessage:self.internalKeyboard
+                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"N", @"e", @"x", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]
+              attachments:nil];
+    } else {
+        UITextRange *selectedTextRange = self.textView.selectedTextRange;
+        CGRect rect = [self.textView caretRectForPosition:selectedTextRange.start];
+        
+        CGPoint origin = rect.origin;
+        origin.y += CGRectGetHeight(rect) + CGRectGetHeight(rect) / 2;
+        UITextPosition *position = [self.textView closestPositionToPoint:origin];
+        UITextRange *textRange = [self.textView textRangeFromPosition:position toPosition:position];
+        self.textView.selectedTextRange = textRange;
+    }
+}
+
+- (void)cursorLeft
+{
+    if (self.textView.markedTextRange) {
+        [self sendMessage:self.internalKeyboard
+                  forName:[NSString stringWithFormat:@"%@", @"movePhraseBoundaryToDirection:"]
+              attachments:@[@{@"NSInteger": @(1)}]];
+    } else if (self.isShifted) {
+        NSRange selectedRange = self.textView.selectedRange;
+        if (selectedRange.location > 0) {
+            selectedRange.location--;
+            selectedRange.length++;
+            
+            self.textView.scrollEnabled = NO;
+            self.textView.selectedRange = selectedRange;
+            self.textView.scrollEnabled = YES;
+        }
+    } else {
+        NSRange selectedRange = self.textView.selectedRange;
+        if (selectedRange.length == 0) {
+            if (selectedRange.location > 0) {
+                selectedRange.location--;
+                
+                self.textView.scrollEnabled = NO;
+                self.textView.selectedRange = selectedRange;
+                self.textView.scrollEnabled = YES;
+            }
+        } else {
+            selectedRange.length = 0;
+            
+            self.textView.scrollEnabled = NO;
+            self.textView.selectedRange = selectedRange;
+            self.textView.scrollEnabled = YES;
+        }
+    }
+}
+
+- (void)cursorRight
+{
+    if (self.textView.markedTextRange) {
+        [self sendMessage:self.internalKeyboard
+                  forName:[NSString stringWithFormat:@"%@", @"movePhraseBoundaryToDirection:"]
+              attachments:@[@{@"NSInteger": @(0)}]];
+    } else if (self.isShifted) {
+        NSRange selectedRange = self.textView.selectedRange;
+        if (selectedRange.location < self.textView.text.length) {
+            selectedRange.length++;
+            
+            self.textView.scrollEnabled = NO;
+            self.textView.selectedRange = selectedRange;
+            self.textView.scrollEnabled = YES;
+        }
+    } else {
+        NSRange selectedRange = self.textView.selectedRange;
+        if (selectedRange.length == 0) {
+            if (selectedRange.location < self.textView.text.length) {
+                selectedRange.location++;
+                
+                self.textView.scrollEnabled = NO;
+                self.textView.selectedRange = selectedRange;
+                self.textView.scrollEnabled = YES;
+            }
+        } else {
+            selectedRange.location = NSMaxRange(selectedRange);
+            selectedRange.length = 0;
+            
+            self.textView.scrollEnabled = NO;
+            self.textView.selectedRange = selectedRange;
+            self.textView.scrollEnabled = YES;
+        }
     }
 }
 
@@ -160,6 +276,7 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
         } else if (i == NCLKeyButtonIndexSpecialKeyShift1 || i == NCLKeyButtonIndexSpecialKeyShift2) {
             [keyButton addTarget:self action:@selector(touchDownShiftKey:) forControlEvents:UIControlEventTouchDown];
             [keyButton addTarget:self action:@selector(touchUpShiftKey:) forControlEvents:UIControlEventTouchUpInside];
+            [keyButton addTarget:self action:@selector(touchDownRepeatShiftKey:) forControlEvents:UIControlEventTouchDownRepeat];
         } else {
             [keyButton addTarget:self action:@selector(touchDownKey:) forControlEvents:UIControlEventTouchDown];
             [keyButton addTarget:self action:@selector(touchUpKey:) forControlEvents:UIControlEventTouchUpInside];
@@ -313,6 +430,8 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
     
 }
 
+#pragma mark -
+
 - (IBAction)touchDownDeleteKey:(id)sender
 {
     [[UIDevice currentDevice] playInputClick];
@@ -366,16 +485,50 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
           attachments:@[@{@"Object": @"\n"}]];
 }
 
-- (IBAction)touchDownShiftKey:(id)sender
+#pragma mark -
+
+- (void)touchDownShiftKey:(id)sender
 {
     [[UIDevice currentDevice] playInputClick];
-    [self.inputEngine setShifted:YES];
+    
+    self.shiftLocked = NO;
+    self.shifted = YES;
 }
 
-- (IBAction)touchUpShiftKey:(id)sender
+- (void)touchUpShiftKey:(id)sender
 {
-    [self.inputEngine setShifted:NO];
+    if (self.shiftLocked) {
+        return;
+    }
+    
+    self.shiftLocked = NO;
+    self.shifted = NO;
 }
+
+- (IBAction)touchDownRepeatShiftKey:(id)sender
+{
+    self.shiftLocked = !self.shiftLocked;
+    self.shifted = self.shiftLocked;
+}
+
+- (void)setShifted:(BOOL)shifted
+{
+    _shifted = shifted;
+    self.inputEngine.shifted = shifted;
+}
+
+- (void)setShiftLocked:(BOOL)shiftLocked
+{
+    _shiftLocked = shiftLocked;
+    
+    NCLKeyboardButton *shift1KeyButton = self.keyButtons[NCLKeyButtonIndexSpecialKeyShift1];
+    shift1KeyButton.selected = shiftLocked;
+    
+    NCLKeyboardButton *shift2KeyButton = self.keyButtons[NCLKeyButtonIndexSpecialKeyShift2];
+    shift2KeyButton.selected = shiftLocked;
+}
+
+#pragma mark -
 
 - (IBAction)touchDownNumberKey:(id)sender
 {
@@ -526,6 +679,9 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
                 [invocation setArgument:&argument atIndex:index];
             } else if ([type isEqualToString:@"BOOL"]) {
                 BOOL argument = [attachment[type] boolValue];
+                [invocation setArgument:&argument atIndex:index];
+            } else if ([type isEqualToString:@"NSInteger"]) {
+                NSInteger argument = [attachment[type] integerValue];
                 [invocation setArgument:&argument atIndex:index];
             }
         }

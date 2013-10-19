@@ -21,8 +21,17 @@ typedef NS_ENUM(NSInteger, NCLKeyboardType) {
 
 @protocol NCLKeyboardAccessoryViewDelegate <NSObject>
 
-- (void)accessoryViewDidComplete:(NCLKeyboardAccessoryView *)accessoryView;
 - (void)accessoryView:(NCLKeyboardAccessoryView *)accessoryView keyboardTypeDidChange:(NSInteger)keyboardType;
+- (void)accessoryViewDidComplete:(NCLKeyboardAccessoryView *)accessoryView;
+
+- (void)accessoryViewArrowUp:(NCLKeyboardAccessoryView *)accessoryView;
+- (void)accessoryViewArrowDown:(NCLKeyboardAccessoryView *)accessoryView;
+- (void)accessoryViewArrowLeft:(NCLKeyboardAccessoryView *)accessoryView;
+- (void)accessoryViewArrowRight:(NCLKeyboardAccessoryView *)accessoryView;
+
+- (void)accessoryViewCut:(NCLKeyboardAccessoryView *)accessoryView;
+- (void)accessoryViewCopy:(NCLKeyboardAccessoryView *)accessoryView;
+- (void)accessoryViewPaste:(NCLKeyboardAccessoryView *)accessoryView;
 
 @end
 

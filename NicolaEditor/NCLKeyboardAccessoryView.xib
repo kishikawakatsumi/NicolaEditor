@@ -17,7 +17,7 @@
                     <items>
                         <barButtonItem style="plain" id="Exz-Nm-Z3G">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="a5e-iO-5BA">
-                                <rect key="frame" x="7" y="8" width="161" height="29"/>
+                                <rect key="frame" x="7" y="8" width="140" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="NICOLA"/>

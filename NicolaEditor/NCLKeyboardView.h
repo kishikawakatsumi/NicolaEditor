@@ -15,6 +15,11 @@
 
 @property (nonatomic) NSString *keyboardInputMethod;
 
+- (void)cursorUp;
+- (void)cursorDown;
+- (void)cursorLeft;
+- (void)cursorRight;
+
 @end
 
 @protocol NCLKeyboardViewDelegate <NSObject>
