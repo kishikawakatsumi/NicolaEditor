@@ -31,6 +31,8 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
 @property (nonatomic) NCLKeyboardKeyType type;
 @property (nonatomic) NSTimeInterval timestamp;
 
+@property (nonatomic, getter = isUsed) BOOL used;
+
 @end
 
 @implementation NCLKeyboardInput
@@ -149,8 +151,6 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [self proccessInput:keyInput];
         });
-    } else if (event == NCLKeyboardEventKeyUp) {
-        
     }
 }
 
@@ -167,8 +167,6 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
         dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
             [self proccessInput:keyInput];
         });
-    } else if (event == NCLKeyboardEventKeyUp) {
-        
     }
 }
 
@@ -189,27 +187,18 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
             NSTimeInterval delta = keyInput.timestamp - previousKeyInput.timestamp;
             
             if (self.delay > delta) {
-                if (previousKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
-                    shiftState = NCLKeyboardShiftStateLeftShifted;
-                    [_keyInputQueue removeObject:previousKeyInput];
-                } else if (previousKeyInput.type == NCLKeyboardKeyTypeRightShift) {
-                    shiftState = NCLKeyboardShiftStateRightShifted;
-                    [_keyInputQueue removeObject:previousKeyInput];
-                }
+                shiftState = (NCLKeyboardShiftState)previousKeyInput.type;
+                [_keyInputQueue removeObject:previousKeyInput];
             }
         }
+        
         if (shiftState == NCLKeyboardShiftStateNone && _keyInputQueue.count > queueIndex + 1) {
             NCLKeyboardInput *nextKeyInput = _keyInputQueue[queueIndex + 1];
             NSTimeInterval delta = nextKeyInput.timestamp - keyInput.timestamp;
             
             if (self.delay > delta) {
-                if (nextKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
-                    shiftState = NCLKeyboardShiftStateLeftShifted;
-                    [_keyInputQueue removeObject:nextKeyInput];
-                } else if (nextKeyInput.type == NCLKeyboardKeyTypeRightShift) {
-                    shiftState = NCLKeyboardShiftStateRightShifted;
-                    [_keyInputQueue removeObject:nextKeyInput];
-                }
+                shiftState = (NCLKeyboardShiftState)nextKeyInput.type;
+                [_keyInputQueue removeObject:nextKeyInput];
             }
         }
         
@@ -232,27 +221,18 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
             NSTimeInterval delta = keyInput.timestamp - previousKeyInput.timestamp;
             
             if (self.delay > delta) {
-                if (previousKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
-                    shiftState = NCLKeyboardShiftStateLeftShifted;
-                    [_keyInputQueue removeObject:previousKeyInput];
-                } else if (previousKeyInput.type == NCLKeyboardKeyTypeRightShift) {
-                    shiftState = NCLKeyboardShiftStateRightShifted;
-                    [_keyInputQueue removeObject:previousKeyInput];
-                }
+                shiftState = (NCLKeyboardShiftState)previousKeyInput.type;
+                [_keyInputQueue removeObject:previousKeyInput];
             }
         }
+        
         if (shiftState == NCLKeyboardShiftStateNone && _keyInputQueue.count > queueIndex + 1) {
             NCLKeyboardInput *nextKeyInput = _keyInputQueue[queueIndex + 1];
             NSTimeInterval delta = nextKeyInput.timestamp - keyInput.timestamp;
             
             if (self.delay > delta) {
-                if (nextKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
-                    shiftState = NCLKeyboardShiftStateLeftShifted;
-                    [_keyInputQueue removeObject:nextKeyInput];
-                } else if (nextKeyInput.type == NCLKeyboardKeyTypeRightShift) {
-                    shiftState = NCLKeyboardShiftStateRightShifted;
-                    [_keyInputQueue removeObject:nextKeyInput];
-                }
+                shiftState = (NCLKeyboardShiftState)nextKeyInput.type;
+                [_keyInputQueue removeObject:nextKeyInput];
             }
         }
         
@@ -263,6 +243,8 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
                 [self.delegate keyboardInputEngineDidInputRightShiftKey:self];
             }
         }
+        
+        [_keyInputQueue removeObject:keyInput];
     }
 }
 
@@ -307,10 +289,13 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
         
         _lastLeftShiftKeyInput = keyInput;
     } else if (event == NCLKeyboardEventKeyUp) {
-        NSTimeInterval delta = CACurrentMediaTime() - _lastLeftShiftKeyInput.timestamp;
-        if (self.delay > delta) {
-            [self proccessInput:_lastLeftShiftKeyInput];
-        }
+        NCLKeyboardInput *keyInput = _lastLeftShiftKeyInput;
+        
+        double delayInSeconds = self.delay * 2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self proccessInput:keyInput];
+        });
         _lastLeftShiftKeyInput = nil;
     }
 }
@@ -325,10 +310,13 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
         
         _lastRightShiftKeyInput = keyInput;
     } else if (event == NCLKeyboardEventKeyUp) {
-        NSTimeInterval delta = CACurrentMediaTime() - _lastRightShiftKeyInput.timestamp;
-        if (self.delay > delta) {
-            [self proccessInput:_lastRightShiftKeyInput];
-        }
+        NCLKeyboardInput *keyInput = _lastRightShiftKeyInput;
+        
+        double delayInSeconds = self.delay * 2;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self proccessInput:keyInput];
+        });
         _lastRightShiftKeyInput = nil;
     }
 }
@@ -346,11 +334,13 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
         NCLKeyboardShiftState shiftState = NCLKeyboardShiftStateNone;
         
         if (_lastLeftShiftKeyInput) {
+            _lastLeftShiftKeyInput.used = YES;
             shiftState = NCLKeyboardShiftStateLeftShifted;
         }
         
         if (shiftState == NCLKeyboardShiftStateNone) {
             if (_lastRightShiftKeyInput) {
+                _lastRightShiftKeyInput.used = YES;
                 shiftState = NCLKeyboardShiftStateRightShifted;
             }
         }
@@ -361,13 +351,9 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
                 NSTimeInterval delta = keyInput.timestamp - previousKeyInput.timestamp;
                 
                 if (self.delay > delta) {
-                    if (previousKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
-                        shiftState = NCLKeyboardShiftStateLeftShifted;
-                        [_keyInputQueue removeObject:previousKeyInput];
-                    } else if (previousKeyInput.type == NCLKeyboardKeyTypeRightShift) {
-                        shiftState = NCLKeyboardShiftStateRightShifted;
-                        [_keyInputQueue removeObject:previousKeyInput];
-                    }
+                    previousKeyInput.used = YES;
+                    shiftState = (NCLKeyboardShiftState)previousKeyInput.type;
+                    [_keyInputQueue removeObject:previousKeyInput];
                 }
             }
             if (shiftState == NCLKeyboardShiftStateNone && _keyInputQueue.count > queueIndex + 1) {
@@ -375,13 +361,9 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
                 NSTimeInterval delta = nextKeyInput.timestamp - keyInput.timestamp;
                 
                 if (self.delay > delta) {
-                    if (nextKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
-                        shiftState = NCLKeyboardShiftStateLeftShifted;
-                        [_keyInputQueue removeObject:nextKeyInput];
-                    } else if (nextKeyInput.type == NCLKeyboardKeyTypeRightShift) {
-                        shiftState = NCLKeyboardShiftStateRightShifted;
-                        [_keyInputQueue removeObject:nextKeyInput];
-                    }
+                    nextKeyInput.used = YES;
+                    shiftState = (NCLKeyboardShiftState)nextKeyInput.type;
+                    [_keyInputQueue removeObject:nextKeyInput];
                 }
             }
         }
@@ -398,44 +380,19 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
         
         [_keyInputQueue removeObject:keyInput];
     } else {
-        NCLKeyboardShiftState shiftState = NCLKeyboardShiftStateNone;
-        
-        if (_keyInputQueue.count > queueIndex - 1) {
-            NCLKeyboardInput *previousKeyInput = _keyInputQueue[queueIndex - 1];
-            NSTimeInterval delta = keyInput.timestamp - previousKeyInput.timestamp;
+        if (!keyInput.isUsed) {
+            NCLKeyboardShiftState shiftState = NCLKeyboardShiftStateNone;
             
-            if (self.delay > delta) {
-                if (previousKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
-                    shiftState = NCLKeyboardShiftStateLeftShifted;
-                    [_keyInputQueue removeObject:previousKeyInput];
-                } else if (previousKeyInput.type == NCLKeyboardKeyTypeRightShift) {
-                    shiftState = NCLKeyboardShiftStateRightShifted;
-                    [_keyInputQueue removeObject:previousKeyInput];
-                }
-            }
-        }
-        if (shiftState == NCLKeyboardShiftStateNone && _keyInputQueue.count > queueIndex + 1) {
-            NCLKeyboardInput *nextKeyInput = _keyInputQueue[queueIndex + 1];
-            NSTimeInterval delta = nextKeyInput.timestamp - keyInput.timestamp;
-            
-            if (self.delay > delta) {
-                if (nextKeyInput.type == NCLKeyboardKeyTypeLeftShift) {
-                    shiftState = NCLKeyboardShiftStateLeftShifted;
-                    [_keyInputQueue removeObject:nextKeyInput];
-                } else if (nextKeyInput.type == NCLKeyboardKeyTypeRightShift) {
-                    shiftState = NCLKeyboardShiftStateRightShifted;
-                    [_keyInputQueue removeObject:nextKeyInput];
+            if (shiftState == NCLKeyboardShiftStateNone) {
+                if (keyInput.type == NCLKeyboardKeyTypeLeftShift) {
+                    [self.delegate keyboardInputEngineDidInputLeftShiftKey:self];
+                } else if (keyInput.type == NCLKeyboardKeyTypeRightShift) {
+                    [self.delegate keyboardInputEngineDidInputRightShiftKey:self];
                 }
             }
         }
         
-        if (shiftState == NCLKeyboardShiftStateNone) {
-            if (keyInput.type == NCLKeyboardKeyTypeLeftShift) {
-                [self.delegate keyboardInputEngineDidInputLeftShiftKey:self];
-            } else if (keyInput.type == NCLKeyboardKeyTypeRightShift) {
-                [self.delegate keyboardInputEngineDidInputRightShiftKey:self];
-            }
-        }
+        [_keyInputQueue removeObject:keyInput];
     }
 }
 

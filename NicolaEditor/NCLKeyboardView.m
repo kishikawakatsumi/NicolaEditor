@@ -33,7 +33,7 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 @property (nonatomic, weak) id internalKeyboard;
 @property (nonatomic) NCLKeyboardInputEngine *inputEngine;
 
-@property (nonatomic) NSString *previousKeyboardInputMethod;
+@property (nonatomic) NSString *lastUsedKeyboardInputMethod;
 
 @property (nonatomic, getter = isShifted) BOOL shifted;
 @property (nonatomic, getter = isShiftLocked) BOOL shiftLocked;
@@ -534,7 +534,7 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 {
     [[UIDevice currentDevice] playInputClick];
     if (![self.keyboardInputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
-        self.previousKeyboardInputMethod = self.keyboardInputMethod;
+        self.lastUsedKeyboardInputMethod = self.keyboardInputMethod;
     }
     self.keyboardInputMethod = NCLKeyboardInputMethodNumberPunctuation;
 }
@@ -544,7 +544,7 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
     [[UIDevice currentDevice] playInputClick];
     
     if ([self.keyboardInputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
-        if ([self.previousKeyboardInputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
+        if ([self.lastUsedKeyboardInputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
             self.keyboardInputMethod = NCLKeyboardInputMethodAlphabet;
         } else {
             self.keyboardInputMethod = NCLKeyboardInputMethodKana;
