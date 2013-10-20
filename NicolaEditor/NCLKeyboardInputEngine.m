@@ -107,6 +107,24 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
     
 }
 
+- (NSString *)shiftedTextWithText:(NSString *)text
+{
+    text = [text capitalizedString];
+    if ([text isEqualToString:@"\u306F"]) {
+        text = @"\u3071";
+    } else if ([text isEqualToString:@"\u3072"]) {
+        text = @"\u3074";
+    } else if ([text isEqualToString:@"\u3075"]) {
+        text = @"\u3077";
+    } else if ([text isEqualToString:@"\u3078"]) {
+        text = @"\u307A";
+    } else if ([text isEqualToString:@"\u307B"]) {
+        text = @"\u307D";
+    }
+    
+    return text;
+}
+
 @end
 
 @implementation NCLKeyboardTimeShiftInputEngine
@@ -207,7 +225,7 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
         NSString *text = keyboardLayout[shiftState][keyIndex];
         
         if (self.shifted) {
-            text = [text capitalizedString];
+            text = [self shiftedTextWithText:text];
         }
         
         [self.delegate keyboardInputEngine:self processedText:text keyIndex:keyIndex];
@@ -373,7 +391,7 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
         NSString *text = keyboardLayout[shiftState][keyIndex];
         
         if (self.shifted) {
-            text = [text capitalizedString];
+            text = [self shiftedTextWithText:text];
         }
         
         [self.delegate keyboardInputEngine:self processedText:text keyIndex:keyIndex];
@@ -444,7 +462,7 @@ NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
     NSString *text = keyboardLayout[_shiftState][keyIndex];
     
     if (self.shifted) {
-        text = [text capitalizedString];
+        text = [self shiftedTextWithText:text];
     }
     
     [self.delegate keyboardInputEngine:self processedText:text keyIndex:keyIndex];

@@ -21,7 +21,11 @@
 @import MobileCoreServices;
 @import ObjectiveC;
 
-static NSString * const ZERO_WIDTH_SPACE = @"\u200B";
+static NSString *U_I_K_e_y_b_o_a_r_d_I_m_p_l;
+static NSString *s_u_p_p_o_r_t_s_S_p_l_i_t;
+static NSString *U_I_K_e_y_b_o_a_r_d_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_F_l_o_a_t_i_n_g_V_i_e_w;
+static NSString *s_e_t_F_r_a_m_e$;
+static NSString *__U_I_C_o_m_p_a_t_i_b_i_l_i_t_y_T_e_x_t_V_i_e_w;
 
 static void swizzleClassMethod(NSString *className, NSString *original, NSString *replacement)
 {
@@ -85,6 +89,15 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 @implementation NCLTextViewController
 
++ (void)initialize
+{
+    U_I_K_e_y_b_o_a_r_d_I_m_p_l = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"I", @"m", @"p", @"l"];
+    s_u_p_p_o_r_t_s_S_p_l_i_t = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"u", @"p", @"p", @"o", @"r", @"t", @"s", @"S", @"p", @"l", @"i", @"t"];
+    U_I_K_e_y_b_o_a_r_d_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_F_l_o_a_t_i_n_g_V_i_e_w = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @"F", @"l", @"o", @"a", @"t", @"i", @"n", @"g", @"V", @"i", @"e", @"w"];
+    s_e_t_F_r_a_m_e$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"F", @"r", @"a", @"m", @"e", @":"];
+    __U_I_C_o_m_p_a_t_i_b_i_l_i_t_y_T_e_x_t_V_i_e_w = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"U", @"I", @"C", @"o", @"m", @"p", @"a", @"t", @"i", @"b", @"i", @"l", @"i", @"t", @"y", @"T", @"e", @"x", @"t", @"V", @"i", @"e", @"w"];
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -130,9 +143,9 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 - (void)prepareForLegacy
 {
     {
-        NSString *className = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"I", @"m", @"p", @"l"];
-        NSString *original = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"u", @"p", @"p", @"o", @"r", @"t", @"s", @"S", @"p", @"l", @"i", @"t"];
-        NSString *replacement = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@",  @"_", @"_", @"s", @"u", @"p", @"p", @"o", @"r", @"t", @"s", @"S", @"p", @"l", @"i", @"t"];
+        NSString *className = U_I_K_e_y_b_o_a_r_d_I_m_p_l;
+        NSString *original = s_u_p_p_o_r_t_s_S_p_l_i_t;
+        NSString *replacement = [NSString stringWithFormat:@"__%@",  s_u_p_p_o_r_t_s_S_p_l_i_t];
         
         BOOL (^block)(id) = ^(id s) {
             return NO;
@@ -151,9 +164,9 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     }
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
         {
-            NSString *className = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @"F", @"l", @"o", @"a", @"t", @"i", @"n", @"g", @"V", @"i", @"e", @"w"];
-            NSString *original = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"F", @"r", @"a", @"m", @"e", @":"];
-            NSString *replacement = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@", @"_", @"_", @"s", @"e", @"t", @"F", @"r", @"a", @"m", @"e", @":"];
+            NSString *className = U_I_K_e_y_b_o_a_r_d_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_F_l_o_a_t_i_n_g_V_i_e_w;
+            NSString *original = s_e_t_F_r_a_m_e$;
+            NSString *replacement = [NSString stringWithFormat:@"__%@", s_e_t_F_r_a_m_e$];
            
             void (^block)(id, CGRect) = ^(id s, CGRect frame)
             {
@@ -227,7 +240,7 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
         [cloudUploadButtonView addTarget:self action:@selector(cloudUpload:) forControlEvents:UIControlEventTouchUpInside];
         cloudUploadButton = [[UIBarButtonItem alloc] initWithCustomView:cloudUploadButtonView];
     } else {
-        textView = [[NSClassFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"U", @"I", @"C", @"o", @"m", @"p", @"a", @"t", @"i", @"b", @"i", @"l", @"i", @"t", @"y", @"T", @"e", @"x", @"t", @"V", @"i", @"e", @"w"]) alloc] initWithFrame:self.view.bounds];
+        textView = [[NSClassFromString(__U_I_C_o_m_p_a_t_i_b_i_l_i_t_y_T_e_x_t_V_i_e_w) alloc] initWithFrame:self.view.bounds];
         
         addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
         shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];

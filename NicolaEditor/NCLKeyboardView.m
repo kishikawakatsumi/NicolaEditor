@@ -17,6 +17,21 @@ NSInteger const NCLKeyButtonIndexSpecialKeyDelete = 11;
 NSInteger const NCLKeyButtonIndexSpecialKeyShift1 = 22;
 NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 
+static NSString *a_d_d_I_n_p_u_t_S_t_r_i_n_g_$;
+static NSString *d_e_l_e_t_e_F_r_o_m_I_n_p_u_t;
+static NSString *s_e_t_I_n_p_u_t_M_o_d_e_$;
+static NSString *m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$;
+static NSString *__h_a_s_C_a_n_d_i_d_a_t_e_s;
+static NSString *u_s_e_r_S_e_l_e_c_t_e_d_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e;
+static NSString *s_h_o_w_P_r_e_v_i_o_u_s_C_a_n_d_i_d_a_t_e;
+static NSString *s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s;
+static NSString *s_e_t_S_h_o_w_s_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_$;
+static NSString *a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e;
+static NSString *en_US;
+static NSString *ja_JP;
+
+static NSCache *cache;
+
 @interface NCLKeyboardView () <UIInputViewAudioFeedback>
 
 @property (nonatomic, weak) IBOutlet UIView *keyboardBackgroundView;
@@ -43,6 +58,24 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 @end
 
 @implementation NCLKeyboardView
+
++ (void)initialize
+{
+    __h_a_s_C_a_n_d_i_d_a_t_e_s = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"];
+    s_e_t_I_n_p_u_t_M_o_d_e_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"];
+    en_US = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"e", @"n", @"_", @"U", @"S", @"@", @"h", @"w", @"=", @"U", @"S", @";", @"s", @"w", @"=", @"Q", @"W", @"E", @"R", @"T", @"Y"];
+    ja_JP = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"j", @"a", @"_", @"J", @"P", @"-", @"K", @"a", @"n", @"a", @"@", @"s", @"w", @"=", @"K", @"a", @"n", @"a", @"-", @"F", @"l", @"i", @"c", @"k", @";", @"h", @"w", @"=", @"U", @"S"];
+    s_h_o_w_P_r_e_v_i_o_u_s_C_a_n_d_i_d_a_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"P", @"r", @"e", @"v", @"i", @"o", @"u", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
+    s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"N", @"e", @"x", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"];
+    m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"m", @"o", @"v", @"e", @"P", @"h", @"r", @"a", @"s", @"e", @"B", @"o", @"u", @"n", @"d", @"a", @"r", @"y", @"T", @"o", @"D", @"i", @"r", @"e", @"c", @"t", @"i", @"o", @"n", @":"];
+    s_e_t_S_h_o_w_s_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"S", @"h", @"o", @"w", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @":"];
+    d_e_l_e_t_e_F_r_o_m_I_n_p_u_t = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"d", @"e", @"l", @"e", @"t", @"e", @"F", @"r", @"o", @"m", @"I", @"n", @"p", @"u", @"t"];
+    a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
+    a_d_d_I_n_p_u_t_S_t_r_i_n_g_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"d", @"d", @"I", @"n", @"p", @"u", @"t", @"S", @"t", @"r", @"i", @"n", @"g", @":"];
+    u_s_e_r_S_e_l_e_c_t_e_d_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"u", @"s", @"e", @"r", @"S", @"e", @"l", @"e", @"c", @"t", @"e", @"d", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
+    
+    cache = [[NSCache alloc] init];
+}
 
 - (void)awakeFromNib
 {
@@ -103,20 +136,9 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 {
     _keyboardInputMethod = inputMethod;
     self.inputEngine.inputMethod = inputMethod;
-    
-    if ([inputMethod isEqualToString:NCLKeyboardInputMethodAlphabet]) {
-        [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"]
-              attachments:@[@{@"Object": [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"e", @"n", @"_", @"U", @"S", @"@", @"h", @"w", @"=", @"U", @"S", @";", @"s", @"w", @"=", @"Q", @"W", @"E", @"R", @"T", @"Y"]}]];
-    } else if ([inputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
-        [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"]
-              attachments:@[@{@"Object": [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"e", @"n", @"_", @"U", @"S", @"@", @"h", @"w", @"=", @"U", @"S", @";", @"s", @"w", @"=", @"Q", @"W", @"E", @"R", @"T", @"Y"]}]];
-    } else if ([inputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
-        [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"]
-              attachments:@[@{@"Object": [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"j", @"a", @"_", @"J", @"P", @"-", @"K", @"a", @"n", @"a", @"@", @"s", @"w", @"=", @"K", @"a", @"n", @"a", @"-", @"F", @"l", @"i", @"c", @"k", @";", @"h", @"w", @"=", @"U", @"S"]}]];
-    }
+    [self sendMessage:self.internalKeyboard
+              forName:s_e_t_I_n_p_u_t_M_o_d_e_$
+          attachments:@[@{@"Object": ja_JP}]];
     
     NSString *keyboardType;
     if ([inputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
@@ -142,11 +164,14 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 
 - (void)cursorUp
 {
-    BOOL hasCandidates = [[self.internalKeyboard valueForKey:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]] boolValue];
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
     if (hasCandidates) {
-        [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"P", @"r", @"e", @"v", @"i", @"o", @"u", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"]
-              attachments:nil];
+        NSString *name = s_h_o_w_P_r_e_v_i_o_u_s_C_a_n_d_i_d_a_t_e;
+        if ([self.internalKeyboard respondsToSelector:NSSelectorFromString(name)]) {
+            [self sendMessage:self.internalKeyboard
+                      forName:name
+                  attachments:nil];
+        }
     } else {
         UITextRange *selectedTextRange = self.textView.selectedTextRange;
         CGRect rect = [self.textView caretRectForPosition:selectedTextRange.start];
@@ -161,10 +186,10 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 
 - (void)cursorDown
 {
-    BOOL hasCandidates = [[self.internalKeyboard valueForKey:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]] boolValue];
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
     if (hasCandidates) {
         [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"N", @"e", @"x", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]
+                  forName:s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s
               attachments:nil];
     } else {
         UITextRange *selectedTextRange = self.textView.selectedTextRange;
@@ -182,7 +207,7 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 {
     if (self.textView.markedTextRange) {
         [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@", @"movePhraseBoundaryToDirection:"]
+                  forName:m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$
               attachments:@[@{@"NSInteger": @(1)}]];
     } else if (self.isShifted) {
         NSRange selectedRange = self.textView.selectedRange;
@@ -218,7 +243,7 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 {
     if (self.textView.markedTextRange) {
         [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@", @"movePhraseBoundaryToDirection:"]
+                  forName:m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$
               attachments:@[@{@"NSInteger": @(0)}]];
     } else if (self.isShifted) {
         NSRange selectedRange = self.textView.selectedRange;
@@ -292,10 +317,10 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
     if (!self.internalKeyboard) {
         self.internalKeyboard = self.textView.inputDelegate;
         [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"]
-              attachments:@[@{@"Object": [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"j", @"a", @"_", @"J", @"P", @"-", @"K", @"a", @"n", @"a", @"@", @"s", @"w", @"=", @"K", @"a", @"n", @"a", @"-", @"F", @"l", @"i", @"c", @"k", @";", @"h", @"w", @"=", @"U", @"S"]}]];
+                  forName:s_e_t_I_n_p_u_t_M_o_d_e_$
+              attachments:@[@{@"Object": ja_JP}]];
         [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"S", @"h", @"o", @"w", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @":"]
+                  forName:s_e_t_S_h_o_w_s_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_$
               attachments:@[@{@"BOOL": @YES}]];
     }
 }
@@ -466,22 +491,22 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 - (void)processDeleteKey
 {
     [self sendMessage:self.internalKeyboard
-              forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"d", @"e", @"l", @"e", @"t", @"e", @"F", @"r", @"o", @"m", @"I", @"n", @"p", @"u", @"t"]
+              forName:d_e_l_e_t_e_F_r_o_m_I_n_p_u_t
           attachments:nil];
 }
 
 - (void)processReturnKey
 {
-    BOOL hasCandidates = [[self.internalKeyboard valueForKey:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]] boolValue];
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
     if (hasCandidates) {
         [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"]
+                  forName:a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e
               attachments:nil];
         return;
     }
     
     [self sendMessage:self.internalKeyboard
-              forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"d", @"d", @"I", @"n", @"p", @"u", @"t", @"S", @"t", @"r", @"i", @"n", @"g", @":"]
+              forName:a_d_d_I_n_p_u_t_S_t_r_i_n_g_$
           attachments:@[@{@"Object": @"\n"}]];
 }
 
@@ -590,7 +615,7 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 - (IBAction)touchUpSpaceKey:(id)sender
 {
     [self sendMessage:self.internalKeyboard
-              forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"d", @"d", @"I", @"n", @"p", @"u", @"t", @"S", @"t", @"r", @"i", @"n", @"g", @":"]
+              forName:a_d_d_I_n_p_u_t_S_t_r_i_n_g_$
           attachments:@[@{@"Object": @" "}]];
 }
 
@@ -604,22 +629,28 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 - (void)keyboardInputEngine:(NCLKeyboardInputEngine *)engine processedText:(NSString *)text keyIndex:(NSInteger)keyIndex
 {
     if (text.length > 0) {
-        NSString *key = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"u", @"s", @"e", @"r", @"S", @"e", @"l", @"e", @"c", @"t", @"e", @"d", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
-        if ([self.internalKeyboard respondsToSelector:NSSelectorFromString(key)]) {
-            BOOL userSelectedCurrentCandidate = [[self.internalKeyboard valueForKey:key] boolValue];
-            if (userSelectedCurrentCandidate) {
-                [self sendMessage:self.internalKeyboard
-                          forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"]
-                      attachments:nil];
+        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+            NSString *key = u_s_e_r_S_e_l_e_c_t_e_d_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e;
+            if ([self.internalKeyboard respondsToSelector:NSSelectorFromString(key)]) {
+                BOOL userSelectedCurrentCandidate = [[self.internalKeyboard valueForKey:key] boolValue];
+                if (userSelectedCurrentCandidate) {
+                    [self sendMessage:self.internalKeyboard
+                              forName:a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e
+                          attachments:nil];
+                }
             }
-        }
-        double delayInSeconds = 0.0;
-        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            double delayInSeconds = 0.0;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self sendMessage:self.internalKeyboard
+                          forName:a_d_d_I_n_p_u_t_S_t_r_i_n_g_$
+                      attachments:@[@{@"Object": text}]];
+            });
+        } else {
             [self sendMessage:self.internalKeyboard
-                      forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"d", @"d", @"I", @"n", @"p", @"u", @"t", @"S", @"t", @"r", @"i", @"n", @"g", @":"]
+                      forName:a_d_d_I_n_p_u_t_S_t_r_i_n_g_$
                   attachments:@[@{@"Object": text}]];
-        });
+        }
     }
 }
 
@@ -629,13 +660,13 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
     NSString *shiftKeyFunction = [userDefaults stringForKey:NCLSettingsLeftShiftFunctionKey];
     if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
         [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"N", @"e", @"x", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]
+                  forName:s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s
               attachments:nil];
     } else if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
-        BOOL hasCandidates = [[self.internalKeyboard valueForKey:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]] boolValue];
+        BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
         if (hasCandidates) {
             [self sendMessage:self.internalKeyboard
-                      forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"]
+                      forName:a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e
                   attachments:nil];
         }
     }
@@ -647,13 +678,13 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
     NSString *shiftKeyFunction = [userDefaults stringForKey:NCLSettingsRightShiftFunctionKey];
     if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
         [self sendMessage:self.internalKeyboard
-                  forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"N", @"e", @"x", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"]
+                  forName:s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s
               attachments:nil];
     } else if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
-        BOOL hasCandidates = [[self.internalKeyboard valueForKey:@"_hasCandidates"] boolValue];
+        BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
         if (hasCandidates) {
             [self sendMessage:self.internalKeyboard
-                      forName:[NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"]
+                      forName:a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e
                   attachments:nil];
         }
     }
@@ -666,11 +697,22 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
     if (!target) {
         return nil;
     }
+    
     SEL selector = NSSelectorFromString(name);
     NSMethodSignature *methodSignature = [target methodSignatureForSelector:selector];
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+    if (!methodSignature) {
+        return nil;
+    }
+    
+    NSInvocation *invocation = [cache objectForKey:name];
+    if (!invocation) {
+        invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+        invocation.selector = selector;
+        
+        [cache setObject:invocation forKey:name];
+    }
+    
     invocation.target = target;
-    invocation.selector = selector;
     NSInteger index = 2;
     for (NSDictionary *attachment in attachments) {
         for (NSString *type in attachment.allKeys) {
