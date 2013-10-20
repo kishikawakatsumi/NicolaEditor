@@ -3,12 +3,10 @@ platform :ios, "5.0"
 pod 'SVProgressHUD'
 pod 'NLCoreData'
 pod 'Evernote-SDK-iOS'
+pod 'Dropbox-iOS-SDK'
 pod 'Helpshift'
 pod 'BugSense'
-
-configuration 'AdHoc' do
-  pod 'TestFlightSDK'
-end
+pod 'TestFlightSDK'
 
 post_install do | installer |
   require 'fileutils'

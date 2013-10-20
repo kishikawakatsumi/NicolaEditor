@@ -17,6 +17,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <NLCoreData/NLCoreData.h>
 #import <Evernote-SDK-iOS/EvernoteSDK.h>
+#import <DropboxSDK/DropboxSDK.h>
 
 @import MobileCoreServices;
 @import ObjectiveC;
@@ -66,7 +67,7 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     _addMethod(clazz, selector, block, signature);
 }
 
-@interface NCLTextViewController () <UITextViewDelegate, UIDocumentInteractionControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
+@interface NCLTextViewController () <UITextViewDelegate, UIDocumentInteractionControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, DBRestClientDelegate>
 
 @property (nonatomic) UIBarButtonItem *addButton;
 @property (nonatomic) UIBarButtonItem *shareButton;
@@ -84,6 +85,8 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 @property (nonatomic) UIEdgeInsets textViewContentInset;
 @property (nonatomic) UIEdgeInsets textViewScrollIndicatorInsets;
+
+@property (nonatomic) DBRestClient *restClient;
 
 @end
 
@@ -304,13 +307,13 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 - (void)setupNotifications
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontDidChange:) name:NCLSettingsFontDidChangeNodification object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationWillEnterForeground:) name:UIApplicationWillEnterForegroundNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontDidChange:) name:NCLSettingsFontDidChangeNodification object:nil];
 }
 
 #pragma mark -
@@ -426,13 +429,7 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
         return;
     }
     
-    NSString *identifier = self.note.identifier;
-    NSString *content = self.note.content;
-    
-    NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
-    NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:identifier] URLByAppendingPathExtension:@"txt"];
-    
-    [[content dataUsingEncoding:NSUTF8StringEncoding] writeToURL:fileURL atomically:YES];
+    NSURL *fileURL = [self saveNoteWithFilename:nil];
     
     UIDocumentInteractionController *interactionController = [UIDocumentInteractionController interactionControllerWithURL:fileURL];
     interactionController.UTI = (__bridge NSString *)kUTTypeUTF8PlainText;
@@ -448,7 +445,23 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
         return;
     }
     
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), nil];
+    UIActionSheet *actionSheet;
+    
+    DBSession *sharedSession = [DBSession sharedSession];
+    if (sharedSession.isLinked) {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                  delegate:self
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Save to Dropbox", nil), nil];
+    } else {
+        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                  delegate:self
+                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                    destructiveButtonTitle:nil
+                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Login to Dropbox", nil), nil];
+    }
+    
     [[NCLPopoverManager sharedManager] presentActionSheet:actionSheet fromBarButtonItem:self.cloudUploadButton];
 }
 
@@ -470,6 +483,7 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
         [self authenticateEvernote];
     }
 }
+
 - (void)evernoteCreateNote:(NSString *)title image:(UIImage *)image contentBody:(NSString *)contentBody tagNames:(NSArray *)tagNames
 {
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
@@ -523,6 +537,64 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
             [self presentError:error message:nil];
         }];
     }];
+}
+
+#pragma mark -
+
+- (void)saveToDropbox:(NCLNote *)note
+{
+    DBSession *session = [DBSession sharedSession];
+    if (!session.isLinked) {
+        [session linkFromController:self];
+    } else {
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        
+        NSURL *fileURL = [self saveNoteWithFilename:self.note.title];
+        NSString *localPath = fileURL.path;
+        NSString *filename = fileURL.lastPathComponent;
+        NSString *destDir = @"/";
+        [[self restClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:localPath];
+    }
+}
+
+- (DBRestClient *)restClient
+{
+    if (!_restClient) {
+        _restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+        _restClient.delegate = self;
+    }
+    
+    return _restClient;
+}
+
+- (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata
+{
+    [SVProgressHUD dismiss];
+    [SVProgressHUD showSuccessWithStatus:nil];
+}
+
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
+{
+    [SVProgressHUD dismiss];
+    [SVProgressHUD showErrorWithStatus:nil];
+}
+
+#pragma mark -
+
+- (NSURL *)saveNoteWithFilename:(NSString *)filename
+{
+    NSString *identifier = self.note.identifier;
+    NSString *content = self.note.content;
+    
+    NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+    if (!filename) {
+        filename = identifier;
+    }
+    NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:filename] URLByAppendingPathExtension:@"txt"];
+    
+    [[content dataUsingEncoding:NSUTF8StringEncoding] writeToURL:fileURL atomically:YES];
+    
+    return fileURL;
 }
 
 #pragma mark -
@@ -739,8 +811,13 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:NSLocalizedString(@"Send to Evernote", nil)]) {
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if ([buttonTitle isEqualToString:NSLocalizedString(@"Send to Evernote", nil)]) {
         [self sendToEvernote:self.note];
+    } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Login to Dropbox", nil)]) {
+        [[DBSession sharedSession] linkFromController:self];
+    } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Save to Dropbox", nil)]) {
+        [self saveToDropbox:self.note];
     }
 }
 

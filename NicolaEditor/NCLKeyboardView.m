@@ -127,7 +127,6 @@ static NSCache *cache;
     
     [self layoutKeyButtons];
     [self setupKeyboardIfNeeded];
-    [self applySwapBackspaceReturnState];
 }
 
 #pragma mark -
@@ -152,14 +151,17 @@ static NSCache *cache;
     } else if ([inputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
         keyboardType = @"number";
     }
+    
     NSInteger i = 0;
-    for (NCLKeyboardButton *keyButton in self.keyButtons) {
+    for (NCLKeyboardButton *keyButton in _keyButtons) {
         [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d", keyboardType, i]] forState:UIControlStateNormal];
         [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d_highlighted", keyboardType, i]] forState:UIControlStateHighlighted];
         [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d_highlighted", keyboardType, i]] forState:UIControlStateSelected];
         [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d_highlighted", keyboardType, i]] forState:UIControlStateSelected | UIControlStateHighlighted];
         i++;
     }
+    
+    [self applySwapBackspaceReturnState];
 }
 
 - (void)cursorUp

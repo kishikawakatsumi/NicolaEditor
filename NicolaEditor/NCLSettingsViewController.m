@@ -26,6 +26,7 @@
 @property (nonatomic, weak) IBOutlet UITableViewCell *timeShiftSliderCell;
 
 @property (nonatomic, weak) IBOutlet UITableViewCell *swapKeyCell;
+@property (nonatomic, weak) IBOutlet UILabel *swapKeyLabel;
 @property (nonatomic, weak) IBOutlet UISwitch *swapKeySwitch;
 
 @property (nonatomic) NCLSliderPopup *popup;
@@ -43,6 +44,15 @@
     UIStepper *stepper = self.fontSizeStepper;
     [stepper removeFromSuperview];
     self.fontSizeCell.accessoryView = stepper;
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        CGRect frame = self.swapKeyLabel.frame;
+        frame.origin.x = 10.0f;
+        frame.origin.y += 4.0f;
+        frame.size.width = 200.0f;
+        self.swapKeyLabel.frame = frame;
+        self.swapKeyLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:16.0f];
+    }
     
     UISwitch *sw = self.swapKeySwitch;
     [sw removeFromSuperview];
@@ -186,18 +196,12 @@
         cell.textLabel.text = NSLocalizedString(@"Left Shift Key", nil);
     } else if (section == 2 && row == 1) {
         cell.textLabel.text = NSLocalizedString(@"Right Shift Key", nil);
-    } else if (section == 3) {
-        cell.textLabel.text = NSLocalizedString(@"Swap ⌫ key for ⏎ key", nil);
     } else if (section == 4) {
         cell.textLabel.text = NSLocalizedString(@"Help", nil);
     }
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        if (section != 3) {
-            cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-        } else {
-            cell.textLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:16.0f];
-        }
+        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
     }
 }
 
