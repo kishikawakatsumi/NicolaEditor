@@ -1,5 +1,5 @@
 PODS:
-  - BugSense (3.5.1)
+  - CrittercismSDK (4.1.0)
   - Dropbox-iOS-SDK (1.3.6)
   - Evernote-SDK-iOS (1.3.0):
     - SSKeychain (= 0.2.1)
@@ -8,22 +8,20 @@ PODS:
   - NLCoreData (0.5.3)
   - SSKeychain (0.2.1)
   - SVProgressHUD (0.9)
-  - TestFlightSDK (2.1.1-beta)
   - UrbanAirship-iOS-SDK (3.0.0)
 
 DEPENDENCIES:
-  - BugSense
+  - CrittercismSDK
   - Dropbox-iOS-SDK
   - Evernote-SDK-iOS
   - Helpshift
   - JLRoutes
   - NLCoreData
   - SVProgressHUD
-  - TestFlightSDK
   - UrbanAirship-iOS-SDK
 
 SPEC CHECKSUMS:
-  BugSense: d6c7be4f7edef7ac0d3867a0aa83bc339587a9b2
+  CrittercismSDK: d5dbea47c083275b3addb9df0645be476c62b3c8
   Dropbox-iOS-SDK: a5fe8e7e00eac346740a3521d83325a63c82443d
   Evernote-SDK-iOS: 848bf6d5f1133540ea32a24d001f2905eb6d52ba
   Helpshift: 2d1302d32b6f10b4fec9ad6f03af683f964899dc
@@ -31,7 +29,6 @@ SPEC CHECKSUMS:
   NLCoreData: bde75667607f7b66a08ef1d78d39b8bc5eed433f
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
   SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
-  TestFlightSDK: dea28c16f0bf65c49c4ed8939b2ae0b0ed9bf8b0
   UrbanAirship-iOS-SDK: f3d763468fe06e4900178ac9ac602493f6c6ae51
 
 COCOAPODS: 0.26.2

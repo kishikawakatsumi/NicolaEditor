@@ -19,8 +19,7 @@
 #import <UrbanAirship-iOS-SDK/UAConfig.h>
 #import <UrbanAirship-iOS-SDK/UAPush.h>
 #import <Helpshift/Helpshift.h>
-#import <TestFlightSDK/TestFlight.h>
-#import <BugSense-iOS/BugSenseController.h>
+#import <CrittercismSDK/Crittercism.h>
 
 static NSString * const EvernoteConsumerKey = @"kishikawakatsumi";
 static NSString * const EvernoteConsumerSecret = @"a54f2575488374bd";
@@ -35,11 +34,9 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     UAConfig *config = [UAConfig defaultConfig];
     [UAirship takeOff:config];
     
-    [Helpshift installForAppID:@"kishikawakatsumi_platform_20131012163756079-96d13f062d21544" domainName:@"kishikawakatsumi.helpshift.com" apiKey:@"6a56e092c74a8d0f5e08eef8441a61b3"];
+    [Helpshift installForAppID:@"nicola-note_platform_20131021094422072-e208905abd32493" domainName:@"nicola-note.helpshift.com" apiKey:@"537b553656373a8b29712f0d632c3687"];
     
-    [TestFlight takeOff:@"7a1ada1b-6b67-4907-af62-ee07d5387caa"];
-    
-    [BugSenseController sharedControllerWithBugSenseAPIKey:@"93a70013"];
+    [Crittercism enableWithAppID: @"5264f50ea7928a4f07000005"];
     
     [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringSandbox consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
     

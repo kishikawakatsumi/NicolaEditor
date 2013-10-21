@@ -19,6 +19,8 @@ NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 
 static NSString *a_d_d_I_n_p_u_t_S_t_r_i_n_g_$;
 static NSString *d_e_l_e_t_e_F_r_o_m_I_n_p_u_t;
+static NSString *s_t_a_r_t_A_u_t_o_D_e_l_e_t_e_T_i_m_e_r;
+static NSString *s_t_o_p_A_u_t_o_D_e_l_e_t_e;
 static NSString *s_e_t_I_n_p_u_t_M_o_d_e_$;
 static NSString *m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$;
 static NSString *__h_a_s_C_a_n_d_i_d_a_t_e_s;
@@ -70,6 +72,8 @@ static NSCache *cache;
     m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"m", @"o", @"v", @"e", @"P", @"h", @"r", @"a", @"s", @"e", @"B", @"o", @"u", @"n", @"d", @"a", @"r", @"y", @"T", @"o", @"D", @"i", @"r", @"e", @"c", @"t", @"i", @"o", @"n", @":"];
     s_e_t_S_h_o_w_s_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"S", @"h", @"o", @"w", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @":"];
     d_e_l_e_t_e_F_r_o_m_I_n_p_u_t = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"d", @"e", @"l", @"e", @"t", @"e", @"F", @"r", @"o", @"m", @"I", @"n", @"p", @"u", @"t"];
+    s_t_a_r_t_A_u_t_o_D_e_l_e_t_e_T_i_m_e_r = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"t", @"a", @"r", @"t", @"A", @"u", @"t", @"o", @"D", @"e", @"l", @"e", @"t", @"e", @"T", @"i", @"m", @"e", @"r"];
+    s_t_o_p_A_u_t_o_D_e_l_e_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"t", @"o", @"p", @"A", @"u", @"t", @"o", @"D", @"e", @"l", @"e", @"t", @"e"];
     a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
     a_d_d_I_n_p_u_t_S_t_r_i_n_g_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"d", @"d", @"I", @"n", @"p", @"u", @"t", @"S", @"t", @"r", @"i", @"n", @"g", @":"];
     u_s_e_r_S_e_l_e_c_t_e_d_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"u", @"s", @"e", @"r", @"S", @"e", @"l", @"e", @"c", @"t", @"e", @"d", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
@@ -472,6 +476,10 @@ static NSCache *cache;
 {
     if (self.swapBackspaceReturnEnabled) {
         [self processReturnKey];
+    } else {
+        [self sendMessage:self.internalKeyboard
+                  forName:s_t_o_p_A_u_t_o_D_e_l_e_t_e
+              attachments:nil];
     }
 }
 
@@ -487,6 +495,10 @@ static NSCache *cache;
 {
     if (!self.swapBackspaceReturnEnabled) {
         [self processReturnKey];
+    } else {
+        [self sendMessage:self.internalKeyboard
+                  forName:s_t_o_p_A_u_t_o_D_e_l_e_t_e
+              attachments:nil];
     }
 }
 
@@ -494,6 +506,9 @@ static NSCache *cache;
 {
     [self sendMessage:self.internalKeyboard
               forName:d_e_l_e_t_e_F_r_o_m_I_n_p_u_t
+          attachments:nil];
+    [self sendMessage:self.internalKeyboard
+              forName:s_t_a_r_t_A_u_t_o_D_e_l_e_t_e_T_i_m_e_r
           attachments:nil];
 }
 
