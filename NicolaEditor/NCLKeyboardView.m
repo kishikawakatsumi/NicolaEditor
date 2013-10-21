@@ -148,12 +148,25 @@ static NSCache *cache;
         keyboardType = @"kana";
         [self.alphabetKeyButton setImage:[UIImage imageNamed:@"key_alphabet"] forState:UIControlStateNormal];
         [self.alphabetKeyButton setImage:[UIImage imageNamed:@"key_alphabet_highlighted"] forState:UIControlStateHighlighted];
+        
+        [self.numberKeyButton setImage:[UIImage imageNamed:@"key_number"] forState:UIControlStateNormal];
+        [self.numberKeyButton setImage:[UIImage imageNamed:@"key_number_highlighted"] forState:UIControlStateHighlighted];
     } else if ([inputMethod isEqualToString:NCLKeyboardInputMethodAlphabet]) {
         keyboardType = @"alphabet";
         [self.alphabetKeyButton setImage:[UIImage imageNamed:@"key_kana"] forState:UIControlStateNormal];
         [self.alphabetKeyButton setImage:[UIImage imageNamed:@"key_kana_highlighted"] forState:UIControlStateHighlighted];
+        
+        [self.numberKeyButton setImage:[UIImage imageNamed:@"key_number"] forState:UIControlStateNormal];
+        [self.numberKeyButton setImage:[UIImage imageNamed:@"key_number_highlighted"] forState:UIControlStateHighlighted];
     } else if ([inputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
         keyboardType = @"number";
+        if ([self.lastUsedKeyboardInputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
+            [self.numberKeyButton setImage:[UIImage imageNamed:@"key_kana"] forState:UIControlStateNormal];
+            [self.numberKeyButton setImage:[UIImage imageNamed:@"key_kana_highlighted"] forState:UIControlStateHighlighted];
+        } else if ([self.lastUsedKeyboardInputMethod isEqualToString:NCLKeyboardInputMethodAlphabet]) {
+            [self.numberKeyButton setImage:[UIImage imageNamed:@"key_alphabet"] forState:UIControlStateNormal];
+            [self.numberKeyButton setImage:[UIImage imageNamed:@"key_alphabet_highlighted"] forState:UIControlStateHighlighted];
+        }
     }
     
     NSInteger i = 0;
@@ -575,10 +588,13 @@ static NSCache *cache;
 - (IBAction)touchDownNumberKey:(id)sender
 {
     [[UIDevice currentDevice] playInputClick];
-    if (![self.keyboardInputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
+    
+    if ([self.keyboardInputMethod isEqualToString:NCLKeyboardInputMethodNumberPunctuation]) {
+        self.keyboardInputMethod = self.lastUsedKeyboardInputMethod;
+    } else {
         self.lastUsedKeyboardInputMethod = self.keyboardInputMethod;
+        self.keyboardInputMethod = NCLKeyboardInputMethodNumberPunctuation;
     }
-    self.keyboardInputMethod = NCLKeyboardInputMethodNumberPunctuation;
 }
 
 - (IBAction)touchDownAlphabetKey:(id)sender
