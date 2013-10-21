@@ -29,6 +29,8 @@
 		1461750818072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461750618072E6500C8763B /* NCLKeyboardInputDisplayView.m */; };
 		1464694A1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
 		1464694B1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
+		1464694E1814FAC500CEAA41 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1464694D1814FAC500CEAA41 /* AirshipConfig.plist */; };
+		1464694F1814FAC500CEAA41 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1464694D1814FAC500CEAA41 /* AirshipConfig.plist */; };
 		146B3EE0180857F200418452 /* NCLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EDF180857F200418452 /* NCLSettingsViewController.m */; };
 		146B3EE1180857F200418452 /* NCLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EDF180857F200418452 /* NCLSettingsViewController.m */; };
 		146B3EE4180859A200418452 /* NCLFontSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */; };
@@ -116,6 +118,7 @@
 		1461750618072E6500C8763B /* NCLKeyboardInputDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLKeyboardInputDisplayView.m; sourceTree = "<group>"; };
 		146469491812E48E00CEAA41 /* NCLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLAppDelegate.m; sourceTree = "<group>"; };
 		1464694C1813FBA000CEAA41 /* NicolaEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NicolaEditor.entitlements; sourceTree = "<group>"; };
+		1464694D1814FAC500CEAA41 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		146B3EDE180857F200418452 /* NCLSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLSettingsViewController.h; sourceTree = "<group>"; };
 		146B3EDF180857F200418452 /* NCLSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLSettingsViewController.m; sourceTree = "<group>"; };
 		146B3EE2180859A200418452 /* NCLFontSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLFontSettingsViewController.h; sourceTree = "<group>"; };
@@ -310,6 +313,7 @@
 			children = (
 				14B3F43718030DEC00F7E91A /* NicolaEditor-Info.plist */,
 				1464694C1813FBA000CEAA41 /* NicolaEditor.entitlements */,
+				1464694D1814FAC500CEAA41 /* AirshipConfig.plist */,
 				14BD796A1811BBBE005A6387 /* Settings.bundle */,
 				14B3F43818030DEC00F7E91A /* InfoPlist.strings */,
 				146B3EEE18085B8600418452 /* Localizable.strings */,
@@ -445,6 +449,7 @@
 				146174711803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
 				14A57E881811255D00F1A7D9 /* Icon-72.png in Resources */,
 				14B3F44E18030DEC00F7E91A /* Images.xcassets in Resources */,
+				1464694E1814FAC500CEAA41 /* AirshipConfig.plist in Resources */,
 				146B3F0F18099F7200418452 /* SampleText.json in Resources */,
 				14BD796B1811BBBE005A6387 /* Settings.bundle in Resources */,
 				14B3F46C18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
@@ -464,6 +469,7 @@
 				14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */,
 				146B3F1018099F7200418452 /* SampleText.json in Resources */,
 				14A57E8B1811255D00F1A7D9 /* Icon-72@2x.png in Resources */,
+				1464694F1814FAC500CEAA41 /* AirshipConfig.plist in Resources */,
 				14A57E891811255D00F1A7D9 /* Icon-72.png in Resources */,
 				146B3EEC18085B8600418452 /* Localizable.strings in Resources */,
 				14B3F46018030DEC00F7E91A /* InfoPlist.strings in Resources */,
@@ -645,7 +651,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "57D8BADA-B8C8-455D-8064-1C1FB4748221";
+				PROVISIONING_PROFILE = "4855FF73-0974-4369-8867-60E8D7528C6A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -679,7 +685,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "57D8BADA-B8C8-455D-8064-1C1FB4748221";
+				PROVISIONING_PROFILE = "4855FF73-0974-4369-8867-60E8D7528C6A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

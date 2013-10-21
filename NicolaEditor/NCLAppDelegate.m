@@ -7,13 +7,17 @@
 //
 
 #import "NCLAppDelegate.h"
-#import "NCLNote.h"
 #import "NCLKeyboardView.h"
-#import "NSString+Helper.h"
 #import "NCLConstants.h"
+#import "NCLNote+Helper.h"
+#import "NSString+Helper.h"
+#import <JLRoutes/JLRoutes.h>
 #import <NLCoreData/NLCoreData.h>
 #import <Evernote-SDK-iOS/EvernoteSDK.h>
 #import <DropboxSDK/DropboxSDK.h>
+#import <UrbanAirship-iOS-SDK/UAirship.h>
+#import <UrbanAirship-iOS-SDK/UAConfig.h>
+#import <UrbanAirship-iOS-SDK/UAPush.h>
 #import <Helpshift/Helpshift.h>
 #import <TestFlightSDK/TestFlight.h>
 #import <BugSense-iOS/BugSenseController.h>
@@ -28,8 +32,13 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    UAConfig *config = [UAConfig defaultConfig];
+    [UAirship takeOff:config];
+    
     [Helpshift installForAppID:@"kishikawakatsumi_platform_20131012163756079-96d13f062d21544" domainName:@"kishikawakatsumi.helpshift.com" apiKey:@"6a56e092c74a8d0f5e08eef8441a61b3"];
+    
     [TestFlight takeOff:@"7a1ada1b-6b67-4907-af62-ee07d5387caa"];
+    
     [BugSenseController sharedControllerWithBugSenseAPIKey:@"93a70013"];
     
     [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringSandbox consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
@@ -51,23 +60,26 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
         NSData *data = [NSData dataWithContentsOfURL:[mainBundle URLForResource:@"SampleText" withExtension:@"json"]];
         NSArray *samples = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
         for (NSString *sample in samples) {
-            NCLNote *note = [NCLNote insertInContext:[NSManagedObjectContext mainContext]];
-            
-            __block NSString *title = nil;
-            [sample enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-                title = line;
-                *stop = YES;
-            }];
-            
-            note.title = title;
-            note.content = sample;
-            
-            [note.managedObjectContext saveNested];
+            [NCLNote insertNewNoteWithContent:sample];
         }
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self prepareForiCloud];
+    
+    [JLRoutes addRoute:@"/:object/:action" handler:^BOOL(NSDictionary *parameters) {
+        NSString *object = parameters[@"object"];
+        NSString *action = parameters[@"action"];
+        
+        if ([object isEqualToString:@"note"] && [action isEqualToString:@"new"]) {
+            NSString *content = parameters[@"content"];
+            [NCLNote insertNewNoteWithContent:content];
+            
+            return YES;
+        }
+        
+        return NO;
+    }];
     
     UISplitViewController *splitViewController = (UISplitViewController *)self.window.rootViewController;
     UINavigationController *navigationController = splitViewController.viewControllers.lastObject;
@@ -105,16 +117,27 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     BOOL canHandle = NO;
+    NSString *scheme = url.scheme.lowercaseString;
     
     EvernoteSession *session = [EvernoteSession sharedSession];
-    if ([[NSString stringWithFormat:@"en-%@", session.consumerKey] isEqualToString:url.scheme]) {
+    if ([[NSString stringWithFormat:@"en-%@", session.consumerKey] isEqualToString:scheme]) {
         canHandle = [session canHandleOpenURL:url];
     }
     
     DBSession *sharedSession = [DBSession sharedSession];
-    if ([sharedSession.appScheme isEqualToString:url.scheme]) {
+    if ([sharedSession.appScheme isEqualToString:scheme]) {
         canHandle = [sharedSession handleOpenURL:url];
     }
+    
+    if (url.isFileURL) {
+        NSError *error = nil;
+        NSString *text = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+        if (text.length > 0 &&!error) {
+            [NCLNote insertNewNoteWithContent:text];
+        }
+    }
+    
+    canHandle = [JLRoutes routeURL:url];
     
     return canHandle;
 }

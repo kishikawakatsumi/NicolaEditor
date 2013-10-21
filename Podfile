@@ -1,9 +1,11 @@
 platform :ios, "5.0"
 
 pod 'SVProgressHUD'
+pod 'JLRoutes'
 pod 'NLCoreData'
 pod 'Evernote-SDK-iOS'
 pod 'Dropbox-iOS-SDK'
+pod 'UrbanAirship-iOS-SDK'
 pod 'Helpshift'
 pod 'BugSense'
 pod 'TestFlightSDK'

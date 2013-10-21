@@ -11,4 +11,6 @@
 
 @interface NCLNote (Helper)
 
++ (NCLNote *)insertNewNoteWithContent:(NSString *)content;
+
 @end

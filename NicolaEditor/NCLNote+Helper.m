@@ -8,6 +8,7 @@
 
 #import "NCLNote+Helper.h"
 #import "NSString+Helper.h"
+#import <NLCoreData/NLCoreData.h>
 
 @implementation NCLNote (Helper)
 
@@ -25,6 +26,24 @@
          [self setPrimitiveValue:[NSDate date] forKey:@"updatedAt"];
     }
     [super willSave];
+}
+
++ (NCLNote *)insertNewNoteWithContent:(NSString *)content
+{
+    NCLNote *note = [self insertInContext:[NSManagedObjectContext mainContext]];
+    
+    __block NSString *title = nil;
+    [content enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+        title = line;
+        *stop = YES;
+    }];
+    
+    note.title = title;
+    note.content = content;
+    
+    [note.managedObjectContext saveNested];
+    
+    return note;
 }
 
 @end
