@@ -110,7 +110,6 @@ static NSCache *cache;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shiftKeyBehaviorDidChange:) name:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swapBackspaceReturnEnabledDidChange:) name:NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification object:nil];
-    
 }
 
 - (void)dealloc

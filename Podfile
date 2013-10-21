@@ -7,7 +7,7 @@ pod 'Evernote-SDK-iOS'
 pod 'Dropbox-iOS-SDK'
 pod 'UrbanAirship-iOS-SDK'
 pod 'Helpshift'
-pod 'CrittercismSDK'
+pod 'CrittercismSDK', '4.0.7'
 
 post_install do | installer |
   require 'fileutils'

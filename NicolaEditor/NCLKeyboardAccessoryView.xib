@@ -21,7 +21,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
                                     <segment title="NICOLA"/>
-                                    <segment title="QWERTY"/>
+                                    <segment title="System"/>
                                 </segments>
                                 <connections>
                                     <action selector="selectionChanged:" destination="bUq-d9-9dn" eventType="valueChanged" id="9Ro-D1-8Pt"/>

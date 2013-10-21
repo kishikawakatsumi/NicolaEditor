@@ -17,6 +17,10 @@
 		14326837181027120001BDBC /* NCLSliderPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326835181027120001BDBC /* NCLSliderPopup.m */; };
 		143268391810272E0001BDBC /* NCLSliderPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 143268381810272E0001BDBC /* NCLSliderPopup.xib */; };
 		1432683A1810272E0001BDBC /* NCLSliderPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 143268381810272E0001BDBC /* NCLSliderPopup.xib */; };
+		145AE70118157C82000459C1 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 145AE6FF18157C82000459C1 /* Icon-72.png */; };
+		145AE70218157C82000459C1 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 145AE6FF18157C82000459C1 /* Icon-72.png */; };
+		145AE70318157C82000459C1 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 145AE70018157C82000459C1 /* Icon-72@2x.png */; };
+		145AE70418157C82000459C1 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 145AE70018157C82000459C1 /* Icon-72@2x.png */; };
 		145E657B180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */; };
 		145E657C180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */; };
 		1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */; };
@@ -47,14 +51,18 @@
 		146B3F091808740000418452 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3F071808740000418452 /* NSString+Helper.m */; };
 		146B3F0F18099F7200418452 /* SampleText.json in Resources */ = {isa = PBXBuildFile; fileRef = 146B3F0E18099F7200418452 /* SampleText.json */; };
 		146B3F1018099F7200418452 /* SampleText.json in Resources */ = {isa = PBXBuildFile; fileRef = 146B3F0E18099F7200418452 /* SampleText.json */; };
+		147733911815A0850045ADFB /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338D1815A0850045ADFB /* Default-Landscape@2x~ipad.png */; };
+		147733921815A0850045ADFB /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338D1815A0850045ADFB /* Default-Landscape@2x~ipad.png */; };
+		147733931815A0850045ADFB /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338E1815A0850045ADFB /* Default-Landscape~ipad.png */; };
+		147733941815A0850045ADFB /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338E1815A0850045ADFB /* Default-Landscape~ipad.png */; };
+		147733951815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338F1815A0850045ADFB /* Default-Portrait@2x~ipad.png */; };
+		147733961815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338F1815A0850045ADFB /* Default-Portrait@2x~ipad.png */; };
+		147733971815A0850045ADFB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 147733901815A0850045ADFB /* Default-Portrait~ipad.png */; };
+		147733981815A0850045ADFB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 147733901815A0850045ADFB /* Default-Portrait~ipad.png */; };
 		14A57E76181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
 		14A57E77181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
 		14A57E7A1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */; };
 		14A57E7B1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */; };
-		14A57E881811255D00F1A7D9 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A57E861811255D00F1A7D9 /* Icon-72.png */; };
-		14A57E891811255D00F1A7D9 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A57E861811255D00F1A7D9 /* Icon-72.png */; };
-		14A57E8A1811255D00F1A7D9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A57E871811255D00F1A7D9 /* Icon-72@2x.png */; };
-		14A57E8B1811255D00F1A7D9 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14A57E871811255D00F1A7D9 /* Icon-72@2x.png */; };
 		14B3F42E18030DEC00F7E91A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42D18030DEC00F7E91A /* Foundation.framework */; };
 		14B3F43018030DEC00F7E91A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42F18030DEC00F7E91A /* CoreGraphics.framework */; };
 		14B3F43218030DEC00F7E91A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F43118030DEC00F7E91A /* UIKit.framework */; };
@@ -107,6 +115,8 @@
 		14326834181027120001BDBC /* NCLSliderPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLSliderPopup.h; sourceTree = "<group>"; };
 		14326835181027120001BDBC /* NCLSliderPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLSliderPopup.m; sourceTree = "<group>"; };
 		143268381810272E0001BDBC /* NCLSliderPopup.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NCLSliderPopup.xib; sourceTree = "<group>"; };
+		145AE6FF18157C82000459C1 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		145AE70018157C82000459C1 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		145E6579180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLShiftKeyFunctionsSettingsViewController.h; sourceTree = "<group>"; };
 		145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLShiftKeyFunctionsSettingsViewController.m; sourceTree = "<group>"; };
 		1461746C1803D86200C8763B /* NCLKeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLKeyboardAccessoryView.h; sourceTree = "<group>"; };
@@ -136,12 +146,14 @@
 		146B3F061808740000418452 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
 		146B3F071808740000418452 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
 		146B3F0E18099F7200418452 /* SampleText.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SampleText.json; sourceTree = "<group>"; };
+		1477338D1815A0850045ADFB /* Default-Landscape@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape@2x~ipad.png"; sourceTree = "<group>"; };
+		1477338E1815A0850045ADFB /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		1477338F1815A0850045ADFB /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
+		147733901815A0850045ADFB /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		14A57E74181087CC00F1A7D9 /* NCLHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLHelpViewController.h; sourceTree = "<group>"; };
 		14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLHelpViewController.m; sourceTree = "<group>"; };
 		14A57E781810FEB700F1A7D9 /* NCLNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLNoteCell.h; sourceTree = "<group>"; };
 		14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLNoteCell.m; sourceTree = "<group>"; };
-		14A57E861811255D00F1A7D9 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		14A57E871811255D00F1A7D9 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		14B3F42A18030DEC00F7E91A /* NicolaEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NicolaEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B3F42D18030DEC00F7E91A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		14B3F42F18030DEC00F7E91A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -298,11 +310,11 @@
 				146B3F071808740000418452 /* NSString+Helper.m */,
 				14326814180FB7990001BDBC /* UIFont+Helper.h */,
 				14326815180FB7990001BDBC /* UIFont+Helper.m */,
-				146B3EF918086C0A00418452 /* Views */,
-				146B3EF818086BFC00418452 /* Models */,
 				14B3F47A1803121E00F7E91A /* Main.storyboard */,
 				14B3F44D18030DEC00F7E91A /* Images.xcassets */,
-				14D140C518112642000AD695 /* Icons */,
+				146B3EF918086C0A00418452 /* Views */,
+				146B3EF818086BFC00418452 /* Models */,
+				14D140C518112642000AD695 /* Resources */,
 				14B3F43618030DEC00F7E91A /* Supporting Files */,
 			);
 			path = NicolaEditor;
@@ -343,13 +355,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		14D140C518112642000AD695 /* Icons */ = {
+		14D140C518112642000AD695 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				14A57E861811255D00F1A7D9 /* Icon-72.png */,
-				14A57E871811255D00F1A7D9 /* Icon-72@2x.png */,
+				145AE6FF18157C82000459C1 /* Icon-72.png */,
+				145AE70018157C82000459C1 /* Icon-72@2x.png */,
+				1477338D1815A0850045ADFB /* Default-Landscape@2x~ipad.png */,
+				1477338E1815A0850045ADFB /* Default-Landscape~ipad.png */,
+				1477338F1815A0850045ADFB /* Default-Portrait@2x~ipad.png */,
+				147733901815A0850045ADFB /* Default-Portrait~ipad.png */,
 			);
-			name = Icons;
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,18 +463,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				146174711803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
-				14A57E881811255D00F1A7D9 /* Icon-72.png in Resources */,
 				14B3F44E18030DEC00F7E91A /* Images.xcassets in Resources */,
 				1464694E1814FAC500CEAA41 /* AirshipConfig.plist in Resources */,
 				146B3F0F18099F7200418452 /* SampleText.json in Resources */,
 				14BD796B1811BBBE005A6387 /* Settings.bundle in Resources */,
+				145AE70118157C82000459C1 /* Icon-72.png in Resources */,
 				14B3F46C18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
 				146B3EEB18085B8600418452 /* Localizable.strings in Resources */,
 				143268391810272E0001BDBC /* NCLSliderPopup.xib in Resources */,
 				14B3F43A18030DEC00F7E91A /* InfoPlist.strings in Resources */,
 				14B3F47B1803121E00F7E91A /* Main.storyboard in Resources */,
 				14B3F47E1803167200F7E91A /* KeyboardLayouts.json in Resources */,
-				14A57E8A1811255D00F1A7D9 /* Icon-72@2x.png in Resources */,
+				145AE70318157C82000459C1 /* Icon-72@2x.png in Resources */,
+				147733911815A0850045ADFB /* Default-Landscape@2x~ipad.png in Resources */,
+				147733931815A0850045ADFB /* Default-Landscape~ipad.png in Resources */,
+				147733951815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */,
+				147733971815A0850045ADFB /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -468,9 +488,9 @@
 			files = (
 				14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */,
 				146B3F1018099F7200418452 /* SampleText.json in Resources */,
-				14A57E8B1811255D00F1A7D9 /* Icon-72@2x.png in Resources */,
+				145AE70418157C82000459C1 /* Icon-72@2x.png in Resources */,
 				1464694F1814FAC500CEAA41 /* AirshipConfig.plist in Resources */,
-				14A57E891811255D00F1A7D9 /* Icon-72.png in Resources */,
+				145AE70218157C82000459C1 /* Icon-72.png in Resources */,
 				146B3EEC18085B8600418452 /* Localizable.strings in Resources */,
 				14B3F46018030DEC00F7E91A /* InfoPlist.strings in Resources */,
 				14B3F47F1803167200F7E91A /* KeyboardLayouts.json in Resources */,
@@ -478,6 +498,10 @@
 				14B3F46D18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
 				14BD796C1811BBBE005A6387 /* Settings.bundle in Resources */,
 				1432683A1810272E0001BDBC /* NCLSliderPopup.xib in Resources */,
+				147733921815A0850045ADFB /* Default-Landscape@2x~ipad.png in Resources */,
+				147733941815A0850045ADFB /* Default-Landscape~ipad.png in Resources */,
+				147733961815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */,
+				147733981815A0850045ADFB /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,7 +675,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "4855FF73-0974-4369-8867-60E8D7528C6A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -685,7 +708,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				PROVISIONING_PROFILE = "4855FF73-0974-4369-8867-60E8D7528C6A";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;

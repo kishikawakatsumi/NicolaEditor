@@ -36,7 +36,7 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     
     [Helpshift installForAppID:@"nicola-note_platform_20131021094422072-e208905abd32493" domainName:@"nicola-note.helpshift.com" apiKey:@"537b553656373a8b29712f0d632c3687"];
     
-    [Crittercism enableWithAppID: @"5264f50ea7928a4f07000005"];
+    [Crittercism enableWithAppID:@"5264f50ea7928a4f07000005"];
     
     [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringSandbox consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
     
@@ -46,9 +46,9 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     [[NSUserDefaults standardUserDefaults] registerDefaults:@{NCLSettingsFontNameKey: @"HiraMinProN-W3",
                                                               NCLSettingsFontSizeKey: @(14.0),
                                                               NCLSettingsShiftKeyBehaviorKey: NCLShiftKeyBehaviorTimeShift,
-                                                              NCLSettingsTimeShiftDurationKey: @(0.1),
-                                                              NCLSettingsLeftShiftFunctionKey: NCLShiftKeyFunctionNextCandidate,
-                                                              NCLSettingsRightShiftFunctionKey: NCLShiftKeyFunctionAcceptCandidate,
+                                                              NCLSettingsTimeShiftDurationKey: @(0.15),
+                                                              NCLSettingsLeftShiftFunctionKey: NCLShiftKeyFunctionAcceptCandidate,
+                                                              NCLSettingsRightShiftFunctionKey: NCLShiftKeyFunctionNextCandidate,
                                                               NCLSettingsSwapBackspaceReturnEnabledKey: @NO}];
     
     if (![[NSUserDefaults standardUserDefaults] stringForKey:@"installation-identifier"]) {

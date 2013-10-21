@@ -173,9 +173,12 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
            
             void (^block)(id, CGRect) = ^(id s, CGRect frame)
             {
-                if (CGRectGetMaxY([self.textView convertRect:frame toView:self.inputView.superview]) > 0.0f) {
-                    CGRect rect = [self.textView caretRectForPosition:self.textView.selectedTextRange.end];
-                    frame.origin.y = rect.origin.y - CGRectGetHeight(frame);
+                UIView *view = self.inputAccessoryView.superview;
+                if (view) {
+                    if (CGRectGetMaxY([self.textView convertRect:frame toView:view]) > 0.0f) {
+                        CGRect rect = [self.textView caretRectForPosition:self.textView.selectedTextRange.end];
+                        frame.origin.y = rect.origin.y - CGRectGetHeight(frame);
+                    }
                 }
                 
                 [s __setFrame:frame];

@@ -53,12 +53,16 @@
         self.swapKeyLabel.frame = frame;
         self.swapKeyLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:16.0f];
     }
+    self.swapKeyLabel.text = NSLocalizedString(@"Swap ⌫ Key for ⏎ Key", nil);
     
     UISwitch *sw = self.swapKeySwitch;
     [sw removeFromSuperview];
     self.swapKeyCell.accessoryView = sw;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL isSwapped = [userDefaults boolForKey:NCLSettingsSwapBackspaceReturnEnabledKey];
+    self.swapKeySwitch.on = isSwapped;
+    
     double fontSize = [userDefaults doubleForKey:NCLSettingsFontSizeKey];
     self.fontSizeStepper.value = fontSize;
     
