@@ -16,7 +16,7 @@
 #import "UIFont+Helper.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <NLCoreData/NLCoreData.h>
-//#import <Evernote-SDK-iOS/EvernoteSDK.h>
+#import <Evernote-SDK-iOS/EvernoteSDK.h>
 #import <DropboxSDK/DropboxSDK.h>
 
 @import MobileCoreServices;
@@ -456,31 +456,18 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     UIActionSheet *actionSheet;
     
     DBSession *sharedSession = [DBSession sharedSession];
-//    if (sharedSession.isLinked) {
-//        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-//                                                  delegate:self
-//                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-//                                    destructiveButtonTitle:nil
-//                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Save to Dropbox", nil), nil];
-//    } else {
-//        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-//                                                  delegate:self
-//                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-//                                    destructiveButtonTitle:nil
-//                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Login to Dropbox", nil), nil];
-//    }
     if (sharedSession.isLinked) {
         actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
-                                         otherButtonTitles:NSLocalizedString(@"Save to Dropbox", nil), nil];
+                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Save to Dropbox", nil), nil];
     } else {
         actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
-                                         otherButtonTitles:NSLocalizedString(@"Login to Dropbox", nil), nil];
+                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Login to Dropbox", nil), nil];
     }
     
     [[NCLPopoverManager sharedManager] presentActionSheet:actionSheet fromBarButtonItem:self.cloudUploadButton];
@@ -488,76 +475,76 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 - (void)sendToEvernote:(NCLNote *)note
 {
-//    EvernoteSession *session = [EvernoteSession sharedSession];
-//    if (session.isAuthenticated) {
-//        NSString *title = note.title;
-//        NSString *content = note.content;
-//        
-//        NSMutableString *contentBody = [[NSMutableString alloc] init];
-//        [content enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-//            [contentBody appendFormat:@"%@<br/>", line];
-//        }];
-//        
-//        NSArray *tagNames = @[];
-//        [self evernoteCreateNote:title image:nil contentBody:contentBody tagNames:tagNames];
-//    } else {
-//        [self authenticateEvernote];
-//    }
+    EvernoteSession *session = [EvernoteSession sharedSession];
+    if (session.isAuthenticated) {
+        NSString *title = note.title;
+        NSString *content = note.content;
+        
+        NSMutableString *contentBody = [[NSMutableString alloc] init];
+        [content enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+            [contentBody appendFormat:@"%@<br/>", line];
+        }];
+        
+        NSArray *tagNames = @[];
+        [self evernoteCreateNote:title image:nil contentBody:contentBody tagNames:tagNames];
+    } else {
+        [self authenticateEvernote];
+    }
 }
 
 - (void)evernoteCreateNote:(NSString *)title image:(UIImage *)image contentBody:(NSString *)contentBody tagNames:(NSArray *)tagNames
 {
-//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//    
-//    NSMutableString *content = [[NSMutableString alloc] init];
-//    [content setString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
-//    [content appendString:@"<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"];
-//    [content appendString:@"<en-note>"];
-//    [content appendString:contentBody];
-//    [content appendString:@"</en-note>"];
-//    
-//    EDAMNoteAttributes *noteAttributes = [[EDAMNoteAttributes alloc] init];
-//    EDAMNote *note = [[EDAMNote alloc] init];
-//    note.title = title;
-//    note.content = content;
-////    note.tagNames = tagNames.mutableCopy;
-//    note.attributes = noteAttributes;
-//    note.created = (long long)[[NSDate date] timeIntervalSince1970] * 1000;
-//    
-//    EvernoteNoteStore *noteStore = [EvernoteNoteStore noteStore];
-//    [noteStore createNote:note success:^(EDAMNote *note) {
-//        [SVProgressHUD dismiss];
-//        [SVProgressHUD showSuccessWithStatus:nil];
-//    } failure:^(NSError *error) {
-//        [SVProgressHUD dismiss];
-//        [SVProgressHUD showErrorWithStatus:nil];
-//    }];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    NSMutableString *content = [[NSMutableString alloc] init];
+    [content setString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
+    [content appendString:@"<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"];
+    [content appendString:@"<en-note>"];
+    [content appendString:contentBody];
+    [content appendString:@"</en-note>"];
+    
+    EDAMNoteAttributes *noteAttributes = [[EDAMNoteAttributes alloc] init];
+    EDAMNote *note = [[EDAMNote alloc] init];
+    note.title = title;
+    note.content = content;
+//    note.tagNames = tagNames.mutableCopy;
+    note.attributes = noteAttributes;
+    note.created = (long long)[[NSDate date] timeIntervalSince1970] * 1000;
+    
+    EvernoteNoteStore *noteStore = [EvernoteNoteStore noteStore];
+    [noteStore createNote:note success:^(EDAMNote *note) {
+        [SVProgressHUD dismiss];
+        [SVProgressHUD showSuccessWithStatus:nil];
+    } failure:^(NSError *error) {
+        [SVProgressHUD dismiss];
+        [SVProgressHUD showErrorWithStatus:nil];
+    }];
 }
 
 - (void)authenticateEvernote
 {
-//    EvernoteSession *session = [EvernoteSession sharedSession];
-//    [session authenticateWithViewController:self completionHandler:^(NSError *error) {
-//        if (error) {
-//            if (error.code == EvernoteSDKErrorCode_USER_CANCELLED) {
-//                return;
-//            }
-//            
-//            [self presentError:error message:nil];
-//            return;
-//        }
-//        if (!session.isAuthenticated) {
-//            [self presentError:nil message:NSLocalizedString(@"Session not authenticated", nil)];
-//            return;
-//        }
-//        
-//        EvernoteUserStore *userStore = [EvernoteUserStore userStore];
-//        [userStore getUserWithSuccess:^(EDAMUser *user) {
-//            [self sendToEvernote:nil];
-//        } failure:^(NSError *error) {
-//            [self presentError:error message:nil];
-//        }];
-//    }];
+    EvernoteSession *session = [EvernoteSession sharedSession];
+    [session authenticateWithViewController:self completionHandler:^(NSError *error) {
+        if (error) {
+            if (error.code == EvernoteSDKErrorCode_USER_CANCELLED) {
+                return;
+            }
+            
+            [self presentError:error message:nil];
+            return;
+        }
+        if (!session.isAuthenticated) {
+            [self presentError:nil message:NSLocalizedString(@"Session not authenticated", nil)];
+            return;
+        }
+        
+        EvernoteUserStore *userStore = [EvernoteUserStore userStore];
+        [userStore getUserWithSuccess:^(EDAMUser *user) {
+            [self sendToEvernote:nil];
+        } failure:^(NSError *error) {
+            [self presentError:error message:nil];
+        }];
+    }];
 }
 
 #pragma mark -
