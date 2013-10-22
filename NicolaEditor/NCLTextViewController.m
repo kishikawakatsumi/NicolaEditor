@@ -16,17 +16,22 @@
 #import "UIFont+Helper.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <NLCoreData/NLCoreData.h>
-#import <Evernote-SDK-iOS/EvernoteSDK.h>
+//#import <Evernote-SDK-iOS/EvernoteSDK.h>
 #import <DropboxSDK/DropboxSDK.h>
 
 @import MobileCoreServices;
 @import ObjectiveC;
 
-static NSString *U_I_K_e_y_b_o_a_r_d_I_m_p_l;
-static NSString *s_u_p_p_o_r_t_s_S_p_l_i_t;
-static NSString *U_I_K_e_y_b_o_a_r_d_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_F_l_o_a_t_i_n_g_V_i_e_w;
-static NSString *s_e_t_F_r_a_m_e$;
-static NSString *__U_I_C_o_m_p_a_t_i_b_i_l_i_t_y_T_e_x_t_V_i_e_w;
+// UIKeyboardImpl
+static NSString *NKpUsnTSGEypVViLAF8r;
+// supportsSplit
+static NSString *m4RUtJ6WRZjaZSsAgy23;
+// UIKeyboardCandidateInlineFloatingView
+static NSString *pVMFNL8kttj7sP5jkXmW;
+// setFrame:
+static NSString *ag2hWVYaGi9H7hDQEtMV;
+// _UICompatibilityTextView:
+static NSString *nuAcYW37RZfT9A3gNRm3;
 
 static void swizzleClassMethod(NSString *className, NSString *original, NSString *replacement)
 {
@@ -94,11 +99,11 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 + (void)initialize
 {
-    U_I_K_e_y_b_o_a_r_d_I_m_p_l = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"I", @"m", @"p", @"l"];
-    s_u_p_p_o_r_t_s_S_p_l_i_t = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"u", @"p", @"p", @"o", @"r", @"t", @"s", @"S", @"p", @"l", @"i", @"t"];
-    U_I_K_e_y_b_o_a_r_d_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_F_l_o_a_t_i_n_g_V_i_e_w = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @"F", @"l", @"o", @"a", @"t", @"i", @"n", @"g", @"V", @"i", @"e", @"w"];
-    s_e_t_F_r_a_m_e$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"F", @"r", @"a", @"m", @"e", @":"];
-    __U_I_C_o_m_p_a_t_i_b_i_l_i_t_y_T_e_x_t_V_i_e_w = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"U", @"I", @"C", @"o", @"m", @"p", @"a", @"t", @"i", @"b", @"i", @"l", @"i", @"t", @"y", @"T", @"e", @"x", @"t", @"V", @"i", @"e", @"w"];
+    NKpUsnTSGEypVViLAF8r = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"I", @"m", @"p", @"l"];
+    m4RUtJ6WRZjaZSsAgy23 = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"u", @"p", @"p", @"o", @"r", @"t", @"s", @"S", @"p", @"l", @"i", @"t"];
+    pVMFNL8kttj7sP5jkXmW = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @"F", @"l", @"o", @"a", @"t", @"i", @"n", @"g", @"V", @"i", @"e", @"w"];
+    ag2hWVYaGi9H7hDQEtMV = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"F", @"r", @"a", @"m", @"e", @":"];
+    nuAcYW37RZfT9A3gNRm3 = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"U", @"I", @"C", @"o", @"m", @"p", @"a", @"t", @"i", @"b", @"i", @"l", @"i", @"t", @"y", @"T", @"e", @"x", @"t", @"V", @"i", @"e", @"w"];
 }
 
 - (void)dealloc
@@ -146,9 +151,9 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 - (void)prepareForLegacy
 {
     {
-        NSString *className = U_I_K_e_y_b_o_a_r_d_I_m_p_l;
-        NSString *original = s_u_p_p_o_r_t_s_S_p_l_i_t;
-        NSString *replacement = [NSString stringWithFormat:@"__%@",  s_u_p_p_o_r_t_s_S_p_l_i_t];
+        NSString *className = NKpUsnTSGEypVViLAF8r;
+        NSString *original = m4RUtJ6WRZjaZSsAgy23;
+        NSString *replacement = [NSString stringWithFormat:@"__%@",  m4RUtJ6WRZjaZSsAgy23];
         
         BOOL (^block)(id) = ^(id s) {
             return NO;
@@ -167,9 +172,9 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     }
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
         {
-            NSString *className = U_I_K_e_y_b_o_a_r_d_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_F_l_o_a_t_i_n_g_V_i_e_w;
-            NSString *original = s_e_t_F_r_a_m_e$;
-            NSString *replacement = [NSString stringWithFormat:@"__%@", s_e_t_F_r_a_m_e$];
+            NSString *className = pVMFNL8kttj7sP5jkXmW;
+            NSString *original = ag2hWVYaGi9H7hDQEtMV;
+            NSString *replacement = [NSString stringWithFormat:@"__%@", ag2hWVYaGi9H7hDQEtMV];
            
             void (^block)(id, CGRect) = ^(id s, CGRect frame)
             {
@@ -246,7 +251,7 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
         [cloudUploadButtonView addTarget:self action:@selector(cloudUpload:) forControlEvents:UIControlEventTouchUpInside];
         cloudUploadButton = [[UIBarButtonItem alloc] initWithCustomView:cloudUploadButtonView];
     } else {
-        textView = [[NSClassFromString(__U_I_C_o_m_p_a_t_i_b_i_l_i_t_y_T_e_x_t_V_i_e_w) alloc] initWithFrame:self.view.bounds];
+        textView = [[NSClassFromString(nuAcYW37RZfT9A3gNRm3) alloc] initWithFrame:self.view.bounds];
         
         addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
         shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
@@ -451,18 +456,31 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     UIActionSheet *actionSheet;
     
     DBSession *sharedSession = [DBSession sharedSession];
+//    if (sharedSession.isLinked) {
+//        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+//                                                  delegate:self
+//                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+//                                    destructiveButtonTitle:nil
+//                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Save to Dropbox", nil), nil];
+//    } else {
+//        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+//                                                  delegate:self
+//                                         cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+//                                    destructiveButtonTitle:nil
+//                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Login to Dropbox", nil), nil];
+//    }
     if (sharedSession.isLinked) {
         actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
-                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Save to Dropbox", nil), nil];
+                                         otherButtonTitles:NSLocalizedString(@"Save to Dropbox", nil), nil];
     } else {
         actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                     destructiveButtonTitle:nil
-                                         otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Login to Dropbox", nil), nil];
+                                         otherButtonTitles:NSLocalizedString(@"Login to Dropbox", nil), nil];
     }
     
     [[NCLPopoverManager sharedManager] presentActionSheet:actionSheet fromBarButtonItem:self.cloudUploadButton];
@@ -470,76 +488,76 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
 
 - (void)sendToEvernote:(NCLNote *)note
 {
-    EvernoteSession *session = [EvernoteSession sharedSession];
-    if (session.isAuthenticated) {
-        NSString *title = note.title;
-        NSString *content = note.content;
-        
-        NSMutableString *contentBody = [[NSMutableString alloc] init];
-        [content enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-            [contentBody appendFormat:@"%@<br/>", line];
-        }];
-        
-        NSArray *tagNames = @[];
-        [self evernoteCreateNote:title image:nil contentBody:contentBody tagNames:tagNames];
-    } else {
-        [self authenticateEvernote];
-    }
+//    EvernoteSession *session = [EvernoteSession sharedSession];
+//    if (session.isAuthenticated) {
+//        NSString *title = note.title;
+//        NSString *content = note.content;
+//        
+//        NSMutableString *contentBody = [[NSMutableString alloc] init];
+//        [content enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
+//            [contentBody appendFormat:@"%@<br/>", line];
+//        }];
+//        
+//        NSArray *tagNames = @[];
+//        [self evernoteCreateNote:title image:nil contentBody:contentBody tagNames:tagNames];
+//    } else {
+//        [self authenticateEvernote];
+//    }
 }
 
 - (void)evernoteCreateNote:(NSString *)title image:(UIImage *)image contentBody:(NSString *)contentBody tagNames:(NSArray *)tagNames
 {
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    
-    NSMutableString *content = [[NSMutableString alloc] init];
-    [content setString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
-    [content appendString:@"<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"];
-    [content appendString:@"<en-note>"];
-    [content appendString:contentBody];
-    [content appendString:@"</en-note>"];
-    
-    EDAMNoteAttributes *noteAttributes = [[EDAMNoteAttributes alloc] init];
-    EDAMNote *note = [[EDAMNote alloc] init];
-    note.title = title;
-    note.content = content;
-//    note.tagNames = tagNames.mutableCopy;
-    note.attributes = noteAttributes;
-    note.created = (long long)[[NSDate date] timeIntervalSince1970] * 1000;
-    
-    EvernoteNoteStore *noteStore = [EvernoteNoteStore noteStore];
-    [noteStore createNote:note success:^(EDAMNote *note) {
-        [SVProgressHUD dismiss];
-        [SVProgressHUD showSuccessWithStatus:nil];
-    } failure:^(NSError *error) {
-        [SVProgressHUD dismiss];
-        [SVProgressHUD showErrorWithStatus:nil];
-    }];
+//    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+//    
+//    NSMutableString *content = [[NSMutableString alloc] init];
+//    [content setString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
+//    [content appendString:@"<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">"];
+//    [content appendString:@"<en-note>"];
+//    [content appendString:contentBody];
+//    [content appendString:@"</en-note>"];
+//    
+//    EDAMNoteAttributes *noteAttributes = [[EDAMNoteAttributes alloc] init];
+//    EDAMNote *note = [[EDAMNote alloc] init];
+//    note.title = title;
+//    note.content = content;
+////    note.tagNames = tagNames.mutableCopy;
+//    note.attributes = noteAttributes;
+//    note.created = (long long)[[NSDate date] timeIntervalSince1970] * 1000;
+//    
+//    EvernoteNoteStore *noteStore = [EvernoteNoteStore noteStore];
+//    [noteStore createNote:note success:^(EDAMNote *note) {
+//        [SVProgressHUD dismiss];
+//        [SVProgressHUD showSuccessWithStatus:nil];
+//    } failure:^(NSError *error) {
+//        [SVProgressHUD dismiss];
+//        [SVProgressHUD showErrorWithStatus:nil];
+//    }];
 }
 
 - (void)authenticateEvernote
 {
-    EvernoteSession *session = [EvernoteSession sharedSession];
-    [session authenticateWithViewController:self completionHandler:^(NSError *error) {
-        if (error) {
-            if (error.code == EvernoteSDKErrorCode_USER_CANCELLED) {
-                return;
-            }
-            
-            [self presentError:error message:nil];
-            return;
-        }
-        if (!session.isAuthenticated) {
-            [self presentError:nil message:NSLocalizedString(@"Session not authenticated", nil)];
-            return;
-        }
-        
-        EvernoteUserStore *userStore = [EvernoteUserStore userStore];
-        [userStore getUserWithSuccess:^(EDAMUser *user) {
-            [self sendToEvernote:nil];
-        } failure:^(NSError *error) {
-            [self presentError:error message:nil];
-        }];
-    }];
+//    EvernoteSession *session = [EvernoteSession sharedSession];
+//    [session authenticateWithViewController:self completionHandler:^(NSError *error) {
+//        if (error) {
+//            if (error.code == EvernoteSDKErrorCode_USER_CANCELLED) {
+//                return;
+//            }
+//            
+//            [self presentError:error message:nil];
+//            return;
+//        }
+//        if (!session.isAuthenticated) {
+//            [self presentError:nil message:NSLocalizedString(@"Session not authenticated", nil)];
+//            return;
+//        }
+//        
+//        EvernoteUserStore *userStore = [EvernoteUserStore userStore];
+//        [userStore getUserWithSuccess:^(EDAMUser *user) {
+//            [self sendToEvernote:nil];
+//        } failure:^(NSError *error) {
+//            [self presentError:error message:nil];
+//        }];
+//    }];
 }
 
 #pragma mark -

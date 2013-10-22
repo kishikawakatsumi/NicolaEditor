@@ -17,18 +17,30 @@ NSInteger const NCLKeyButtonIndexSpecialKeyDelete = 11;
 NSInteger const NCLKeyButtonIndexSpecialKeyShift1 = 22;
 NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 
-static NSString *a_d_d_I_n_p_u_t_S_t_r_i_n_g_$;
-static NSString *d_e_l_e_t_e_F_r_o_m_I_n_p_u_t;
-static NSString *s_t_a_r_t_A_u_t_o_D_e_l_e_t_e_T_i_m_e_r;
-static NSString *s_t_o_p_A_u_t_o_D_e_l_e_t_e;
-static NSString *s_e_t_I_n_p_u_t_M_o_d_e_$;
-static NSString *m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$;
-static NSString *__h_a_s_C_a_n_d_i_d_a_t_e_s;
-static NSString *u_s_e_r_S_e_l_e_c_t_e_d_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e;
-static NSString *s_h_o_w_P_r_e_v_i_o_u_s_C_a_n_d_i_d_a_t_e;
-static NSString *s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s;
-static NSString *s_e_t_S_h_o_w_s_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_$;
-static NSString *a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e;
+// setInputMode:
+static NSString *HTcj2RHKk78UgtYwx3Z8;
+// addInputString
+static NSString *mb6FzfJW6t9XaDQkna7m;
+// deleteFromInput
+static NSString *PArjMGcJEYULesZzYbwp;
+// startAutoDeleteTimer
+static NSString *G2AmM5eQZ4RxKLM3TCKZ;
+// stopAutoDelete
+static NSString *jLdpi9URsHKDRWf36aE6;
+// movePhraseBoundaryToDirection:
+static NSString *c4TdPa3m8nDVPeha877N;
+// _hasCandidates
+static NSString *TBH2nEKQNPBmyDkQdzCx;
+// showPreviousCandidate
+static NSString *L98fTVmwP43UFtL579EB;
+// showNextCandidates
+static NSString *GUU2JdGW8jGWuc388rJR;
+// setShowsCandidateInline:
+static NSString *SxYmcXP2AFEYh4CXYBMJ;
+// acceptCurrentCandidate
+static NSString *wsjiFCKRrgQ3ipQpec6L;
+// userSelectedCurrentCandidate
+static NSString *CsLigQ6mK4n6e6ChunPz;
 static NSString *en_US;
 static NSString *ja_JP;
 
@@ -63,20 +75,32 @@ static NSCache *cache;
 
 + (void)initialize
 {
-    __h_a_s_C_a_n_d_i_d_a_t_e_s = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"];
-    s_e_t_I_n_p_u_t_M_o_d_e_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"];
+    // setInputMode:
+    HTcj2RHKk78UgtYwx3Z8 = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"I", @"n", @"p", @"u", @"t", @"M", @"o", @"d", @"e", @":"];
+    // addInputString
+    mb6FzfJW6t9XaDQkna7m = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"d", @"d", @"I", @"n", @"p", @"u", @"t", @"S", @"t", @"r", @"i", @"n", @"g", @":"];
+    // deleteFromInput
+    PArjMGcJEYULesZzYbwp = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"d", @"e", @"l", @"e", @"t", @"e", @"F", @"r", @"o", @"m", @"I", @"n", @"p", @"u", @"t"];
+    // startAutoDeleteTimer
+    G2AmM5eQZ4RxKLM3TCKZ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"t", @"a", @"r", @"t", @"A", @"u", @"t", @"o", @"D", @"e", @"l", @"e", @"t", @"e", @"T", @"i", @"m", @"e", @"r"];
+    // stopAutoDelete
+    jLdpi9URsHKDRWf36aE6 = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"t", @"o", @"p", @"A", @"u", @"t", @"o", @"D", @"e", @"l", @"e", @"t", @"e"];
+    // movePhraseBoundaryToDirection:
+    c4TdPa3m8nDVPeha877N = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"m", @"o", @"v", @"e", @"P", @"h", @"r", @"a", @"s", @"e", @"B", @"o", @"u", @"n", @"d", @"a", @"r", @"y", @"T", @"o", @"D", @"i", @"r", @"e", @"c", @"t", @"i", @"o", @"n", @":"];
+    // _hasCandidates
+    TBH2nEKQNPBmyDkQdzCx = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"h", @"a", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"];
+    // showPreviousCandidate
+    L98fTVmwP43UFtL579EB = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"P", @"r", @"e", @"v", @"i", @"o", @"u", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
+    // showNextCandidates
+    GUU2JdGW8jGWuc388rJR = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"N", @"e", @"x", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"];
+    // setShowsCandidateInline:
+    SxYmcXP2AFEYh4CXYBMJ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"S", @"h", @"o", @"w", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @":"];
+    // acceptCurrentCandidate
+    wsjiFCKRrgQ3ipQpec6L = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
+    // userSelectedCurrentCandidate
+    CsLigQ6mK4n6e6ChunPz = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"u", @"s", @"e", @"r", @"S", @"e", @"l", @"e", @"c", @"t", @"e", @"d", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
     en_US = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"e", @"n", @"_", @"U", @"S", @"@", @"h", @"w", @"=", @"U", @"S", @";", @"s", @"w", @"=", @"Q", @"W", @"E", @"R", @"T", @"Y"];
     ja_JP = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"j", @"a", @"_", @"J", @"P", @"-", @"K", @"a", @"n", @"a", @"@", @"s", @"w", @"=", @"K", @"a", @"n", @"a", @"-", @"F", @"l", @"i", @"c", @"k", @";", @"h", @"w", @"=", @"U", @"S"];
-    s_h_o_w_P_r_e_v_i_o_u_s_C_a_n_d_i_d_a_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"P", @"r", @"e", @"v", @"i", @"o", @"u", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
-    s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"h", @"o", @"w", @"N", @"e", @"x", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"s"];
-    m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"m", @"o", @"v", @"e", @"P", @"h", @"r", @"a", @"s", @"e", @"B", @"o", @"u", @"n", @"d", @"a", @"r", @"y", @"T", @"o", @"D", @"i", @"r", @"e", @"c", @"t", @"i", @"o", @"n", @":"];
-    s_e_t_S_h_o_w_s_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"e", @"t", @"S", @"h", @"o", @"w", @"s", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"n", @"l", @"i", @"n", @"e", @":"];
-    d_e_l_e_t_e_F_r_o_m_I_n_p_u_t = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"d", @"e", @"l", @"e", @"t", @"e", @"F", @"r", @"o", @"m", @"I", @"n", @"p", @"u", @"t"];
-    s_t_a_r_t_A_u_t_o_D_e_l_e_t_e_T_i_m_e_r = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"t", @"a", @"r", @"t", @"A", @"u", @"t", @"o", @"D", @"e", @"l", @"e", @"t", @"e", @"T", @"i", @"m", @"e", @"r"];
-    s_t_o_p_A_u_t_o_D_e_l_e_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"s", @"t", @"o", @"p", @"A", @"u", @"t", @"o", @"D", @"e", @"l", @"e", @"t", @"e"];
-    a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
-    a_d_d_I_n_p_u_t_S_t_r_i_n_g_$ = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"d", @"d", @"I", @"n", @"p", @"u", @"t", @"S", @"t", @"r", @"i", @"n", @"g", @":"];
-    u_s_e_r_S_e_l_e_c_t_e_d_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"u", @"s", @"e", @"r", @"S", @"e", @"l", @"e", @"c", @"t", @"e", @"d", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
     
     cache = [[NSCache alloc] init];
 }
@@ -139,7 +163,7 @@ static NSCache *cache;
     _keyboardInputMethod = inputMethod;
     self.inputEngine.inputMethod = inputMethod;
     [self sendMessage:self.internalKeyboard
-              forName:s_e_t_I_n_p_u_t_M_o_d_e_$
+              forName:HTcj2RHKk78UgtYwx3Z8
           attachments:@[@{@"Object": ja_JP}]];
     
     NSString *keyboardType;
@@ -182,9 +206,9 @@ static NSCache *cache;
 
 - (void)cursorUp
 {
-    BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
     if (hasCandidates) {
-        NSString *name = s_h_o_w_P_r_e_v_i_o_u_s_C_a_n_d_i_d_a_t_e;
+        NSString *name = L98fTVmwP43UFtL579EB;
         if ([self.internalKeyboard respondsToSelector:NSSelectorFromString(name)]) {
             [self sendMessage:self.internalKeyboard
                       forName:name
@@ -204,10 +228,10 @@ static NSCache *cache;
 
 - (void)cursorDown
 {
-    BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
     if (hasCandidates) {
         [self sendMessage:self.internalKeyboard
-                  forName:s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s
+                  forName:GUU2JdGW8jGWuc388rJR
               attachments:nil];
     } else {
         UITextRange *selectedTextRange = self.textView.selectedTextRange;
@@ -225,7 +249,7 @@ static NSCache *cache;
 {
     if (self.textView.markedTextRange) {
         [self sendMessage:self.internalKeyboard
-                  forName:m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$
+                  forName:c4TdPa3m8nDVPeha877N
               attachments:@[@{@"NSInteger": @(1)}]];
     } else if (self.isShifted) {
         NSRange selectedRange = self.textView.selectedRange;
@@ -261,7 +285,7 @@ static NSCache *cache;
 {
     if (self.textView.markedTextRange) {
         [self sendMessage:self.internalKeyboard
-                  forName:m_o_v_e_P_h_r_a_s_e_B_o_u_n_d_a_r_y_T_o_D_i_r_e_c_t_i_o_n_$
+                  forName:c4TdPa3m8nDVPeha877N
               attachments:@[@{@"NSInteger": @(0)}]];
     } else if (self.isShifted) {
         NSRange selectedRange = self.textView.selectedRange;
@@ -335,10 +359,10 @@ static NSCache *cache;
     if (!self.internalKeyboard) {
         self.internalKeyboard = self.textView.inputDelegate;
         [self sendMessage:self.internalKeyboard
-                  forName:s_e_t_I_n_p_u_t_M_o_d_e_$
+                  forName:HTcj2RHKk78UgtYwx3Z8
               attachments:@[@{@"Object": ja_JP}]];
         [self sendMessage:self.internalKeyboard
-                  forName:s_e_t_S_h_o_w_s_C_a_n_d_i_d_a_t_e_I_n_l_i_n_e_$
+                  forName:SxYmcXP2AFEYh4CXYBMJ
               attachments:@[@{@"BOOL": @YES}]];
     }
 }
@@ -490,7 +514,7 @@ static NSCache *cache;
         [self processReturnKey];
     } else {
         [self sendMessage:self.internalKeyboard
-                  forName:s_t_o_p_A_u_t_o_D_e_l_e_t_e
+                  forName:jLdpi9URsHKDRWf36aE6
               attachments:nil];
     }
 }
@@ -509,7 +533,7 @@ static NSCache *cache;
         [self processReturnKey];
     } else {
         [self sendMessage:self.internalKeyboard
-                  forName:s_t_o_p_A_u_t_o_D_e_l_e_t_e
+                  forName:jLdpi9URsHKDRWf36aE6
               attachments:nil];
     }
 }
@@ -517,25 +541,25 @@ static NSCache *cache;
 - (void)processDeleteKey
 {
     [self sendMessage:self.internalKeyboard
-              forName:d_e_l_e_t_e_F_r_o_m_I_n_p_u_t
+              forName:PArjMGcJEYULesZzYbwp
           attachments:nil];
     [self sendMessage:self.internalKeyboard
-              forName:s_t_a_r_t_A_u_t_o_D_e_l_e_t_e_T_i_m_e_r
+              forName:G2AmM5eQZ4RxKLM3TCKZ
           attachments:nil];
 }
 
 - (void)processReturnKey
 {
-    BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
     if (hasCandidates) {
         [self sendMessage:self.internalKeyboard
-                  forName:a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e
+                  forName:wsjiFCKRrgQ3ipQpec6L
               attachments:nil];
         return;
     }
     
     [self sendMessage:self.internalKeyboard
-              forName:a_d_d_I_n_p_u_t_S_t_r_i_n_g_$
+              forName:mb6FzfJW6t9XaDQkna7m
           attachments:@[@{@"Object": @"\n"}]];
 }
 
@@ -647,7 +671,7 @@ static NSCache *cache;
 - (IBAction)touchUpSpaceKey:(id)sender
 {
     [self sendMessage:self.internalKeyboard
-              forName:a_d_d_I_n_p_u_t_S_t_r_i_n_g_$
+              forName:mb6FzfJW6t9XaDQkna7m
           attachments:@[@{@"Object": @" "}]];
 }
 
@@ -662,12 +686,12 @@ static NSCache *cache;
 {
     if (text.length > 0) {
         if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
-            NSString *key = u_s_e_r_S_e_l_e_c_t_e_d_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e;
+            NSString *key = CsLigQ6mK4n6e6ChunPz;
             if ([self.internalKeyboard respondsToSelector:NSSelectorFromString(key)]) {
                 BOOL userSelectedCurrentCandidate = [[self.internalKeyboard valueForKey:key] boolValue];
                 if (userSelectedCurrentCandidate) {
                     [self sendMessage:self.internalKeyboard
-                              forName:a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e
+                              forName:wsjiFCKRrgQ3ipQpec6L
                           attachments:nil];
                 }
             }
@@ -675,12 +699,12 @@ static NSCache *cache;
             dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
             dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
                 [self sendMessage:self.internalKeyboard
-                          forName:a_d_d_I_n_p_u_t_S_t_r_i_n_g_$
+                          forName:mb6FzfJW6t9XaDQkna7m
                       attachments:@[@{@"Object": text}]];
             });
         } else {
             [self sendMessage:self.internalKeyboard
-                      forName:a_d_d_I_n_p_u_t_S_t_r_i_n_g_$
+                      forName:mb6FzfJW6t9XaDQkna7m
                   attachments:@[@{@"Object": text}]];
         }
     }
@@ -692,13 +716,13 @@ static NSCache *cache;
     NSString *shiftKeyFunction = [userDefaults stringForKey:NCLSettingsLeftShiftFunctionKey];
     if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
         [self sendMessage:self.internalKeyboard
-                  forName:s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s
+                  forName:GUU2JdGW8jGWuc388rJR
               attachments:nil];
     } else if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
-        BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
+        BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
         if (hasCandidates) {
             [self sendMessage:self.internalKeyboard
-                      forName:a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e
+                      forName:wsjiFCKRrgQ3ipQpec6L
                   attachments:nil];
         }
     }
@@ -710,13 +734,13 @@ static NSCache *cache;
     NSString *shiftKeyFunction = [userDefaults stringForKey:NCLSettingsRightShiftFunctionKey];
     if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
         [self sendMessage:self.internalKeyboard
-                  forName:s_h_o_w_N_e_x_t_C_a_n_d_i_d_a_t_e_s
+                  forName:GUU2JdGW8jGWuc388rJR
               attachments:nil];
     } else if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
-        BOOL hasCandidates = [[self.internalKeyboard valueForKey:__h_a_s_C_a_n_d_i_d_a_t_e_s] boolValue];
+        BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
         if (hasCandidates) {
             [self sendMessage:self.internalKeyboard
-                      forName:a_c_c_e_p_t_C_u_r_r_e_n_t_C_a_n_d_i_d_a_t_e
+                      forName:wsjiFCKRrgQ3ipQpec6L
                   attachments:nil];
         }
     }
