@@ -73,14 +73,14 @@
 - (void)startDownload
 {
     NSString *fontName = self.fontName;
-    NSDictionary *attrs = @{(id)kCTFontNameAttribute: fontName};
+    NSDictionary *attributes = @{(id)kCTFontNameAttribute: fontName};
     
-	CTFontDescriptorRef desc = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)attrs);
-    NSArray *descs = @[(__bridge id)desc];
-    CFRelease(desc);
+	CTFontDescriptorRef fontDescriptor = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)attributes);
+    NSArray *fontDescriptors = @[(__bridge id)fontDescriptor];
+    CFRelease(fontDescriptor);
     
 	__block BOOL errorDuringDownload = NO;
-    CTFontDescriptorMatchFontDescriptorsWithProgressHandler((__bridge CFArrayRef)descs, NULL, ^(CTFontDescriptorMatchingState state, CFDictionaryRef progressParameter) {
+    CTFontDescriptorMatchFontDescriptorsWithProgressHandler((__bridge CFArrayRef)fontDescriptors, NULL, ^(CTFontDescriptorMatchingState state, CFDictionaryRef progressParameter) {
         NSDictionary *parameter = (__bridge NSDictionary *)progressParameter;
 		double progressValue = [parameter[(id)kCTFontDescriptorMatchingPercentage] doubleValue];
 		
@@ -95,6 +95,17 @@
             _finished = YES;
             
             if (errorDuringDownload) {
+                if ([self.delegate respondsToSelector:@selector(download:matchingDidFailWithError:)]) {
+                    [self.delegate download:self matchingDidFailWithError:nil];
+                }
+                return (bool)NO;
+            }
+            
+            UIFont *font = [UIFont fontWithName:fontName size:1.0f];
+            if (!font) {
+                if ([self.delegate respondsToSelector:@selector(download:matchingDidFailWithError:)]) {
+                    [self.delegate download:self matchingDidFailWithError:nil];
+                }
                 return (bool)NO;
             }
             
@@ -345,6 +356,30 @@
     }
     
     [self startNextDownload];
+}
+
+- (void)loadDownloadedFontNamed:(NSString *)fontName
+{
+    NSDictionary *attributes = @{(id)kCTFontNameAttribute: fontName};
+    
+	CTFontDescriptorRef fontDescriptor = CTFontDescriptorCreateWithAttributes((__bridge CFDictionaryRef)attributes);
+    NSArray *fontDescriptors = @[(__bridge id)fontDescriptor];
+    CFRelease(fontDescriptor);
+    CTFontDescriptorMatchFontDescriptorsWithProgressHandler((__bridge CFArrayRef)fontDescriptors, NULL, ^bool(CTFontDescriptorMatchingState state, CFDictionaryRef progressParameter) {
+        if (state == kCTFontDescriptorMatchingDidFinish) {
+			dispatch_async( dispatch_get_main_queue(), ^ {
+                UIFont *font = [UIFont fontWithName:fontName size:1.0f];
+                if (font) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFinishNotification object:nil userInfo:@{@"name": fontName}];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:nil userInfo:nil];
+                }
+			});
+		} else if (state == kCTFontDescriptorMatchingWillBeginDownloading) {
+            return (bool)NO;
+		}
+        
+		return (bool)YES;
+    });
 }
 
 - (NCLFontDownloadGroup *)downloadGroupWithFontName:(NSString *)fontName

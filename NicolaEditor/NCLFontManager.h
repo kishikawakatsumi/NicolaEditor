@@ -25,4 +25,6 @@ typedef NS_ENUM(NSInteger, NCLFontManagerDownloadStatus) {
 - (void)enqueueDownloadWithFontName:(NSString *)fontName;
 - (void)enqueueDownloadWithFontNames:(NSArray *)fontNames;
 
+- (void)loadDownloadedFontNamed:(NSString *)fontName;
+
 @end

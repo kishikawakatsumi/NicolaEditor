@@ -7,7 +7,7 @@
 //
 
 #import "NCLAppDelegate.h"
-#import "NCLKeyboardView.h"
+#import "NCLFontManager.h"
 #import "NCLConstants.h"
 #import "NCLNote+Helper.h"
 #import "NSString+Helper.h"
@@ -55,9 +55,8 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
                                      NCLSettingsSwapBackspaceReturnEnabledKey: @NO}];
     
     NSDictionary *downloadedFonts = [userDefaults valueForKey:NCLSettingsDownloadedFontsKey];
-    for (NSString *downloadedFont in downloadedFonts.allValues) {
-        NSURL *URL = [NSURL URLWithString:downloadedFont];
-        CTFontManagerRegisterFontsForURL((__bridge CFURLRef)URL, kCTFontManagerScopeProcess, NULL);
+    for (NSString *downloadedFontName in downloadedFonts.allKeys) {
+        [[NCLFontManager sharedManager] loadDownloadedFontNamed:downloadedFontName];
     }
     
     if (![userDefaults stringForKey:NCLInstallationIdentifierKey]) {
