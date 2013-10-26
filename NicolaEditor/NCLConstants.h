@@ -8,8 +8,11 @@
 
 @import Foundation;
 
+extern NSString * const NCLInstallationIdentifierKey;
+
 extern NSString * const NCLSettingsFontNameKey;
 extern NSString * const NCLSettingsFontSizeKey;
+extern NSString * const NCLSettingsDownloadedFontsKey;
 
 extern NSString * const NCLSettingsShiftKeyBehaviorKey;
 extern NSString * const NCLSettingsTimeShiftDurationKey;
@@ -31,3 +34,10 @@ extern NSString * const NCLShiftKeyBehaviorPrefixShift;
 extern NSString * const NCLShiftKeyFunctionNextCandidate;
 extern NSString * const NCLShiftKeyFunctionAcceptCandidate;
 extern NSString * const NCLShiftKeyFunctionNone;
+
+extern NSString * const NCLFontManagerMatchingDidBeginNotification;
+extern NSString * const NCLFontManagerMatchingDidFinishNotification;
+extern NSString * const NCLFontManagerMatchingDidFailNotification;
+extern NSString * const NCLFontManagerMatchingWillBeginDownloadingNotification;
+extern NSString * const NCLFontManagerMatchingDownloadingNotification;
+extern NSString * const NCLFontManagerMatchingDidFinishDownloadingNotification;

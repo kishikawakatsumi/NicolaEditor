@@ -23,8 +23,6 @@
 		145AE70418157C82000459C1 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 145AE70018157C82000459C1 /* Icon-72@2x.png */; };
 		145AE74D18163ECB000459C1 /* NCLAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145AE74C18163ECB000459C1 /* NCLAboutViewController.m */; };
 		145AE74E18163ECB000459C1 /* NCLAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145AE74C18163ECB000459C1 /* NCLAboutViewController.m */; };
-		145AE75118164126000459C1 /* UILabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 145AE75018164126000459C1 /* UILabel+Helper.m */; };
-		145AE75218164126000459C1 /* UILabel+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 145AE75018164126000459C1 /* UILabel+Helper.m */; };
 		145E657B180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */; };
 		145E657C180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */; };
 		1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */; };
@@ -63,6 +61,8 @@
 		147733961815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338F1815A0850045ADFB /* Default-Portrait@2x~ipad.png */; };
 		147733971815A0850045ADFB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 147733901815A0850045ADFB /* Default-Portrait~ipad.png */; };
 		147733981815A0850045ADFB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 147733901815A0850045ADFB /* Default-Portrait~ipad.png */; };
+		147C582D181BB49200413706 /* NCLFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 147C582C181BB49200413706 /* NCLFontManager.m */; };
+		147C582E181BB49200413706 /* NCLFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 147C582C181BB49200413706 /* NCLFontManager.m */; };
 		14A57E76181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
 		14A57E77181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
 		14A57E7A1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */; };
@@ -123,8 +123,6 @@
 		145AE70018157C82000459C1 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 		145AE74B18163ECB000459C1 /* NCLAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLAboutViewController.h; sourceTree = "<group>"; };
 		145AE74C18163ECB000459C1 /* NCLAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLAboutViewController.m; sourceTree = "<group>"; };
-		145AE74F18164126000459C1 /* UILabel+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Helper.h"; sourceTree = "<group>"; };
-		145AE75018164126000459C1 /* UILabel+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Helper.m"; sourceTree = "<group>"; };
 		145E6579180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLShiftKeyFunctionsSettingsViewController.h; sourceTree = "<group>"; };
 		145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLShiftKeyFunctionsSettingsViewController.m; sourceTree = "<group>"; };
 		1461746C1803D86200C8763B /* NCLKeyboardAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLKeyboardAccessoryView.h; sourceTree = "<group>"; };
@@ -158,6 +156,8 @@
 		1477338E1815A0850045ADFB /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		1477338F1815A0850045ADFB /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
 		147733901815A0850045ADFB /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		147C582B181BB49200413706 /* NCLFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLFontManager.h; sourceTree = "<group>"; };
+		147C582C181BB49200413706 /* NCLFontManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLFontManager.m; sourceTree = "<group>"; };
 		14A57E74181087CC00F1A7D9 /* NCLHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLHelpViewController.h; sourceTree = "<group>"; };
 		14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLHelpViewController.m; sourceTree = "<group>"; };
 		14A57E781810FEB700F1A7D9 /* NCLNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLNoteCell.h; sourceTree = "<group>"; };
@@ -256,6 +256,29 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		147C582A181BB47000413706 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				14B3F44718030DEC00F7E91A /* NCLNotesViewController.h */,
+				14B3F44818030DEC00F7E91A /* NCLNotesViewController.m */,
+				14B3F476180310D600F7E91A /* NCLTextViewController.h */,
+				14B3F477180310D600F7E91A /* NCLTextViewController.m */,
+				146B3EDE180857F200418452 /* NCLSettingsViewController.h */,
+				146B3EDF180857F200418452 /* NCLSettingsViewController.m */,
+				146B3EE2180859A200418452 /* NCLFontSettingsViewController.h */,
+				146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */,
+				146B3EF0180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.h */,
+				146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */,
+				145E6579180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.h */,
+				145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */,
+				14A57E74181087CC00F1A7D9 /* NCLHelpViewController.h */,
+				14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */,
+				145AE74B18163ECB000459C1 /* NCLAboutViewController.h */,
+				145AE74C18163ECB000459C1 /* NCLAboutViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		14B3F42118030DEC00F7E91A = {
 			isa = PBXGroup;
 			children = (
@@ -294,36 +317,21 @@
 			children = (
 				14B3F43E18030DEC00F7E91A /* NCLAppDelegate.h */,
 				146469491812E48E00CEAA41 /* NCLAppDelegate.m */,
-				14B3F44718030DEC00F7E91A /* NCLNotesViewController.h */,
-				14B3F44818030DEC00F7E91A /* NCLNotesViewController.m */,
-				14B3F476180310D600F7E91A /* NCLTextViewController.h */,
-				14B3F477180310D600F7E91A /* NCLTextViewController.m */,
-				146B3EDE180857F200418452 /* NCLSettingsViewController.h */,
-				146B3EDF180857F200418452 /* NCLSettingsViewController.m */,
-				146B3EE2180859A200418452 /* NCLFontSettingsViewController.h */,
-				146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */,
-				146B3EF0180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.h */,
-				146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */,
-				145E6579180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.h */,
-				145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */,
-				14A57E74181087CC00F1A7D9 /* NCLHelpViewController.h */,
-				14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */,
-				145AE74B18163ECB000459C1 /* NCLAboutViewController.h */,
-				145AE74C18163ECB000459C1 /* NCLAboutViewController.m */,
 				14326818180FBF910001BDBC /* NCLPopoverManager.h */,
 				14326819180FBF910001BDBC /* NCLPopoverManager.m */,
 				1461747E18058F6B00C8763B /* NCLKeyboardInputEngine.h */,
 				1461747F18058F6B00C8763B /* NCLKeyboardInputEngine.m */,
+				147C582B181BB49200413706 /* NCLFontManager.h */,
+				147C582C181BB49200413706 /* NCLFontManager.m */,
 				14326810180FB7270001BDBC /* NCLConstants.h */,
 				14326811180FB7270001BDBC /* NCLConstants.m */,
 				146B3F061808740000418452 /* NSString+Helper.h */,
 				146B3F071808740000418452 /* NSString+Helper.m */,
 				14326814180FB7990001BDBC /* UIFont+Helper.h */,
 				14326815180FB7990001BDBC /* UIFont+Helper.m */,
-				145AE74F18164126000459C1 /* UILabel+Helper.h */,
-				145AE75018164126000459C1 /* UILabel+Helper.m */,
 				14B3F47A1803121E00F7E91A /* Main.storyboard */,
 				14B3F44D18030DEC00F7E91A /* Images.xcassets */,
+				147C582A181BB47000413706 /* View Controllers */,
 				146B3EF918086C0A00418452 /* Views */,
 				146B3EF818086BFC00418452 /* Models */,
 				14D140C518112642000AD695 /* Resources */,
@@ -561,7 +569,7 @@
 				14B3F44918030DEC00F7E91A /* NCLNotesViewController.m in Sources */,
 				145AE74D18163ECB000459C1 /* NCLAboutViewController.m in Sources */,
 				146B3EE0180857F200418452 /* NCLSettingsViewController.m in Sources */,
-				145AE75118164126000459C1 /* UILabel+Helper.m in Sources */,
+				147C582D181BB49200413706 /* NCLFontManager.m in Sources */,
 				1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */,
 				1464694A1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */,
 				14B3F47218030EB900F7E91A /* NCLKeyboardView.m in Sources */,
@@ -598,6 +606,7 @@
 				146B3EE1180857F200418452 /* NCLSettingsViewController.m in Sources */,
 				14A57E77181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */,
 				14B3F47518030EB900F7E91A /* NCLKeyboardButton.m in Sources */,
+				147C582E181BB49200413706 /* NCLFontManager.m in Sources */,
 				146B3F0518086F5600418452 /* NCLNote+Helper.m in Sources */,
 				146B3F0118086C5E00418452 /* NCLNote.m in Sources */,
 				14326837181027120001BDBC /* NCLSliderPopup.m in Sources */,
@@ -610,7 +619,6 @@
 				1432681B180FBF910001BDBC /* NCLPopoverManager.m in Sources */,
 				146B3F091808740000418452 /* NSString+Helper.m in Sources */,
 				145AE74E18163ECB000459C1 /* NCLAboutViewController.m in Sources */,
-				145AE75218164126000459C1 /* UILabel+Helper.m in Sources */,
 				146B3EF3180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

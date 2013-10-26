@@ -8,8 +8,11 @@
 
 #import "NCLConstants.h"
 
+NSString * const NCLInstallationIdentifierKey = @"installation-identifier";
+
 NSString * const NCLSettingsFontNameKey = @"font-name";
 NSString * const NCLSettingsFontSizeKey = @"font-size";
+NSString * const NCLSettingsDownloadedFontsKey = @"downloaded-fonts";
 
 NSString * const NCLSettingsShiftKeyBehaviorKey = @"shift-key-behavior";
 NSString * const NCLSettingsTimeShiftDurationKey = @"time-shift-duration";
@@ -31,3 +34,10 @@ NSString * const NCLShiftKeyBehaviorPrefixShift = @"Prefix-Shift";
 NSString * const NCLShiftKeyFunctionNextCandidate = @"Next-Candidate";
 NSString * const NCLShiftKeyFunctionAcceptCandidate = @"Accept-Candidate";
 NSString * const NCLShiftKeyFunctionNone = @"None";
+
+NSString * const NCLFontManagerMatchingDidBeginNotification = @"NCLFontManagerMatchingDidBeginNotification";
+NSString * const NCLFontManagerMatchingDidFinishNotification = @"NCLFontManagerMatchingDidFinishNotification";
+NSString * const NCLFontManagerMatchingDidFailNotification = @"NCLFontManagerMatchingDidFailNotification";
+NSString * const NCLFontManagerMatchingWillBeginDownloadingNotification = @"NCLFontManagerMatchingWillBeginDownloadingNotification";
+NSString * const NCLFontManagerMatchingDownloadingNotification = @"NCLFontManagerMatchingDownloadingNotification";
+NSString * const NCLFontManagerMatchingDidFinishDownloadingNotification = @"NCLFontManagerMatchingDidFinishDownloadingNotification";

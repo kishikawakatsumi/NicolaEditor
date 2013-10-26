@@ -21,6 +21,8 @@
 #import <Helpshift/Helpshift.h>
 #import <CrittercismSDK/Crittercism.h>
 
+@import CoreText;
+
 static NSString * const EvernoteConsumerKey = @"kishikawakatsumi";
 static NSString * const EvernoteConsumerSecret = @"a54f2575488374bd";
 
@@ -43,16 +45,23 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     DBSession* session = [[DBSession alloc] initWithAppKey:DropboxAppKey appSecret:DropboxAppSecret root:kDBRootAppFolder];
     [DBSession setSharedSession:session];
     
-    [[NSUserDefaults standardUserDefaults] registerDefaults:@{NCLSettingsFontNameKey: @"HiraMinProN-W3",
-                                                              NCLSettingsFontSizeKey: @(14.0),
-                                                              NCLSettingsShiftKeyBehaviorKey: NCLShiftKeyBehaviorTimeShift,
-                                                              NCLSettingsTimeShiftDurationKey: @(0.15),
-                                                              NCLSettingsLeftShiftFunctionKey: NCLShiftKeyFunctionAcceptCandidate,
-                                                              NCLSettingsRightShiftFunctionKey: NCLShiftKeyFunctionNextCandidate,
-                                                              NCLSettingsSwapBackspaceReturnEnabledKey: @NO}];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults registerDefaults:@{NCLSettingsFontNameKey: @"HiraMinProN-W3",
+                                     NCLSettingsFontSizeKey: @(14.0),
+                                     NCLSettingsShiftKeyBehaviorKey: NCLShiftKeyBehaviorTimeShift,
+                                     NCLSettingsTimeShiftDurationKey: @(0.15),
+                                     NCLSettingsLeftShiftFunctionKey: NCLShiftKeyFunctionAcceptCandidate,
+                                     NCLSettingsRightShiftFunctionKey: NCLShiftKeyFunctionNextCandidate,
+                                     NCLSettingsSwapBackspaceReturnEnabledKey: @NO}];
     
-    if (![[NSUserDefaults standardUserDefaults] stringForKey:@"installation-identifier"]) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSString UUIDString] forKey:@"installation-identifier"];
+    NSDictionary *downloadedFonts = [userDefaults valueForKey:NCLSettingsDownloadedFontsKey];
+    for (NSString *downloadedFont in downloadedFonts.allValues) {
+        NSURL *URL = [NSURL URLWithString:downloadedFont];
+        CTFontManagerRegisterFontsForURL((__bridge CFURLRef)URL, kCTFontManagerScopeProcess, NULL);
+    }
+    
+    if (![userDefaults stringForKey:NCLInstallationIdentifierKey]) {
+        [userDefaults setObject:[NSString UUIDString] forKey:NCLInstallationIdentifierKey];
         NSBundle *mainBundle = [NSBundle mainBundle];
         NSData *data = [NSData dataWithContentsOfURL:[mainBundle URLForResource:@"SampleText" withExtension:@"json"]];
         NSArray *samples = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
@@ -60,7 +69,7 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
             [NCLNote insertNewNoteWithContent:sample];
         }
     }
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [userDefaults synchronize];
     
     [self prepareForiCloud];
     

@@ -362,6 +362,13 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     UIFont *font = [UIFont fontWithName:fontName size:fontSize];
     UIFont *boldFont = [font fontWithBoldTrait:YES italicTrait:NO andSize:fontSize];
     
+    if (!font) {
+        return;
+    }
+    if (!boldFont) {
+        boldFont = font;
+    }
+    
     if ([self.textView respondsToSelector:@selector(setAttributedText:)]) {
         if (content.length > 0) {
             if (!self.textView.markedTextRange) {

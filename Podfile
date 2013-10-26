@@ -1,6 +1,7 @@
 platform :ios, '5.0'
 
 pod 'SVProgressHUD'
+pod 'FFCircularProgressView'
 pod 'JLRoutes'
 pod 'NLCoreData'
 pod 'Evernote-SDK-iOS'
