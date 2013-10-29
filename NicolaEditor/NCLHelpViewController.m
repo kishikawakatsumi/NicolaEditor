@@ -33,7 +33,7 @@
     } else if (section == 0 && row == 3) {
         cell.textLabel.text = NSLocalizedString(@"FAQ", nil);
     } else if (section == 1 && row == 0) {
-        cell.textLabel.text = NSLocalizedString(@"About NICOLA Note", nil);
+        cell.textLabel.text = NSLocalizedString(@"About N Note", nil);
     }
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
