@@ -13,7 +13,7 @@
 #import "NSString+Helper.h"
 #import <JLRoutes/JLRoutes.h>
 #import <NLCoreData/NLCoreData.h>
-//#import <Evernote-SDK-iOS/EvernoteSDK.h>
+#import <Evernote-SDK-iOS/EvernoteSDK.h>
 #import <DropboxSDK/DropboxSDK.h>
 #import <UrbanAirship-iOS-SDK/UAirship.h>
 #import <UrbanAirship-iOS-SDK/UAConfig.h>
@@ -23,8 +23,8 @@
 
 @import CoreText;
 
-//static NSString * const EvernoteConsumerKey = @"kishikawakatsumi";
-//static NSString * const EvernoteConsumerSecret = @"a54f2575488374bd";
+static NSString * const EvernoteConsumerKey = @"kishikawakatsumi";
+static NSString * const EvernoteConsumerSecret = @"a54f2575488374bd";
 
 static NSString * const DropboxAppKey = @"jnt8gm2oa7oa1no";
 static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
@@ -40,7 +40,7 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     
     [Crittercism enableWithAppID:@"5264f50ea7928a4f07000005"];
     
-//    [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringSandbox consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
+    [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringSandbox consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
     
     DBSession* session = [[DBSession alloc] initWithAppKey:DropboxAppKey appSecret:DropboxAppSecret root:kDBRootAppFolder];
     [DBSession setSharedSession:session];
@@ -95,7 +95,7 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-//    [[EvernoteSession sharedSession] handleDidBecomeActive];
+    [[EvernoteSession sharedSession] handleDidBecomeActive];
     [[NSManagedObjectContext mainContext] saveNested];
 }
 
@@ -124,10 +124,10 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     BOOL canHandle = NO;
     NSString *scheme = url.scheme.lowercaseString;
     
-//    EvernoteSession *session = [EvernoteSession sharedSession];
-//    if ([[NSString stringWithFormat:@"en-%@", session.consumerKey] isEqualToString:scheme]) {
-//        canHandle = [session canHandleOpenURL:url];
-//    }
+    EvernoteSession *session = [EvernoteSession sharedSession];
+    if ([[NSString stringWithFormat:@"en-%@", session.consumerKey] isEqualToString:scheme]) {
+        canHandle = [session canHandleOpenURL:url];
+    }
     
     DBSession *sharedSession = [DBSession sharedSession];
     if ([sharedSession.appScheme isEqualToString:scheme]) {
