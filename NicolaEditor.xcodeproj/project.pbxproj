@@ -329,8 +329,6 @@
 				146B3F071808740000418452 /* NSString+Helper.m */,
 				14326814180FB7990001BDBC /* UIFont+Helper.h */,
 				14326815180FB7990001BDBC /* UIFont+Helper.m */,
-				14B3F47A1803121E00F7E91A /* Main.storyboard */,
-				14B3F44D18030DEC00F7E91A /* Images.xcassets */,
 				147C582A181BB47000413706 /* View Controllers */,
 				146B3EF918086C0A00418452 /* Views */,
 				146B3EF818086BFC00418452 /* Models */,
@@ -378,6 +376,8 @@
 		14D140C518112642000AD695 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				14B3F47A1803121E00F7E91A /* Main.storyboard */,
+				14B3F44D18030DEC00F7E91A /* Images.xcassets */,
 				145AE6FF18157C82000459C1 /* Icon-72.png */,
 				145AE70018157C82000459C1 /* Icon-72@2x.png */,
 				1477338D1815A0850045ADFB /* Default-Landscape@2x~ipad.png */,
