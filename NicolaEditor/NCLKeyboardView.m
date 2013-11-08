@@ -9,6 +9,7 @@
 #import "NCLKeyboardView.h"
 #import "NCLKeyboardButton.h"
 #import "NCLKeyboardInputEngine.h"
+#import "NCLPhysicalKeyboardManager.h"
 #import "NCLConstants.h"
 
 @import ObjectiveC;
@@ -134,6 +135,7 @@ static NSCache *cache;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shiftKeyBehaviorDidChange:) name:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swapBackspaceReturnEnabledDidChange:) name:NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(physicalKeyboardAvailabilityChangedNotification:) name:NCLPhysicalKeyboardAvailabilityChangedNotification object:nil];
 }
 
 - (void)dealloc
@@ -352,6 +354,13 @@ static NSCache *cache;
         [self.keyboardBackgroundView addSubview:keyButton];
         [self.keyButtons addObject:keyButton];
     }
+    
+    NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
+    if (keyboardManager.isPhysicalKeyboardAttached) {
+        [self physicalKeyboardAttached];
+    } else {
+        [self physicalKeyboardDettached];
+    }
 }
 
 - (void)setupKeyboardIfNeeded
@@ -364,7 +373,55 @@ static NSCache *cache;
         [self sendMessage:self.internalKeyboard
                   forName:SxYmcXP2AFEYh4CXYBMJ
               attachments:@[@{@"BOOL": @YES}]];
+        
+        [[NCLPhysicalKeyboardManager sharedManager] setTextView:self.textView];
     }
+}
+
+- (void)physicalKeyboardAvailabilityChangedNotification:(NSNotification *)notification
+{
+    NSDictionary *userInfo = notification.userInfo;
+    BOOL isInHardwareKeyboardMode = [userInfo[NCLPhysicalKeyboardAvailabilityKey] boolValue];
+    if (isInHardwareKeyboardMode) {
+        [self physicalKeyboardAttached];
+    } else {
+        [self physicalKeyboardDettached];
+    }
+}
+
+- (void)physicalKeyboardAttached
+{
+    CGRect frame = self.frame;
+    frame.size.height = 0.0f;
+    
+    [UIView animateWithDuration:0.0 delay:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.frame = frame;
+    } completion:^(BOOL finished) {
+        self.hidden = YES;
+    }];
+    
+    [self.textView performSelector:@selector(reloadInputViews) withObject:nil afterDelay:0.0];
+}
+
+- (void)physicalKeyboardDettached
+{
+    UIApplication *app = [UIApplication sharedApplication];
+    UIInterfaceOrientation orientation = app.statusBarOrientation;
+    
+    CGRect frame = self.frame;
+    if (UIInterfaceOrientationIsPortrait(orientation)) {
+        frame.size.height = 264.0f;
+    } else {
+        frame.size.height = 352.0f;
+    }
+    
+    [UIView animateWithDuration:0.0 delay:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        self.frame = frame;
+    } completion:^(BOOL finished) {
+        self.hidden = NO;
+    }];
+    
+    [self.textView performSelector:@selector(reloadInputViews) withObject:nil afterDelay:0.0];
 }
 
 - (void)layoutKeyButtons

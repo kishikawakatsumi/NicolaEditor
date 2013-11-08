@@ -1,31 +1,27 @@
 //
-//  NCLKeyboardInputEngine.m
+//  NCLPhysicalKeyboardInputEngine.m
 //  NicolaEditor
 //
-//  Created by kishikawa katsumi on 2013/10/09.
+//  Created by kishikawa katsumi on 2013/11/09.
 //  Copyright (c) 2013 kishikawa katsumi. All rights reserved.
 //
 
-#import "NCLKeyboardInputEngine.h"
+#import "NCLPhysicalKeyboardInputEngine.h"
 #import "NCLConstants.h"
 
-@implementation NCLKeyboardInput
-
-@end
-
-@interface NCLKeyboardInputEngine ()
+@interface NCLPhysicalKeyboardInputEngine ()
 
 @property (nonatomic) NSDictionary *keyboardLayouts;
 
 @end
 
-@interface NCLKeyboardTimeShiftInputEngine : NCLKeyboardInputEngine
+@interface NCLPhysicalKeyboardTimeShiftInputEngine : NCLPhysicalKeyboardInputEngine
 
 @property (nonatomic) NSMutableArray *keyInputQueue;
 
 @end
 
-@interface NCLKeyboardContinuityShiftInputEngine : NCLKeyboardInputEngine
+@interface NCLPhysicalKeyboardContinuityShiftInputEngine : NCLPhysicalKeyboardInputEngine
 
 @property (nonatomic) NSMutableArray *keyInputQueue;
 @property (nonatomic) NCLKeyboardInput *lastLeftShiftKeyInput;
@@ -33,22 +29,22 @@
 
 @end
 
-@interface NCLKeyboardPrefixShiftInputEngine : NCLKeyboardInputEngine
+@interface NCLPhysicalKeyboardPrefixShiftInputEngine : NCLPhysicalKeyboardInputEngine
 
 @property (nonatomic) NCLKeyboardShiftState shiftState;
 
 @end
 
-@implementation NCLKeyboardInputEngine
+@implementation NCLPhysicalKeyboardInputEngine
 
 + (id)inputEngineWithShiftKeyBehavior:(NSString *)shiftKeyBehavior
 {
     if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift]) {
-        return [[NCLKeyboardTimeShiftInputEngine alloc] init];
+        return [[NCLPhysicalKeyboardTimeShiftInputEngine alloc] init];
     } else if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorContinuityShift]) {
-        return [[NCLKeyboardContinuityShiftInputEngine alloc] init];
+        return [[NCLPhysicalKeyboardContinuityShiftInputEngine alloc] init];
     } else if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorPrefixShift]) {
-        return [[NCLKeyboardPrefixShiftInputEngine alloc] init];
+        return [[NCLPhysicalKeyboardPrefixShiftInputEngine alloc] init];
     }
     
     return nil;
@@ -59,7 +55,7 @@
     self = [super init];
     if (self) {
         NSBundle *mainBundle = [NSBundle mainBundle];
-        NSData *data = [NSData dataWithContentsOfURL:[mainBundle URLForResource:@"KeyboardLayouts" withExtension:@"json"]];
+        NSData *data = [NSData dataWithContentsOfURL:[mainBundle URLForResource:@"PhysicalKeyboardLayouts" withExtension:@"json"]];
         self.keyboardLayouts = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     }
     
@@ -101,7 +97,7 @@
 
 @end
 
-@implementation NCLKeyboardTimeShiftInputEngine
+@implementation NCLPhysicalKeyboardTimeShiftInputEngine
 
 - (id)init
 {
@@ -242,7 +238,7 @@
 
 @end
 
-@implementation NCLKeyboardContinuityShiftInputEngine
+@implementation NCLPhysicalKeyboardContinuityShiftInputEngine
 
 - (id)init
 {
@@ -390,7 +386,7 @@
 
 @end
 
-@implementation NCLKeyboardPrefixShiftInputEngine
+@implementation NCLPhysicalKeyboardPrefixShiftInputEngine
 
 - (void)addKeyInput:(NSInteger)input
 {

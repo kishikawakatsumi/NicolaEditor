@@ -41,3 +41,6 @@ extern NSString * const NCLFontManagerMatchingDidFailNotification;
 extern NSString * const NCLFontManagerMatchingWillBeginDownloadingNotification;
 extern NSString * const NCLFontManagerMatchingDownloadingNotification;
 extern NSString * const NCLFontManagerMatchingDidFinishDownloadingNotification;
+
+extern NSString * const NCLPhysicalKeyboardAvailabilityChangedNotification;
+extern NSString * const NCLPhysicalKeyboardAvailabilityKey;

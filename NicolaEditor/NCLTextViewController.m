@@ -337,6 +337,9 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     [self tryBeginEditing];
     
     [[NCLPopoverManager sharedManager] dismissPopovers];
+    if (self.masterPopoverController.isPopoverVisible) {
+        [self.masterPopoverController dismissPopoverAnimated:YES];
+    }
 }
 
 - (void)updateUI
@@ -803,6 +806,11 @@ static void addInstanceMethod(NSString *className, NSString *selector, id block,
     
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
     self.masterPopoverController = nil;
+}
+
+- (UIInterfaceOrientation)splitViewControllerPreferredInterfaceOrientationForPresentation:(UISplitViewController *)splitViewController;
+{
+    return UIInterfaceOrientationLandscapeRight;
 }
 
 #pragma mark -

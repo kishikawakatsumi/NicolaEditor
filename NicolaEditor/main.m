@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NCLApplication.h"
 #import "NCLAppDelegate.h"
 
 int main(int argc, char * argv[])
 {
     @autoreleasepool {
-        return UIApplicationMain(argc, argv, nil, NSStringFromClass([NCLAppDelegate class]));
+        return UIApplicationMain(argc, argv,  NSStringFromClass([NCLApplication class]), NSStringFromClass([NCLAppDelegate class]));
     }
 }

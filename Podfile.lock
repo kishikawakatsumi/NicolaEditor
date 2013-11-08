@@ -1,5 +1,5 @@
 PODS:
-  - CrittercismSDK (4.0.7)
+  - CrittercismSDK (4.1.2)
   - Dropbox-iOS-SDK (1.3.6)
   - Evernote-SDK-iOS (1.3.0):
     - SSKeychain (= 0.2.1)
@@ -8,11 +8,11 @@ PODS:
   - JLRoutes (1.4)
   - NLCoreData (0.5.3)
   - SSKeychain (0.2.1)
-  - SVProgressHUD (0.9)
+  - SVProgressHUD (1.0)
   - UrbanAirship-iOS-SDK (3.0.0)
 
 DEPENDENCIES:
-  - CrittercismSDK (= 4.0.7)
+  - CrittercismSDK
   - Dropbox-iOS-SDK
   - Evernote-SDK-iOS
   - FFCircularProgressView
@@ -23,7 +23,7 @@ DEPENDENCIES:
   - UrbanAirship-iOS-SDK
 
 SPEC CHECKSUMS:
-  CrittercismSDK: 23b8193df3619a74597a1f81b9c09ab7e53a1508
+  CrittercismSDK: 6182966dc89b633611b1acb87201952d84224120
   Dropbox-iOS-SDK: a5fe8e7e00eac346740a3521d83325a63c82443d
   Evernote-SDK-iOS: 848bf6d5f1133540ea32a24d001f2905eb6d52ba
   FFCircularProgressView: 972f8c316f6a612a9ca55d7800ade41b51efedf2
@@ -31,7 +31,7 @@ SPEC CHECKSUMS:
   JLRoutes: 8814d5341d2678c2daca045ce538f21e62e558d4
   NLCoreData: bde75667607f7b66a08ef1d78d39b8bc5eed433f
   SSKeychain: ffa1a79eb716d9ed1ca184fb0cf218087ca28486
-  SVProgressHUD: 03d4845ec8e64591726428a08236c6a5489d45f8
+  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
   UrbanAirship-iOS-SDK: f3d763468fe06e4900178ac9ac602493f6c6ae51
 
 COCOAPODS: 0.27.1

@@ -41,3 +41,6 @@ NSString * const NCLFontManagerMatchingDidFailNotification = @"NCLFontManagerMat
 NSString * const NCLFontManagerMatchingWillBeginDownloadingNotification = @"NCLFontManagerMatchingWillBeginDownloadingNotification";
 NSString * const NCLFontManagerMatchingDownloadingNotification = @"NCLFontManagerMatchingDownloadingNotification";
 NSString * const NCLFontManagerMatchingDidFinishDownloadingNotification = @"NCLFontManagerMatchingDidFinishDownloadingNotification";
+
+NSString * const NCLPhysicalKeyboardAvailabilityChangedNotification = @"NCLPhysicalKeyboardAvailabilityChangedNotification";
+NSString * const NCLPhysicalKeyboardAvailabilityKey = @"NCLPhysicalKeyboardAvailabilityKey";
