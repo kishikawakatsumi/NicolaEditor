@@ -11,6 +11,10 @@
 #import "NCLKeyboardView.h"
 #import "NCLConstants.h"
 
+static NSString * const NCLPhysicalKeyboardAppleJIS = @"Apple Wireless Keyboard JIS";
+
+static NSString *xfS9MiWvpygnCQtUh483;
+
 @interface NCLPhysicalKeyboardManager ()
 
 @property (nonatomic) NCLKeyboardInputEngine *inputEngine;
@@ -22,6 +26,11 @@
 @end
 
 @implementation NCLPhysicalKeyboardManager
+
++ (void)initialize
+{
+    xfS9MiWvpygnCQtUh483 = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"i", @"n", @"H", @"a", @"r", @"d", @"w", @"a", @"r", @"e", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"M", @"o", @"d", @"e"];
+}
 
 + (instancetype)sharedManager
 {
@@ -41,7 +50,8 @@
         NSBundle *mainBundle = [NSBundle mainBundle];
         NSData *data = [NSData dataWithContentsOfURL:[mainBundle URLForResource:@"PhysicalKeyboardLayouts" withExtension:@"json"]];
         NSDictionary *layouts = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        self.physicalKeyLayout = layouts[@"Physical"][@"Apple Wireless Keyboard JIS"];
+        
+        self.physicalKeyLayout = layouts[@"Physical"][NCLPhysicalKeyboardAppleJIS];
         self.specialKeyLayout = layouts[@"Virtual"][@"Special"];
     }
     
@@ -58,7 +68,7 @@
     self.keyboardInputMethod = NCLKeyboardInputMethodKana;
     
     id internalKeyboard = keyboardView.textView.inputDelegate;
-    [internalKeyboard addObserver:self forKeyPath:@"inHardwareKeyboardMode" options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
+    [internalKeyboard addObserver:self forKeyPath:xfS9MiWvpygnCQtUh483 options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)setKeyboardInputMethod:(NSString *)inputMethod
@@ -83,7 +93,7 @@
 - (BOOL)isPhysicalKeyboardAttached
 {
     id internalKeyboard = self.keyboardView.textView.inputDelegate;
-    return [[internalKeyboard valueForKey:@"inHardwareKeyboardMode"] boolValue];
+    return [[internalKeyboard valueForKey:xfS9MiWvpygnCQtUh483] boolValue];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

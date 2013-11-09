@@ -40,7 +40,7 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     
     [Crittercism enableWithAppID:@"5264f50ea7928a4f07000005"];
     
-    [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringSandbox consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
+    [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringUS consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
     
     DBSession* session = [[DBSession alloc] initWithAppKey:DropboxAppKey appSecret:DropboxAppSecret root:kDBRootAppFolder];
     [DBSession setSharedSession:session];

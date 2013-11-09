@@ -116,6 +116,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		14124B64182E902600C99A40 /* NCLRuntimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLRuntimeUtils.h; sourceTree = "<group>"; };
 		14326810180FB7270001BDBC /* NCLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLConstants.h; sourceTree = "<group>"; };
 		14326811180FB7270001BDBC /* NCLConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLConstants.m; sourceTree = "<group>"; };
 		14326814180FB7990001BDBC /* UIFont+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Helper.h"; sourceTree = "<group>"; };
@@ -345,6 +346,7 @@
 				146B3F071808740000418452 /* NSString+Helper.m */,
 				14326814180FB7990001BDBC /* UIFont+Helper.h */,
 				14326815180FB7990001BDBC /* UIFont+Helper.m */,
+				14124B64182E902600C99A40 /* NCLRuntimeUtils.h */,
 				147C582A181BB47000413706 /* View Controllers */,
 				146B3EF918086C0A00418452 /* Views */,
 				146B3EF818086BFC00418452 /* Models */,

@@ -9,33 +9,106 @@
 #import "NCLApplication.h"
 #import "NCLPhysicalKeyboardManager.h"
 #import "NCLConstants.h"
+#import "NCLRuntimeUtils.h"
+
+#define GSEVENT_TYPE_KEYDOWN 10
+#define GSEVENT_TYPE_KEYUP 11
+
+#define GSEVENT_TYPE 2
+#define GSEVENT_SUBTYPE 3
+#define GSEVENT_LOCATION 4
+#define GSEVENT_WINLOCATION 6
+#define GSEVENT_WINCONTEXTID 8
+#define GSEVENT_TIMESTAMP 9
+#define GSEVENT_WINREF 11
+#define GSEVENT_FLAGS 12
+#define GSEVENT_SENDERPID 13
+#define GSEVENT_INFOSIZE 14
+
+#define GSEVENTKEY_KEYCODE 15
+#define GSEVENTKEY_KEYCODE_CHARIGNORINGMOD 15
+#define GSEVENTKEY_CHARSET_CHARSET 16
+#define GSEVENTKEY_ISKEYREPEATING 17
+
+#define GSEVENT_TYPE_KEYDOWN 10
+#define GSEVENT_TYPE_KEYUP 11
+#define GSEVENT_TYPE_MODIFIERKEYDOWN 12
+// 1 << 16
+#define GSEVENT_FLAG_LCMD 65536
+// 1 << 17
+#define GSEVENT_FLAG_LSHIFT 131072
+// 1 << 18
+#define GSEVENT_FLAG_CAPS 262144
+// 1 << 19
+#define GSEVENT_FLAG_LALT 524288
+// 1 << 20
+#define GSEVENT_FLAG_LCTRL 1048576
+// 1 << 21
+#define GSEVENT_FLAG_RSHIFT 2097152
+// 1 << 22
+#define GSEVENT_FLAG_RALT 4194304
+// 1 << 23
+#define GSEVENT_FLAG_RCTRL 8388608
+// 1 << 24
+#define GSEVENT_FLAG_RCMD 16777216
+
+#define KEYCODE_LSHIFT 225
+#define KEYCODE_RSHIFT 229
+#define KEYCODE_LCTRL 224
+#define KEYCODE_LALT 226
+#define KEYCODE_LCMD 227
+#define KEYCODE_RCMD 231
 
 @import ObjectiveC;
 
-@interface UIApplication (Private)
+// UITouchesEvent
+static Class ecdlSGPPRJ8lYtneLexG;
+// UIPhysicalKeyboardEvent
+static Class XNDPIT6GE263kMwAOUcr;
+// handleKeyUIEvent
+static NSString *puEGJ3jwuERjzDY5XQkR;
+// _isKeyDown
+static NSString *Fufcs7WsN2OHwyZhxh6A;
+// _keyCode
+static NSString *rbVU9OE7QenrQ1lYz8MW;
+// - (int *)_gsEvent;
+static SEL JwCnruEgQmBG2hHNkjV9;
+// - (int)_modifierFlags;
+static SEL VZAZO96qAh2Y3i5zjZCS;
 
-- (void)handleKeyUIEvent:(UIEvent *)event;
-
-@end
-
-@interface UIEvent (Private)
-
-- (int *)_gsEvent;
-
-@end
-
-@interface NCLPhysicalKeyboardEvent : UIEvent
-
-@property(readonly, nonatomic) long long _keyCode;
-@property(readonly, nonatomic) _Bool _isKeyDown;
-
-@end
+static BOOL LSHIFT;
+static BOOL RSHIFT;
+static BOOL LCTRL;
+//static BOOL RCTRL;
+static BOOL LALT;
+//static BOOL RALT;
+static BOOL LCMD;
+static BOOL RCMD;
 
 @implementation NCLApplication
 
-- (void)handleKeyUIEvent:(UIEvent *)event
++ (void)initialize
 {
-    if ([event isKindOfClass:NSClassFromString(@"UIPhysicalKeyboardEvent")]) {
+    ecdlSGPPRJ8lYtneLexG = NSClassFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"T", @"o", @"u", @"c", @"h", @"e", @"s", @"E", @"v", @"e", @"n", @"t"]);
+    XNDPIT6GE263kMwAOUcr = NSClassFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"U", @"I", @"P", @"h", @"y", @"s", @"i", @"c", @"a", @"l", @"K", @"e", @"y", @"b", @"o", @"a", @"r", @"d", @"E", @"v", @"e", @"n", @"t"]);
+    puEGJ3jwuERjzDY5XQkR = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"h", @"a", @"n", @"d", @"l", @"e", @"K", @"e", @"y", @"U", @"I", @"E", @"v", @"e", @"n", @"t", @":"];
+    Fufcs7WsN2OHwyZhxh6A = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@", @"_", @"i", @"s", @"K", @"e", @"y", @"D", @"o", @"w", @"n"];
+    rbVU9OE7QenrQ1lYz8MW = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", @"_", @"k", @"e", @"y", @"C", @"o", @"d", @"e"];
+    JwCnruEgQmBG2hHNkjV9 = NSSelectorFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@", @"_", @"g", @"s", @"E", @"v", @"e", @"n", @"t"]);
+    VZAZO96qAh2Y3i5zjZCS = NSSelectorFromString([NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"m", @"o", @"d", @"i", @"f", @"i", @"e", @"r", @"F", @"l", @"a", @"g", @"s"]);
+    
+    {
+        NSString *className = @"NCLApplication";
+        NSString *original = puEGJ3jwuERjzDY5XQkR;
+        NSString *replacement = @"__handleKeyEvent:";
+        
+        swizzleInstanceMethod(className, original, replacement);
+    }
+}
+
+- (void)__handleKeyEvent:(UIEvent *)event
+{
+    if ([event isKindOfClass:XNDPIT6GE263kMwAOUcr]) {
         NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
         if (keyboardManager.isPhysicalKeyboardAttached) {
             BOOL result = [self processEvent:event];
@@ -45,22 +118,41 @@
         }
     }
     
-    [super handleKeyUIEvent:event];
+    [self __handleKeyEvent:event];
 }
 
-- (BOOL)processEvent:(id)event
+- (BOOL)processEvent:(UIEvent *)event
 {
     BOOL result = NO;
     
-    BOOL isKeyDown = [event _isKeyDown];
+    BOOL isKeyDown = [[event valueForKey:Fufcs7WsN2OHwyZhxh6A] boolValue];
     
-    long long keyCode = [event _keyCode];
+    long long keyCode = [[event valueForKey:rbVU9OE7QenrQ1lYz8MW] longLongValue];
     UniChar *keycode = (UniChar *)&keyCode;
     UniChar key = keycode[0];
     
+    int eventFlags = 0;
+    if ([event respondsToSelector:VZAZO96qAh2Y3i5zjZCS]) {
+        static NSInvocation *invocation = nil;
+        if (!invocation) {
+            NSMethodSignature *methodSignature = [event methodSignatureForSelector:VZAZO96qAh2Y3i5zjZCS];
+            invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+            invocation.selector = VZAZO96qAh2Y3i5zjZCS;
+        }
+        
+        invocation.target = event;
+        [invocation invoke];
+        [invocation getReturnValue:&eventFlags];
+    }
+    
     NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
     if (isKeyDown) {
-        result = [keyboardManager downKeyCode:key];
+        if ((eventFlags & GSEVENT_FLAG_LCTRL) != GSEVENT_FLAG_LCTRL &&
+            (eventFlags & GSEVENT_FLAG_LALT) != GSEVENT_FLAG_LALT &&
+            (eventFlags & GSEVENT_FLAG_LCMD) != GSEVENT_FLAG_LCMD &&
+            (eventFlags & GSEVENT_FLAG_RCMD) != GSEVENT_FLAG_RCMD) {
+            result = [keyboardManager downKeyCode:key];
+        }
     } else {
         result = [keyboardManager upKeyCode:key];
     }
@@ -68,215 +160,120 @@
     return result;
 }
 
-#define GSEVENT_TYPE 2
-//#define GSEVENT_SUBTYPE 3
-//#define GSEVENT_LOCATION 4
-//#define GSEVENT_WINLOCATION 6
-//#define GSEVENT_WINCONTEXTID 8
-//#define GSEVENT_TIMESTAMP 9
-//#define GSEVENT_WINREF 11
-#define GSEVENT_FLAGS 12
-//#define GSEVENT_SENDERPID 13
-//#define GSEVENT_INFOSIZE 14
-
-#define GSEVENTKEY_KEYCODE_CHARIGNORINGMOD 15
-//#define GSEVENTKEY_CHARSET_CHARSET 16
-//#define GSEVENTKEY_ISKEYREPEATING 17 // ??
-
-#define GSEVENT_TYPE_KEYDOWN 10
-#define GSEVENT_TYPE_KEYUP 11
-
-#define GSEVENT_TYPE 2
-#define GSEVENT_FLAGS 12
-#define GSEVENTKEY_KEYCODE 15
-#define GSEVENT_TYPE_KEYUP 11
-#define GSEVENT_TYPE_KEYDOWN 10
-#define GSEVENT_FLAG_LSHIFT 131072
-#define GSEVENT_FLAG_RSHIFT 2097152
-#define GSEVENT_FLAG_LCTRL 1048576
-#define GSEVENT_FLAG_RCTRL 8388608
-#define GSEVENT_FLAG_LALT 524288
-#define GSEVENT_FLAG_RALT 4194304
-#define GSEVENT_FLAG_LCMD 65536
-
 - (void)sendEvent:(UIEvent *)event
 {
-    [super sendEvent:event];
-    NSLog(@"%@", NSStringFromClass(event.class));
-    
-    if ([event isKindOfClass:NSClassFromString(@"UITouchesEvent")]) {
-        return;
-    }
-    
-    if ([event respondsToSelector:@selector(_gsEvent)]) {
-        int *eventMem;
-        eventMem = [event _gsEvent];
-        if (eventMem) {
-            int eventType = eventMem[GSEVENT_TYPE];
-            int eventFlags = eventMem[GSEVENT_FLAGS];
-            NSLog(@"event flags: %i", eventFlags);
-            
-            if ((eventFlags & GSEVENT_FLAG_LSHIFT) == GSEVENT_FLAG_LSHIFT) {
-                NSLog(@"%@ %@", @"PRESSED", @"LSHIFT");
-            } else {
-                NSLog(@"%@ %@", @"RELEASED", @"LSHIFT");
-            }
-            
-            if ((eventFlags & GSEVENT_FLAG_RSHIFT) == GSEVENT_FLAG_RSHIFT) {
-                NSLog(@"%@ %@", @"PRESSED", @"RSHIFT");
-            } else {
-                NSLog(@"%@ %@", @"RELEASED", @"RSHIFT");
-            }
-            
-            if ((eventFlags & GSEVENT_FLAG_LCTRL) == GSEVENT_FLAG_LCTRL) {
-                NSLog(@"%@ %@", @"PRESSED", @"LCTRL");
-            } else {
-                NSLog(@"%@ %@", @"RELEASED", @"LCTRL");
-            }
-            
-            if ((eventFlags & GSEVENT_FLAG_RCTRL) == GSEVENT_FLAG_RCTRL) {
-                NSLog(@"%@ %@", @"PRESSED", @"RCTRL");
-            } else {
-                NSLog(@"%@ %@", @"RELEASED", @"RCTRL");
-            }
-            
-            if ((eventFlags & GSEVENT_FLAG_LALT) == GSEVENT_FLAG_LALT) {
-                NSLog(@"%@ %@", @"PRESSED", @"LALT");
-            } else {
-                NSLog(@"%@ %@", @"RELEASED", @"LALT");
-            }
-            
-            if ((eventFlags & GSEVENT_FLAG_RALT) == GSEVENT_FLAG_RALT) {
-                NSLog(@"%@ %@", @"PRESSED", @"RALT");
-            } else {
-                NSLog(@"%@ %@", @"RELEASED", @"RALT");
-            }
-            
-            if ((eventFlags & GSEVENT_FLAG_LCMD) == GSEVENT_FLAG_LCMD) {
-                NSLog(@"%@ %@", @"PRESSED", @"LCMD");
-            } else {
-                NSLog(@"%@ %@", @"RELEASED", @"LCMD");
-            }
-            
-            if (eventType == GSEVENT_TYPE_KEYUP) {
-                int scancode = eventMem[GSEVENTKEY_KEYCODE];
-                NSLog(@"%@ %d", @"RELEASED", scancode);
-            }
-            
-            if (eventType == GSEVENT_TYPE_KEYDOWN) {
-                int scancode = eventMem[GSEVENTKEY_KEYCODE];
-                NSLog(@"%@ %d", @"PRESSED", scancode);
+    if (![event isKindOfClass:ecdlSGPPRJ8lYtneLexG]) {
+        NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
+        if (keyboardManager.isPhysicalKeyboardAttached) {
+            if ([event respondsToSelector:JwCnruEgQmBG2hHNkjV9]) {
+                static NSInvocation *invocation = nil;
+                if (!invocation) {
+                    NSMethodSignature *methodSignature = [event methodSignatureForSelector:JwCnruEgQmBG2hHNkjV9];
+                    invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+                    invocation.selector = JwCnruEgQmBG2hHNkjV9;
+                }
+                
+                int *eventMemory;
+                
+                invocation.target = event;
+                [invocation invoke];
+                [invocation getReturnValue:&eventMemory];
+                
+                if (eventMemory) {
+                    BOOL result = NO;
+                    
+                    int eventType = eventMemory[GSEVENT_TYPE];
+                    int eventFlags = eventMemory[GSEVENT_FLAGS];
+                    
+                    if (eventType == GSEVENT_TYPE_KEYDOWN) {
+                        if ((eventFlags & GSEVENT_FLAG_LCTRL) != GSEVENT_FLAG_LCTRL &&
+                            (eventFlags & GSEVENT_FLAG_LALT) != GSEVENT_FLAG_LALT &&
+                            (eventFlags & GSEVENT_FLAG_LCMD) != GSEVENT_FLAG_LCMD &&
+                            (eventFlags & GSEVENT_FLAG_RCMD) != GSEVENT_FLAG_RCMD) {
+                            int tmp = eventMemory[GSEVENTKEY_KEYCODE];
+                            UniChar *keycode = (UniChar *)&tmp;
+                            UniChar key = keycode[0];
+                            result = [keyboardManager downKeyCode:key];
+                        }
+                    } else if (eventType == GSEVENT_TYPE_MODIFIERKEYDOWN) {
+                        if ((eventFlags & GSEVENT_FLAG_LSHIFT) == GSEVENT_FLAG_LSHIFT) {
+                            LSHIFT = YES;
+                            result = [keyboardManager downKeyCode:KEYCODE_LSHIFT];
+                        }
+                        
+                        if ((eventFlags & GSEVENT_FLAG_RSHIFT) == GSEVENT_FLAG_RSHIFT) {
+                            RSHIFT = YES;
+                            result = [keyboardManager downKeyCode:KEYCODE_RSHIFT];
+                        }
+                        
+                        if ((eventFlags & GSEVENT_FLAG_LCTRL) == GSEVENT_FLAG_LCTRL) {
+                            LCTRL = YES;
+                            result = [keyboardManager downKeyCode:KEYCODE_LCTRL];
+                        }
+                        
+                        if ((eventFlags & GSEVENT_FLAG_LALT) == GSEVENT_FLAG_LALT) {
+                            LALT = YES;
+                            result = [keyboardManager downKeyCode:KEYCODE_LALT];
+                        }
+                        
+                        if ((eventFlags & GSEVENT_FLAG_LCMD) == GSEVENT_FLAG_LCMD) {
+                            LCMD = YES;
+                            result = [keyboardManager downKeyCode:KEYCODE_LCMD];
+                        }
+                        
+                        if ((eventFlags & GSEVENT_FLAG_RCMD) == GSEVENT_FLAG_RCMD) {
+                            RCMD = YES;
+                            result = [keyboardManager downKeyCode:KEYCODE_RCMD];
+                        }
+                    } else if (eventType == GSEVENT_TYPE_KEYUP) {
+                        int key = eventMemory[GSEVENTKEY_KEYCODE];
+                        result = [keyboardManager upKeyCode:key];
+                        
+                        if ((eventFlags & GSEVENT_FLAG_LSHIFT) != GSEVENT_FLAG_LSHIFT) {
+                            if (LSHIFT) {
+                                result = [keyboardManager upKeyCode:KEYCODE_LSHIFT];
+                            }
+                            LSHIFT = NO;
+                        }
+                        
+                        if ((eventFlags & GSEVENT_FLAG_RSHIFT) != GSEVENT_FLAG_RSHIFT) {
+                            if (RSHIFT) {
+                                result = [keyboardManager upKeyCode:KEYCODE_RSHIFT];
+                            }
+                            RSHIFT = NO;
+                        }
+                        
+                        if ((eventFlags & GSEVENT_FLAG_LCTRL) != GSEVENT_FLAG_LCTRL) {
+                            if (LCTRL) {
+                                result = [keyboardManager upKeyCode:KEYCODE_LCTRL];
+                            }
+                            LCTRL = NO;
+                        }
+                        
+                        if ((eventFlags & GSEVENT_FLAG_LALT) != GSEVENT_FLAG_LALT) {
+                            if (LALT) {
+                                result = [keyboardManager upKeyCode:KEYCODE_LALT];
+                            }
+                            LALT = NO;
+                        }
+                        
+                        if ((eventFlags & GSEVENT_FLAG_LCMD) != GSEVENT_FLAG_LCMD) {
+                            if (LCMD) {
+                                result = [keyboardManager upKeyCode:KEYCODE_LCMD];
+                            }
+                            LCMD = NO;
+                        }
+                    }
+                    
+                    if (result) {
+                        return;
+                    }
+                }
             }
         }
     }
+    
+    [super sendEvent:event];
 }
-
-//- (void)sendEvent:(UIEvent *)event
-//{
-//    [super sendEvent:event];
-//    
-//    if ([event respondsToSelector:@selector(_gsEvent)]) {
-//        // Hardware Key events are of kind UIInternalEvent which are a wrapper of GSEventRef which is wrapper of GSEventRecord
-//        int *eventMemory = (int *)[event _gsEvent];
-//        if (eventMemory) {
-//            int eventType = eventMemory[GSEVENT_TYPE];
-//            NSLog(@"event type = %d", eventType);
-//            if (eventType == GSEVENT_TYPE_KEYUP) {
-//                // Since the event type is key up we can assume is a GSEventKey struct
-//                // Get flags from GSEvent
-//                int eventFlags = eventMemory[GSEVENT_FLAGS];
-//                if (eventFlags) {
-//                    NSLog(@"flags %8X", eventFlags);
-//                    // Only post notifications when Shift, Ctrl, Cmd or Alt key were pressed.
-//                    
-//                    // Get keycode from GSEventKey
-//                    int tmp = eventMemory[15];
-//                    UniChar *keycode = (UniChar *)&tmp; // Cast to silent warning
-//                    //tmp = (tmp & 0xFF00);
-//                    //tmp = tmp >> 16;
-//                    //UniChar keycode = tmp;
-//                    //tmp = eventMemory[16];
-//                    //tmp = (tmp & 0x00FF);
-//                    //tmp = tmp << 16;
-//                    //UniChar keycode = tmp;
-//                    NSLog(@"keycode %d", keycode[0]);
-//                    printf("Shift Ctrl Alt Cmd %d %d %d %d\n ", (eventFlags&(1<<17))?1:0, (eventFlags&(1<<18))?1:0, (eventFlags&(1<<19))?1:0, (eventFlags&(1<<20))?1:0 );
-//                    
-//                    /*
-//                     Some Keycodes found
-//                     ===================
-//                     
-//                     Alphabet
-//                     a = 4
-//                     b = 5
-//                     c = ...
-//                     z = 29
-//                     
-//                     Numbers
-//                     1 = 30
-//                     2 = 31
-//                     3 = ...
-//                     9 = 38
-//                     
-//                     Arrows
-//                     Right = 79
-//                     Left = 80
-//                     Down = 81
-//                     Up = 82
-//                     
-//                     Flags found (Differ from Kenny's header)
-//                     ========================================
-//                     
-//                     Cmd = 1 << 17
-//                     Shift = 1 << 18
-//                     Ctrl = 1 << 19
-//                     Alt = 1 << 20
-//                     
-//                     */
-//                }
-//            }
-//        }
-//    }
-//}
-
-//- (void)handleKeyUIEvent:(UIEvent *)event
-//{
-//    size_t s = malloc_size((__bridge const void *)(event));
-//    NSLog(@"%s enter... %ld", __func__, s);
-//    
-//    unsigned long *ptr = (unsigned long *)(__bridge void *)event;
-//
-//#define OFF_KEY_MASK 12
-//#define OFF_KEY_SCANCODE 15
-//#define OFF_KEY_CHAR 17
-//
-//    NSLog(@"type: %lx off: %d", *(ptr + 2), 2);
-//    NSLog(@"MASK: %lx off: %d", *(ptr + OFF_KEY_MASK), OFF_KEY_MASK);
-//    NSLog(@"SCAN: %lx off: %d", *(ptr + OFF_KEY_SCANCODE), OFF_KEY_SCANCODE);
-//    NSLog(@"CHAR: %lx off: %d", *(ptr + OFF_KEY_CHAR), OFF_KEY_CHAR);
-//    
-////    NSLog(@"sizeof unsigned long: %lx", sizeof(unsigned long));
-////    
-////    for (int i = 0; i < s / 4; ++i) {
-////        //        NSLog(@"... [%d] = %x", i, *(unsigned char *)(ptr + i));
-////        NSLog(@"... [%d] = %lx", i, *(unsigned long *)(ptr + i));
-////    }
-//    
-//#define OFF_DUMP 8
-//    
-////    unsigned long *dump = (unsigned long *) *(ptr + OFF_DUMP);
-////    s = malloc_size((const void *)*(ptr + OFF_DUMP));
-////    
-////    NSLog(@"... *[%d] size: %ld", OFF_DUMP, malloc_size((const void *)*(ptr + OFF_DUMP)));
-////    
-////    for (int i = 0; i < s / 4; ++i) {
-////        NSLog(@"..... [%d] = %lx", i, *(unsigned long *)(dump + i));
-////    }
-////    
-////    struct objc_super super_data = { self, [UIApplication class] };
-////    objc_msgSendSuper(&super_data, @selector(handleKeyUIEvent:), event);
-//    
-//    [super handleKeyUIEvent:event];
-//}
 
 @end

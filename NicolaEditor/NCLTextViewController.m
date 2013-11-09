@@ -14,6 +14,7 @@
 #import "NCLNote.h"
 #import "NCLConstants.h"
 #import "UIFont+Helper.h"
+#import "NCLRuntimeUtils.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <NLCoreData/NLCoreData.h>
 #import <Evernote-SDK-iOS/EvernoteSDK.h>
@@ -24,53 +25,14 @@
 
 // UIKeyboardImpl
 static NSString *NKpUsnTSGEypVViLAF8r;
-// supportsSplit
+// + (BOOL)supportsSplit
 static NSString *m4RUtJ6WRZjaZSsAgy23;
 // UIKeyboardCandidateInlineFloatingView
 static NSString *pVMFNL8kttj7sP5jkXmW;
-// setFrame:
+// - (void)setFrame:
 static NSString *ag2hWVYaGi9H7hDQEtMV;
-// _UICompatibilityTextView:
+// _UICompatibilityTextView
 static NSString *nuAcYW37RZfT9A3gNRm3;
-
-static void swizzleClassMethod(NSString *className, NSString *original, NSString *replacement)
-{
-    Class c = NSClassFromString(className);
-    SEL orig = NSSelectorFromString(original);
-    SEL rep = NSSelectorFromString(replacement);
-    Method originalMethod = class_getClassMethod(c, orig);
-    Method replacementMethod = class_getClassMethod(c, rep);
-    method_exchangeImplementations(originalMethod, replacementMethod);
-}
-
-static void swizzleInstanceMethod(NSString *className, NSString *original, NSString *replacement)
-{
-    Class c = NSClassFromString(className);
-    SEL orig = NSSelectorFromString(original);
-    SEL rep = NSSelectorFromString(replacement);
-    Method originalMethod = class_getInstanceMethod(c, orig);
-    Method replacementMethod = class_getInstanceMethod(c, rep);
-    method_exchangeImplementations(originalMethod, replacementMethod);
-}
-
-static void _addMethod(Class c, NSString *selector, id block, NSString *sig)
-{
-    SEL sel = NSSelectorFromString(selector);
-    IMP imp = imp_implementationWithBlock(block);
-    class_addMethod(c, sel, imp, sig.UTF8String);
-}
-
-static void addClassMethod(NSString *className, NSString *selector, id block, NSString *signature)
-{
-    Class metaClass = objc_getMetaClass([className UTF8String]);
-    _addMethod(metaClass, selector, block, signature);
-}
-
-static void addInstanceMethod(NSString *className, NSString *selector, id block, NSString *signature)
-{
-    Class clazz = NSClassFromString(className);
-    _addMethod(clazz, selector, block, signature);
-}
 
 @interface NCLTextViewController () <UITextViewDelegate, UIDocumentInteractionControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, DBRestClientDelegate>
 

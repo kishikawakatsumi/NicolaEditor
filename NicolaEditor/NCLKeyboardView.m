@@ -42,7 +42,9 @@ static NSString *SxYmcXP2AFEYh4CXYBMJ;
 static NSString *wsjiFCKRrgQ3ipQpec6L;
 // userSelectedCurrentCandidate
 static NSString *CsLigQ6mK4n6e6ChunPz;
+// en_US@hw=US;sw=QWERTY
 static NSString *en_US;
+// ja_JP-Kana@sw=Kana-Flick;hw=US
 static NSString *ja_JP;
 
 static NSCache *cache;
@@ -100,7 +102,9 @@ static NSCache *cache;
     wsjiFCKRrgQ3ipQpec6L = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
     // userSelectedCurrentCandidate
     CsLigQ6mK4n6e6ChunPz = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"u", @"s", @"e", @"r", @"S", @"e", @"l", @"e", @"c", @"t", @"e", @"d", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
+    // en_US@hw=US;sw=QWERTY
     en_US = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"e", @"n", @"_", @"U", @"S", @"@", @"h", @"w", @"=", @"U", @"S", @";", @"s", @"w", @"=", @"Q", @"W", @"E", @"R", @"T", @"Y"];
+    // ja_JP-Kana@sw=Kana-Flick;hw=US
     ja_JP = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"j", @"a", @"_", @"J", @"P", @"-", @"K", @"a", @"n", @"a", @"@", @"s", @"w", @"=", @"K", @"a", @"n", @"a", @"-", @"F", @"l", @"i", @"c", @"k", @";", @"h", @"w", @"=", @"U", @"S"];
     
     cache = [[NSCache alloc] init];

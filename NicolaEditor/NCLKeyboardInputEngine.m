@@ -150,28 +150,6 @@ typedef NS_ENUM(NSInteger, NCLKeyboardShiftState) {
     
 }
 
-- (void)addPhysicalKeyInput:(NSInteger)input
-{
-    NSDictionary *specialKeyboardLayout = self.keyboardLayouts[@"Virtual"][@"Special"];
-    
-    NSString *specialKey = specialKeyboardLayout[@(input).stringValue];
-    if (specialKey) {
-        if ([specialKey isEqualToString:@"DEL"]) {
-            
-        } else if ([specialKey isEqualToString:@"KANA/EISU"]) {
-            
-        } else if ([specialKey isEqualToString:@"SHIFT"]) {
-            
-        } else if ([specialKey isEqualToString:@"LSHIFT"]) {
-            
-        } else if ([specialKey isEqualToString:@"RSHIFT"]) {
-            
-        }
-    } else {
-        [self addKeyInput:input];
-    }
-}
-
 - (void)addLeftShiftKeyEvent:(NCLKeyboardEvent)event
 {
     
