@@ -8,53 +8,13 @@
 
 #import "NCLApplication.h"
 #import "NCLPhysicalKeyboardManager.h"
+#import "NCLConstants.h"
 
-#define GSMODIFIER_FLAG_LSHIFT 562949953552384
-#define GSMODIFIER_FLAG_RSHIFT 2097152
-#define GSMODIFIER_FLAG_LCTRL 1125899907891200
-#define GSMODIFIER_FLAG_RCTRL 8388608
-#define GSMODIFIER_FLAG_LALT 2251799814209536
-#define GSMODIFIER_FLAG_RALT 4194304
-#define GSMODIFIER_FLAG_LCMD 4503599627436032
-#define GSMODIFIER_FLAG_RCMD 4503599627436032
-#define GSMODIFIER_FLAG_CAPS 281474976972800
-
-@interface PhysicalKeyboardEvent : UIEvent {//UIPhysicalButtonsEvent
-    int _inputFlags;
-    NSString *_modifiedInput;
-    NSString *_unmodifiedInput;
-    NSString *_shiftModifiedInput;
-    NSString *_commandModifiedInput;
-    NSString *_markedInput;
-    long long _modifierFlags;
-    NSString *_privateInput;
-}
-+ (id)_eventWithInput:(id)arg1 inputFlags:(int)arg2;
-@property(retain, nonatomic) NSString *_privateInput; // @synthesize _privateInput;
-@property(nonatomic) int _inputFlags; // @synthesize _inputFlags;
-@property(nonatomic) long long _modifierFlags; // @synthesize _modifierFlags;
-@property(retain, nonatomic) NSString *_markedInput; // @synthesize _markedInput;
-@property(retain, nonatomic) NSString *_commandModifiedInput; // @synthesize _commandModifiedInput;
-@property(retain, nonatomic) NSString *_shiftModifiedInput; // @synthesize _shiftModifiedInput;
-@property(retain, nonatomic) NSString *_unmodifiedInput; // @synthesize _unmodifiedInput;
-@property(retain, nonatomic) NSString *_modifiedInput; // @synthesize _modifiedInput;
-@property(readonly, nonatomic) long long _gsModifierFlags;
-- (void)_privatizeInput;
-- (void)dealloc;
-- (id)_cloneEvent;
-- (_Bool)isEqual:(id)arg1;
-- (_Bool)_matchesKeyCommand:(id)arg1;
-//- (void)_setHIDEvent:(struct __IOHIDEvent *)arg1 keyboard:(struct __GSKeyboard *)arg2;
-@property(readonly, nonatomic) long long _keyCode;
-@property(readonly, nonatomic) _Bool _isKeyDown;
-- (long long)type;
-@end
+@import ObjectiveC;
 
 @interface UIApplication (Private)
 
 - (void)handleKeyUIEvent:(UIEvent *)event;
-- (id)_keyCommandForEvent:(PhysicalKeyboardEvent *)event;
-- (int *)_gsEvent;
 
 @end
 
@@ -64,39 +24,48 @@
 
 @end
 
-@import ObjectiveC;
+@interface NCLPhysicalKeyboardEvent : UIEvent
+
+@property(readonly, nonatomic) long long _keyCode;
+@property(readonly, nonatomic) _Bool _isKeyDown;
+
+@end
 
 @implementation NCLApplication
 
 - (void)handleKeyUIEvent:(UIEvent *)event
 {
-    [super handleKeyUIEvent:event];
-    NSLog(@"%s", __func__);
-    NSLog(@"%@", event);
-    if ([[NCLPhysicalKeyboardManager sharedManager] isPhysicalKeyboardAttached]) {
-        [self processEvent:event];
+    if ([event isKindOfClass:NSClassFromString(@"UIPhysicalKeyboardEvent")]) {
+        NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
+        if (keyboardManager.isPhysicalKeyboardAttached) {
+            BOOL result = [self processEvent:event];
+            if (result) {
+                return;
+            }
+        }
     }
+    
+    [super handleKeyUIEvent:event];
 }
 
-- (void)processEvent:(PhysicalKeyboardEvent *)event
+- (BOOL)processEvent:(id)event
 {
-    NSLog(@"%s", __func__);
-    NSLog(@"_privateInput: %@", [event _privateInput]);
-    NSLog(@"_markedInput: %@", [event _markedInput]);
-    NSLog(@"_modifiedInput: %@", [event _modifiedInput]);
-    NSLog(@"_unmodifiedInput: %@", [event _unmodifiedInput]);
-    NSLog(@"_shiftModifiedInput: %@", [event _shiftModifiedInput]);
-    NSLog(@"_isKeyDown: %d", [event _isKeyDown]);
-    NSLog(@"_modifierFlags: %lld", [event _modifierFlags]);
-    NSLog(@"_inputFlags: %d", [event _inputFlags]);
-    NSLog(@"_gsModifierFlags: %lld", [event _gsModifierFlags]);
-//    NSLog(@"_keyCode: %lld", [event _keyCode]);
-    long long _keyCode = [event _keyCode];
-    UniChar *keycode = (UniChar *)&_keyCode;
-    UniChar key = keycode[0];
-    NSLog(@"_keyCode: %d", key);
+    BOOL result = NO;
     
-//    NSLog(@"type: %lld", [event type]);
+    BOOL isKeyDown = [event _isKeyDown];
+    
+    long long keyCode = [event _keyCode];
+    UniChar *keycode = (UniChar *)&keyCode;
+    UniChar key = keycode[0];
+    
+    NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
+    if (isKeyDown) {
+        result = [keyboardManager downKeyCode:key];
+    } else {
+        result = [keyboardManager upKeyCode:key];
+    }
+    
+    return result;
 }
 
 #define GSEVENT_TYPE 2

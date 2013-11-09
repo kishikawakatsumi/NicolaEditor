@@ -13,32 +13,6 @@ typedef NS_ENUM(NSInteger, NCLKeyboardEvent) {
     NCLKeyboardEventKeyUp
 };
 
-typedef NS_ENUM(NSInteger, NCLKeyboardKeyType) {
-    NCLKeyboardKeyTypeCharacter = 0,
-    NCLKeyboardKeyTypeLeftShift,
-    NCLKeyboardKeyTypeRightShift
-};
-
-typedef NS_ENUM(NSInteger, NCLKeyboardShiftState) {
-    NCLKeyboardShiftStateNone = 0,
-    NCLKeyboardShiftStateLeftShifted,
-    NCLKeyboardShiftStateRightShifted
-};
-
-@interface NCLKeyboardInput : NSObject
-
-@property (nonatomic) NSInteger index;
-@property (nonatomic) NCLKeyboardKeyType type;
-@property (nonatomic) NSTimeInterval timestamp;
-
-@property (nonatomic, getter = isUsed) BOOL used;
-
-@end
-
-extern NSString * const NCLKeyboardInputMethodKana;
-extern NSString * const NCLKeyboardInputMethodAlphabet;
-extern NSString * const NCLKeyboardInputMethodNumberPunctuation;
-
 @interface NCLKeyboardInputEngine : NSObject
 
 @property (nonatomic, weak) id delegate;
@@ -54,6 +28,10 @@ extern NSString * const NCLKeyboardInputMethodNumberPunctuation;
 
 - (void)addLeftShiftKeyEvent:(NCLKeyboardEvent)event;
 - (void)addRightShiftKeyEvent:(NCLKeyboardEvent)event;
+
+@end
+
+@interface NCLPhysicalKeyboardInputEngine : NCLKeyboardInputEngine
 
 @end
 

@@ -19,6 +19,8 @@
 - (void)cursorDown;
 - (void)cursorLeft;
 - (void)cursorRight;
+- (void)processDeleteKeyDown;
+- (void)processDeleteKeyUp;
 
 @end
 

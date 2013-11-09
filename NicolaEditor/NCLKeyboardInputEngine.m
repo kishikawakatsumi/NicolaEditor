@@ -9,13 +9,87 @@
 #import "NCLKeyboardInputEngine.h"
 #import "NCLConstants.h"
 
+typedef NS_ENUM(NSInteger, NCLKeyboardKeyType) {
+    NCLKeyboardKeyTypeCharacter = 0,
+    NCLKeyboardKeyTypeLeftShift,
+    NCLKeyboardKeyTypeRightShift
+};
+
+typedef NS_ENUM(NSInteger, NCLKeyboardShiftState) {
+    NCLKeyboardShiftStateNone = 0,
+    NCLKeyboardShiftStateLeftShifted,
+    NCLKeyboardShiftStateRightShifted
+};
+
+@interface NCLKeyboardInput : NSObject
+
+@property (nonatomic) NSInteger index;
+@property (nonatomic) NCLKeyboardKeyType type;
+@property (nonatomic) NSTimeInterval timestamp;
+
+@property (nonatomic, getter = isUsed) BOOL used;
+
+@end
+
 @implementation NCLKeyboardInput
 
 @end
 
+@interface NCLKeyInputResolver : NSObject
+
+@property (nonatomic) NSDictionary *keyboardLayouts;
+
+@end
+
+@implementation NCLKeyInputResolver
+
+- (id)initWithKeyboardLayout:(NSString *)keyboardLayout
+{
+    self = [super init];
+    if (self) {
+        NSBundle *mainBundle = [NSBundle mainBundle];
+        NSData *data = [NSData dataWithContentsOfURL:[mainBundle URLForResource:keyboardLayout withExtension:@"json"]];
+        NSDictionary *layouts = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        
+        _keyboardLayouts = layouts;
+    }
+    
+    return self;
+}
+
+- (NSString *)textForKeyIndex:(NSInteger)keyIndex shiftState:(NCLKeyboardShiftState)shiftState inputMethod:(NSString *)inputMethod
+{
+    NSArray *keyboardLayout = self.keyboardLayouts[inputMethod];
+    NSString *text = keyboardLayout[shiftState][keyIndex];
+    return text;
+}
+
+@end
+
+@interface NCLPhysicalKeyInputResolver : NCLKeyInputResolver
+
+@end
+
+@implementation NCLPhysicalKeyInputResolver
+
+- (NSString *)textForKeyIndex:(NSInteger)keyIndex shiftState:(NCLKeyboardShiftState)shiftState inputMethod:(NSString *)inputMethod
+{
+    NSArray *physicalKeyboardLayout = self.keyboardLayouts[@"Physical"][@"Apple Wireless Keyboard JIS"];
+    NSArray *virtualKeyboardLayout = self.keyboardLayouts[@"Virtual"][@"orz"];
+    
+    NSInteger index = [physicalKeyboardLayout indexOfObject:@(keyIndex).stringValue];
+    NSString *text = virtualKeyboardLayout[shiftState][index];
+    return text;
+}
+
+@end
+
+#pragma mark -
+
 @interface NCLKeyboardInputEngine ()
 
 @property (nonatomic) NSDictionary *keyboardLayouts;
+@property (nonatomic) NCLKeyInputResolver *keyInputResolver;
 
 @end
 
@@ -39,28 +113,33 @@
 
 @end
 
+@interface NCLPhysicalKeyboardInputEngine ()
+
+@end
+
 @implementation NCLKeyboardInputEngine
 
 + (id)inputEngineWithShiftKeyBehavior:(NSString *)shiftKeyBehavior
 {
+    NSString *keyboardLayout = @"KeyboardLayouts";
+    NCLKeyInputResolver *keyInputResolver = [[NCLKeyInputResolver alloc] initWithKeyboardLayout:keyboardLayout];
+    
     if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift]) {
-        return [[NCLKeyboardTimeShiftInputEngine alloc] init];
+        return [[NCLKeyboardTimeShiftInputEngine alloc] initWithKeyInputResolver:keyInputResolver];
     } else if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorContinuityShift]) {
-        return [[NCLKeyboardContinuityShiftInputEngine alloc] init];
+        return [[NCLKeyboardContinuityShiftInputEngine alloc] initWithKeyInputResolver:keyInputResolver];
     } else if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorPrefixShift]) {
-        return [[NCLKeyboardPrefixShiftInputEngine alloc] init];
+        return [[NCLKeyboardPrefixShiftInputEngine alloc] initWithKeyInputResolver:keyInputResolver];
     }
     
     return nil;
 }
 
-- (id)init
+- (id)initWithKeyInputResolver:(NCLKeyInputResolver *)keyInputResolver
 {
     self = [super init];
     if (self) {
-        NSBundle *mainBundle = [NSBundle mainBundle];
-        NSData *data = [NSData dataWithContentsOfURL:[mainBundle URLForResource:@"KeyboardLayouts" withExtension:@"json"]];
-        self.keyboardLayouts = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        _keyInputResolver = keyInputResolver;
     }
     
     return self;
@@ -69,6 +148,28 @@
 - (void)addKeyInput:(NSInteger)input
 {
     
+}
+
+- (void)addPhysicalKeyInput:(NSInteger)input
+{
+    NSDictionary *specialKeyboardLayout = self.keyboardLayouts[@"Virtual"][@"Special"];
+    
+    NSString *specialKey = specialKeyboardLayout[@(input).stringValue];
+    if (specialKey) {
+        if ([specialKey isEqualToString:@"DEL"]) {
+            
+        } else if ([specialKey isEqualToString:@"KANA/EISU"]) {
+            
+        } else if ([specialKey isEqualToString:@"SHIFT"]) {
+            
+        } else if ([specialKey isEqualToString:@"LSHIFT"]) {
+            
+        } else if ([specialKey isEqualToString:@"RSHIFT"]) {
+            
+        }
+    } else {
+        [self addKeyInput:input];
+    }
 }
 
 - (void)addLeftShiftKeyEvent:(NCLKeyboardEvent)event
@@ -101,11 +202,31 @@
 
 @end
 
+@implementation NCLPhysicalKeyboardInputEngine
+
++ (id)inputEngineWithShiftKeyBehavior:(NSString *)shiftKeyBehavior
+{
+    NSString *keyboardLayout = @"PhysicalKeyboardLayouts";
+    NCLPhysicalKeyInputResolver *keyInputResolver = [[NCLPhysicalKeyInputResolver alloc] initWithKeyboardLayout:keyboardLayout];
+    
+    if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift]) {
+        return [[NCLKeyboardTimeShiftInputEngine alloc] initWithKeyInputResolver:keyInputResolver];
+    } else if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorContinuityShift]) {
+        return [[NCLKeyboardContinuityShiftInputEngine alloc] initWithKeyInputResolver:keyInputResolver];
+    } else if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorPrefixShift]) {
+        return [[NCLKeyboardPrefixShiftInputEngine alloc] initWithKeyInputResolver:keyInputResolver];
+    }
+    
+    return nil;
+}
+
+@end
+
 @implementation NCLKeyboardTimeShiftInputEngine
 
-- (id)init
+- (id)initWithKeyInputResolver:(NCLKeyInputResolver *)keyInputResolver
 {
-    self = [super init];
+    self = [super initWithKeyInputResolver:keyInputResolver];
     if (self) {
         self.keyInputQueue = [[NSMutableArray alloc] init];
     }
@@ -195,8 +316,7 @@
         }
         
         NSInteger keyIndex = keyInput.index;
-        NSArray *keyboardLayout = self.keyboardLayouts[self.inputMethod];
-        NSString *text = keyboardLayout[shiftState][keyIndex];
+        NSString *text = [self.keyInputResolver textForKeyIndex:keyIndex shiftState:shiftState inputMethod:self.inputMethod];
         
         if (self.shifted) {
             text = [self shiftedTextWithText:text];
@@ -244,9 +364,9 @@
 
 @implementation NCLKeyboardContinuityShiftInputEngine
 
-- (id)init
+- (id)initWithKeyInputResolver:(NCLKeyInputResolver *)keyInputResolver
 {
-    self = [super init];
+    self = [super initWithKeyInputResolver:keyInputResolver];
     if (self) {
         self.keyInputQueue = [[NSMutableArray alloc] init];
     }
@@ -361,8 +481,7 @@
         }
         
         NSInteger keyIndex = keyInput.index;
-        NSArray *keyboardLayout = self.keyboardLayouts[self.inputMethod];
-        NSString *text = keyboardLayout[shiftState][keyIndex];
+        NSString *text = [self.keyInputResolver textForKeyIndex:keyIndex shiftState:shiftState inputMethod:self.inputMethod];
         
         if (self.shifted) {
             text = [self shiftedTextWithText:text];
@@ -432,8 +551,7 @@
 - (void)proccessInput:(NCLKeyboardInput *)keyInput
 {
     NSInteger keyIndex = keyInput.index;
-    NSArray *keyboardLayout = self.keyboardLayouts[self.inputMethod];
-    NSString *text = keyboardLayout[_shiftState][keyIndex];
+    NSString *text = [self.keyInputResolver textForKeyIndex:keyIndex shiftState:_shiftState inputMethod:self.inputMethod];
     
     if (self.shifted) {
         text = [self shiftedTextWithText:text];

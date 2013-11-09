@@ -39,8 +39,6 @@
 		1461D015182D355500F93FA8 /* NCLPhysicalKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D013182D355500F93FA8 /* NCLPhysicalKeyboardManager.m */; };
 		1461D017182D626800F93FA8 /* PhysicalKeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 1461D016182D626800F93FA8 /* PhysicalKeyboardLayouts.json */; };
 		1461D018182D626800F93FA8 /* PhysicalKeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 1461D016182D626800F93FA8 /* PhysicalKeyboardLayouts.json */; };
-		1461D01B182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D01A182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.m */; };
-		1461D01C182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D01A182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.m */; };
 		1464694A1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
 		1464694B1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
 		1464694E1814FAC500CEAA41 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1464694D1814FAC500CEAA41 /* AirshipConfig.plist */; };
@@ -145,8 +143,6 @@
 		1461D012182D355500F93FA8 /* NCLPhysicalKeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLPhysicalKeyboardManager.h; sourceTree = "<group>"; };
 		1461D013182D355500F93FA8 /* NCLPhysicalKeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLPhysicalKeyboardManager.m; sourceTree = "<group>"; };
 		1461D016182D626800F93FA8 /* PhysicalKeyboardLayouts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PhysicalKeyboardLayouts.json; sourceTree = "<group>"; };
-		1461D019182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLPhysicalKeyboardInputEngine.h; sourceTree = "<group>"; };
-		1461D01A182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLPhysicalKeyboardInputEngine.m; sourceTree = "<group>"; };
 		146469491812E48E00CEAA41 /* NCLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLAppDelegate.m; sourceTree = "<group>"; };
 		1464694C1813FBA000CEAA41 /* NicolaEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NicolaEditor.entitlements; sourceTree = "<group>"; };
 		1464694D1814FAC500CEAA41 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
@@ -339,8 +335,6 @@
 				14326819180FBF910001BDBC /* NCLPopoverManager.m */,
 				1461747E18058F6B00C8763B /* NCLKeyboardInputEngine.h */,
 				1461747F18058F6B00C8763B /* NCLKeyboardInputEngine.m */,
-				1461D019182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.h */,
-				1461D01A182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.m */,
 				1461D012182D355500F93FA8 /* NCLPhysicalKeyboardManager.h */,
 				1461D013182D355500F93FA8 /* NCLPhysicalKeyboardManager.m */,
 				147C582B181BB49200413706 /* NCLFontManager.h */,
@@ -598,7 +592,6 @@
 				1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */,
 				1464694A1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */,
 				14B3F47218030EB900F7E91A /* NCLKeyboardView.m in Sources */,
-				1461D01B182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.m in Sources */,
 				1461D014182D355500F93FA8 /* NCLPhysicalKeyboardManager.m in Sources */,
 				146B3F0018086C5E00418452 /* NCLNote.m in Sources */,
 				1461748018058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */,
@@ -625,7 +618,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1461D01C182D689300F93FA8 /* NCLPhysicalKeyboardInputEngine.m in Sources */,
 				14B3F46218030DEC00F7E91A /* NicolaEditorTests.m in Sources */,
 				1461750818072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */,
 				14326813180FB7270001BDBC /* NCLConstants.m in Sources */,

@@ -42,5 +42,9 @@ NSString * const NCLFontManagerMatchingWillBeginDownloadingNotification = @"NCLF
 NSString * const NCLFontManagerMatchingDownloadingNotification = @"NCLFontManagerMatchingDownloadingNotification";
 NSString * const NCLFontManagerMatchingDidFinishDownloadingNotification = @"NCLFontManagerMatchingDidFinishDownloadingNotification";
 
+NSString * const NCLKeyboardInputMethodKana = @"Kana";
+NSString * const NCLKeyboardInputMethodAlphabet = @"Alphabet";
+NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
+
 NSString * const NCLPhysicalKeyboardAvailabilityChangedNotification = @"NCLPhysicalKeyboardAvailabilityChangedNotification";
 NSString * const NCLPhysicalKeyboardAvailabilityKey = @"NCLPhysicalKeyboardAvailabilityKey";

@@ -164,9 +164,14 @@ static NSCache *cache;
 {
     _keyboardInputMethod = inputMethod;
     self.inputEngine.inputMethod = inputMethod;
+    
+    NSString *inputMode = ja_JP;
+    if ([[NCLPhysicalKeyboardManager sharedManager] isPhysicalKeyboardAttached] && ![inputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
+        inputMode = en_US;
+    }
     [self sendMessage:self.internalKeyboard
               forName:HTcj2RHKk78UgtYwx3Z8
-          attachments:@[@{@"Object": ja_JP}]];
+          attachments:@[@{@"Object": inputMode}]];
     
     NSString *keyboardType;
     if ([inputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
@@ -374,7 +379,7 @@ static NSCache *cache;
                   forName:SxYmcXP2AFEYh4CXYBMJ
               attachments:@[@{@"BOOL": @YES}]];
         
-        [[NCLPhysicalKeyboardManager sharedManager] setTextView:self.textView];
+        [[NCLPhysicalKeyboardManager sharedManager] setKeyboardView:self];
     }
 }
 
@@ -561,7 +566,7 @@ static NSCache *cache;
     [[UIDevice currentDevice] playInputClick];
     
     if (!self.swapBackspaceReturnEnabled) {
-        [self processDeleteKey];
+        [self processDeleteKeyDown];
     }
 }
 
@@ -570,9 +575,7 @@ static NSCache *cache;
     if (self.swapBackspaceReturnEnabled) {
         [self processReturnKey];
     } else {
-        [self sendMessage:self.internalKeyboard
-                  forName:jLdpi9URsHKDRWf36aE6
-              attachments:nil];
+        [self processDeleteKeyUp];
     }
 }
 
@@ -580,7 +583,7 @@ static NSCache *cache;
 {
     [[UIDevice currentDevice] playInputClick];
     if (self.swapBackspaceReturnEnabled) {
-        [self processDeleteKey];
+        [self processDeleteKeyDown];
     }
 }
 
@@ -595,13 +598,20 @@ static NSCache *cache;
     }
 }
 
-- (void)processDeleteKey
+- (void)processDeleteKeyDown
 {
     [self sendMessage:self.internalKeyboard
               forName:PArjMGcJEYULesZzYbwp
           attachments:nil];
     [self sendMessage:self.internalKeyboard
               forName:G2AmM5eQZ4RxKLM3TCKZ
+          attachments:nil];
+}
+
+- (void)processDeleteKeyUp
+{
+    [self sendMessage:self.internalKeyboard
+              forName:jLdpi9URsHKDRWf36aE6
           attachments:nil];
 }
 
