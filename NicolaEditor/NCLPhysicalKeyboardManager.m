@@ -53,9 +53,20 @@ static NSString *xfS9MiWvpygnCQtUh483;
         
         self.physicalKeyLayout = layouts[@"Physical"][NCLPhysicalKeyboardAppleJIS];
         self.specialKeyLayout = layouts[@"Virtual"][@"Special"];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
     
     return self;
+}
+
+- (void)applicationDidEnterBackground:(NSNotification *)notification
+{
+    id internalKeyboard = self.keyboardView.textView.inputDelegate;
+    void *observationInfo = [internalKeyboard observationInfo];
+    if (observationInfo) {
+        [internalKeyboard removeObserver:self forKeyPath:xfS9MiWvpygnCQtUh483];
+    }
 }
 
 #pragma mark -
