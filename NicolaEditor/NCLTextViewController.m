@@ -636,13 +636,15 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
     CGRect keyboardFrame = [userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     keyboardFrame = [self.view convertRect:keyboardFrame fromView:nil];
     
+    CGFloat keyboardHeight = CGRectGetHeight(keyboardFrame);
+    
     UIEdgeInsets contentInset = self.textView.contentInset;
     self.textViewContentInset = contentInset;
-    contentInset.bottom = CGRectGetHeight(keyboardFrame) + 44.0f;
+    contentInset.bottom = keyboardHeight + 44.0f;
     
     UIEdgeInsets scrollIndicatorInsets = self.textView.scrollIndicatorInsets;
     self.textViewScrollIndicatorInsets = scrollIndicatorInsets;
-    scrollIndicatorInsets.bottom = CGRectGetHeight(keyboardFrame);
+    scrollIndicatorInsets.bottom = keyboardHeight;
     
     NSTimeInterval duration = [userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     UIViewAnimationCurve animationCurve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
