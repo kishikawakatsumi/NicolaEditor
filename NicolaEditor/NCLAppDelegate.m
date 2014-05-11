@@ -36,7 +36,7 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     UAConfig *config = [UAConfig defaultConfig];
     [UAirship takeOff:config];
     
-    [Helpshift installForAppID:@"nicola-note_platform_20131021094422072-e208905abd32493" domainName:@"nicola-note.helpshift.com" apiKey:@"537b553656373a8b29712f0d632c3687"];
+    [Helpshift installForApiKey:@"537b553656373a8b29712f0d632c3687" domainName:@"nicola-note.helpshift.com" appID:@"nicola-note_platform_20131021094422072-e208905abd32493"];
     
     [Crittercism enableWithAppID:@"5264f50ea7928a4f07000005"];
     
