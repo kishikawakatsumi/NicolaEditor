@@ -109,9 +109,7 @@
     }
     
     if (!self.settingsPopoverController) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        
-        NCLSettingsViewController *controller = [storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([NCLSettingsViewController class])];
+        NCLSettingsViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([NCLSettingsViewController class])];
         controller.delegate = self;
         
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
