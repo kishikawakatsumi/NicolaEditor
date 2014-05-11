@@ -23,9 +23,6 @@ NSString * const NCLSettingsRightShiftFunctionKey = @"shift-key-function-right";
 NSString * const NCLSettingsSwapBackspaceReturnEnabledKey = @"swap-backspase-return-enabled";
 
 NSString * const NCLSettingsFontDidChangeNodification = @"NCLSettingsFontDidChangeNodification";
-NSString * const NCLSettingsShiftKeyBehaviorDidChangeNodification = @"NCLSettingsShiftKeyBehaviorDidChangeNodification";
-NSString * const NCLSettingsShiftKeyFunctionDidChangeNodification = @"NCLSettingsShiftKeyFunctionDidChangeNodification";
-NSString * const NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification = @"NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification";
 
 NSString * const NCLShiftKeyBehaviorTimeShift = @"Time-Shift";
 NSString * const NCLShiftKeyBehaviorContinuityShift = @"Continuity-Shift";
@@ -45,6 +42,13 @@ NSString * const NCLFontManagerMatchingDidFinishDownloadingNotification = @"NCLF
 NSString * const NCLKeyboardInputMethodKana = @"Kana";
 NSString * const NCLKeyboardInputMethodAlphabet = @"Alphabet";
 NSString * const NCLKeyboardInputMethodNumberPunctuation = @"NumberPunctuation";
+
+NSString * const NCLSettingsExternalKeyboardKey = @"external-keyboard";
+NSString * const NCLSettingsExternalKeyboardLayoutKey = @"external-keyboard-layout";
+
+NSString * const NCLKeyboardAppleWirelessKeyboardJIS = @"AppleWirelessKeyboardJIS";
+NSString * const NCLKeyboardAppleWirelessKeyboardUS = @"AppleWirelessKeyboardUS";
+NSString * const NCLKeyboardUserDefined = @"UserDefined";
 
 NSString * const NCLPhysicalKeyboardAvailabilityChangedNotification = @"NCLPhysicalKeyboardAvailabilityChangedNotification";
 NSString * const NCLPhysicalKeyboardAvailabilityKey = @"NCLPhysicalKeyboardAvailabilityKey";

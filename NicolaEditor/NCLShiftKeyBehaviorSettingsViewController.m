@@ -59,11 +59,10 @@
     } else if (row == 2) {
         [userDefaults setObject:NCLShiftKeyBehaviorPrefixShift forKey:key];
     }
+    [userDefaults synchronize];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
 }
 
 @end

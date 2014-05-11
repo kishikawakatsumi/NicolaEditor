@@ -37,21 +37,17 @@ typedef NS_ENUM(NSInteger, NCLKeyboardShiftState) {
 
 @interface NCLKeyInputResolver : NSObject
 
-@property (nonatomic) NSDictionary *keyboardLayouts;
+@property (nonatomic) id keyboardLayouts;
 
 @end
 
 @implementation NCLKeyInputResolver
 
-- (id)initWithKeyboardLayout:(NSString *)keyboardLayout
+- (id)initWithKeyboardLayout:(id)layout
 {
     self = [super init];
     if (self) {
-        NSBundle *mainBundle = [NSBundle mainBundle];
-        NSData *data = [NSData dataWithContentsOfURL:[mainBundle URLForResource:keyboardLayout withExtension:@"json"]];
-        NSDictionary *layouts = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        
-        _keyboardLayouts = layouts;
+        _keyboardLayouts = layout;
     }
     
     return self;
@@ -74,8 +70,11 @@ typedef NS_ENUM(NSInteger, NCLKeyboardShiftState) {
 
 - (NSString *)textForKeyIndex:(NSInteger)keyIndex shiftState:(NCLKeyboardShiftState)shiftState inputMethod:(NSString *)inputMethod
 {
-    NSArray *physicalKeyboardLayout = self.keyboardLayouts[@"Physical"][@"Apple Wireless Keyboard JIS"];
-    NSArray *virtualKeyboardLayout = self.keyboardLayouts[@"Virtual"][@"orz"];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *layout = [userDefaults stringForKey:NCLSettingsExternalKeyboardLayoutKey];
+    
+    NSArray *physicalKeyboardLayout = self.keyboardLayouts[0];
+    NSArray *virtualKeyboardLayout = self.keyboardLayouts[2][layout];
     
     NSInteger index = [physicalKeyboardLayout indexOfObject:@(keyIndex).stringValue];
     NSString *text = virtualKeyboardLayout[shiftState][index];
@@ -121,8 +120,8 @@ typedef NS_ENUM(NSInteger, NCLKeyboardShiftState) {
 
 + (id)inputEngineWithShiftKeyBehavior:(NSString *)shiftKeyBehavior
 {
-    NSString *keyboardLayout = @"KeyboardLayouts";
-    NCLKeyInputResolver *keyInputResolver = [[NCLKeyInputResolver alloc] initWithKeyboardLayout:keyboardLayout];
+    NSDictionary *layout = [self keyboardLayoutNamed:@"SoftwareKeyboard"];
+    NCLKeyInputResolver *keyInputResolver = [[NCLKeyInputResolver alloc] initWithKeyboardLayout:layout];
     
     if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift]) {
         return [[NCLKeyboardTimeShiftInputEngine alloc] initWithKeyInputResolver:keyInputResolver];
@@ -133,6 +132,27 @@ typedef NS_ENUM(NSInteger, NCLKeyboardShiftState) {
     }
     
     return nil;
+}
+
++ (id)keyboardLayoutNamed:(NSString *)name
+{
+    id layout;
+    
+    NSData *data = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:name withExtension:@"json"]];
+    if (data) {
+        layout = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+    } else {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentDirectory = paths.lastObject;
+        NSString *filename = [name stringByAppendingPathExtension:@"json"];
+        
+        data = [NSData dataWithContentsOfFile:[documentDirectory stringByAppendingPathComponent:filename]];
+        if (data) {
+            layout = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
+        }
+    }
+    
+    return layout;
 }
 
 - (id)initWithKeyInputResolver:(NCLKeyInputResolver *)keyInputResolver
@@ -184,8 +204,11 @@ typedef NS_ENUM(NSInteger, NCLKeyboardShiftState) {
 
 + (id)inputEngineWithShiftKeyBehavior:(NSString *)shiftKeyBehavior
 {
-    NSString *keyboardLayout = @"PhysicalKeyboardLayouts";
-    NCLPhysicalKeyInputResolver *keyInputResolver = [[NCLPhysicalKeyInputResolver alloc] initWithKeyboardLayout:keyboardLayout];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *keyboard = [userDefaults stringForKey:NCLSettingsExternalKeyboardKey];
+    
+    id layout = [self keyboardLayoutNamed:keyboard];
+    NCLPhysicalKeyInputResolver *keyInputResolver = [[NCLPhysicalKeyInputResolver alloc] initWithKeyboardLayout:layout];
     
     if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift]) {
         return [[NCLKeyboardTimeShiftInputEngine alloc] initWithKeyInputResolver:keyInputResolver];

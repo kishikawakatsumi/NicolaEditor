@@ -140,8 +140,6 @@ static NSCache *cache;
     
     self.keyboardInputMethod = NCLKeyboardInputMethodKana;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(shiftKeyBehaviorDidChange:) name:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(swapBackspaceReturnEnabledDidChange:) name:NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(physicalKeyboardAvailabilityChangedNotification:) name:NCLPhysicalKeyboardAvailabilityChangedNotification object:nil];
 }
 
@@ -428,8 +426,6 @@ static NSCache *cache;
 
 - (void)physicalKeyboardDettached
 {
-    [UIView setAnimationsEnabled:NO];
-    
     UIApplication *app = [UIApplication sharedApplication];
     UIInterfaceOrientation orientation = app.statusBarOrientation;
     
@@ -448,10 +444,6 @@ static NSCache *cache;
         self.frame = frame;
     } completion:^(BOOL finished) {
         self.hidden = NO;
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [UIView setAnimationsEnabled:YES];
-        });
     }];
     
     [self.textView performSelector:@selector(reloadInputViews) withObject:nil afterDelay:0.0];
@@ -532,16 +524,6 @@ static NSCache *cache;
         self.spaceKeyButton.frame = CGRectMake(772.0, 267.0, 161.0, keyHeight);
         self.keyboardKeyButton.frame = CGRectMake(942.0, 267.0, keyWidth, keyHeight);
     }
-}
-
-- (void)shiftKeyBehaviorDidChange:(NSNotification *)notification
-{
-    [self setupInputEngine];
-}
-
-- (void)swapBackspaceReturnEnabledDidChange:(NSNotification *)notification
-{
-    [self applySwapBackspaceReturnState];
 }
 
 - (void)applySwapBackspaceReturnState

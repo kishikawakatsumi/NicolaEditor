@@ -64,11 +64,10 @@
     
     NSString *function = self.functions[indexPath.row];
     [userDefaults setObject:function forKey:key];
+    [userDefaults synchronize];
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [tableView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsShiftKeyFunctionDidChangeNodification object:nil];
 }
 
 @end

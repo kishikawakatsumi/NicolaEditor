@@ -23,6 +23,7 @@ typedef NS_ENUM(NSInteger, NCLKeyboardEvent) {
 @property (nonatomic, getter = isShifted) BOOL shifted;
 
 + (id)inputEngineWithShiftKeyBehavior:(NSString *)shiftKeyBehavior;
++ (id)keyboardLayoutNamed:(NSString *)name;
 
 - (void)addKeyInput:(NSInteger)input;
 

@@ -37,8 +37,6 @@
 		1461D011182D353700F93FA8 /* NCLApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D00E182D353700F93FA8 /* NCLApplication.m */; };
 		1461D014182D355500F93FA8 /* NCLPhysicalKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D013182D355500F93FA8 /* NCLPhysicalKeyboardManager.m */; };
 		1461D015182D355500F93FA8 /* NCLPhysicalKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D013182D355500F93FA8 /* NCLPhysicalKeyboardManager.m */; };
-		1461D017182D626800F93FA8 /* PhysicalKeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 1461D016182D626800F93FA8 /* PhysicalKeyboardLayouts.json */; };
-		1461D018182D626800F93FA8 /* PhysicalKeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 1461D016182D626800F93FA8 /* PhysicalKeyboardLayouts.json */; };
 		1464694A1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
 		1464694B1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
 		146B3EE0180857F200418452 /* NCLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EDF180857F200418452 /* NCLSettingsViewController.m */; };
@@ -67,6 +65,12 @@
 		147733981815A0850045ADFB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 147733901815A0850045ADFB /* Default-Portrait~ipad.png */; };
 		147C582D181BB49200413706 /* NCLFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 147C582C181BB49200413706 /* NCLFontManager.m */; };
 		147C582E181BB49200413706 /* NCLFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 147C582C181BB49200413706 /* NCLFontManager.m */; };
+		149E0BA6191FB39F00913673 /* AppleWirelessKeyboardJIS.json in Resources */ = {isa = PBXBuildFile; fileRef = 149E0BA5191FB39F00913673 /* AppleWirelessKeyboardJIS.json */; };
+		149E0BA7191FB39F00913673 /* AppleWirelessKeyboardJIS.json in Resources */ = {isa = PBXBuildFile; fileRef = 149E0BA5191FB39F00913673 /* AppleWirelessKeyboardJIS.json */; };
+		149E0BAA191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0BA9191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m */; };
+		149E0BAB191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0BA9191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m */; };
+		149E0BAD191FBFC200913673 /* AppleWirelessKeyboardUS.json in Resources */ = {isa = PBXBuildFile; fileRef = 149E0BAC191FBFC200913673 /* AppleWirelessKeyboardUS.json */; };
+		149E0BAE191FBFC200913673 /* AppleWirelessKeyboardUS.json in Resources */ = {isa = PBXBuildFile; fileRef = 149E0BAC191FBFC200913673 /* AppleWirelessKeyboardUS.json */; };
 		14A57E76181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
 		14A57E77181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
 		14A57E7A1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */; };
@@ -96,8 +100,8 @@
 		14B3F479180310D600F7E91A /* NCLTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F477180310D600F7E91A /* NCLTextViewController.m */; };
 		14B3F47B1803121E00F7E91A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47A1803121E00F7E91A /* Main.storyboard */; };
 		14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47A1803121E00F7E91A /* Main.storyboard */; };
-		14B3F47E1803167200F7E91A /* KeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* KeyboardLayouts.json */; };
-		14B3F47F1803167200F7E91A /* KeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* KeyboardLayouts.json */; };
+		14B3F47E1803167200F7E91A /* SoftwareKeyboard.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* SoftwareKeyboard.json */; };
+		14B3F47F1803167200F7E91A /* SoftwareKeyboard.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* SoftwareKeyboard.json */; };
 		14BD796B1811BBBE005A6387 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14BD796A1811BBBE005A6387 /* Settings.bundle */; };
 		14BD796C1811BBBE005A6387 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14BD796A1811BBBE005A6387 /* Settings.bundle */; };
 		C631213B1BE745BBA45EA37C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 405DAA10965C4E299C75719A /* libPods.a */; };
@@ -141,7 +145,6 @@
 		1461D00F182D353700F93FA8 /* NCLApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLApplication.h; sourceTree = "<group>"; };
 		1461D012182D355500F93FA8 /* NCLPhysicalKeyboardManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLPhysicalKeyboardManager.h; sourceTree = "<group>"; };
 		1461D013182D355500F93FA8 /* NCLPhysicalKeyboardManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLPhysicalKeyboardManager.m; sourceTree = "<group>"; };
-		1461D016182D626800F93FA8 /* PhysicalKeyboardLayouts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PhysicalKeyboardLayouts.json; sourceTree = "<group>"; };
 		146469491812E48E00CEAA41 /* NCLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLAppDelegate.m; sourceTree = "<group>"; };
 		1464694C1813FBA000CEAA41 /* NicolaEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NicolaEditor.entitlements; sourceTree = "<group>"; };
 		146B3EDE180857F200418452 /* NCLSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLSettingsViewController.h; sourceTree = "<group>"; };
@@ -167,6 +170,10 @@
 		147733901815A0850045ADFB /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		147C582B181BB49200413706 /* NCLFontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLFontManager.h; sourceTree = "<group>"; };
 		147C582C181BB49200413706 /* NCLFontManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLFontManager.m; sourceTree = "<group>"; };
+		149E0BA5191FB39F00913673 /* AppleWirelessKeyboardJIS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppleWirelessKeyboardJIS.json; sourceTree = "<group>"; };
+		149E0BA8191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLExternalKeyboardSettingsViewController.h; sourceTree = "<group>"; };
+		149E0BA9191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLExternalKeyboardSettingsViewController.m; sourceTree = "<group>"; };
+		149E0BAC191FBFC200913673 /* AppleWirelessKeyboardUS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppleWirelessKeyboardUS.json; sourceTree = "<group>"; };
 		14A57E74181087CC00F1A7D9 /* NCLHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLHelpViewController.h; sourceTree = "<group>"; };
 		14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLHelpViewController.m; sourceTree = "<group>"; };
 		14A57E781810FEB700F1A7D9 /* NCLNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLNoteCell.h; sourceTree = "<group>"; };
@@ -198,7 +205,7 @@
 		14B3F476180310D600F7E91A /* NCLTextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLTextViewController.h; sourceTree = "<group>"; };
 		14B3F477180310D600F7E91A /* NCLTextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLTextViewController.m; sourceTree = "<group>"; };
 		14B3F47A1803121E00F7E91A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		14B3F47D1803167200F7E91A /* KeyboardLayouts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = KeyboardLayouts.json; sourceTree = "<group>"; };
+		14B3F47D1803167200F7E91A /* SoftwareKeyboard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SoftwareKeyboard.json; sourceTree = "<group>"; };
 		14BD796A1811BBBE005A6387 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		405DAA10965C4E299C75719A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -209,10 +216,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				14B3F43018030DEC00F7E91A /* CoreGraphics.framework in Frameworks */,
-				14B3F43418030DEC00F7E91A /* CoreData.framework in Frameworks */,
 				14B3F43218030DEC00F7E91A /* UIKit.framework in Frameworks */,
 				14B3F42E18030DEC00F7E91A /* Foundation.framework in Frameworks */,
+				14B3F43018030DEC00F7E91A /* CoreGraphics.framework in Frameworks */,
+				14B3F43418030DEC00F7E91A /* CoreData.framework in Frameworks */,
 				C631213B1BE745BBA45EA37C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,6 +287,8 @@
 				146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */,
 				145E6579180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.h */,
 				145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */,
+				149E0BA8191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.h */,
+				149E0BA9191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m */,
 				14A57E74181087CC00F1A7D9 /* NCLHelpViewController.h */,
 				14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */,
 				145AE74B18163ECB000459C1 /* NCLAboutViewController.h */,
@@ -363,8 +372,9 @@
 				146B3EEE18085B8600418452 /* Localizable.strings */,
 				14B3F43B18030DEC00F7E91A /* main.m */,
 				14B3F43D18030DEC00F7E91A /* NicolaEditor-Prefix.pch */,
-				14B3F47D1803167200F7E91A /* KeyboardLayouts.json */,
-				1461D016182D626800F93FA8 /* PhysicalKeyboardLayouts.json */,
+				14B3F47D1803167200F7E91A /* SoftwareKeyboard.json */,
+				149E0BA5191FB39F00913673 /* AppleWirelessKeyboardJIS.json */,
+				149E0BAC191FBFC200913673 /* AppleWirelessKeyboardUS.json */,
 				146B3F0E18099F7200418452 /* SampleText.json */,
 			);
 			name = "Supporting Files";
@@ -498,7 +508,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				146174711803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
-				1461D017182D626800F93FA8 /* PhysicalKeyboardLayouts.json in Resources */,
 				14B3F44E18030DEC00F7E91A /* Images.xcassets in Resources */,
 				146B3F0F18099F7200418452 /* SampleText.json in Resources */,
 				14BD796B1811BBBE005A6387 /* Settings.bundle in Resources */,
@@ -506,9 +515,11 @@
 				14B3F46C18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
 				146B3EEB18085B8600418452 /* Localizable.strings in Resources */,
 				143268391810272E0001BDBC /* NCLSliderPopup.xib in Resources */,
+				149E0BA6191FB39F00913673 /* AppleWirelessKeyboardJIS.json in Resources */,
 				14B3F43A18030DEC00F7E91A /* InfoPlist.strings in Resources */,
+				149E0BAD191FBFC200913673 /* AppleWirelessKeyboardUS.json in Resources */,
 				14B3F47B1803121E00F7E91A /* Main.storyboard in Resources */,
-				14B3F47E1803167200F7E91A /* KeyboardLayouts.json in Resources */,
+				14B3F47E1803167200F7E91A /* SoftwareKeyboard.json in Resources */,
 				145AE70318157C82000459C1 /* Icon-72@2x.png in Resources */,
 				147733911815A0850045ADFB /* Default-Landscape@2x~ipad.png in Resources */,
 				147733931815A0850045ADFB /* Default-Landscape~ipad.png in Resources */,
@@ -527,8 +538,8 @@
 				145AE70218157C82000459C1 /* Icon-72.png in Resources */,
 				146B3EEC18085B8600418452 /* Localizable.strings in Resources */,
 				14B3F46018030DEC00F7E91A /* InfoPlist.strings in Resources */,
-				14B3F47F1803167200F7E91A /* KeyboardLayouts.json in Resources */,
-				1461D018182D626800F93FA8 /* PhysicalKeyboardLayouts.json in Resources */,
+				149E0BA7191FB39F00913673 /* AppleWirelessKeyboardJIS.json in Resources */,
+				14B3F47F1803167200F7E91A /* SoftwareKeyboard.json in Resources */,
 				146174721803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
 				14B3F46D18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
 				14BD796C1811BBBE005A6387 /* Settings.bundle in Resources */,
@@ -537,6 +548,7 @@
 				147733941815A0850045ADFB /* Default-Landscape~ipad.png in Resources */,
 				147733961815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */,
 				147733981815A0850045ADFB /* Default-Portrait~ipad.png in Resources */,
+				149E0BAE191FBFC200913673 /* AppleWirelessKeyboardUS.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +614,7 @@
 				1432681A180FBF910001BDBC /* NCLPopoverManager.m in Sources */,
 				14A57E7A1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */,
 				14B3F44618030DEC00F7E91A /* NicolaEditor.xcdatamodeld in Sources */,
+				149E0BAA191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m in Sources */,
 				14B3F47418030EB900F7E91A /* NCLKeyboardButton.m in Sources */,
 				1461750718072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */,
 				14326816180FB7990001BDBC /* UIFont+Helper.m in Sources */,
@@ -638,6 +651,7 @@
 				1432681B180FBF910001BDBC /* NCLPopoverManager.m in Sources */,
 				146B3F091808740000418452 /* NSString+Helper.m in Sources */,
 				145AE74E18163ECB000459C1 /* NCLAboutViewController.m in Sources */,
+				149E0BAB191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m in Sources */,
 				146B3EF3180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

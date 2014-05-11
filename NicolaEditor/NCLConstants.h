@@ -23,9 +23,6 @@ extern NSString * const NCLSettingsRightShiftFunctionKey;
 extern NSString * const NCLSettingsSwapBackspaceReturnEnabledKey;
 
 extern NSString * const NCLSettingsFontDidChangeNodification;
-extern NSString * const NCLSettingsShiftKeyBehaviorDidChangeNodification;
-extern NSString * const NCLSettingsShiftKeyFunctionDidChangeNodification;
-extern NSString * const NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification;
 
 extern NSString * const NCLShiftKeyBehaviorTimeShift;
 extern NSString * const NCLShiftKeyBehaviorContinuityShift;
@@ -45,6 +42,13 @@ extern NSString * const NCLFontManagerMatchingDidFinishDownloadingNotification;
 extern NSString * const NCLKeyboardInputMethodKana;
 extern NSString * const NCLKeyboardInputMethodAlphabet;
 extern NSString * const NCLKeyboardInputMethodNumberPunctuation;
+
+extern NSString * const NCLSettingsExternalKeyboardKey;
+extern NSString * const NCLSettingsExternalKeyboardLayoutKey;
+
+extern NSString * const NCLKeyboardAppleWirelessKeyboardJIS;
+extern NSString * const NCLKeyboardAppleWirelessKeyboardUS;
+extern NSString * const NCLKeyboardUserDefined;
 
 extern NSString * const NCLPhysicalKeyboardAvailabilityChangedNotification;
 extern NSString * const NCLPhysicalKeyboardAvailabilityKey;

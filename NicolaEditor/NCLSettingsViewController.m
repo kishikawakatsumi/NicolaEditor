@@ -118,6 +118,7 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setDouble:fontSize forKey:NCLSettingsFontSizeKey];
+    [userDefaults synchronize];
     
     self.fontSizeLabel.text = [NSString stringWithFormat:@"%d pt", (int)fontSize];
     
@@ -155,16 +156,13 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setFloat:timeShiftDuration forKey:NCLSettingsTimeShiftDurationKey];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsShiftKeyBehaviorDidChangeNodification object:nil];
 }
 
 - (IBAction)swapKeySwitchValueChanged:(id)sender
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setBool:self.swapKeySwitch.isOn forKey:NCLSettingsSwapBackspaceReturnEnabledKey];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsSwapBackspaceReturnEnabledDidChangeNodification object:nil];
+    [userDefaults synchronize];
 }
 
 #pragma mark -
@@ -179,7 +177,7 @@
         return NSLocalizedString(@"Shift Key Functions", nil);
     } else if (section == 3) {
         return NSLocalizedString(@"Special", nil);
-    } else if (section == 4) {
+    } else if (section == 5) {
         return NSLocalizedString(@"Help", nil);
     }
     
@@ -198,6 +196,8 @@
         cell.textLabel.text = NSLocalizedString(@"Left Shift Key", nil);
     } else if (section == 2 && row == 1) {
         cell.textLabel.text = NSLocalizedString(@"Right Shift Key", nil);
+    } else if (section == 3 && row == 1) {
+        cell.textLabel.text = NSLocalizedString(@"External Keyboard", nil);
     } else if (section == 4) {
         cell.textLabel.text = NSLocalizedString(@"Help", nil);
     }

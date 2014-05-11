@@ -48,7 +48,9 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
                                      NCLSettingsTimeShiftDurationKey: @(0.15),
                                      NCLSettingsLeftShiftFunctionKey: NCLShiftKeyFunctionAcceptCandidate,
                                      NCLSettingsRightShiftFunctionKey: NCLShiftKeyFunctionNextCandidate,
-                                     NCLSettingsSwapBackspaceReturnEnabledKey: @NO}];
+                                     NCLSettingsSwapBackspaceReturnEnabledKey: @NO,
+                                     NCLSettingsExternalKeyboardKey: NCLKeyboardAppleWirelessKeyboardJIS,
+                                     NCLSettingsExternalKeyboardLayoutKey: @"NICOLA"}];
     
     NSDictionary *downloadedFonts = [userDefaults valueForKey:NCLSettingsDownloadedFontsKey];
     for (NSString *downloadedFontName in downloadedFonts.allKeys) {
@@ -66,6 +68,7 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     }
     [userDefaults synchronize];
     
+    [self exportUserDefinedKayboardLayout];
     [self prepareForiCloud];
     
     [JLRoutes addRoute:@"/:object/:action" handler:^BOOL(NSDictionary *parameters) {
@@ -142,6 +145,35 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     
     return canHandle;
 }
+
+#pragma mark -
+
+- (void)exportUserDefinedKayboardLayout
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentDirectory = paths.lastObject;
+    NSString *path = [documentDirectory stringByAppendingPathComponent:@"UserDefined.json"];
+    
+    if (![self filesExistsAtPath:path]) {
+        NSFileManager *fileManager = [[NSFileManager alloc] init];
+        [fileManager copyItemAtPath:[[NSBundle mainBundle] pathForResource:@"AppleWirelessKeyboardJIS" ofType:@"json"] toPath:path error:nil];
+    }
+}
+
+- (BOOL)filesExistsAtPath:(NSString *)path
+{
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    BOOL isDirectory = NO;
+    if ([fileManager fileExistsAtPath:path isDirectory:&isDirectory]) {
+        if (!isDirectory) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+#pragma mark -
 
 - (void)prepareForiCloud
 {

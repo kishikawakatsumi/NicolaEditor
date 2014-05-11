@@ -11,8 +11,6 @@
 #import "NCLKeyboardView.h"
 #import "NCLConstants.h"
 
-static NSString * const NCLPhysicalKeyboardAppleJIS = @"Apple Wireless Keyboard JIS";
-
 static NSString *xfS9MiWvpygnCQtUh483;
 
 @interface NCLPhysicalKeyboardManager ()
@@ -47,18 +45,27 @@ static NSString *xfS9MiWvpygnCQtUh483;
 {
     self = [super init];
     if (self) {
-        NSBundle *mainBundle = [NSBundle mainBundle];
-        NSData *data = [NSData dataWithContentsOfURL:[mainBundle URLForResource:@"PhysicalKeyboardLayouts" withExtension:@"json"]];
-        NSDictionary *layouts = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
-        
-        self.physicalKeyLayout = layouts[@"Physical"][NCLPhysicalKeyboardAppleJIS];
-        self.specialKeyLayout = layouts[@"Virtual"][@"Special"];
-        
+        [self setupKeyboardLayout];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
     
     return self;
 }
+
+#pragma mark -
+
+- (void)setupKeyboardLayout
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *keyboard = [userDefaults stringForKey:NCLSettingsExternalKeyboardKey];
+    
+    NSArray *layouts = [NCLKeyboardInputEngine keyboardLayoutNamed:keyboard];
+    
+    self.physicalKeyLayout = layouts[0];
+    self.specialKeyLayout = layouts[1];
+}
+
+#pragma mark -
 
 - (void)applicationDidEnterBackground:(NSNotification *)notification
 {

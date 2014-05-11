@@ -122,12 +122,9 @@
         self.boldFontNames = @[@"HiraMinProN-W6", @"HiraKakuProN-W6", @"HiraMaruProN-W4", @"YuMin-Demibold", @"YuGo-Bold", @"Osaka", @"Osaka-Mono"];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontManagerMatchingDidBegin:) name:NCLFontManagerMatchingDidBeginNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontManagerMatchingDidFinish:) name:NCLFontManagerMatchingDidFinishNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontManagerMatchingDidFail:) name:NCLFontManagerMatchingDidFailNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontManagerMatchingWillBeginDownloading:) name:NCLFontManagerMatchingWillBeginDownloadingNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontManagerMatchingDownloading:) name:NCLFontManagerMatchingDownloadingNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontManagerMatchingDidFinishDownloading:) name:NCLFontManagerMatchingDidFinishDownloadingNotification object:nil];
 }
 
 #pragma mark -
@@ -206,6 +203,7 @@
     
     if ([[NCLFontManager sharedManager] isAvailableFontNamed:fontName] && [[NCLFontManager sharedManager] isAvailableFontNamed:boldFontName]) {
         [userDefaults setObject:fontName forKey:key];
+        [userDefaults synchronize];
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         [tableView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
@@ -255,11 +253,6 @@
     [self startDownloadFontNamed:fontName];
 }
 
-- (void)fontManagerMatchingDidBegin:(NSNotification *)notification
-{
-    
-}
-
 - (void)fontManagerMatchingDidFinish:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
@@ -277,11 +270,6 @@
     [self.tableView reloadData];
 }
 
-- (void)fontManagerMatchingWillBeginDownloading:(NSNotification *)notification
-{
-    
-}
-
 - (void)fontManagerMatchingDownloading:(NSNotification *)notification
 {
     NSDictionary *userInfo = notification.userInfo;
@@ -292,11 +280,6 @@
     if (progressView.progress > 0.0) {
         [progressView stopSpinProgressBackgroundLayer];
     }
-}
-
-- (void)fontManagerMatchingDidFinishDownloading:(NSNotification *)notification
-{
-    
 }
 
 @end
