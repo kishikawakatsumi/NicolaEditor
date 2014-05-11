@@ -122,12 +122,6 @@ static BOOL RCMD;
 {
     BOOL result = NO;
     
-    BOOL isKeyDown = [[event valueForKey:Fufcs7WsN2OHwyZhxh6A] boolValue];
-    
-    long long keyCode = [[event valueForKey:rbVU9OE7QenrQ1lYz8MW] longLongValue];
-    UniChar *keycode = (UniChar *)&keyCode;
-    UniChar key = keycode[0];
-    
     int eventFlags = 0;
     if ([event respondsToSelector:VZAZO96qAh2Y3i5zjZCS]) {
         static NSInvocation *invocation = nil;
@@ -141,6 +135,12 @@ static BOOL RCMD;
         [invocation invoke];
         [invocation getReturnValue:&eventFlags];
     }
+    
+    BOOL isKeyDown = [[event valueForKey:Fufcs7WsN2OHwyZhxh6A] boolValue];
+    
+    long long keyCode = [[event valueForKey:rbVU9OE7QenrQ1lYz8MW] longLongValue];
+    UniChar *keycode = (UniChar *)&keyCode;
+    UniChar key = keycode[0];
     
     NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
     if (isKeyDown) {

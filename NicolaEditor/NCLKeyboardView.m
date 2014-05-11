@@ -129,7 +129,10 @@ static NSCache *cache;
 - (void)commonInit
 {
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        self.keyboardBackgroundView.backgroundColor = [UIColor colorWithRed:0.812 green:0.824 blue:0.839 alpha:1.000];
+        self.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.5];
+        self.keyboardBackgroundView.backgroundColor = self.backgroundColor;
+    } else {
+        self.keyboardBackgroundView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.5];
     }
     
     [self setupInputEngine];
@@ -404,9 +407,15 @@ static NSCache *cache;
     frame.size.height = 0.0f;
     
     [UIView animateWithDuration:0.0 delay:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.frame = frame;
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
+            self.keyboardBackgroundView.hidden = YES;
+        } else {
+            self.frame = frame;
+        }
     } completion:^(BOOL finished) {
-        self.hidden = YES;
+        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_5_1) {
+            self.hidden = YES;
+        }
     }];
     
     [self.textView performSelector:@selector(reloadInputViews) withObject:nil afterDelay:0.0];
@@ -422,6 +431,10 @@ static NSCache *cache;
         frame.size.height = 264.0f;
     } else {
         frame.size.height = 352.0f;
+    }
+    
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
+        self.keyboardBackgroundView.hidden = NO;
     }
     
     [UIView animateWithDuration:0.0 delay:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
