@@ -49,11 +49,92 @@
 // 1 << 24
 #define GSEVENT_FLAG_RCMD 16777216
 
-#define KEYCODE_LSHIFT 225
-#define KEYCODE_RSHIFT 229
+// 1 << 16
+#define EVENT_FLAG_CAPS 65536
+// 1 << 17
+#define EVENT_FLAG_SHIFT 131072
+// 1 << 18
+#define EVENT_FLAG_CTRL 262144
+// 1 << 19
+#define EVENT_FLAG_ALT 524288
+// 1 << 20
+#define EVENT_FLAG_CMD 1048576
+
+#define KEYCODE_A 4
+#define KEYCODE_B 5
+#define KEYCODE_C 6
+#define KEYCODE_D 7
+#define KEYCODE_E 8
+#define KEYCODE_F 9
+#define KEYCODE_G 10
+#define KEYCODE_H 11
+#define KEYCODE_I 12
+#define KEYCODE_J 13
+#define KEYCODE_K 14
+#define KEYCODE_L 15
+#define KEYCODE_M 16
+#define KEYCODE_N 17
+#define KEYCODE_O 18
+#define KEYCODE_P 19
+#define KEYCODE_Q 20
+#define KEYCODE_R 21
+#define KEYCODE_S 22
+#define KEYCODE_T 23
+#define KEYCODE_U 24
+#define KEYCODE_V 25
+#define KEYCODE_W 26
+#define KEYCODE_X 27
+#define KEYCODE_Y 28
+#define KEYCODE_Z 29
+#define KEYCODE_1 30
+#define KEYCODE_2 31
+#define KEYCODE_3 32
+#define KEYCODE_4 33
+#define KEYCODE_5 34
+#define KEYCODE_6 35
+#define KEYCODE_7 36
+#define KEYCODE_8 37
+#define KEYCODE_9 38
+#define KEYCODE_0 39
+#define KEYCODE_ENTER 40
+#define KEYCODE_ESC 41
+#define KEYCODE_DEL 42
+#define KEYCODE_TAB 43
+#define KEYCODE_MINUS 45
+#define KEYCODE_EQUAL 46
+#define KEYCODE_LBRACKET 47
+#define KEYCODE_RBRACKET 48
+#define KEYCODE_BACKSLASH 49
+#define KEYCODE_SEMICOLON 51
+#define KEYCODE_APOS 52
+#define KEYCODE_BACKQUOTE 53
+#define KEYCODE_COMMA 54
+#define KEYCODE_PERIOD 55
+#define KEYCODE_SLASH 56
+#define KEYCODE_CAPS 57
+#define KEYCODE_F1 58
+#define KEYCODE_F2 59
+#define KEYCODE_F3 60
+#define KEYCODE_F4 61
+#define KEYCODE_F5 62
+#define KEYCODE_F6 63
+#define KEYCODE_F7 64
+#define KEYCODE_F8 65
+#define KEYCODE_F9 66
+#define KEYCODE_F10 67
+#define KEYCODE_F11 68
+#define KEYCODE_F12 69
+#define KEYCODE_ARROW_RIGHT 79
+#define KEYCODE_ARROW_LEFT 80
+#define KEYCODE_ARROW_DOWN 81
+#define KEYCODE_ARROW_UP 82
+#define KEYCODE_KANA 144
+#define KEYCODE_EISU 145
 #define KEYCODE_LCTRL 224
+#define KEYCODE_LSHIFT 225
 #define KEYCODE_LALT 226
 #define KEYCODE_LCMD 227
+#define KEYCODE_RSHIFT 229
 #define KEYCODE_RCMD 231
 
 @import ObjectiveC;
@@ -144,10 +225,9 @@ static BOOL RCMD;
     
     NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
     if (isKeyDown) {
-        if ((eventFlags & GSEVENT_FLAG_LCTRL) != GSEVENT_FLAG_LCTRL &&
-            (eventFlags & GSEVENT_FLAG_LALT) != GSEVENT_FLAG_LALT &&
-            (eventFlags & GSEVENT_FLAG_LCMD) != GSEVENT_FLAG_LCMD &&
-            (eventFlags & GSEVENT_FLAG_RCMD) != GSEVENT_FLAG_RCMD) {
+        if ((eventFlags & EVENT_FLAG_CTRL) != EVENT_FLAG_CTRL &&
+            (eventFlags & EVENT_FLAG_ALT) != EVENT_FLAG_ALT &&
+            (eventFlags & EVENT_FLAG_CMD) != EVENT_FLAG_CMD) {
             result = [keyboardManager downKeyCode:key];
         }
     } else {

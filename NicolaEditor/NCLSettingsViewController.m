@@ -46,11 +46,11 @@
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         CGRect frame = self.swapKeyLabel.frame;
-        frame.origin.x = 10.0f;
-        frame.origin.y += 4.0f;
-        frame.size.width = 200.0f;
+        frame.origin.x = 10.0;
+        frame.origin.y += 4.0;
+        frame.size.width = 200.0;
         self.swapKeyLabel.frame = frame;
-        self.swapKeyLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:16.0f];
+        self.swapKeyLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:16.0];
     }
     self.swapKeyLabel.text = NSLocalizedString(@"Swap ⌫ Key for ⏎ Key", nil);
     
@@ -67,14 +67,14 @@
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         CGRect frame = self.timeShiftDurationLabel.frame;
-        frame.origin.x = 10.0f;
+        frame.origin.x = 10.0;
         self.timeShiftDurationLabel.frame = frame;
     }
     float timeShiftDuration = [userDefaults doubleForKey:NCLSettingsTimeShiftDurationKey];
     self.timeShiftDurationSlider.value = timeShiftDuration;
     
     self.popup = [[[UINib nibWithNibName:NSStringFromClass([NCLSliderPopup class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
-    self.popup.alpha = 0.0f;
+    self.popup.alpha = 0.0;
     [self.view addSubview:self.popup];
 }
 
@@ -127,7 +127,7 @@
 - (IBAction)timeShiftSliderTouchUp:(id)sender
 {
     [UIView animateWithDuration:0.2 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.popup.alpha = 0.0f;
+        self.popup.alpha = 0.0;
     } completion:^(BOOL finished) {
         
     }];
@@ -142,15 +142,15 @@
                                                               trackRect:trackRect
                                                                   value:timeShiftDuration];
     CGPoint center = CGPointMake(CGRectGetMinX(thumbRect) + CGRectGetMinX(self.timeShiftDurationSlider.frame),
-                                 CGRectGetMinY(self.timeShiftDurationSlider.frame) - 44.0f);
+                                 CGRectGetMinY(self.timeShiftDurationSlider.frame) - 44.0);
     center = [self.timeShiftDurationSlider convertPoint:center toView:self.view];
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         center.x -= CGRectGetWidth(thumbRect) / 4;
     } else {
-        center.x -= 2.0f;
+        center.x -= 2.0;
     }
     self.popup.center = center;
-    self.popup.alpha = 1.0f;
+    self.popup.alpha = 1.0;
     self.popup.valueLabel.text = [NSString stringWithFormat:@"%d", (int)(timeShiftDuration * 1000)];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

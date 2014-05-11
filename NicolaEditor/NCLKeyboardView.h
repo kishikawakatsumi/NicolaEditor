@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-@interface NCLKeyboardView : UIInputView
+@interface NCLKeyboardView : UIView
 
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, weak) UITextView *textView;

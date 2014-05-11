@@ -142,7 +142,7 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
             {
                 UIView *view = self.inputAccessoryView.superview;
                 if (view) {
-                    if (CGRectGetMaxY([self.textView convertRect:frame toView:view]) > 0.0f) {
+                    if (CGRectGetMaxY([self.textView convertRect:frame toView:view]) > 0.0) {
                         CGRect rect = [self.textView caretRectForPosition:self.textView.selectedTextRange.end];
                         frame.origin.y = rect.origin.y - CGRectGetHeight(frame);
                     }
@@ -251,7 +251,7 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
     [button sizeToFit];
     
     CGRect frame = button.frame;
-    frame.size.width = 44.0f;
+    frame.size.width = 44.0;
     button.frame = frame;
     
     return button;
@@ -640,7 +640,7 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
     
     UIEdgeInsets contentInset = self.textView.contentInset;
     self.textViewContentInset = contentInset;
-    contentInset.bottom = keyboardHeight + 44.0f;
+    contentInset.bottom = keyboardHeight + 44.0;
     
     UIEdgeInsets scrollIndicatorInsets = self.textView.scrollIndicatorInsets;
     self.textViewScrollIndicatorInsets = scrollIndicatorInsets;

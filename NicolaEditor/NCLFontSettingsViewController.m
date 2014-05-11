@@ -35,14 +35,14 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:CGRectMake(0.0f, 0.0f, 44.0f, 44.0f)];
+    self = [super initWithFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-            self.progressView = [[FFCircularProgressView alloc] initWithFrame:CGRectMake(10.0f, 10.0f, 24.0f, 24.0f)];
+            self.progressView = [[FFCircularProgressView alloc] initWithFrame:CGRectMake(10.0, 10.0, 24.0, 24.0)];
         } else {
-            self.progressView = [[FFCircularProgressView alloc] initWithFrame:CGRectMake(20.0f, 10.0f, 24.0f, 24.0f)];
+            self.progressView = [[FFCircularProgressView alloc] initWithFrame:CGRectMake(20.0, 10.0, 24.0, 24.0)];
         }
         
         [self addSubview:self.progressView];

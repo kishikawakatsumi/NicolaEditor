@@ -129,7 +129,7 @@ static NSCache *cache;
 - (void)commonInit
 {
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        self.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.5];
+        self.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
         self.keyboardBackgroundView.backgroundColor = self.backgroundColor;
     } else {
         self.keyboardBackgroundView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.5];
@@ -403,10 +403,12 @@ static NSCache *cache;
 
 - (void)physicalKeyboardAttached
 {
-    CGRect frame = self.frame;
-    frame.size.height = 0.0f;
+    [UIView setAnimationsEnabled:NO];
     
-    [UIView animateWithDuration:0.0 delay:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    CGRect frame = self.frame;
+    frame.size.height = 0.0;
+    
+    [UIView animateWithDuration:0.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
             self.keyboardBackgroundView.hidden = YES;
         } else {
@@ -416,6 +418,9 @@ static NSCache *cache;
         if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_5_1) {
             self.hidden = YES;
         }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView setAnimationsEnabled:YES];
+        });
     }];
     
     [self.textView performSelector:@selector(reloadInputViews) withObject:nil afterDelay:0.0];
@@ -423,14 +428,16 @@ static NSCache *cache;
 
 - (void)physicalKeyboardDettached
 {
+    [UIView setAnimationsEnabled:NO];
+    
     UIApplication *app = [UIApplication sharedApplication];
     UIInterfaceOrientation orientation = app.statusBarOrientation;
     
     CGRect frame = self.frame;
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        frame.size.height = 264.0f;
+        frame.size.height = 264.0;
     } else {
-        frame.size.height = 352.0f;
+        frame.size.height = 352.0;
     }
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
@@ -441,6 +448,10 @@ static NSCache *cache;
         self.frame = frame;
     } completion:^(BOOL finished) {
         self.hidden = NO;
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [UIView setAnimationsEnabled:YES];
+        });
     }];
     
     [self.textView performSelector:@selector(reloadInputViews) withObject:nil afterDelay:0.0];
@@ -459,21 +470,21 @@ static NSCache *cache;
     CGFloat keyWidth;
     CGFloat keyHeight;
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        leftMargin = 6.0f;
-        leftPadding = 32.0f;
-        topMargin = 8.0f;
-        horizontalSpacing = 6.5f;
-        verticalSpacing = 8.0f;
-        keyWidth = 57.0f;
-        keyHeight = 56.0f;
+        leftMargin = 6.0;
+        leftPadding = 32.0;
+        topMargin = 8.0;
+        horizontalSpacing = 6.5;
+        verticalSpacing = 8.0;
+        keyWidth = 57.0;
+        keyHeight = 56.0;
     } else {
-        leftMargin = 7.0f;
-        leftPadding = 38.0f;
-        topMargin = 9.0f;
-        horizontalSpacing = 9.0f;
-        verticalSpacing = 11.0f;
-        keyWidth = 76.0f;
-        keyHeight = 75.0f;
+        leftMargin = 7.0;
+        leftPadding = 38.0;
+        topMargin = 9.0;
+        horizontalSpacing = 9.0;
+        verticalSpacing = 11.0;
+        keyWidth = 76.0;
+        keyHeight = 75.0;
     }
 
     NSInteger counter = 0;
@@ -505,21 +516,21 @@ static NSCache *cache;
     }
     
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        self.returnKeyButton.frame = CGRectMake(674.0f, 72.0f, 88.0f, keyHeight);
-        self.numberKeyButton.frame = CGRectMake(5.0f, 200.0f, keyWidth, keyHeight);
-        self.alphabetKeyButton.frame = CGRectMake(68.5f, 200.0f, keyWidth, keyHeight);
-        self.leftShiftKeyButton.frame = CGRectMake(132.0f, 200.0f, 217.0f, keyHeight);
-        self.rightShiftKeyButton.frame = CGRectMake(356.0f, 200.0f, 216.0f, keyHeight);
-        self.spaceKeyButton.frame = CGRectMake(578.5f, 200.0f, 121.0f, keyHeight);
-        self.keyboardKeyButton.frame = CGRectMake(706.0f, 200.0f, keyWidth, keyHeight);
+        self.returnKeyButton.frame = CGRectMake(674.0, 72.0, 88.0, keyHeight);
+        self.numberKeyButton.frame = CGRectMake(5.0, 200.0, keyWidth, keyHeight);
+        self.alphabetKeyButton.frame = CGRectMake(68.5, 200.0, keyWidth, keyHeight);
+        self.leftShiftKeyButton.frame = CGRectMake(132.0, 200.0, 217.0, keyHeight);
+        self.rightShiftKeyButton.frame = CGRectMake(356.0, 200.0, 216.0, keyHeight);
+        self.spaceKeyButton.frame = CGRectMake(578.5, 200.0, 121.0, keyHeight);
+        self.keyboardKeyButton.frame = CGRectMake(706.0, 200.0, keyWidth, keyHeight);
     } else {
-        self.returnKeyButton.frame = CGRectMake(895.0f, 95.0f, 122.0f, keyHeight);
-        self.numberKeyButton.frame = CGRectMake(7.0f, 267.0f, keyWidth, keyHeight);
-        self.alphabetKeyButton.frame = CGRectMake(92.0f, 267.0f, keyWidth, keyHeight);
-        self.leftShiftKeyButton.frame = CGRectMake(177.0f, 267.0f, 289.0f, keyHeight);
-        self.rightShiftKeyButton.frame = CGRectMake(475.0f, 267.0f, 288.0f, keyHeight);
-        self.spaceKeyButton.frame = CGRectMake(772.0f, 267.0f, 161.0f, keyHeight);
-        self.keyboardKeyButton.frame = CGRectMake(942.0f, 267.0f, keyWidth, keyHeight);
+        self.returnKeyButton.frame = CGRectMake(895.0, 95.0, 122.0, keyHeight);
+        self.numberKeyButton.frame = CGRectMake(7.0, 267.0, keyWidth, keyHeight);
+        self.alphabetKeyButton.frame = CGRectMake(92.0, 267.0, keyWidth, keyHeight);
+        self.leftShiftKeyButton.frame = CGRectMake(177.0, 267.0, 289.0, keyHeight);
+        self.rightShiftKeyButton.frame = CGRectMake(475.0, 267.0, 288.0, keyHeight);
+        self.spaceKeyButton.frame = CGRectMake(772.0, 267.0, 161.0, keyHeight);
+        self.keyboardKeyButton.frame = CGRectMake(942.0, 267.0, keyWidth, keyHeight);
     }
 }
 

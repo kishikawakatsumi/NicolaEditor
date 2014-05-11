@@ -101,7 +101,7 @@
                 return (bool)NO;
             }
             
-            UIFont *font = [UIFont fontWithName:fontName size:1.0f];
+            UIFont *font = [UIFont fontWithName:fontName size:1.0];
             if (!font) {
                 if ([self.delegate respondsToSelector:@selector(download:matchingDidFailWithError:)]) {
                     [self.delegate download:self matchingDidFailWithError:nil];
@@ -109,7 +109,7 @@
                 return (bool)NO;
             }
             
-            CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)fontName, 0.0f, NULL);
+            CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)fontName, 0.0, NULL);
             CFStringRef fontURL = CTFontCopyAttribute(fontRef, kCTFontURLAttribute);
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -182,7 +182,7 @@
 
 - (CGFloat)progress
 {
-    CGFloat progress = 0.0f;
+    CGFloat progress = 0.0;
     
     if (self.downloads.count == 0) {
         return progress;
@@ -315,7 +315,7 @@
 
 - (BOOL)isAvailableFontNamed:(NSString *)fontName
 {
-    UIFont *font = [UIFont fontWithName:fontName size:1.0f];
+    UIFont *font = [UIFont fontWithName:fontName size:1.0];
     return font && ([font.fontName compare:fontName] == NSOrderedSame || [font.familyName compare:fontName] == NSOrderedSame);
 }
 
@@ -368,7 +368,7 @@
     CTFontDescriptorMatchFontDescriptorsWithProgressHandler((__bridge CFArrayRef)fontDescriptors, NULL, ^bool(CTFontDescriptorMatchingState state, CFDictionaryRef progressParameter) {
         if (state == kCTFontDescriptorMatchingDidFinish) {
 			dispatch_async( dispatch_get_main_queue(), ^ {
-                UIFont *font = [UIFont fontWithName:fontName size:1.0f];
+                UIFont *font = [UIFont fontWithName:fontName size:1.0];
                 if (font) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFinishNotification object:nil userInfo:@{@"name": fontName}];
                     [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:nil userInfo:nil];

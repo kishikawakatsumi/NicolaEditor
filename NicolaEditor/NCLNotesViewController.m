@@ -50,7 +50,7 @@
             UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
             backgroundView.backgroundColor = [UIColor clearColor];
             
-            UIImageView *shadowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(self.navigationController.navigationBar.bounds), 1.0f / [[UIScreen mainScreen] scale])];
+            UIImageView *shadowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.navigationController.navigationBar.bounds), 1.0 / [[UIScreen mainScreen] scale])];
             shadowImageView.image = [[UIImage imageNamed:@"shadow"] resizableImageWithCapInsets:UIEdgeInsetsZero];
             [backgroundView addSubview:shadowImageView];
             
@@ -64,7 +64,7 @@
         [settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
         [settingsButton sizeToFit];
         CGRect frame = settingsButton.frame;
-        frame.size.width = 44.0f;
+        frame.size.width = 44.0;
         settingsButton.frame = frame;
         settingsButton.showsTouchWhenHighlighted = YES;
         [settingsButton addTarget:self action:@selector(presentSettings:) forControlEvents:UIControlEventTouchUpInside];

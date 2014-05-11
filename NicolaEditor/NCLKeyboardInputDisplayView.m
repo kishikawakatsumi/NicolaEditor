@@ -23,20 +23,20 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.userInteractionEnabled = NO;
-        self.backgroundColor = [UIColor colorWithWhite:1.0f alpha:1.0f];
-        self.alpha = 0.0f;
+        self.backgroundColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+        self.alpha = 0.0;
         
         CGFloat scale = [[UIScreen mainScreen] scale];
-        self.layer.borderWidth = 1.0f / scale;
-        self.layer.borderColor = [[UIColor colorWithWhite:0.0f alpha:0.2f] CGColor];
-        self.layer.cornerRadius = 7.0f;
+        self.layer.borderWidth = 1.0 / scale;
+        self.layer.borderColor = [[UIColor colorWithWhite:0.0 alpha:0.2] CGColor];
+        self.layer.cornerRadius = 7.0;
         self.layer.masksToBounds = YES;
         
         self.label = [[UILabel alloc] initWithFrame:self.bounds];
         self.label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         self.label.backgroundColor = [UIColor clearColor];
         self.label.textAlignment = NSTextAlignmentCenter;
-        self.label.font = [UIFont systemFontOfSize:23.0f];
+        self.label.font = [UIFont systemFontOfSize:23.0];
         [self addSubview:self.label];
     }
     
@@ -52,16 +52,16 @@
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
-    self.alpha = 0.0f;
+    self.alpha = 0.0;
 }
 
 - (void)show
 {
     [UIView animateWithDuration:0.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.alpha = 1.0f;
+        self.alpha = 1.0;
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.2 delay:0.3 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            self.alpha = 0.0f;
+            self.alpha = 0.0;
         } completion:^(BOOL finished) {
             
         }];

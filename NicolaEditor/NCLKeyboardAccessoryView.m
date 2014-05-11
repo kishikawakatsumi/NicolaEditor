@@ -30,22 +30,22 @@
     UIBarButtonItem *pasteButton;
     
     UIBarButtonItem *space18 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    space18.width = 18.0f;
+    space18.width = 18.0;
     
     UIBarButtonItem *space16 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    space16.width = 16.0f;
+    space16.width = 16.0;
     
     UIBarButtonItem *space20 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    space20.width = 20.0f;
+    space20.width = 20.0;
     
     UIBarButtonItem *space22 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    space22.width = 22.0f;
+    space22.width = 22.0;
     
     UIBarButtonItem *space24 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    space24.width = 24.0f;
+    space24.width = 24.0;
     
     UIBarButtonItem *space30 = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    space30.width = 30.0f;
+    space30.width = 30.0;
     
     NSArray *items;
     
@@ -94,8 +94,8 @@
         
         items = @[space18, upArrowButton, downArrowButton, leftArrowButton, rightArrowButton, cutButton, copyButton, pasteButton];
     } else {
-        [self.keyboardChooser setContentOffset:CGSizeMake(0.0f, 1.0f) forSegmentAtIndex:0];
-        [self.keyboardChooser setContentOffset:CGSizeMake(0.0f, 1.0f) forSegmentAtIndex:1];
+        [self.keyboardChooser setContentOffset:CGSizeMake(0.0, 1.0) forSegmentAtIndex:0];
+        [self.keyboardChooser setContentOffset:CGSizeMake(0.0, 1.0) forSegmentAtIndex:1];
         
         upArrowButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_up"] style:UIBarButtonItemStylePlain target:self action:@selector(arrowUp:)];
         downArrowButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"arrow_down"] style:UIBarButtonItemStylePlain target:self action:@selector(arrowDown:)];
@@ -121,7 +121,7 @@
     [button sizeToFit];
     
     CGRect frame = button.frame;
-    frame.size.width = 44.0f;
+    frame.size.width = 44.0;
     button.frame = frame;
     
     return button;
