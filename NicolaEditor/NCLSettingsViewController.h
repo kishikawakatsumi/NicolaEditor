@@ -16,9 +16,6 @@
 
 @protocol NCLSettingsViewControllerDelegate <NSObject>
 
-- (void)settingsViewControllerShouldShowSupport:(NCLSettingsViewController *)controller;
-- (void)settingsViewControllerShouldShowReportIssue:(NCLSettingsViewController *)controller;
-- (void)settingsViewControllerShouldShowInbox:(NCLSettingsViewController *)controller;
-- (void)settingsViewControllerShouldShowFAQs:(NCLSettingsViewController *)controller;
+- (void)settingsViewControllerShouldShowUserVoice:(NCLSettingsViewController *)controller;
 
 @end

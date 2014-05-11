@@ -24,14 +24,8 @@
 {
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
-    if (section == 0 && row == 0) {
-        cell.textLabel.text = NSLocalizedString(@"Help", nil);
-    } else if (section == 0 && row == 1) {
+    if (section == 0 && row == 1) {
         cell.textLabel.text = NSLocalizedString(@"Report Issue", nil);
-    } else if (section == 0 && row == 2) {
-        cell.textLabel.text = NSLocalizedString(@"Inbox", nil);
-    } else if (section == 0 && row == 3) {
-        cell.textLabel.text = NSLocalizedString(@"FAQ", nil);
     } else if (section == 1 && row == 0) {
         cell.textLabel.text = NSLocalizedString(@"About N+Note", nil);
     }
@@ -47,20 +41,8 @@
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
     if (section == 0 && row == 0) {
-        if ([self.delegate respondsToSelector:@selector(helpViewControllerShouldShowSupport:)]) {
-            [self.delegate helpViewControllerShouldShowSupport:self];
-        }
-    } else if (section == 0 && row == 1) {
-        if ([self.delegate respondsToSelector:@selector(helpViewControllerShouldShowReportIssue:)]) {
-            [self.delegate helpViewControllerShouldShowReportIssue:self];
-        }
-    } else if (section == 0 && row == 2) {
-        if ([self.delegate respondsToSelector:@selector(helpViewControllerShouldShowInbox:)]) {
-            [self.delegate helpViewControllerShouldShowInbox:self];
-        }
-    } else if (section == 0 && row == 3) {
-        if ([self.delegate respondsToSelector:@selector(helpViewControllerShouldShowFAQs:)]) {
-            [self.delegate helpViewControllerShouldShowFAQs:self];
+        if ([self.delegate respondsToSelector:@selector(helpViewControllerShouldShowUserVoice:)]) {
+            [self.delegate helpViewControllerShouldShowUserVoice:self];
         }
     }
 }

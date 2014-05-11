@@ -15,10 +15,7 @@
 #import <NLCoreData/NLCoreData.h>
 #import <Evernote-SDK-iOS/EvernoteSDK.h>
 #import <DropboxSDK/DropboxSDK.h>
-#import <UrbanAirship-iOS-SDK/UAirship.h>
-#import <UrbanAirship-iOS-SDK/UAConfig.h>
-#import <UrbanAirship-iOS-SDK/UAPush.h>
-#import <Helpshift/Helpshift.h>
+#import <uservoice-iphone-sdk/UserVoice.h>
 #import <CrittercismSDK/Crittercism.h>
 
 @import CoreText;
@@ -33,10 +30,9 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    UAConfig *config = [UAConfig defaultConfig];
-    [UAirship takeOff:config];
-    
-    [Helpshift installForApiKey:@"537b553656373a8b29712f0d632c3687" domainName:@"nicola-note.helpshift.com" appID:@"nicola-note_platform_20131021094422072-e208905abd32493"];
+    UVConfig *config = [UVConfig configWithSite:@"kishikawakatsumi.uservoice.com"];
+    config.forumId = 251764;
+    [UserVoice initialize:config];
     
     [Crittercism enableWithAppID:@"5264f50ea7928a4f07000005"];
     

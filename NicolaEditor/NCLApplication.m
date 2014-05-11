@@ -11,9 +11,6 @@
 #import "NCLConstants.h"
 #import "NCLRuntimeUtils.h"
 
-#define GSEVENT_TYPE_KEYDOWN 10
-#define GSEVENT_TYPE_KEYUP 11
-
 #define GSEVENT_TYPE 2
 #define GSEVENT_SUBTYPE 3
 #define GSEVENT_LOCATION 4
@@ -185,14 +182,15 @@ static BOOL RCMD;
                     int eventType = eventMemory[GSEVENT_TYPE];
                     int eventFlags = eventMemory[GSEVENT_FLAGS];
                     
+                    int tmp = eventMemory[GSEVENTKEY_KEYCODE];
+                    UniChar *keycode = (UniChar *)&tmp;
+                    UniChar key = keycode[0];
+                    
                     if (eventType == GSEVENT_TYPE_KEYDOWN) {
                         if ((eventFlags & GSEVENT_FLAG_LCTRL) != GSEVENT_FLAG_LCTRL &&
                             (eventFlags & GSEVENT_FLAG_LALT) != GSEVENT_FLAG_LALT &&
                             (eventFlags & GSEVENT_FLAG_LCMD) != GSEVENT_FLAG_LCMD &&
                             (eventFlags & GSEVENT_FLAG_RCMD) != GSEVENT_FLAG_RCMD) {
-                            int tmp = eventMemory[GSEVENTKEY_KEYCODE];
-                            UniChar *keycode = (UniChar *)&tmp;
-                            UniChar key = keycode[0];
                             result = [keyboardManager downKeyCode:key];
                         }
                     } else if (eventType == GSEVENT_TYPE_MODIFIERKEYDOWN) {
@@ -226,7 +224,6 @@ static BOOL RCMD;
                             result = [keyboardManager downKeyCode:KEYCODE_RCMD];
                         }
                     } else if (eventType == GSEVENT_TYPE_KEYUP) {
-                        int key = eventMemory[GSEVENTKEY_KEYCODE];
                         result = [keyboardManager upKeyCode:key];
                         
                         if ((eventFlags & GSEVENT_FLAG_LSHIFT) != GSEVENT_FLAG_LSHIFT) {

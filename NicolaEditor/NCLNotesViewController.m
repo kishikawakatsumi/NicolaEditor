@@ -12,7 +12,7 @@
 #import "NCLPopoverManager.h"
 #import "NCLNote.h"
 #import <NLCoreData/NLCoreData.h>
-#import <Helpshift/Helpshift.h>
+#import <uservoice-iphone-sdk/UserVoice.h>
 
 @interface NCLNotesViewController ()
 
@@ -276,44 +276,14 @@
 
 #pragma mark -
 
-- (void)settingsViewControllerShouldShowSupport:(NCLSettingsViewController *)controller
+- (void)settingsViewControllerShouldShowUserVoice:(NCLSettingsViewController *)controller
 {
     [[NCLPopoverManager sharedManager] dismissPopovers];
     if (self.textViewController.masterPopoverController.isPopoverVisible) {
         [self.textViewController.masterPopoverController dismissPopoverAnimated:YES];
     }
     
-    [[Helpshift sharedInstance] showSupport:self.textViewController];
-}
-
-- (void)settingsViewControllerShouldShowReportIssue:(NCLSettingsViewController *)controller
-{
-    [[NCLPopoverManager sharedManager] dismissPopovers];
-    if (self.textViewController.masterPopoverController.isPopoverVisible) {
-        [self.textViewController.masterPopoverController dismissPopoverAnimated:YES];
-    }
-    
-    [[Helpshift sharedInstance] reportIssue:self.textViewController];
-}
-
-- (void)settingsViewControllerShouldShowInbox:(NCLSettingsViewController *)controller
-{
-    [[NCLPopoverManager sharedManager] dismissPopovers];
-    if (self.textViewController.masterPopoverController.isPopoverVisible) {
-        [self.textViewController.masterPopoverController dismissPopoverAnimated:YES];
-    }
-    
-    [[Helpshift sharedInstance] showInbox:self.textViewController];
-}
-
-- (void)settingsViewControllerShouldShowFAQs:(NCLSettingsViewController *)controller
-{
-    [[NCLPopoverManager sharedManager] dismissPopovers];
-    if (self.textViewController.masterPopoverController.isPopoverVisible) {
-        [self.textViewController.masterPopoverController dismissPopoverAnimated:YES];
-    }
-    
-    [[Helpshift sharedInstance] showFAQs:self.textViewController];
+    [UserVoice presentUserVoiceInterfaceForParentViewController:self.textViewController];
 }
 
 @end

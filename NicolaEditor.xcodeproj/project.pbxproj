@@ -41,8 +41,6 @@
 		1461D018182D626800F93FA8 /* PhysicalKeyboardLayouts.json in Resources */ = {isa = PBXBuildFile; fileRef = 1461D016182D626800F93FA8 /* PhysicalKeyboardLayouts.json */; };
 		1464694A1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
 		1464694B1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
-		1464694E1814FAC500CEAA41 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1464694D1814FAC500CEAA41 /* AirshipConfig.plist */; };
-		1464694F1814FAC500CEAA41 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1464694D1814FAC500CEAA41 /* AirshipConfig.plist */; };
 		146B3EE0180857F200418452 /* NCLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EDF180857F200418452 /* NCLSettingsViewController.m */; };
 		146B3EE1180857F200418452 /* NCLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EDF180857F200418452 /* NCLSettingsViewController.m */; };
 		146B3EE4180859A200418452 /* NCLFontSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */; };
@@ -146,7 +144,6 @@
 		1461D016182D626800F93FA8 /* PhysicalKeyboardLayouts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = PhysicalKeyboardLayouts.json; sourceTree = "<group>"; };
 		146469491812E48E00CEAA41 /* NCLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLAppDelegate.m; sourceTree = "<group>"; };
 		1464694C1813FBA000CEAA41 /* NicolaEditor.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NicolaEditor.entitlements; sourceTree = "<group>"; };
-		1464694D1814FAC500CEAA41 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		146B3EDE180857F200418452 /* NCLSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLSettingsViewController.h; sourceTree = "<group>"; };
 		146B3EDF180857F200418452 /* NCLSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLSettingsViewController.m; sourceTree = "<group>"; };
 		146B3EE2180859A200418452 /* NCLFontSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLFontSettingsViewController.h; sourceTree = "<group>"; };
@@ -361,7 +358,6 @@
 			children = (
 				14B3F43718030DEC00F7E91A /* NicolaEditor-Info.plist */,
 				1464694C1813FBA000CEAA41 /* NicolaEditor.entitlements */,
-				1464694D1814FAC500CEAA41 /* AirshipConfig.plist */,
 				14BD796A1811BBBE005A6387 /* Settings.bundle */,
 				14B3F43818030DEC00F7E91A /* InfoPlist.strings */,
 				146B3EEE18085B8600418452 /* Localizable.strings */,
@@ -454,7 +450,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = NCL;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "kishikawa katsumi";
 				TargetAttributes = {
 					14B3F42918030DEC00F7E91A = {
@@ -504,7 +500,6 @@
 				146174711803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
 				1461D017182D626800F93FA8 /* PhysicalKeyboardLayouts.json in Resources */,
 				14B3F44E18030DEC00F7E91A /* Images.xcassets in Resources */,
-				1464694E1814FAC500CEAA41 /* AirshipConfig.plist in Resources */,
 				146B3F0F18099F7200418452 /* SampleText.json in Resources */,
 				14BD796B1811BBBE005A6387 /* Settings.bundle in Resources */,
 				145AE70118157C82000459C1 /* Icon-72.png in Resources */,
@@ -529,7 +524,6 @@
 				14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */,
 				146B3F1018099F7200418452 /* SampleText.json in Resources */,
 				145AE70418157C82000459C1 /* Icon-72@2x.png in Resources */,
-				1464694F1814FAC500CEAA41 /* AirshipConfig.plist in Resources */,
 				145AE70218157C82000459C1 /* Icon-72.png in Resources */,
 				146B3EEC18085B8600418452 /* Localizable.strings in Resources */,
 				14B3F46018030DEC00F7E91A /* InfoPlist.strings in Resources */,
@@ -693,7 +687,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -734,7 +727,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -804,7 +796,6 @@
 		14B3F46918030DEC00F7E91A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NicolaEditor.app/NicolaEditor";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -827,7 +818,6 @@
 		14B3F46A18030DEC00F7E91A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NicolaEditor.app/NicolaEditor";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

@@ -1,13 +1,14 @@
 platform :ios, '5.0'
 
+inhibit_all_warnings!
+
 pod 'SVProgressHUD'
 pod 'FFCircularProgressView'
 pod 'JLRoutes'
 pod 'NLCoreData'
 pod 'Evernote-SDK-iOS'
 pod 'Dropbox-iOS-SDK'
-pod 'UrbanAirship-iOS-SDK'
-pod 'Helpshift'
+pod 'uservoice-iphone-sdk', '~> 2.0'
 pod 'CrittercismSDK'
 
 post_install do | installer |

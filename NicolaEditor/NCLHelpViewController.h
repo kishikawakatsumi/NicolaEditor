@@ -16,10 +16,6 @@
 
 @protocol NCLHelpViewControllerDelegate <NSObject>
 
-- (void)helpViewControllerShouldShowSupport:(NCLHelpViewController *)controller;
-- (void)helpViewControllerShouldShowReportIssue:(NCLHelpViewController *)controller;
-- (void)helpViewControllerShouldShowInbox:(NCLHelpViewController *)controller;
-- (void)helpViewControllerShouldShowFAQs:(NCLHelpViewController *)controller;
+- (void)helpViewControllerShouldShowUserVoice:(NCLHelpViewController *)controller;
 
 @end
-

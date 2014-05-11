@@ -23,7 +23,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *shiftKeyBehaviorLabel;
 @property (nonatomic, weak) IBOutlet UILabel *timeShiftDurationLabel;
 @property (nonatomic, weak) IBOutlet UISlider *timeShiftDurationSlider;
-@property (nonatomic, weak) IBOutlet UITableViewCell *timeShiftSliderCell;
 
 @property (nonatomic, weak) IBOutlet UITableViewCell *swapKeyCell;
 @property (nonatomic, weak) IBOutlet UILabel *swapKeyLabel;
@@ -88,7 +87,7 @@
     self.fontNameLabel.text = NSLocalizedString(fontName, nil);
     
     double fontSize = [userDefaults doubleForKey:NCLSettingsFontSizeKey];
-    self.fontSizeLabel.text = [NSString stringWithFormat:@"%d pt", (NSInteger)fontSize];
+    self.fontSizeLabel.text = [NSString stringWithFormat:@"%d pt", (int)fontSize];
     
     NSString *shiftKeyBehavior = [userDefaults stringForKey:NCLSettingsShiftKeyBehaviorKey];
     self.shiftKeyBehaviorLabel.text = NSLocalizedString(shiftKeyBehavior, nil);
@@ -100,9 +99,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:NSStringFromClass([NCLShiftKeyFunctionsSettingsViewController class])]) {
-        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
-        if (indexPath.section == 2 && indexPath.row == 0) {
+    if ([segue.identifier hasPrefix:NSStringFromClass([NCLShiftKeyFunctionsSettingsViewController class])]) {
+        if ([segue.identifier hasSuffix:@"-Left"]) {
             NCLShiftKeyFunctionsSettingsViewController *controller = segue.destinationViewController;
             controller.left = YES;
         }
@@ -121,7 +119,7 @@
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setDouble:fontSize forKey:NCLSettingsFontSizeKey];
     
-    self.fontSizeLabel.text = [NSString stringWithFormat:@"%d pt", (NSInteger)fontSize];
+    self.fontSizeLabel.text = [NSString stringWithFormat:@"%d pt", (int)fontSize];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:nil];
 }
@@ -153,7 +151,7 @@
     }
     self.popup.center = center;
     self.popup.alpha = 1.0f;
-    self.popup.valueLabel.text = [NSString stringWithFormat:@"%d", (NSInteger)(timeShiftDuration * 1000)];
+    self.popup.valueLabel.text = [NSString stringWithFormat:@"%d", (int)(timeShiftDuration * 1000)];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setFloat:timeShiftDuration forKey:NCLSettingsTimeShiftDurationKey];
@@ -212,31 +210,10 @@
 
 #pragma mark -
 
-- (void)helpViewControllerShouldShowSupport:(NCLHelpViewController *)controller
+- (void)helpViewControllerShouldShowUserVoice:(NCLHelpViewController *)controller
 {
-    if ([self.delegate respondsToSelector:@selector(settingsViewControllerShouldShowSupport:)]) {
-        [self.delegate settingsViewControllerShouldShowSupport:self];
-    }
-}
-
-- (void)helpViewControllerShouldShowReportIssue:(NCLHelpViewController *)controller
-{
-    if ([self.delegate respondsToSelector:@selector(settingsViewControllerShouldShowReportIssue:)]) {
-        [self.delegate settingsViewControllerShouldShowReportIssue:self];
-    }
-}
-
-- (void)helpViewControllerShouldShowInbox:(NCLHelpViewController *)controller
-{
-    if ([self.delegate respondsToSelector:@selector(settingsViewControllerShouldShowInbox:)]) {
-        [self.delegate settingsViewControllerShouldShowInbox:self];
-    }
-}
-
-- (void)helpViewControllerShouldShowFAQs:(NCLHelpViewController *)controller
-{
-    if ([self.delegate respondsToSelector:@selector(settingsViewControllerShouldShowFAQs:)]) {
-        [self.delegate settingsViewControllerShouldShowFAQs:self];
+    if ([self.delegate respondsToSelector:@selector(settingsViewControllerShouldShowUserVoice:)]) {
+        [self.delegate settingsViewControllerShouldShowUserVoice:self];
     }
 }
 

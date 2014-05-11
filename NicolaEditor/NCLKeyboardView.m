@@ -14,9 +14,9 @@
 
 @import ObjectiveC;
 
-NSInteger const NCLKeyButtonIndexSpecialKeyDelete = 11;
-NSInteger const NCLKeyButtonIndexSpecialKeyShift1 = 22;
-NSInteger const NCLKeyButtonIndexSpecialKeyShift2 = 33;
+int const NCLKeyButtonIndexSpecialKeyDelete = 11;
+int const NCLKeyButtonIndexSpecialKeyShift1 = 22;
+int const NCLKeyButtonIndexSpecialKeyShift2 = 33;
 
 // setInputMode:
 static NSString *HTcj2RHKk78UgtYwx3Z8;
@@ -203,7 +203,7 @@ static NSCache *cache;
         }
     }
     
-    NSInteger i = 0;
+    int i = 0;
     for (NCLKeyboardButton *keyButton in _keyButtons) {
         [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d", keyboardType, i]] forState:UIControlStateNormal];
         [keyButton setImage:[UIImage imageNamed:[NSString stringWithFormat:@"key_%@_%02d_highlighted", keyboardType, i]] forState:UIControlStateHighlighted];
