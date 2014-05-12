@@ -98,6 +98,12 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
     self.inputAccessoryView.hidden = NO;
 }
 
+- (void)viewDidUnload
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewDidUnload];
+}
+
 #pragma mark -
 
 + (BOOL)__supportsSplit

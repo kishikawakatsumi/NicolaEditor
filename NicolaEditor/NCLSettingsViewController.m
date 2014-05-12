@@ -122,7 +122,7 @@
     
     self.fontSizeLabel.text = [NSString stringWithFormat:@"%d pt", (int)fontSize];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:self];
 }
 
 - (IBAction)timeShiftSliderTouchUp:(id)sender
@@ -197,7 +197,11 @@
     } else if (section == 2 && row == 1) {
         cell.textLabel.text = NSLocalizedString(@"Right Shift Key", nil);
     } else if (section == 3 && row == 1) {
-        cell.textLabel.text = NSLocalizedString(@"External Keyboard", nil);
+        if (row == 1) {
+            cell.textLabel.text = NSLocalizedString(@"External Keyboard", nil);
+        } else if (row == 2) {
+            cell.textLabel.text = NSLocalizedString(@"Connect to a Computer...", nil);
+        }
     } else if (section == 4) {
         cell.textLabel.text = NSLocalizedString(@"Help", nil);
     }

@@ -208,7 +208,7 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         [tableView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:self];
     } else {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
     }

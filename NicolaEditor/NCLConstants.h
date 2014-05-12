@@ -52,3 +52,6 @@ extern NSString * const NCLKeyboardUserDefined;
 
 extern NSString * const NCLPhysicalKeyboardAvailabilityChangedNotification;
 extern NSString * const NCLPhysicalKeyboardAvailabilityKey;
+
+extern NSString * const NCLVNCServerWillConnectNodification;
+extern NSString * const NCLVNCServerProfileKey;

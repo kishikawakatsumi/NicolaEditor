@@ -8,73 +8,69 @@
 
 /* Begin PBXBuildFile section */
 		14326812180FB7270001BDBC /* NCLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326811180FB7270001BDBC /* NCLConstants.m */; };
-		14326813180FB7270001BDBC /* NCLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326811180FB7270001BDBC /* NCLConstants.m */; };
 		14326816180FB7990001BDBC /* UIFont+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326815180FB7990001BDBC /* UIFont+Helper.m */; };
-		14326817180FB7990001BDBC /* UIFont+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326815180FB7990001BDBC /* UIFont+Helper.m */; };
 		1432681A180FBF910001BDBC /* NCLPopoverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326819180FBF910001BDBC /* NCLPopoverManager.m */; };
-		1432681B180FBF910001BDBC /* NCLPopoverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326819180FBF910001BDBC /* NCLPopoverManager.m */; };
 		14326836181027120001BDBC /* NCLSliderPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326835181027120001BDBC /* NCLSliderPopup.m */; };
-		14326837181027120001BDBC /* NCLSliderPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326835181027120001BDBC /* NCLSliderPopup.m */; };
 		143268391810272E0001BDBC /* NCLSliderPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 143268381810272E0001BDBC /* NCLSliderPopup.xib */; };
-		1432683A1810272E0001BDBC /* NCLSliderPopup.xib in Resources */ = {isa = PBXBuildFile; fileRef = 143268381810272E0001BDBC /* NCLSliderPopup.xib */; };
 		145AE70118157C82000459C1 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 145AE6FF18157C82000459C1 /* Icon-72.png */; };
-		145AE70218157C82000459C1 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 145AE6FF18157C82000459C1 /* Icon-72.png */; };
 		145AE70318157C82000459C1 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 145AE70018157C82000459C1 /* Icon-72@2x.png */; };
-		145AE70418157C82000459C1 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 145AE70018157C82000459C1 /* Icon-72@2x.png */; };
 		145AE74D18163ECB000459C1 /* NCLAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145AE74C18163ECB000459C1 /* NCLAboutViewController.m */; };
-		145AE74E18163ECB000459C1 /* NCLAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145AE74C18163ECB000459C1 /* NCLAboutViewController.m */; };
 		145E657B180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */; };
-		145E657C180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */; };
 		1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */; };
-		1461746F1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461746D1803D86200C8763B /* NCLKeyboardAccessoryView.m */; };
 		146174711803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146174701803D88700C8763B /* NCLKeyboardAccessoryView.xib */; };
-		146174721803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 146174701803D88700C8763B /* NCLKeyboardAccessoryView.xib */; };
 		1461748018058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461747F18058F6B00C8763B /* NCLKeyboardInputEngine.m */; };
-		1461748118058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461747F18058F6B00C8763B /* NCLKeyboardInputEngine.m */; };
 		1461750718072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461750618072E6500C8763B /* NCLKeyboardInputDisplayView.m */; };
-		1461750818072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461750618072E6500C8763B /* NCLKeyboardInputDisplayView.m */; };
 		1461D010182D353700F93FA8 /* NCLApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D00E182D353700F93FA8 /* NCLApplication.m */; };
-		1461D011182D353700F93FA8 /* NCLApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D00E182D353700F93FA8 /* NCLApplication.m */; };
 		1461D014182D355500F93FA8 /* NCLPhysicalKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D013182D355500F93FA8 /* NCLPhysicalKeyboardManager.m */; };
-		1461D015182D355500F93FA8 /* NCLPhysicalKeyboardManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1461D013182D355500F93FA8 /* NCLPhysicalKeyboardManager.m */; };
 		1464694A1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
-		1464694B1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 146469491812E48E00CEAA41 /* NCLAppDelegate.m */; };
 		146B3EE0180857F200418452 /* NCLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EDF180857F200418452 /* NCLSettingsViewController.m */; };
-		146B3EE1180857F200418452 /* NCLSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EDF180857F200418452 /* NCLSettingsViewController.m */; };
 		146B3EE4180859A200418452 /* NCLFontSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */; };
-		146B3EE5180859A200418452 /* NCLFontSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */; };
 		146B3EEB18085B8600418452 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 146B3EEE18085B8600418452 /* Localizable.strings */; };
-		146B3EEC18085B8600418452 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 146B3EEE18085B8600418452 /* Localizable.strings */; };
 		146B3EF2180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */; };
-		146B3EF3180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EF1180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m */; };
 		146B3F0018086C5E00418452 /* NCLNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EFF18086C5E00418452 /* NCLNote.m */; };
-		146B3F0118086C5E00418452 /* NCLNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3EFF18086C5E00418452 /* NCLNote.m */; };
 		146B3F0418086F5600418452 /* NCLNote+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3F0318086F5600418452 /* NCLNote+Helper.m */; };
-		146B3F0518086F5600418452 /* NCLNote+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3F0318086F5600418452 /* NCLNote+Helper.m */; };
 		146B3F081808740000418452 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3F071808740000418452 /* NSString+Helper.m */; };
-		146B3F091808740000418452 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 146B3F071808740000418452 /* NSString+Helper.m */; };
 		146B3F0F18099F7200418452 /* SampleText.json in Resources */ = {isa = PBXBuildFile; fileRef = 146B3F0E18099F7200418452 /* SampleText.json */; };
-		146B3F1018099F7200418452 /* SampleText.json in Resources */ = {isa = PBXBuildFile; fileRef = 146B3F0E18099F7200418452 /* SampleText.json */; };
 		147733911815A0850045ADFB /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338D1815A0850045ADFB /* Default-Landscape@2x~ipad.png */; };
-		147733921815A0850045ADFB /* Default-Landscape@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338D1815A0850045ADFB /* Default-Landscape@2x~ipad.png */; };
 		147733931815A0850045ADFB /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338E1815A0850045ADFB /* Default-Landscape~ipad.png */; };
-		147733941815A0850045ADFB /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338E1815A0850045ADFB /* Default-Landscape~ipad.png */; };
 		147733951815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338F1815A0850045ADFB /* Default-Portrait@2x~ipad.png */; };
-		147733961815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 1477338F1815A0850045ADFB /* Default-Portrait@2x~ipad.png */; };
 		147733971815A0850045ADFB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 147733901815A0850045ADFB /* Default-Portrait~ipad.png */; };
-		147733981815A0850045ADFB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 147733901815A0850045ADFB /* Default-Portrait~ipad.png */; };
 		147C582D181BB49200413706 /* NCLFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 147C582C181BB49200413706 /* NCLFontManager.m */; };
-		147C582E181BB49200413706 /* NCLFontManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 147C582C181BB49200413706 /* NCLFontManager.m */; };
 		149E0BA6191FB39F00913673 /* AppleWirelessKeyboardJIS.json in Resources */ = {isa = PBXBuildFile; fileRef = 149E0BA5191FB39F00913673 /* AppleWirelessKeyboardJIS.json */; };
-		149E0BA7191FB39F00913673 /* AppleWirelessKeyboardJIS.json in Resources */ = {isa = PBXBuildFile; fileRef = 149E0BA5191FB39F00913673 /* AppleWirelessKeyboardJIS.json */; };
 		149E0BAA191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0BA9191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m */; };
-		149E0BAB191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0BA9191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m */; };
 		149E0BAD191FBFC200913673 /* AppleWirelessKeyboardUS.json in Resources */ = {isa = PBXBuildFile; fileRef = 149E0BAC191FBFC200913673 /* AppleWirelessKeyboardUS.json */; };
-		149E0BAE191FBFC200913673 /* AppleWirelessKeyboardUS.json in Resources */ = {isa = PBXBuildFile; fileRef = 149E0BAC191FBFC200913673 /* AppleWirelessKeyboardUS.json */; };
+		149E0C0D191FF11600913673 /* BDHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0BB6191FF11600913673 /* BDHost.m */; };
+		149E0C11191FF11600913673 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0BBA191FF11600913673 /* GCDAsyncSocket.m */; };
+		149E0C17191FF11600913673 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 149E0C0C191FF11600913673 /* libcrypto.a */; };
+		149E0C22191FF18900913673 /* NSData+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C1B191FF18900913673 /* NSData+HexString.m */; };
+		149E0C23191FF18900913673 /* UILabel+MultiLineAutoSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C1D191FF18900913673 /* UILabel+MultiLineAutoSize.m */; };
+		149E0C24191FF18900913673 /* UIViewController+ErrorOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C1F191FF18900913673 /* UIViewController+ErrorOverlay.m */; };
+		149E0C25191FF18900913673 /* UIViewController+Spinner.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C21191FF18900913673 /* UIViewController+Spinner.m */; };
+		149E0C31191FF19E00913673 /* Des.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C28191FF19E00913673 /* Des.m */; };
+		149E0C32191FF19E00913673 /* HandleErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C2B191FF19E00913673 /* HandleErrors.m */; };
+		149E0C33191FF19E00913673 /* KeyMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C2D191FF19E00913673 /* KeyMapping.m */; };
+		149E0C34191FF19E00913673 /* MDNSDiscoverer.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C2F191FF19E00913673 /* MDNSDiscoverer.m */; };
+		149E0C58191FF42500913673 /* RFBEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C38191FF42500913673 /* RFBEvent.m */; };
+		149E0C59191FF42500913673 /* RFBMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C3A191FF42500913673 /* RFBMessage.m */; };
+		149E0C5A191FF42500913673 /* RFBSecurity.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C3C191FF42500913673 /* RFBSecurity.m */; };
+		149E0C5B191FF42500913673 /* RFBConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C3E191FF42500913673 /* RFBConnection.m */; };
+		149E0C5C191FF42500913673 /* RFBInputConnManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C40191FF42500913673 /* RFBInputConnManager.m */; };
+		149E0C5D191FF42500913673 /* RFBKeyEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C42191FF42500913673 /* RFBKeyEvent.m */; };
+		149E0C5E191FF42500913673 /* RFBPointerEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C44191FF42500913673 /* RFBPointerEvent.m */; };
+		149E0C5F191FF42500913673 /* RFBSecurityARD.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C46191FF42500913673 /* RFBSecurityARD.m */; };
+		149E0C60191FF42500913673 /* RFBSecurityInvalid.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C48191FF42500913673 /* RFBSecurityInvalid.m */; };
+		149E0C61191FF42500913673 /* RFBSecurityNone.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C4A191FF42500913673 /* RFBSecurityNone.m */; };
+		149E0C62191FF42500913673 /* RFBSecurityVNC.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C4C191FF42500913673 /* RFBSecurityVNC.m */; };
+		149E0C63191FF42500913673 /* RFBSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C4E191FF42500913673 /* RFBSocket.m */; };
+		149E0C64191FF42500913673 /* VersionMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C50191FF42500913673 /* VersionMsg.m */; };
+		149E0C65191FF42500913673 /* ProfileSaverFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C53191FF42500913673 /* ProfileSaverFetcher.m */; };
+		149E0C66191FF42500913673 /* ServerProfile+Probe.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C55191FF42500913673 /* ServerProfile+Probe.m */; };
+		149E0C67191FF42500913673 /* ServerProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C57191FF42500913673 /* ServerProfile.m */; };
+		149E0C6A191FF8A800913673 /* NCLVNCSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C69191FF8A800913673 /* NCLVNCSettingsViewController.m */; };
+		149E0C6D191FFF6C00913673 /* NCLServerProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C6C191FFF6C00913673 /* NCLServerProfileViewController.m */; };
+		149E0C701920062D00913673 /* NCLDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C6F1920062D00913673 /* NCLDiscoveryViewController.m */; };
 		14A57E76181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
-		14A57E77181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
 		14A57E7A1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */; };
-		14A57E7B1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */; };
 		14B3F42E18030DEC00F7E91A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42D18030DEC00F7E91A /* Foundation.framework */; };
 		14B3F43018030DEC00F7E91A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42F18030DEC00F7E91A /* CoreGraphics.framework */; };
 		14B3F43218030DEC00F7E91A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F43118030DEC00F7E91A /* UIKit.framework */; };
@@ -84,38 +80,18 @@
 		14B3F44618030DEC00F7E91A /* NicolaEditor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F44418030DEC00F7E91A /* NicolaEditor.xcdatamodeld */; };
 		14B3F44918030DEC00F7E91A /* NCLNotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F44818030DEC00F7E91A /* NCLNotesViewController.m */; };
 		14B3F44E18030DEC00F7E91A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F44D18030DEC00F7E91A /* Images.xcassets */; };
-		14B3F45518030DEC00F7E91A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F45418030DEC00F7E91A /* XCTest.framework */; };
-		14B3F45618030DEC00F7E91A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42D18030DEC00F7E91A /* Foundation.framework */; };
-		14B3F45718030DEC00F7E91A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F43118030DEC00F7E91A /* UIKit.framework */; };
-		14B3F45818030DEC00F7E91A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F43318030DEC00F7E91A /* CoreData.framework */; };
-		14B3F46018030DEC00F7E91A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F45E18030DEC00F7E91A /* InfoPlist.strings */; };
-		14B3F46218030DEC00F7E91A /* NicolaEditorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F46118030DEC00F7E91A /* NicolaEditorTests.m */; };
 		14B3F46C18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F46B18030EAF00F7E91A /* NCLKeyboardView.xib */; };
-		14B3F46D18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F46B18030EAF00F7E91A /* NCLKeyboardView.xib */; };
 		14B3F47218030EB900F7E91A /* NCLKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F46F18030EB900F7E91A /* NCLKeyboardView.m */; };
-		14B3F47318030EB900F7E91A /* NCLKeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F46F18030EB900F7E91A /* NCLKeyboardView.m */; };
 		14B3F47418030EB900F7E91A /* NCLKeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F47118030EB900F7E91A /* NCLKeyboardButton.m */; };
-		14B3F47518030EB900F7E91A /* NCLKeyboardButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F47118030EB900F7E91A /* NCLKeyboardButton.m */; };
 		14B3F478180310D600F7E91A /* NCLTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F477180310D600F7E91A /* NCLTextViewController.m */; };
-		14B3F479180310D600F7E91A /* NCLTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14B3F477180310D600F7E91A /* NCLTextViewController.m */; };
 		14B3F47B1803121E00F7E91A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47A1803121E00F7E91A /* Main.storyboard */; };
-		14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47A1803121E00F7E91A /* Main.storyboard */; };
 		14B3F47E1803167200F7E91A /* SoftwareKeyboard.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* SoftwareKeyboard.json */; };
-		14B3F47F1803167200F7E91A /* SoftwareKeyboard.json in Resources */ = {isa = PBXBuildFile; fileRef = 14B3F47D1803167200F7E91A /* SoftwareKeyboard.json */; };
 		14BD796B1811BBBE005A6387 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14BD796A1811BBBE005A6387 /* Settings.bundle */; };
-		14BD796C1811BBBE005A6387 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 14BD796A1811BBBE005A6387 /* Settings.bundle */; };
+		66C7A1F61920A303006C293B /* NCLRFBInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7A1F51920A303006C293B /* NCLRFBInputViewController.m */; };
+		66C7A1F91920A3DB006C293B /* TouchInputTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7A1F81920A3DB006C293B /* TouchInputTracker.m */; };
+		66C7A1FD1920A419006C293B /* RFBInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7A1FC1920A419006C293B /* RFBInputView.m */; };
 		C631213B1BE745BBA45EA37C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 405DAA10965C4E299C75719A /* libPods.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		14B3F45918030DEC00F7E91A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 14B3F42218030DEC00F7E91A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 14B3F42918030DEC00F7E91A;
-			remoteInfo = NicolaEditor;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		14124B64182E902600C99A40 /* NCLRuntimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLRuntimeUtils.h; sourceTree = "<group>"; };
@@ -152,7 +128,6 @@
 		146B3EE2180859A200418452 /* NCLFontSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLFontSettingsViewController.h; sourceTree = "<group>"; };
 		146B3EE3180859A200418452 /* NCLFontSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLFontSettingsViewController.m; sourceTree = "<group>"; };
 		146B3EE918085B7E00418452 /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		146B3EEA18085B7F00418452 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		146B3EED18085B8600418452 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		146B3EEF18085B8900418452 /* ja */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		146B3EF0180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLShiftKeyBehaviorSettingsViewController.h; sourceTree = "<group>"; };
@@ -174,6 +149,68 @@
 		149E0BA8191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLExternalKeyboardSettingsViewController.h; sourceTree = "<group>"; };
 		149E0BA9191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLExternalKeyboardSettingsViewController.m; sourceTree = "<group>"; };
 		149E0BAC191FBFC200913673 /* AppleWirelessKeyboardUS.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = AppleWirelessKeyboardUS.json; sourceTree = "<group>"; };
+		149E0BB5191FF11600913673 /* BDHost.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BDHost.h; sourceTree = "<group>"; };
+		149E0BB6191FF11600913673 /* BDHost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BDHost.m; sourceTree = "<group>"; };
+		149E0BB9191FF11600913673 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		149E0BBA191FF11600913673 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		149E0BBC191FF11600913673 /* keysymdef.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = keysymdef.h; sourceTree = "<group>"; };
+		149E0C0C191FF11600913673 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libcrypto.a; sourceTree = "<group>"; };
+		149E0C1A191FF18900913673 /* NSData+HexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+HexString.h"; sourceTree = "<group>"; };
+		149E0C1B191FF18900913673 /* NSData+HexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+HexString.m"; sourceTree = "<group>"; };
+		149E0C1C191FF18900913673 /* UILabel+MultiLineAutoSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+MultiLineAutoSize.h"; sourceTree = "<group>"; };
+		149E0C1D191FF18900913673 /* UILabel+MultiLineAutoSize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+MultiLineAutoSize.m"; sourceTree = "<group>"; };
+		149E0C1E191FF18900913673 /* UIViewController+ErrorOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ErrorOverlay.h"; sourceTree = "<group>"; };
+		149E0C1F191FF18900913673 /* UIViewController+ErrorOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ErrorOverlay.m"; sourceTree = "<group>"; };
+		149E0C20191FF18900913673 /* UIViewController+Spinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spinner.h"; sourceTree = "<group>"; };
+		149E0C21191FF18900913673 /* UIViewController+Spinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spinner.m"; sourceTree = "<group>"; };
+		149E0C27191FF19E00913673 /* Des.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Des.h; sourceTree = "<group>"; };
+		149E0C28191FF19E00913673 /* Des.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Des.m; sourceTree = "<group>"; };
+		149E0C29191FF19E00913673 /* ErrorHandlingMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorHandlingMacros.h; sourceTree = "<group>"; };
+		149E0C2A191FF19E00913673 /* HandleErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandleErrors.h; sourceTree = "<group>"; };
+		149E0C2B191FF19E00913673 /* HandleErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandleErrors.m; sourceTree = "<group>"; };
+		149E0C2C191FF19E00913673 /* KeyMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyMapping.h; sourceTree = "<group>"; };
+		149E0C2D191FF19E00913673 /* KeyMapping.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyMapping.m; sourceTree = "<group>"; };
+		149E0C2E191FF19E00913673 /* MDNSDiscoverer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDNSDiscoverer.h; sourceTree = "<group>"; };
+		149E0C2F191FF19E00913673 /* MDNSDiscoverer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDNSDiscoverer.m; sourceTree = "<group>"; };
+		149E0C30191FF19E00913673 /* UsefulMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UsefulMacros.h; sourceTree = "<group>"; };
+		149E0C37191FF42500913673 /* RFBEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBEvent.h; sourceTree = "<group>"; };
+		149E0C38191FF42500913673 /* RFBEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBEvent.m; sourceTree = "<group>"; };
+		149E0C39191FF42500913673 /* RFBMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBMessage.h; sourceTree = "<group>"; };
+		149E0C3A191FF42500913673 /* RFBMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBMessage.m; sourceTree = "<group>"; };
+		149E0C3B191FF42500913673 /* RFBSecurity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBSecurity.h; sourceTree = "<group>"; };
+		149E0C3C191FF42500913673 /* RFBSecurity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBSecurity.m; sourceTree = "<group>"; };
+		149E0C3D191FF42500913673 /* RFBConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBConnection.h; sourceTree = "<group>"; };
+		149E0C3E191FF42500913673 /* RFBConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBConnection.m; sourceTree = "<group>"; };
+		149E0C3F191FF42500913673 /* RFBInputConnManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBInputConnManager.h; sourceTree = "<group>"; };
+		149E0C40191FF42500913673 /* RFBInputConnManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBInputConnManager.m; sourceTree = "<group>"; };
+		149E0C41191FF42500913673 /* RFBKeyEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBKeyEvent.h; sourceTree = "<group>"; };
+		149E0C42191FF42500913673 /* RFBKeyEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBKeyEvent.m; sourceTree = "<group>"; };
+		149E0C43191FF42500913673 /* RFBPointerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBPointerEvent.h; sourceTree = "<group>"; };
+		149E0C44191FF42500913673 /* RFBPointerEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBPointerEvent.m; sourceTree = "<group>"; };
+		149E0C45191FF42500913673 /* RFBSecurityARD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBSecurityARD.h; sourceTree = "<group>"; };
+		149E0C46191FF42500913673 /* RFBSecurityARD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBSecurityARD.m; sourceTree = "<group>"; };
+		149E0C47191FF42500913673 /* RFBSecurityInvalid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBSecurityInvalid.h; sourceTree = "<group>"; };
+		149E0C48191FF42500913673 /* RFBSecurityInvalid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBSecurityInvalid.m; sourceTree = "<group>"; };
+		149E0C49191FF42500913673 /* RFBSecurityNone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBSecurityNone.h; sourceTree = "<group>"; };
+		149E0C4A191FF42500913673 /* RFBSecurityNone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBSecurityNone.m; sourceTree = "<group>"; };
+		149E0C4B191FF42500913673 /* RFBSecurityVNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBSecurityVNC.h; sourceTree = "<group>"; };
+		149E0C4C191FF42500913673 /* RFBSecurityVNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBSecurityVNC.m; sourceTree = "<group>"; };
+		149E0C4D191FF42500913673 /* RFBSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RFBSocket.h; sourceTree = "<group>"; };
+		149E0C4E191FF42500913673 /* RFBSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RFBSocket.m; sourceTree = "<group>"; };
+		149E0C4F191FF42500913673 /* VersionMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionMsg.h; sourceTree = "<group>"; };
+		149E0C50191FF42500913673 /* VersionMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersionMsg.m; sourceTree = "<group>"; };
+		149E0C52191FF42500913673 /* ProfileSaverFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileSaverFetcher.h; sourceTree = "<group>"; };
+		149E0C53191FF42500913673 /* ProfileSaverFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileSaverFetcher.m; sourceTree = "<group>"; };
+		149E0C54191FF42500913673 /* ServerProfile+Probe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ServerProfile+Probe.h"; sourceTree = "<group>"; };
+		149E0C55191FF42500913673 /* ServerProfile+Probe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ServerProfile+Probe.m"; sourceTree = "<group>"; };
+		149E0C56191FF42500913673 /* ServerProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerProfile.h; sourceTree = "<group>"; };
+		149E0C57191FF42500913673 /* ServerProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerProfile.m; sourceTree = "<group>"; };
+		149E0C68191FF8A800913673 /* NCLVNCSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLVNCSettingsViewController.h; sourceTree = "<group>"; };
+		149E0C69191FF8A800913673 /* NCLVNCSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLVNCSettingsViewController.m; sourceTree = "<group>"; };
+		149E0C6B191FFF6C00913673 /* NCLServerProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLServerProfileViewController.h; sourceTree = "<group>"; };
+		149E0C6C191FFF6C00913673 /* NCLServerProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLServerProfileViewController.m; sourceTree = "<group>"; };
+		149E0C6E1920062D00913673 /* NCLDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLDiscoveryViewController.h; sourceTree = "<group>"; };
+		149E0C6F1920062D00913673 /* NCLDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLDiscoveryViewController.m; sourceTree = "<group>"; };
 		14A57E74181087CC00F1A7D9 /* NCLHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLHelpViewController.h; sourceTree = "<group>"; };
 		14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLHelpViewController.m; sourceTree = "<group>"; };
 		14A57E781810FEB700F1A7D9 /* NCLNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLNoteCell.h; sourceTree = "<group>"; };
@@ -192,11 +229,7 @@
 		14B3F44718030DEC00F7E91A /* NCLNotesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NCLNotesViewController.h; sourceTree = "<group>"; };
 		14B3F44818030DEC00F7E91A /* NCLNotesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NCLNotesViewController.m; sourceTree = "<group>"; };
 		14B3F44D18030DEC00F7E91A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		14B3F45318030DEC00F7E91A /* NicolaEditorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NicolaEditorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		14B3F45418030DEC00F7E91A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		14B3F45D18030DEC00F7E91A /* NicolaEditorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NicolaEditorTests-Info.plist"; sourceTree = "<group>"; };
-		14B3F45F18030DEC00F7E91A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		14B3F46118030DEC00F7E91A /* NicolaEditorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NicolaEditorTests.m; sourceTree = "<group>"; };
 		14B3F46B18030EAF00F7E91A /* NCLKeyboardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NCLKeyboardView.xib; sourceTree = "<group>"; };
 		14B3F46E18030EB900F7E91A /* NCLKeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLKeyboardView.h; sourceTree = "<group>"; };
 		14B3F46F18030EB900F7E91A /* NCLKeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLKeyboardView.m; sourceTree = "<group>"; };
@@ -208,6 +241,12 @@
 		14B3F47D1803167200F7E91A /* SoftwareKeyboard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SoftwareKeyboard.json; sourceTree = "<group>"; };
 		14BD796A1811BBBE005A6387 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		405DAA10965C4E299C75719A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		66C7A1F41920A303006C293B /* NCLRFBInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLRFBInputViewController.h; sourceTree = "<group>"; };
+		66C7A1F51920A303006C293B /* NCLRFBInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLRFBInputViewController.m; sourceTree = "<group>"; };
+		66C7A1F71920A3DB006C293B /* TouchInputTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchInputTracker.h; path = Vendor/iOSVNCInputClient/UI/TouchInputTracker.h; sourceTree = SOURCE_ROOT; };
+		66C7A1F81920A3DB006C293B /* TouchInputTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchInputTracker.m; path = Vendor/iOSVNCInputClient/UI/TouchInputTracker.m; sourceTree = SOURCE_ROOT; };
+		66C7A1FB1920A419006C293B /* RFBInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFBInputView.h; path = Vendor/iOSVNCInputClient/UI/RFBInputView.h; sourceTree = SOURCE_ROOT; };
+		66C7A1FC1920A419006C293B /* RFBInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RFBInputView.m; path = Vendor/iOSVNCInputClient/UI/RFBInputView.m; sourceTree = SOURCE_ROOT; };
 		FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -220,18 +259,8 @@
 				14B3F42E18030DEC00F7E91A /* Foundation.framework in Frameworks */,
 				14B3F43018030DEC00F7E91A /* CoreGraphics.framework in Frameworks */,
 				14B3F43418030DEC00F7E91A /* CoreData.framework in Frameworks */,
+				149E0C17191FF11600913673 /* libcrypto.a in Frameworks */,
 				C631213B1BE745BBA45EA37C /* libPods.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		14B3F45018030DEC00F7E91A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14B3F45518030DEC00F7E91A /* XCTest.framework in Frameworks */,
-				14B3F45818030DEC00F7E91A /* CoreData.framework in Frameworks */,
-				14B3F45718030DEC00F7E91A /* UIKit.framework in Frameworks */,
-				14B3F45618030DEC00F7E91A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,6 +308,8 @@
 				14B3F44818030DEC00F7E91A /* NCLNotesViewController.m */,
 				14B3F476180310D600F7E91A /* NCLTextViewController.h */,
 				14B3F477180310D600F7E91A /* NCLTextViewController.m */,
+				66C7A1F41920A303006C293B /* NCLRFBInputViewController.h */,
+				66C7A1F51920A303006C293B /* NCLRFBInputViewController.m */,
 				146B3EDE180857F200418452 /* NCLSettingsViewController.h */,
 				146B3EDF180857F200418452 /* NCLSettingsViewController.m */,
 				146B3EE2180859A200418452 /* NCLFontSettingsViewController.h */,
@@ -289,6 +320,12 @@
 				145E657A180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m */,
 				149E0BA8191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.h */,
 				149E0BA9191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m */,
+				149E0C68191FF8A800913673 /* NCLVNCSettingsViewController.h */,
+				149E0C69191FF8A800913673 /* NCLVNCSettingsViewController.m */,
+				149E0C6B191FFF6C00913673 /* NCLServerProfileViewController.h */,
+				149E0C6C191FFF6C00913673 /* NCLServerProfileViewController.m */,
+				149E0C6E1920062D00913673 /* NCLDiscoveryViewController.h */,
+				149E0C6F1920062D00913673 /* NCLDiscoveryViewController.m */,
 				14A57E74181087CC00F1A7D9 /* NCLHelpViewController.h */,
 				14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */,
 				145AE74B18163ECB000459C1 /* NCLAboutViewController.h */,
@@ -297,11 +334,167 @@
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
+		149E0BAF191FF0E400913673 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				149E0BB0191FF0F600913673 /* iOSVNCInputClient */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
+		149E0BB0191FF0F600913673 /* iOSVNCInputClient */ = {
+			isa = PBXGroup;
+			children = (
+				149E0BB3191FF11600913673 /* 3rdParty */,
+				149E0C35191FF42500913673 /* RFB */,
+				149E0C51191FF42500913673 /* ServerProfile */,
+				149E0C19191FF18900913673 /* FrameworkCategories */,
+				66C7A1FA1920A3DF006C293B /* UI */,
+				149E0C26191FF19E00913673 /* Utils */,
+			);
+			name = iOSVNCInputClient;
+			sourceTree = "<group>";
+		};
+		149E0BB3191FF11600913673 /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				149E0BB4191FF11600913673 /* BDHost */,
+				149E0BB7191FF11600913673 /* CocoaAsyncSocket */,
+				149E0BBB191FF11600913673 /* KeySymDef */,
+				149E0BBD191FF11600913673 /* OpenSSL */,
+			);
+			name = 3rdParty;
+			path = Vendor/iOSVNCInputClient/3rdParty;
+			sourceTree = SOURCE_ROOT;
+		};
+		149E0BB4191FF11600913673 /* BDHost */ = {
+			isa = PBXGroup;
+			children = (
+				149E0BB5191FF11600913673 /* BDHost.h */,
+				149E0BB6191FF11600913673 /* BDHost.m */,
+			);
+			path = BDHost;
+			sourceTree = "<group>";
+		};
+		149E0BB7191FF11600913673 /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				149E0BB9191FF11600913673 /* GCDAsyncSocket.h */,
+				149E0BBA191FF11600913673 /* GCDAsyncSocket.m */,
+			);
+			path = CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
+		149E0BBB191FF11600913673 /* KeySymDef */ = {
+			isa = PBXGroup;
+			children = (
+				149E0BBC191FF11600913673 /* keysymdef.h */,
+			);
+			path = KeySymDef;
+			sourceTree = "<group>";
+		};
+		149E0BBD191FF11600913673 /* OpenSSL */ = {
+			isa = PBXGroup;
+			children = (
+				149E0C0C191FF11600913673 /* libcrypto.a */,
+			);
+			path = OpenSSL;
+			sourceTree = "<group>";
+		};
+		149E0C19191FF18900913673 /* FrameworkCategories */ = {
+			isa = PBXGroup;
+			children = (
+				149E0C1A191FF18900913673 /* NSData+HexString.h */,
+				149E0C1B191FF18900913673 /* NSData+HexString.m */,
+				149E0C1C191FF18900913673 /* UILabel+MultiLineAutoSize.h */,
+				149E0C1D191FF18900913673 /* UILabel+MultiLineAutoSize.m */,
+				149E0C1E191FF18900913673 /* UIViewController+ErrorOverlay.h */,
+				149E0C1F191FF18900913673 /* UIViewController+ErrorOverlay.m */,
+				149E0C20191FF18900913673 /* UIViewController+Spinner.h */,
+				149E0C21191FF18900913673 /* UIViewController+Spinner.m */,
+			);
+			name = FrameworkCategories;
+			path = Vendor/iOSVNCInputClient/FrameworkCategories;
+			sourceTree = SOURCE_ROOT;
+		};
+		149E0C26191FF19E00913673 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				149E0C27191FF19E00913673 /* Des.h */,
+				149E0C28191FF19E00913673 /* Des.m */,
+				149E0C29191FF19E00913673 /* ErrorHandlingMacros.h */,
+				149E0C2A191FF19E00913673 /* HandleErrors.h */,
+				149E0C2B191FF19E00913673 /* HandleErrors.m */,
+				149E0C2C191FF19E00913673 /* KeyMapping.h */,
+				149E0C2D191FF19E00913673 /* KeyMapping.m */,
+				149E0C2E191FF19E00913673 /* MDNSDiscoverer.h */,
+				149E0C2F191FF19E00913673 /* MDNSDiscoverer.m */,
+				149E0C30191FF19E00913673 /* UsefulMacros.h */,
+			);
+			name = Utils;
+			path = Vendor/iOSVNCInputClient/Utils;
+			sourceTree = SOURCE_ROOT;
+		};
+		149E0C35191FF42500913673 /* RFB */ = {
+			isa = PBXGroup;
+			children = (
+				149E0C36191FF42500913673 /* Abstract Classes */,
+				149E0C3D191FF42500913673 /* RFBConnection.h */,
+				149E0C3E191FF42500913673 /* RFBConnection.m */,
+				149E0C3F191FF42500913673 /* RFBInputConnManager.h */,
+				149E0C40191FF42500913673 /* RFBInputConnManager.m */,
+				149E0C41191FF42500913673 /* RFBKeyEvent.h */,
+				149E0C42191FF42500913673 /* RFBKeyEvent.m */,
+				149E0C43191FF42500913673 /* RFBPointerEvent.h */,
+				149E0C44191FF42500913673 /* RFBPointerEvent.m */,
+				149E0C45191FF42500913673 /* RFBSecurityARD.h */,
+				149E0C46191FF42500913673 /* RFBSecurityARD.m */,
+				149E0C47191FF42500913673 /* RFBSecurityInvalid.h */,
+				149E0C48191FF42500913673 /* RFBSecurityInvalid.m */,
+				149E0C49191FF42500913673 /* RFBSecurityNone.h */,
+				149E0C4A191FF42500913673 /* RFBSecurityNone.m */,
+				149E0C4B191FF42500913673 /* RFBSecurityVNC.h */,
+				149E0C4C191FF42500913673 /* RFBSecurityVNC.m */,
+				149E0C4D191FF42500913673 /* RFBSocket.h */,
+				149E0C4E191FF42500913673 /* RFBSocket.m */,
+				149E0C4F191FF42500913673 /* VersionMsg.h */,
+				149E0C50191FF42500913673 /* VersionMsg.m */,
+			);
+			name = RFB;
+			path = Vendor/iOSVNCInputClient/RFB;
+			sourceTree = SOURCE_ROOT;
+		};
+		149E0C36191FF42500913673 /* Abstract Classes */ = {
+			isa = PBXGroup;
+			children = (
+				149E0C37191FF42500913673 /* RFBEvent.h */,
+				149E0C38191FF42500913673 /* RFBEvent.m */,
+				149E0C39191FF42500913673 /* RFBMessage.h */,
+				149E0C3A191FF42500913673 /* RFBMessage.m */,
+				149E0C3B191FF42500913673 /* RFBSecurity.h */,
+				149E0C3C191FF42500913673 /* RFBSecurity.m */,
+			);
+			path = "Abstract Classes";
+			sourceTree = "<group>";
+		};
+		149E0C51191FF42500913673 /* ServerProfile */ = {
+			isa = PBXGroup;
+			children = (
+				149E0C52191FF42500913673 /* ProfileSaverFetcher.h */,
+				149E0C53191FF42500913673 /* ProfileSaverFetcher.m */,
+				149E0C54191FF42500913673 /* ServerProfile+Probe.h */,
+				149E0C55191FF42500913673 /* ServerProfile+Probe.m */,
+				149E0C56191FF42500913673 /* ServerProfile.h */,
+				149E0C57191FF42500913673 /* ServerProfile.m */,
+			);
+			name = ServerProfile;
+			path = Vendor/iOSVNCInputClient/ServerProfile;
+			sourceTree = SOURCE_ROOT;
+		};
 		14B3F42118030DEC00F7E91A = {
 			isa = PBXGroup;
 			children = (
 				14B3F43518030DEC00F7E91A /* NicolaEditor */,
-				14B3F45B18030DEC00F7E91A /* NicolaEditorTests */,
 				14B3F42C18030DEC00F7E91A /* Frameworks */,
 				14B3F42B18030DEC00F7E91A /* Products */,
 				FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */,
@@ -313,7 +506,6 @@
 			isa = PBXGroup;
 			children = (
 				14B3F42A18030DEC00F7E91A /* NicolaEditor.app */,
-				14B3F45318030DEC00F7E91A /* NicolaEditorTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -356,6 +548,7 @@
 				147C582A181BB47000413706 /* View Controllers */,
 				146B3EF918086C0A00418452 /* Views */,
 				146B3EF818086BFC00418452 /* Models */,
+				149E0BAF191FF0E400913673 /* Vendor */,
 				14D140C518112642000AD695 /* Resources */,
 				14B3F43618030DEC00F7E91A /* Supporting Files */,
 			);
@@ -380,24 +573,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		14B3F45B18030DEC00F7E91A /* NicolaEditorTests */ = {
-			isa = PBXGroup;
-			children = (
-				14B3F46118030DEC00F7E91A /* NicolaEditorTests.m */,
-				14B3F45C18030DEC00F7E91A /* Supporting Files */,
-			);
-			path = NicolaEditorTests;
-			sourceTree = "<group>";
-		};
-		14B3F45C18030DEC00F7E91A /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				14B3F45D18030DEC00F7E91A /* NicolaEditorTests-Info.plist */,
-				14B3F45E18030DEC00F7E91A /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		14D140C518112642000AD695 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +586,17 @@
 				147733901815A0850045ADFB /* Default-Portrait~ipad.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		66C7A1FA1920A3DF006C293B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				66C7A1FB1920A419006C293B /* RFBInputView.h */,
+				66C7A1FC1920A419006C293B /* RFBInputView.m */,
+				66C7A1F71920A3DB006C293B /* TouchInputTracker.h */,
+				66C7A1F81920A3DB006C293B /* TouchInputTracker.m */,
+			);
+			name = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,24 +620,6 @@
 			productName = NicolaEditor;
 			productReference = 14B3F42A18030DEC00F7E91A /* NicolaEditor.app */;
 			productType = "com.apple.product-type.application";
-		};
-		14B3F45218030DEC00F7E91A /* NicolaEditorTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 14B3F46818030DEC00F7E91A /* Build configuration list for PBXNativeTarget "NicolaEditorTests" */;
-			buildPhases = (
-				14B3F44F18030DEC00F7E91A /* Sources */,
-				14B3F45018030DEC00F7E91A /* Frameworks */,
-				14B3F45118030DEC00F7E91A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				14B3F45A18030DEC00F7E91A /* PBXTargetDependency */,
-			);
-			name = NicolaEditorTests;
-			productName = NicolaEditorTests;
-			productReference = 14B3F45318030DEC00F7E91A /* NicolaEditorTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -477,9 +645,6 @@
 							};
 						};
 					};
-					14B3F45218030DEC00F7E91A = {
-						TestTargetID = 14B3F42918030DEC00F7E91A;
-					};
 				};
 			};
 			buildConfigurationList = 14B3F42518030DEC00F7E91A /* Build configuration list for PBXProject "NicolaEditor" */;
@@ -497,7 +662,6 @@
 			projectRoot = "";
 			targets = (
 				14B3F42918030DEC00F7E91A /* NicolaEditor */,
-				14B3F45218030DEC00F7E91A /* NicolaEditorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -525,30 +689,6 @@
 				147733931815A0850045ADFB /* Default-Landscape~ipad.png in Resources */,
 				147733951815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */,
 				147733971815A0850045ADFB /* Default-Portrait~ipad.png in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		14B3F45118030DEC00F7E91A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14B3F47C1803121E00F7E91A /* Main.storyboard in Resources */,
-				146B3F1018099F7200418452 /* SampleText.json in Resources */,
-				145AE70418157C82000459C1 /* Icon-72@2x.png in Resources */,
-				145AE70218157C82000459C1 /* Icon-72.png in Resources */,
-				146B3EEC18085B8600418452 /* Localizable.strings in Resources */,
-				14B3F46018030DEC00F7E91A /* InfoPlist.strings in Resources */,
-				149E0BA7191FB39F00913673 /* AppleWirelessKeyboardJIS.json in Resources */,
-				14B3F47F1803167200F7E91A /* SoftwareKeyboard.json in Resources */,
-				146174721803D88700C8763B /* NCLKeyboardAccessoryView.xib in Resources */,
-				14B3F46D18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
-				14BD796C1811BBBE005A6387 /* Settings.bundle in Resources */,
-				1432683A1810272E0001BDBC /* NCLSliderPopup.xib in Resources */,
-				147733921815A0850045ADFB /* Default-Landscape@2x~ipad.png in Resources */,
-				147733941815A0850045ADFB /* Default-Landscape~ipad.png in Resources */,
-				147733961815A0850045ADFB /* Default-Portrait@2x~ipad.png in Resources */,
-				147733981815A0850045ADFB /* Default-Portrait~ipad.png in Resources */,
-				149E0BAE191FBFC200913673 /* AppleWirelessKeyboardUS.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,78 +733,69 @@
 			buildActionMask = 2147483647;
 			files = (
 				14B3F478180310D600F7E91A /* NCLTextViewController.m in Sources */,
+				149E0C5D191FF42500913673 /* RFBKeyEvent.m in Sources */,
 				14B3F44918030DEC00F7E91A /* NCLNotesViewController.m in Sources */,
 				145AE74D18163ECB000459C1 /* NCLAboutViewController.m in Sources */,
+				149E0C34191FF19E00913673 /* MDNSDiscoverer.m in Sources */,
+				149E0C5A191FF42500913673 /* RFBSecurity.m in Sources */,
 				146B3EE0180857F200418452 /* NCLSettingsViewController.m in Sources */,
 				147C582D181BB49200413706 /* NCLFontManager.m in Sources */,
+				149E0C62191FF42500913673 /* RFBSecurityVNC.m in Sources */,
+				149E0C58191FF42500913673 /* RFBEvent.m in Sources */,
 				1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */,
+				149E0C5F191FF42500913673 /* RFBSecurityARD.m in Sources */,
+				149E0C23191FF18900913673 /* UILabel+MultiLineAutoSize.m in Sources */,
+				149E0C11191FF11600913673 /* GCDAsyncSocket.m in Sources */,
+				66C7A1F91920A3DB006C293B /* TouchInputTracker.m in Sources */,
 				1464694A1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */,
+				149E0C63191FF42500913673 /* RFBSocket.m in Sources */,
+				149E0C61191FF42500913673 /* RFBSecurityNone.m in Sources */,
+				66C7A1FD1920A419006C293B /* RFBInputView.m in Sources */,
+				149E0C64191FF42500913673 /* VersionMsg.m in Sources */,
+				66C7A1F61920A303006C293B /* NCLRFBInputViewController.m in Sources */,
+				149E0C6A191FF8A800913673 /* NCLVNCSettingsViewController.m in Sources */,
 				14B3F47218030EB900F7E91A /* NCLKeyboardView.m in Sources */,
+				149E0C24191FF18900913673 /* UIViewController+ErrorOverlay.m in Sources */,
 				1461D014182D355500F93FA8 /* NCLPhysicalKeyboardManager.m in Sources */,
+				149E0C5E191FF42500913673 /* RFBPointerEvent.m in Sources */,
+				149E0C59191FF42500913673 /* RFBMessage.m in Sources */,
 				146B3F0018086C5E00418452 /* NCLNote.m in Sources */,
+				149E0C22191FF18900913673 /* NSData+HexString.m in Sources */,
+				149E0C5B191FF42500913673 /* RFBConnection.m in Sources */,
 				1461748018058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */,
 				146B3EE4180859A200418452 /* NCLFontSettingsViewController.m in Sources */,
 				146B3F0418086F5600418452 /* NCLNote+Helper.m in Sources */,
+				149E0C6D191FFF6C00913673 /* NCLServerProfileViewController.m in Sources */,
 				1461D010182D353700F93FA8 /* NCLApplication.m in Sources */,
 				146B3EF2180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */,
 				145E657B180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */,
+				149E0C66191FF42500913673 /* ServerProfile+Probe.m in Sources */,
 				14326836181027120001BDBC /* NCLSliderPopup.m in Sources */,
+				149E0C31191FF19E00913673 /* Des.m in Sources */,
 				14A57E76181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */,
+				149E0C65191FF42500913673 /* ProfileSaverFetcher.m in Sources */,
 				14B3F43C18030DEC00F7E91A /* main.m in Sources */,
 				1432681A180FBF910001BDBC /* NCLPopoverManager.m in Sources */,
 				14A57E7A1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */,
+				149E0C60191FF42500913673 /* RFBSecurityInvalid.m in Sources */,
+				149E0C32191FF19E00913673 /* HandleErrors.m in Sources */,
+				149E0C701920062D00913673 /* NCLDiscoveryViewController.m in Sources */,
 				14B3F44618030DEC00F7E91A /* NicolaEditor.xcdatamodeld in Sources */,
 				149E0BAA191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m in Sources */,
+				149E0C0D191FF11600913673 /* BDHost.m in Sources */,
+				149E0C33191FF19E00913673 /* KeyMapping.m in Sources */,
 				14B3F47418030EB900F7E91A /* NCLKeyboardButton.m in Sources */,
 				1461750718072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */,
+				149E0C67191FF42500913673 /* ServerProfile.m in Sources */,
 				14326816180FB7990001BDBC /* UIFont+Helper.m in Sources */,
 				146B3F081808740000418452 /* NSString+Helper.m in Sources */,
+				149E0C5C191FF42500913673 /* RFBInputConnManager.m in Sources */,
+				149E0C25191FF18900913673 /* UIViewController+Spinner.m in Sources */,
 				14326812180FB7270001BDBC /* NCLConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		14B3F44F18030DEC00F7E91A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				14B3F46218030DEC00F7E91A /* NicolaEditorTests.m in Sources */,
-				1461750818072E6500C8763B /* NCLKeyboardInputDisplayView.m in Sources */,
-				14326813180FB7270001BDBC /* NCLConstants.m in Sources */,
-				145E657C180DAAA7004B6ECB /* NCLShiftKeyFunctionsSettingsViewController.m in Sources */,
-				1461D011182D353700F93FA8 /* NCLApplication.m in Sources */,
-				1461748118058F6B00C8763B /* NCLKeyboardInputEngine.m in Sources */,
-				1464694B1812E48E00CEAA41 /* NCLAppDelegate.m in Sources */,
-				146B3EE1180857F200418452 /* NCLSettingsViewController.m in Sources */,
-				14A57E77181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */,
-				14B3F47518030EB900F7E91A /* NCLKeyboardButton.m in Sources */,
-				1461D015182D355500F93FA8 /* NCLPhysicalKeyboardManager.m in Sources */,
-				147C582E181BB49200413706 /* NCLFontManager.m in Sources */,
-				146B3F0518086F5600418452 /* NCLNote+Helper.m in Sources */,
-				146B3F0118086C5E00418452 /* NCLNote.m in Sources */,
-				14326837181027120001BDBC /* NCLSliderPopup.m in Sources */,
-				14A57E7B1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */,
-				1461746F1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */,
-				14326817180FB7990001BDBC /* UIFont+Helper.m in Sources */,
-				146B3EE5180859A200418452 /* NCLFontSettingsViewController.m in Sources */,
-				14B3F47318030EB900F7E91A /* NCLKeyboardView.m in Sources */,
-				14B3F479180310D600F7E91A /* NCLTextViewController.m in Sources */,
-				1432681B180FBF910001BDBC /* NCLPopoverManager.m in Sources */,
-				146B3F091808740000418452 /* NSString+Helper.m in Sources */,
-				145AE74E18163ECB000459C1 /* NCLAboutViewController.m in Sources */,
-				149E0BAB191FBACA00913673 /* NCLExternalKeyboardSettingsViewController.m in Sources */,
-				146B3EF3180863F200418452 /* NCLShiftKeyBehaviorSettingsViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		14B3F45A18030DEC00F7E91A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 14B3F42918030DEC00F7E91A /* NicolaEditor */;
-			targetProxy = 14B3F45918030DEC00F7E91A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		146B3EEE18085B8600418452 /* Localizable.strings */ = {
@@ -681,15 +812,6 @@
 			children = (
 				14B3F43918030DEC00F7E91A /* en */,
 				146B3EE918085B7E00418452 /* ja */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		14B3F45E18030DEC00F7E91A /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				14B3F45F18030DEC00F7E91A /* en */,
-				146B3EEA18085B7F00418452 /* ja */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -729,6 +851,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "4855FF73-0974-4369-8867-60E8D7528C6A";
@@ -763,6 +889,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PROVISIONING_PROFILE = "3F0C6069-54D5-4DCC-A618-B4846973C018";
 				SDKROOT = iphoneos;
@@ -782,7 +912,25 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NicolaEditor/NicolaEditor-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/CrittercismSDK\"",
+					"\"${PODS_ROOT}/Headers/Dropbox-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/Evernote-SDK-iOS\"",
+					"\"${PODS_ROOT}/Headers/FFCircularProgressView\"",
+					"\"${PODS_ROOT}/Headers/JLRoutes\"",
+					"\"${PODS_ROOT}/Headers/NLCoreData\"",
+					"\"${PODS_ROOT}/Headers/SSKeychain\"",
+					"\"${PODS_ROOT}/Headers/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/uservoice-iphone-sdk\"",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"$(PROJECT_DIR)/Vendor/iOSVNCInputClient/3rdParty/OpenSSL/include",
+				);
 				INFOPLIST_FILE = "NicolaEditor/NicolaEditor-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/iOSVNCInputClient/3rdParty/OpenSSL",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -800,50 +948,28 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NicolaEditor/NicolaEditor-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/CrittercismSDK\"",
+					"\"${PODS_ROOT}/Headers/Dropbox-iOS-SDK\"",
+					"\"${PODS_ROOT}/Headers/Evernote-SDK-iOS\"",
+					"\"${PODS_ROOT}/Headers/FFCircularProgressView\"",
+					"\"${PODS_ROOT}/Headers/JLRoutes\"",
+					"\"${PODS_ROOT}/Headers/NLCoreData\"",
+					"\"${PODS_ROOT}/Headers/SSKeychain\"",
+					"\"${PODS_ROOT}/Headers/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/uservoice-iphone-sdk\"",
+					"\"$(SDKROOT)/usr/include/libxml2\"",
+					"$(PROJECT_DIR)/Vendor/iOSVNCInputClient/3rdParty/OpenSSL/include",
+				);
 				INFOPLIST_FILE = "NicolaEditor/NicolaEditor-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendor/iOSVNCInputClient/3rdParty/OpenSSL",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
-		14B3F46918030DEC00F7E91A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NicolaEditor.app/NicolaEditor";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NicolaEditor/NicolaEditor-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "NicolaEditorTests/NicolaEditorTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		14B3F46A18030DEC00F7E91A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/NicolaEditor.app/NicolaEditor";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "NicolaEditor/NicolaEditor-Prefix.pch";
-				INFOPLIST_FILE = "NicolaEditorTests/NicolaEditorTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
 		};
@@ -864,15 +990,6 @@
 			buildConfigurations = (
 				14B3F46618030DEC00F7E91A /* Debug */,
 				14B3F46718030DEC00F7E91A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		14B3F46818030DEC00F7E91A /* Build configuration list for PBXNativeTarget "NicolaEditorTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				14B3F46918030DEC00F7E91A /* Debug */,
-				14B3F46A18030DEC00F7E91A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

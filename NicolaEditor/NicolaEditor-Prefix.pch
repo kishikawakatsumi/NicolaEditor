@@ -15,3 +15,15 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
 #endif
+
+#ifdef DEBUG
+    #define DLog(...)    NSLog(__VA_ARGS__)
+    #define DLogErr(...) NSLog(__VA_ARGS__)
+    #define DLogWar(...) NSLog(__VA_ARGS__)
+    #define DLogInf(...) NSLog(__VA_ARGS__)
+#else
+    #define DLog(...)    do {} while (0)
+    #define DLogErr(...) do {} while (0)
+    #define DLogWar(...) do {} while (0)
+    #define DLogInf(...) do {} while (0)
+#endif

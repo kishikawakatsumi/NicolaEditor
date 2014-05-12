@@ -52,3 +52,6 @@ NSString * const NCLKeyboardUserDefined = @"UserDefined";
 
 NSString * const NCLPhysicalKeyboardAvailabilityChangedNotification = @"NCLPhysicalKeyboardAvailabilityChangedNotification";
 NSString * const NCLPhysicalKeyboardAvailabilityKey = @"NCLPhysicalKeyboardAvailabilityKey";
+
+NSString * const NCLVNCServerWillConnectNodification = @"NCLVNCServerWillConnectNodification";
+NSString * const NCLVNCServerProfileKey = @"NCLVNCServerProfileKey";

@@ -370,8 +370,8 @@
 			dispatch_async( dispatch_get_main_queue(), ^ {
                 UIFont *font = [UIFont fontWithName:fontName size:1.0];
                 if (font) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFinishNotification object:nil userInfo:@{@"name": fontName}];
-                    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:nil userInfo:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFinishNotification object:self userInfo:@{@"name": fontName}];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsFontDidChangeNodification object:self userInfo:nil];
                 }
 			});
 		} else if (state == kCTFontDescriptorMatchingWillBeginDownloading) {
@@ -407,7 +407,7 @@
 
 - (void)downloadGroupMatchingDidBegin:(NCLFontDownloadGroup *)group
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidBeginNotification object:nil userInfo:@{@"name": group.name}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidBeginNotification object:self userInfo:@{@"name": group.name}];
 }
 
 - (void)downloadGroupMatchingDidFinish:(NCLFontDownloadGroup *)group
@@ -417,7 +417,7 @@
     
     [self startNextDownload];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFinishNotification object:nil userInfo:@{@"name": group.name}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFinishNotification object:self userInfo:@{@"name": group.name}];
 }
 
 - (void)downloadGroup:(NCLFontDownloadGroup *)group matchingDidFailWithError:(NSError *)error
@@ -427,22 +427,22 @@
     
     [self startNextDownload];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFailNotification object:nil userInfo:@{@"name": group.name}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFailNotification object:self userInfo:@{@"name": group.name}];
 }
 
 - (void)downloadGroupMatchingWillBeginDownloading:(NCLFontDownloadGroup *)group
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingWillBeginDownloadingNotification object:nil userInfo:@{@"name": group.name}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingWillBeginDownloadingNotification object:self userInfo:@{@"name": group.name}];
 }
 
 - (void)downloadGroupMatchingDownloading:(NCLFontDownloadGroup *)group progress:(CGFloat)progress
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDownloadingNotification object:nil userInfo:@{@"name": group.name, @"progress": @(progress / 100.0)}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDownloadingNotification object:self userInfo:@{@"name": group.name, @"progress": @(progress / 100.0)}];
 }
 
 - (void)downloadGroupMatchingDidFinishDownloading:(NCLFontDownloadGroup *)group
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFinishDownloadingNotification object:nil userInfo:@{@"name": group.name}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NCLFontManagerMatchingDidFinishDownloadingNotification object:self userInfo:@{@"name": group.name}];
 }
 
 @end

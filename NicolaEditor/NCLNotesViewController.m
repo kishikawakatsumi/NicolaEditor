@@ -8,9 +8,11 @@
 
 #import "NCLNotesViewController.h"
 #import "NCLTextViewController.h"
+#import "NCLRFBInputViewController.h"
 #import "NCLSettingsViewController.h"
 #import "NCLPopoverManager.h"
 #import "NCLNote.h"
+#import "NCLConstants.h"
 #import <NLCoreData/NLCoreData.h>
 #import <uservoice-iphone-sdk/UserVoice.h>
 
@@ -36,6 +38,11 @@
         self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
     }
     [super awakeFromNib];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad
@@ -94,12 +101,22 @@
     
     NSError *error = nil;
     [self.fetchedResultsController performFetch:&error];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverWillConnect:) name:NCLVNCServerWillConnectNodification object:nil];
+}
+
+- (void)viewDidUnload
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewDidUnload];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;
 }
+
+#pragma mark -
 
 - (IBAction)presentSettings:(id)sender
 {
@@ -275,6 +292,15 @@
 }
 
 #pragma mark -
+
+- (void)serverWillConnect:(NSNotification *)notification
+{
+    [[NCLPopoverManager sharedManager] dismissPopovers];
+    
+    NCLRFBInputViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([NCLRFBInputViewController class])];
+    controller.serverProfile = notification.userInfo[NCLVNCServerProfileKey];
+    [self presentModalViewController:controller animated:YES];
+}
 
 - (void)settingsViewControllerShouldShowUserVoice:(NCLSettingsViewController *)controller
 {
