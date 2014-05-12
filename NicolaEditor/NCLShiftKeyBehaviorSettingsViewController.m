@@ -28,14 +28,27 @@
     NSString *shiftKeyBehavior = [userDefaults stringForKey:NCLSettingsShiftKeyBehaviorKey];
     
     NSInteger row = indexPath.row;
-    if (row == 0 && [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else if (row == 1 && [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorContinuityShift]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else if (row == 2 && [shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorPrefixShift]) {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-    } else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+    if (row == 0) {
+        cell.textLabel.text = NSLocalizedString(@"Time-Shift", nil);
+        if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorTimeShift]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    } else if (row == 1) {
+        cell.textLabel.text = NSLocalizedString(@"Continuity-Shift", nil);
+        if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorContinuityShift]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
+    } else if (row == 2) {
+        cell.textLabel.text = NSLocalizedString(@"Prefix-Shift", nil);
+        if ([shiftKeyBehavior isEqualToString:NCLShiftKeyBehaviorPrefixShift]) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
     
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {

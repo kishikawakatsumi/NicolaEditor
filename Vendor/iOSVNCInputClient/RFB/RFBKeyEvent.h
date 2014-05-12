@@ -19,6 +19,12 @@
 //TODO: Implement function keys
 
 @property (assign, nonatomic, readonly) unichar keyPress;
+@property (assign, nonatomic, readonly) int keysym;
 
--(id)initWithKeypress:(unichar)keypress;
+@property (assign, nonatomic) BOOL up;
+@property (assign, nonatomic) BOOL down;
+
+//-(id)initWithKeypress:(unichar)keypress;
+-(id)initWithKeysym:(int)keysym;
+
 @end

@@ -22,7 +22,7 @@
 #define ServiceDiscoveryErrorDomain @"serviceDiscoveryError"
 #define ServiceDiscoveryErrorCode 800
 
-#define DEFAULT_TIMEOUT 5.0 //Service, browser timeout
+#define DEFAULT_TIMEOUT 30.0 //Service, browser timeout
 
 @protocol MDNSDiscovererDelegateProtocol;
 

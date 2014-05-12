@@ -53,6 +53,14 @@
     [super viewDidLoad];
     
 	[self registerTapGestureForKBDismiss];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    UIView *contentView = self.scrollView.subviews.firstObject;
+    self.scrollView.contentSize = contentView.frame.size;
     
     if (!self.savedURL) {
 		[self disableUsernameFields];
@@ -68,12 +76,6 @@
 		self.serverProfileDetailsNavigationBar.title = NSLocalizedString(@"Edit Server", nil);
 		[self textFieldSetupFromProfile:self.serverProfile];
 	}
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self refreshScrollViewContentSize];
 }
 
 #pragma mark -
@@ -330,6 +332,7 @@
 	self.macAuthSwitch.enabled = YES;
 	self.ard35CompatSwitch.enabled = YES;
 }
+
 #pragma mark -
 
 - (void)probe
@@ -341,14 +344,15 @@
     __block NSError *error = nil;
     dispatch_queue_t probeQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     dispatch_async(probeQueue, ^{
-        if (!blockSafeSelf.successfulSecurityProbe)
+        if (!blockSafeSelf.successfulSecurityProbe) {
             probeResults = [ServerProfile probeServerProfile:blockSafeSelf.serverProfile
                                                    ProbeType:ProbeSecurity
                                                        Error:&error];
-        else if (!blockSafeSelf.successfulAuthProbe)
+        } else if (!blockSafeSelf.successfulAuthProbe) {
             probeResults = [ServerProfile probeServerProfile:blockSafeSelf.serverProfile
                                                    ProbeType:ProbeAuth
                                                        Error:&error];
+        }
         
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[blockSafeSelf stopSpinner];
@@ -420,13 +424,13 @@
 
 - (void)checkAddressPortAndProbeServerProfile:(ServerProfile *)serverProfile
 {
-	NSString *addressCheck = [BDHost addressForHostname:serverProfile.address];
-	if (addressCheck) {
-		[self probe];
-	} else {
-		[self handleDisplayErrors:NSLocalizedString(@"Invalid IP address supplied, cannot start checks", nil)];
-		DLogWar(@"Invalid IP address supplied, cannot start probe");
-	}
+    NSString *addressCheck = [BDHost addressForHostname:serverProfile.address];
+    if (addressCheck) {
+        [self probe];
+    } else {
+        [self handleDisplayErrors:NSLocalizedString(@"Invalid IP address supplied, cannot start checks", nil)];
+        DLogWar(@"Invalid IP address supplied, cannot start probe");
+    }
 }
 
 - (void)checkUsernamePwdAndProbeServerProfile:(ServerProfile *)serverProfile
@@ -446,12 +450,6 @@
 }
 
 #pragma mark -
-
-- (void)refreshScrollViewContentSize
-{
-    UIView *contentView = self.scrollView.subviews.firstObject;
-    self.scrollView.contentSize = contentView.frame.size;
-}
 
 - (void)registerTapGestureForKBDismiss
 {

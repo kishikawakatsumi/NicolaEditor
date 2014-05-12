@@ -17,14 +17,26 @@
 
 @implementation RFBKeyEvent
 //override
--(id)init {
+- (id)init
+{
 	return [self initWithKeypress:0];
 }
 
-
--(id)initWithKeypress:(unichar)keypress {
+- (id)initWithKeypress:(unichar)keypress
+{
 	if ((self = [super init]))
 		_keyPress = keypress;
 	return self;
 }
+
+- (id)initWithKeysym:(int)keysym
+{
+	if ((self = [super init])) {
+		_keysym = keysym;
+        _up = YES;
+        _down = YES;
+    }
+	return self;
+}
+
 @end

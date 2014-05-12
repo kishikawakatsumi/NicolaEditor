@@ -70,6 +70,8 @@
         frame.origin.x = 10.0;
         self.timeShiftDurationLabel.frame = frame;
     }
+    self.timeShiftDurationLabel.text = NSLocalizedString(@"Shift Key Delay", nil);
+    
     float timeShiftDuration = [userDefaults doubleForKey:NCLSettingsTimeShiftDurationKey];
     self.timeShiftDurationSlider.value = timeShiftDuration;
     
@@ -196,11 +198,17 @@
         cell.textLabel.text = NSLocalizedString(@"Left Shift Key", nil);
     } else if (section == 2 && row == 1) {
         cell.textLabel.text = NSLocalizedString(@"Right Shift Key", nil);
-    } else if (section == 3 && row == 1) {
+    } else if (section == 3) {
         if (row == 1) {
             cell.textLabel.text = NSLocalizedString(@"External Keyboard", nil);
         } else if (row == 2) {
-            cell.textLabel.text = NSLocalizedString(@"Connect to a Computer...", nil);
+            cell.textLabel.text = NSLocalizedString(@"Connect to a Computer", nil);
+            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
+                cell.textLabel.textColor = [UIColor grayColor];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.userInteractionEnabled = NO;
+            }
         }
     } else if (section == 4) {
         cell.textLabel.text = NSLocalizedString(@"Help", nil);

@@ -69,6 +69,8 @@
 		149E0C6A191FF8A800913673 /* NCLVNCSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C69191FF8A800913673 /* NCLVNCSettingsViewController.m */; };
 		149E0C6D191FFF6C00913673 /* NCLServerProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C6C191FFF6C00913673 /* NCLServerProfileViewController.m */; };
 		149E0C701920062D00913673 /* NCLDiscoveryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C6F1920062D00913673 /* NCLDiscoveryViewController.m */; };
+		149E0C761921250D00913673 /* NSString+RomajiKanaConvert.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C731921250D00913673 /* NSString+RomajiKanaConvert.m */; };
+		149E0C771921250D00913673 /* PaRomajiKanaConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C751921250D00913673 /* PaRomajiKanaConverter.m */; };
 		14A57E76181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */; };
 		14A57E7A1810FEB700F1A7D9 /* NCLNoteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14A57E791810FEB700F1A7D9 /* NCLNoteCell.m */; };
 		14B3F42E18030DEC00F7E91A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14B3F42D18030DEC00F7E91A /* Foundation.framework */; };
@@ -211,6 +213,10 @@
 		149E0C6C191FFF6C00913673 /* NCLServerProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLServerProfileViewController.m; sourceTree = "<group>"; };
 		149E0C6E1920062D00913673 /* NCLDiscoveryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLDiscoveryViewController.h; sourceTree = "<group>"; };
 		149E0C6F1920062D00913673 /* NCLDiscoveryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLDiscoveryViewController.m; sourceTree = "<group>"; };
+		149E0C721921250D00913673 /* NSString+RomajiKanaConvert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+RomajiKanaConvert.h"; sourceTree = "<group>"; };
+		149E0C731921250D00913673 /* NSString+RomajiKanaConvert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+RomajiKanaConvert.m"; sourceTree = "<group>"; };
+		149E0C741921250D00913673 /* PaRomajiKanaConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PaRomajiKanaConverter.h; sourceTree = "<group>"; };
+		149E0C751921250D00913673 /* PaRomajiKanaConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PaRomajiKanaConverter.m; sourceTree = "<group>"; };
 		14A57E74181087CC00F1A7D9 /* NCLHelpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLHelpViewController.h; sourceTree = "<group>"; };
 		14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLHelpViewController.m; sourceTree = "<group>"; };
 		14A57E781810FEB700F1A7D9 /* NCLNoteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLNoteCell.h; sourceTree = "<group>"; };
@@ -330,6 +336,7 @@
 				14A57E75181087CC00F1A7D9 /* NCLHelpViewController.m */,
 				145AE74B18163ECB000459C1 /* NCLAboutViewController.h */,
 				145AE74C18163ECB000459C1 /* NCLAboutViewController.m */,
+				14B3F47A1803121E00F7E91A /* Main.storyboard */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -338,6 +345,7 @@
 			isa = PBXGroup;
 			children = (
 				149E0BB0191FF0F600913673 /* iOSVNCInputClient */,
+				149E0C711921250D00913673 /* PaRomajiKanaConverter */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
@@ -491,6 +499,18 @@
 			path = Vendor/iOSVNCInputClient/ServerProfile;
 			sourceTree = SOURCE_ROOT;
 		};
+		149E0C711921250D00913673 /* PaRomajiKanaConverter */ = {
+			isa = PBXGroup;
+			children = (
+				149E0C721921250D00913673 /* NSString+RomajiKanaConvert.h */,
+				149E0C731921250D00913673 /* NSString+RomajiKanaConvert.m */,
+				149E0C741921250D00913673 /* PaRomajiKanaConverter.h */,
+				149E0C751921250D00913673 /* PaRomajiKanaConverter.m */,
+			);
+			name = PaRomajiKanaConverter;
+			path = Vendor/PaRomajiKanaConverter;
+			sourceTree = SOURCE_ROOT;
+		};
 		14B3F42118030DEC00F7E91A = {
 			isa = PBXGroup;
 			children = (
@@ -576,7 +596,6 @@
 		14D140C518112642000AD695 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				14B3F47A1803121E00F7E91A /* Main.storyboard */,
 				14B3F44D18030DEC00F7E91A /* Images.xcassets */,
 				145AE6FF18157C82000459C1 /* Icon-72.png */,
 				145AE70018157C82000459C1 /* Icon-72@2x.png */,
@@ -744,6 +763,7 @@
 				149E0C58191FF42500913673 /* RFBEvent.m in Sources */,
 				1461746E1803D86200C8763B /* NCLKeyboardAccessoryView.m in Sources */,
 				149E0C5F191FF42500913673 /* RFBSecurityARD.m in Sources */,
+				149E0C761921250D00913673 /* NSString+RomajiKanaConvert.m in Sources */,
 				149E0C23191FF18900913673 /* UILabel+MultiLineAutoSize.m in Sources */,
 				149E0C11191FF11600913673 /* GCDAsyncSocket.m in Sources */,
 				66C7A1F91920A3DB006C293B /* TouchInputTracker.m in Sources */,
@@ -773,6 +793,7 @@
 				14326836181027120001BDBC /* NCLSliderPopup.m in Sources */,
 				149E0C31191FF19E00913673 /* Des.m in Sources */,
 				14A57E76181087CC00F1A7D9 /* NCLHelpViewController.m in Sources */,
+				149E0C771921250D00913673 /* PaRomajiKanaConverter.m in Sources */,
 				149E0C65191FF42500913673 /* ProfileSaverFetcher.m in Sources */,
 				14B3F43C18030DEC00F7E91A /* main.m in Sources */,
 				1432681A180FBF910001BDBC /* NCLPopoverManager.m in Sources */,
@@ -823,6 +844,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -867,6 +889,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;

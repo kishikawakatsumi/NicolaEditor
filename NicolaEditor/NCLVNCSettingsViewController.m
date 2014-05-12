@@ -8,6 +8,7 @@
 
 #import "NCLVNCSettingsViewController.h"
 #import "NCLServerProfileViewController.h"
+#import "NCLConstants.h"
 #import "ProfileSaverFetcher.h"
 
 @interface NCLVNCSettingsViewController ()
@@ -120,6 +121,7 @@
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
         cell.textLabel.highlightedTextColor = [UIColor whiteColor];
+        cell.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
         cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     }
 }
@@ -170,9 +172,17 @@
     }
 	
 	if (tableView.editing) {
-		[self showServerProfileViewWithProfile:profile WithURL:profileURL];
+        NCLServerProfileViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([NCLServerProfileViewController class])];
+        controller.delegate = self;
+        if (profileURL && profile) {
+            controller.savedURL = profileURL;
+            controller.serverProfile = profile;
+            [self tableEditingDone];
+        }
+        
+        [self.navigationController pushViewController:controller animated:YES];
 	} else {
-		[self showMouseViewWithProfile:profile];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NCLVNCServerWillConnectNodification object:self userInfo:@{NCLVNCServerProfileKey: profile}];
 	}
 }
 
@@ -196,26 +206,6 @@
         
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
-}
-
-#pragma mark -
-
-- (void)showServerProfileViewWithProfile:(ServerProfile *)serverProfile WithURL:(NSURL *)profileURL
-{
-	NCLServerProfileViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([NCLServerProfileViewController class])];
-    controller.delegate = self;
-    if (profileURL && serverProfile) {
-        controller.savedURL = profileURL;
-		controller.serverProfile = serverProfile;
-		[self tableEditingDone];
-	}
-    
-	[self.navigationController pushViewController:controller animated:YES];
-}
-
-- (void)showMouseViewWithProfile:(ServerProfile *)serverProfile
-{
-    
 }
 
 @end

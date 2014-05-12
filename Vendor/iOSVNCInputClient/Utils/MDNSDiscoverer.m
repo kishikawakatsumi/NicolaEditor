@@ -212,9 +212,9 @@
 -(void)netService:(NSNetService *)sender didNotResolve:(NSDictionary *)errorDict {
     //Don't add connection to searchResults
     //Log error
-    NSString *errorCode = [errorDict objectForKey:NSNetServicesErrorCode];
-    NSString *errorDomain = [errorDict objectForKey:NSNetServicesErrorDomain];
-    DLogErr(@"netService:didNotResolve: %@, %@", errorCode, errorDomain);
+//    NSString *errorCode = [errorDict objectForKey:NSNetServicesErrorCode];
+//    NSString *errorDomain = [errorDict objectForKey:NSNetServicesErrorDomain];
+//    DLogErr(@"netService:didNotResolve: %@, %@", errorCode, errorDomain);
     [self isServiceBufferReadComplete]; //Even if a resolve fails still need to return partial results!
 }
 @end

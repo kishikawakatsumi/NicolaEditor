@@ -616,6 +616,10 @@ static NSCache *cache;
     [self sendMessage:self.internalKeyboard
               forName:G2AmM5eQZ4RxKLM3TCKZ
           attachments:nil];
+    
+    if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
+        [self.delegate keyboardViewInputBackspace:self];
+    }
 }
 
 - (void)processDeleteKeyUp
@@ -638,6 +642,10 @@ static NSCache *cache;
     [self sendMessage:self.internalKeyboard
               forName:mb6FzfJW6t9XaDQkna7m
           attachments:@[@{@"Object": @"\n"}]];
+    
+    if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
+        [self.delegate keyboardViewInputEnter:self];
+    }
 }
 
 #pragma mark -
@@ -660,7 +668,7 @@ static NSCache *cache;
     self.shifted = NO;
 }
 
-- (IBAction)touchDownRepeatShiftKey:(id)sender
+- (void)touchDownRepeatShiftKey:(id)sender
 {
     self.shiftLocked = !self.shiftLocked;
     self.shifted = self.shiftLocked;
@@ -670,6 +678,16 @@ static NSCache *cache;
 {
     _shifted = shifted;
     self.inputEngine.shifted = shifted;
+    
+    if (shifted) {
+        if ([self.delegate respondsToSelector:@selector(keyboardViewInputShiftDown:)]) {
+            [self.delegate keyboardViewInputShiftDown:self];
+        }
+    } else {
+        if ([self.delegate respondsToSelector:@selector(keyboardViewInputShiftUp:)]) {
+            [self.delegate keyboardViewInputShiftUp:self];
+        }
+    }
 }
 
 - (void)setShiftLocked:(BOOL)shiftLocked
@@ -750,11 +768,19 @@ static NSCache *cache;
     [self sendMessage:self.internalKeyboard
               forName:mb6FzfJW6t9XaDQkna7m
           attachments:@[@{@"Object": @" "}]];
+    
+    if ([self.delegate respondsToSelector:@selector(keyboardViewInputSpace:)]) {
+        [self.delegate keyboardViewInputSpace:self];
+    }
 }
 
 - (IBAction)touchUpKeyboardKey:(id)sender
 {
     [self.textView endEditing:NO];
+    
+    if ([self.delegate respondsToSelector:@selector(keyboardViewInputHideKeyboard:)]) {
+        [self.delegate keyboardViewInputHideKeyboard:self];
+    }
 }
 
 #pragma mark -
@@ -784,6 +810,10 @@ static NSCache *cache;
                       forName:mb6FzfJW6t9XaDQkna7m
                   attachments:@[@{@"Object": text}]];
         }
+        
+        if ([self.delegate respondsToSelector:@selector(keyboardView:inputText:)]) {
+            [self.delegate keyboardView:self inputText:text];
+        }
     }
 }
 
@@ -795,12 +825,20 @@ static NSCache *cache;
         [self sendMessage:self.internalKeyboard
                   forName:GUU2JdGW8jGWuc388rJR
               attachments:nil];
+        
+        if ([self.delegate respondsToSelector:@selector(keyboardViewInputNextCandidate:)]) {
+            [self.delegate keyboardViewInputNextCandidate:self];
+        }
     } else if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
         BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
         if (hasCandidates) {
             [self sendMessage:self.internalKeyboard
                       forName:wsjiFCKRrgQ3ipQpec6L
                   attachments:nil];
+            
+            if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
+                [self.delegate keyboardViewInputEnter:self];
+            }
         }
     }
 }
@@ -813,12 +851,20 @@ static NSCache *cache;
         [self sendMessage:self.internalKeyboard
                   forName:GUU2JdGW8jGWuc388rJR
               attachments:nil];
+        
+        if ([self.delegate respondsToSelector:@selector(keyboardViewInputNextCandidate:)]) {
+            [self.delegate keyboardViewInputNextCandidate:self];
+        }
     } else if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
         BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
         if (hasCandidates) {
             [self sendMessage:self.internalKeyboard
                       forName:wsjiFCKRrgQ3ipQpec6L
                   attachments:nil];
+            
+            if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
+                [self.delegate keyboardViewInputEnter:self];
+            }
         }
     }
 }

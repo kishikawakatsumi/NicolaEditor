@@ -24,7 +24,7 @@
 {
     NSInteger section = indexPath.section;
     NSInteger row = indexPath.row;
-    if (section == 0 && row == 1) {
+    if (section == 0 && row == 0) {
         cell.textLabel.text = NSLocalizedString(@"Report Issue", nil);
     } else if (section == 1 && row == 0) {
         cell.textLabel.text = NSLocalizedString(@"About N+Note", nil);

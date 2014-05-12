@@ -7,19 +7,30 @@
 //
 
 #import "NCLRFBInputViewController.h"
+#import "NCLKeyboardView.h"
+#import "NCLKeyboardAccessoryView.h"
 #import "RFBInputConnManager.h"
 #import "RFBPointerEvent.h"
 #import "RFBKeyEvent.h"
 #import "RFBInputView.h"
 #import "TouchInputTracker.h"
 #import "UIViewController+Spinner.h"
+#import "NSString+RomajiKanaConvert.h"
 
-@interface NCLRFBInputViewController ()<KeyboardInputDelegate, RFBInputConnManagerDelegate>
+#define XK_MISCELLANY
+#define XK_LATIN1
+#import "keysymdef.h"
+
+@interface NCLRFBInputViewController () <UITextViewDelegate, RFBInputConnManagerDelegate>
 
 @property (nonatomic) RFBInputConnManager *rfbInputConnMgr;
 @property (nonatomic) TouchInputTracker *touchInputTrkr;
 
 @property (nonatomic, weak) IBOutlet UITextView *helpTextView;
+
+@property (nonatomic, weak) IBOutlet UITextView *textView;
+@property (nonatomic) UIView *inputView;
+@property (nonatomic) UIView *inputAccessoryView;
 
 @end
 
@@ -34,9 +45,8 @@
 {
     [super viewDidLoad];
     
-	((RFBInputView *)self.view).delegate = self;
-    
 	[self setupGestureRecognizers];
+    [self setupInputView];
     
 	if (self.serverProfile) {
 		self.rfbInputConnMgr = [[RFBInputConnManager alloc] initWithProfile:self.serverProfile ProtocolDelegate:self];
@@ -49,7 +59,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.view becomeFirstResponder];
+    [self.textView becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -60,6 +70,11 @@
 	
 	self.rfbInputConnMgr = nil;
 	DLogInf(@"Unloading Mouse View");
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark -
@@ -93,6 +108,20 @@
     [self.view addGestureRecognizer:longTap];
 	[self.view addGestureRecognizer:singleFingerDrag];
 	[self.view addGestureRecognizer:doubleFingerDrag];
+}
+
+- (void)setupInputView
+{
+    NCLKeyboardView *inputView = [[[UINib nibWithNibName:NSStringFromClass([NCLKeyboardView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+    inputView.delegate = self;
+    
+    self.textView.inputView = inputView;
+    self.inputView = inputView;
+    
+    NCLKeyboardAccessoryView *inputAccessoryView = [[[UINib nibWithNibName:NSStringFromClass([NCLKeyboardAccessoryView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+    inputAccessoryView.delegate = self;
+    self.textView.inputAccessoryView = inputAccessoryView;
+    self.inputAccessoryView = inputAccessoryView;
 }
 
 #pragma mark -
@@ -154,12 +183,200 @@
     [self.rfbInputConnMgr sendEvent:panEvent];
 }
 
-#pragma mark 
+#pragma mark
 
-- (void)rfbInputView:(RFBInputView *)view receivedKey:(unichar)keycode
+- (void)keyboardView:(NCLKeyboardView *)view inputText:(NSString *)text
 {
-    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeypress:keycode];
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Zenkaku];
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    
+    NSString *string;
+    if ([text isEqualToString:@"\u3002"] || [text isEqualToString:@"\uFF0E"]) {
+        string = @".";
+    } else if ([text isEqualToString:@"\u3001"] || [text isEqualToString:@"\uFF0C"]) {
+        string = @",";
+    } else {
+        string = [text stringKanaToRomaji];
+    }
+    
+    for (int i = 0; i < string.length; i++) {
+        unichar keycode = [string characterAtIndex:i];
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:keycode];
+        dispatch_async(dispatch_get_current_queue(), ^{
+            [self.rfbInputConnMgr sendEvent:keyEvent];
+        });
+    }
+}
+
+- (void)keyboardViewInputEnter:(NCLKeyboardView *)view
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Return];
     [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)keyboardViewInputBackspace:(NCLKeyboardView *)view
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_BackSpace];
+    [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)keyboardViewInputShiftDown:(NCLKeyboardView *)view
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Shift_L];
+    keyEvent.up = NO;
+    [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)keyboardViewInputShiftUp:(NCLKeyboardView *)view
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Shift_L];
+    keyEvent.down = NO;
+    [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)keyboardViewInputSpace:(NCLKeyboardView *)view
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_space];
+    [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)keyboardViewInputNextCandidate:(NCLKeyboardView *)view
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Zenkaku];
+    [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)keyboardViewInputHideKeyboard:(NCLKeyboardView *)view
+{
+    [self.textView resignFirstResponder];
+}
+
+#pragma mark -
+
+- (void)accessoryView:(NCLKeyboardAccessoryView *)accessoryView keyboardTypeDidChange:(NSInteger)keyboardType
+{
+    if (keyboardType == NCLKeyboardTypeNICOLA) {
+        [self setupInputView];
+    } else {
+        self.textView.inputView = nil;
+    }
+    
+    [self.textView reloadInputViews];
+}
+
+- (void)accessoryViewDidComplete:(NCLKeyboardAccessoryView *)accessoryView
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)accessoryViewArrowUp:(NCLKeyboardAccessoryView *)accessoryView
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Up];
+    [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)accessoryViewArrowDown:(NCLKeyboardAccessoryView *)accessoryView
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Down];
+    [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)accessoryViewArrowLeft:(NCLKeyboardAccessoryView *)accessoryView
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Left];
+    [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)accessoryViewArrowRight:(NCLKeyboardAccessoryView *)accessoryView
+{
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Right];
+    [self.rfbInputConnMgr sendEvent:keyEvent];
+}
+
+- (void)accessoryViewCut:(NCLKeyboardAccessoryView *)accessoryView
+{
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
+        keyEvent.up = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_x];
+        keyEvent.up = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_x];
+        keyEvent.down = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
+        keyEvent.down = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+}
+
+- (void)accessoryViewCopy:(NCLKeyboardAccessoryView *)accessoryView
+{
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
+        keyEvent.up = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_c];
+        keyEvent.up = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_c];
+        keyEvent.down = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
+        keyEvent.down = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+}
+
+- (void)accessoryViewPaste:(NCLKeyboardAccessoryView *)accessoryView
+{
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
+        keyEvent.up = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_v];
+        keyEvent.up = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_v];
+        keyEvent.down = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+    dispatch_async(dispatch_get_current_queue(), ^{
+        RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
+        keyEvent.down = NO;
+        [self.rfbInputConnMgr sendEvent:keyEvent];
+    });
+}
+
+#pragma mark -
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    return NO;
 }
 
 #pragma mark -
@@ -168,12 +385,12 @@
 {
 	if (error) {
         [self stopSpinner];
+        
 		NSString *errorMsg = [NSLocalizedString(@"Encountered Problem: ", nil) stringByAppendingString:error.localizedDescription];
 		[self displayErrorMessage:errorMsg];
+        
 		return;
 	}
-    
-    self.helpTextView.hidden = NO;
 	
 	switch (action) {
 		case CONNECTION_START:

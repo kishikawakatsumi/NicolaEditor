@@ -311,9 +311,14 @@
 	//TODO: Probably doesn't handle certain keys like modifiers and special characters
 	
 	//resolve the keysym
-	int keysym = [KeyMapping unicharToX11KeySym:keyEvent.keyPress];
-	[self sendKeyDown:keysym];
-	[self sendKeyUp:keysym];
+//	int keysym = [KeyMapping unicharToX11KeySym:keyEvent.keyPress];
+	int keysym = keyEvent.keysym;
+    if (keyEvent.down) {
+        [self sendKeyDown:keysym];
+    }
+    if (keyEvent.up) {
+        [self sendKeyUp:keysym];
+    }
 }
 
 -(void)sendKeyDown:(int)keysym {

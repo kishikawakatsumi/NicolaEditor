@@ -153,6 +153,7 @@
     NSInteger row = indexPath.row;
     if (row < self.fontNames.count) {
         NSString *fontName = self.fontNames[row];
+        cell.textLabel.text = NSLocalizedString(fontName, nil);
         
         NSInteger index = [self.fontNames indexOfObject:fontName];
         NSString *boldFontName = self.boldFontNames[index];

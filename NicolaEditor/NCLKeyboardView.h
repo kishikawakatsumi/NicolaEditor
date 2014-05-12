@@ -26,4 +26,13 @@
 
 @protocol NCLKeyboardViewDelegate <NSObject>
 
+- (void)keyboardView:(NCLKeyboardView *)view inputText:(NSString *)text;
+- (void)keyboardViewInputEnter:(NCLKeyboardView *)view;
+- (void)keyboardViewInputBackspace:(NCLKeyboardView *)view;
+- (void)keyboardViewInputShiftDown:(NCLKeyboardView *)view;
+- (void)keyboardViewInputShiftUp:(NCLKeyboardView *)view;
+- (void)keyboardViewInputSpace:(NCLKeyboardView *)view;
+- (void)keyboardViewInputNextCandidate:(NCLKeyboardView *)view;
+- (void)keyboardViewInputHideKeyboard:(NCLKeyboardView *)view;
+
 @end
