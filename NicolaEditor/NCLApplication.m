@@ -222,7 +222,6 @@ static BOOL RCMD;
     long long keyCode = [[event valueForKey:rbVU9OE7QenrQ1lYz8MW] longLongValue];
     UniChar *keycode = (UniChar *)&keyCode;
     UniChar key = keycode[0];
-    NSLog(@"%d", key);
     
     NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
     if (isKeyDown) {
