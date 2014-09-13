@@ -219,7 +219,11 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
         [cloudUploadButtonView addTarget:self action:@selector(cloudUpload:) forControlEvents:UIControlEventTouchUpInside];
         cloudUploadButton = [[UIBarButtonItem alloc] initWithCustomView:cloudUploadButtonView];
     } else {
-        textView = [[NSClassFromString(nuAcYW37RZfT9A3gNRm3) alloc] initWithFrame:self.view.bounds];
+        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
+            textView = [[NSClassFromString(nuAcYW37RZfT9A3gNRm3) alloc] initWithFrame:self.view.bounds];
+        } else {
+            textView = [[UITextView alloc] initWithFrame:self.view.bounds];
+        }
         
         addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
         shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
