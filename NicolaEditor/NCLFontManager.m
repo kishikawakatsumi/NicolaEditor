@@ -110,7 +110,7 @@
             }
             
             CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)fontName, 0.0, NULL);
-            CFStringRef fontURL = CTFontCopyAttribute(fontRef, kCTFontURLAttribute);
+            CFURLRef fontURL = CTFontCopyAttribute(fontRef, kCTFontURLAttribute);
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSMutableDictionary *dowloadedFonts = [[userDefaults objectForKey:NCLSettingsDownloadedFontsKey] mutableCopy];
