@@ -1,13 +1,13 @@
 PODS:
-  - CrittercismSDK (4.3.3)
-  - Dropbox-iOS-SDK (1.3.10)
+  - CrittercismSDK (4.3.7)
+  - Dropbox-iOS-SDK (1.3.11)
   - Evernote-SDK-iOS (1.3.1):
     - SSKeychain (~> 1.2.2)
-  - FFCircularProgressView (0.4)
+  - FFCircularProgressView (0.5)
   - JLRoutes (1.5.1)
   - NLCoreData (0.5.3)
   - SSKeychain (1.2.2)
-  - SVProgressHUD (1.0)
+  - SVProgressHUD (HEAD based on 1.0)
   - uservoice-iphone-sdk (2.0.15)
 
 DEPENDENCIES:
@@ -17,18 +17,18 @@ DEPENDENCIES:
   - FFCircularProgressView
   - JLRoutes
   - NLCoreData
-  - SVProgressHUD
+  - SVProgressHUD (HEAD)
   - uservoice-iphone-sdk (~> 2.0)
 
 SPEC CHECKSUMS:
-  CrittercismSDK: 2dd7d834502e4b12a2c2e4873c11580bec3778c1
-  Dropbox-iOS-SDK: 9cc160cd7fa2edfae25adf11346bff3496d6dbad
-  Evernote-SDK-iOS: ee7b17de0ebc65e8aa78112e6b0562d9297e8839
-  FFCircularProgressView: 73a1eb8c3c6a2a77b0fb4e7fdb1f3417688b0d4d
-  JLRoutes: 4ca144189633c57b061970f54c45b95b7e24c558
-  NLCoreData: bde75667607f7b66a08ef1d78d39b8bc5eed433f
-  SSKeychain: 3d0b76c87e7b062a7ad1631a825fddec84367d44
-  SVProgressHUD: 5e10939a296debf5fe5a5895eda9539b8b2114f1
-  uservoice-iphone-sdk: c2e2bd41f27c0653efbf1c4a619f3a8fd6736e0f
+  CrittercismSDK: 4da8d0e407fb1ef29eef98678c1f90be4943b85e
+  Dropbox-iOS-SDK: 3bd81e7abfeb66b8fced09768db0166286a90f3f
+  Evernote-SDK-iOS: 92f4eb30d74d2fb3b495fe216d73aac67a68e6d3
+  FFCircularProgressView: 723b7a84c412b5d9d2a5531bc716b99965ad7192
+  JLRoutes: 3400fe314fc01c861a14ff7e183d209b0cd302ae
+  NLCoreData: c31ca2e6d5a2564bded820b5d202d08b4f243099
+  SSKeychain: cc48bd3ad24fcd9125adb9e0d23dd50b8bbd08b9
+  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  uservoice-iphone-sdk: 7944097ed97488fa4763987729f4db6e28c2be04
 
-COCOAPODS: 0.32.1
+COCOAPODS: 0.33.1

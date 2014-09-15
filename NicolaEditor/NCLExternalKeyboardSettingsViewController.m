@@ -48,15 +48,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
         return 3;
-    } else {
+    } else if (section == 1) {
         return self.layoutDefinitions.count;
+    } else {
+        return 1;
     }
 }
 
@@ -66,6 +68,8 @@
         return NSLocalizedString(@"Keyboard", nil);
     } else if (section == 1) {
         return NSLocalizedString(@"Layout", nil);
+    } else if (section == 2) {
+        return NSLocalizedString(@"Development", nil);
     }
     
     return nil;
@@ -125,6 +129,15 @@
         } else {
             cell.accessoryType = UITableViewCellAccessoryNone;
         }
+    } else if (section == 2) {
+        cell.textLabel.text = NSLocalizedString(@"Display Keycode", nil);;
+        
+        BOOL displayKeycode = [userDefaults boolForKey:NCLSettingsExternalKeyboardDisplayKeycode];
+        if (displayKeycode) {
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        } else {
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
     
     return cell;
@@ -162,6 +175,12 @@
         NSString *layoutName = layoutNames[row];
         
         [userDefaults setObject:layoutName forKey:key];
+    } else if (section == 2) {
+        NSString *key = NCLSettingsExternalKeyboardDisplayKeycode;
+        BOOL displayKeycode = [userDefaults boolForKey:key];
+        [userDefaults setBool:!displayKeycode forKey:key];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:NCLSettingsExternalKeyboardDebugSettingsChangedNotification object:self];
     }
     
     [userDefaults synchronize];

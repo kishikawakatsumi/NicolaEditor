@@ -10,6 +10,7 @@
 #import "NCLKeyboardInputEngine.h"
 #import "NCLKeyboardView.h"
 #import "NCLConstants.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 
 static NSString *xfS9MiWvpygnCQtUh483;
 
@@ -20,6 +21,9 @@ static NSString *xfS9MiWvpygnCQtUh483;
 
 @property (nonatomic) NSArray *physicalKeyLayout;
 @property (nonatomic) NSDictionary *specialKeyLayout;
+
+@property (nonatomic, getter = isDisplayKeycode) BOOL displayKeycode;
+@property (nonatomic, getter = isDisplayDebugInfo) BOOL displayDebugInfo;
 
 @end
 
@@ -46,10 +50,17 @@ static NSString *xfS9MiWvpygnCQtUh483;
     self = [super init];
     if (self) {
         [self setupKeyboardLayout];
+        [self applyDebugFunctionEnabled];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(externalKeyboardDebugSettingsChanged:) name:NCLSettingsExternalKeyboardDebugSettingsChangedNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
     }
     
     return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -
@@ -63,6 +74,16 @@ static NSString *xfS9MiWvpygnCQtUh483;
     
     self.physicalKeyLayout = layouts[0];
     self.specialKeyLayout = layouts[1];
+}
+
+- (void)applyDebugFunctionEnabled
+{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    BOOL displayKeycode = [userDefaults boolForKey:NCLSettingsExternalKeyboardDisplayKeycode];
+    BOOL displayDebugInfo = [userDefaults boolForKey:NCLSettingsExternalKeyboardDisplayDebugInfo];
+    
+    self.displayKeycode = displayKeycode;
+    self.displayDebugInfo = displayDebugInfo;
 }
 
 #pragma mark -
@@ -150,6 +171,10 @@ static NSString *xfS9MiWvpygnCQtUh483;
         }
     }
     
+    if (_displayKeycode) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@"keyup"] status:[NSString stringWithFormat:@"[ %@ ]", keyCodeString]];
+    }
+    
     return result;
 }
 
@@ -179,6 +204,10 @@ static NSString *xfS9MiWvpygnCQtUh483;
     if ([specialKey isEqualToString:@"KANA/EISU"]) {
         [self toggleInputMethod];
         result = ![self.keyboardInputMethod isEqualToString:NCLKeyboardInputMethodKana];
+    }
+    
+    if (_displayKeycode) {
+        [SVProgressHUD showImage:[UIImage imageNamed:@"keyup"] status:[NSString stringWithFormat:@"[ %@ ]", keyCodeString]];
     }
     
     return result;
@@ -252,6 +281,13 @@ static NSString *xfS9MiWvpygnCQtUh483;
 - (void)upRightShiftKey
 {
     [self.inputEngine addRightShiftKeyEvent:NCLKeyboardEventKeyUp];
+}
+
+#pragma mark -
+
+- (void)externalKeyboardDebugSettingsChanged:(UIApplication *)application
+{
+    [self applyDebugFunctionEnabled];
 }
 
 @end

@@ -50,6 +50,10 @@ NSString * const NCLKeyboardAppleWirelessKeyboardJIS = @"AppleWirelessKeyboardJI
 NSString * const NCLKeyboardAppleWirelessKeyboardUS = @"AppleWirelessKeyboardUS";
 NSString * const NCLKeyboardUserDefined = @"UserDefined";
 
+NSString * const NCLSettingsExternalKeyboardDisplayKeycode = @"external-keyboard-development-display-keycode";
+NSString * const NCLSettingsExternalKeyboardDisplayDebugInfo = @"external-keyboard-development-display-debug-info";
+NSString * const NCLSettingsExternalKeyboardDebugSettingsChangedNotification = @"NCLSettingsExternalKeyboardDebugSettingsChangedNotification";;
+
 NSString * const NCLPhysicalKeyboardAvailabilityChangedNotification = @"NCLPhysicalKeyboardAvailabilityChangedNotification";
 NSString * const NCLPhysicalKeyboardAvailabilityKey = @"NCLPhysicalKeyboardAvailabilityKey";
 

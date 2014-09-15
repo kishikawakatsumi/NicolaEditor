@@ -50,6 +50,10 @@ extern NSString * const NCLKeyboardAppleWirelessKeyboardJIS;
 extern NSString * const NCLKeyboardAppleWirelessKeyboardUS;
 extern NSString * const NCLKeyboardUserDefined;
 
+extern NSString * const NCLSettingsExternalKeyboardDisplayKeycode;
+extern NSString * const NCLSettingsExternalKeyboardDisplayDebugInfo;
+extern NSString * const NCLSettingsExternalKeyboardDebugSettingsChangedNotification;
+
 extern NSString * const NCLPhysicalKeyboardAvailabilityChangedNotification;
 extern NSString * const NCLPhysicalKeyboardAvailabilityKey;
 

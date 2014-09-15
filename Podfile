@@ -2,7 +2,7 @@ platform :ios, '5.0'
 
 inhibit_all_warnings!
 
-pod 'SVProgressHUD'
+pod 'SVProgressHUD', :head
 pod 'FFCircularProgressView'
 pod 'JLRoutes'
 pod 'NLCoreData'
