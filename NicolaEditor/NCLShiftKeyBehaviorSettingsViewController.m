@@ -18,7 +18,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     self.navigationItem.title = NSLocalizedString(@"Shift Key Behavior", nil);
 }
 
