@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14017BE21F7843BD00DAA862 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 149E0C0C191FF11600913673 /* libcrypto.a */; };
+		1401810A1F78ED79006D9C81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140181091F78ED79006D9C81 /* LaunchScreen.storyboard */; };
 		14326812180FB7270001BDBC /* NCLConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326811180FB7270001BDBC /* NCLConstants.m */; };
 		14326816180FB7990001BDBC /* UIFont+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326815180FB7990001BDBC /* UIFont+Helper.m */; };
 		1432681A180FBF910001BDBC /* NCLPopoverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 14326819180FBF910001BDBC /* NCLPopoverManager.m */; };
@@ -41,7 +43,6 @@
 		149E0BAD191FBFC200913673 /* AppleWirelessKeyboardUS.json in Resources */ = {isa = PBXBuildFile; fileRef = 149E0BAC191FBFC200913673 /* AppleWirelessKeyboardUS.json */; };
 		149E0C0D191FF11600913673 /* BDHost.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0BB6191FF11600913673 /* BDHost.m */; };
 		149E0C11191FF11600913673 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0BBA191FF11600913673 /* GCDAsyncSocket.m */; };
-		149E0C17191FF11600913673 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 149E0C0C191FF11600913673 /* libcrypto.a */; };
 		149E0C22191FF18900913673 /* NSData+HexString.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C1B191FF18900913673 /* NSData+HexString.m */; };
 		149E0C23191FF18900913673 /* UILabel+MultiLineAutoSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C1D191FF18900913673 /* UILabel+MultiLineAutoSize.m */; };
 		149E0C24191FF18900913673 /* UIViewController+ErrorOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 149E0C1F191FF18900913673 /* UIViewController+ErrorOverlay.m */; };
@@ -92,10 +93,12 @@
 		66C7A1F61920A303006C293B /* NCLRFBInputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7A1F51920A303006C293B /* NCLRFBInputViewController.m */; };
 		66C7A1F91920A3DB006C293B /* TouchInputTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7A1F81920A3DB006C293B /* TouchInputTracker.m */; };
 		66C7A1FD1920A419006C293B /* RFBInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C7A1FC1920A419006C293B /* RFBInputView.m */; };
-		C631213B1BE745BBA45EA37C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 405DAA10965C4E299C75719A /* libPods.a */; };
+		99CA521D453432968489AF62 /* libPods-NicolaEditor.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F2B23765BA52F286193F7A20 /* libPods-NicolaEditor.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		01AB617934408CED622D3D2D /* Pods-NicolaEditor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NicolaEditor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NicolaEditor/Pods-NicolaEditor.debug.xcconfig"; sourceTree = "<group>"; };
+		140181091F78ED79006D9C81 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		14124B64182E902600C99A40 /* NCLRuntimeUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLRuntimeUtils.h; sourceTree = "<group>"; };
 		14326810180FB7270001BDBC /* NCLConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLConstants.h; sourceTree = "<group>"; };
 		14326811180FB7270001BDBC /* NCLConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLConstants.m; sourceTree = "<group>"; };
@@ -246,14 +249,14 @@
 		14B3F47A1803121E00F7E91A /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		14B3F47D1803167200F7E91A /* SoftwareKeyboard.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = SoftwareKeyboard.json; sourceTree = "<group>"; };
 		14BD796A1811BBBE005A6387 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		405DAA10965C4E299C75719A /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		65F2B65CE531F704379A1FA2 /* Pods-NicolaEditor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NicolaEditor.release.xcconfig"; path = "Pods/Target Support Files/Pods-NicolaEditor/Pods-NicolaEditor.release.xcconfig"; sourceTree = "<group>"; };
 		66C7A1F41920A303006C293B /* NCLRFBInputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NCLRFBInputViewController.h; sourceTree = "<group>"; };
 		66C7A1F51920A303006C293B /* NCLRFBInputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NCLRFBInputViewController.m; sourceTree = "<group>"; };
 		66C7A1F71920A3DB006C293B /* TouchInputTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchInputTracker.h; path = Vendor/iOSVNCInputClient/UI/TouchInputTracker.h; sourceTree = SOURCE_ROOT; };
 		66C7A1F81920A3DB006C293B /* TouchInputTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouchInputTracker.m; path = Vendor/iOSVNCInputClient/UI/TouchInputTracker.m; sourceTree = SOURCE_ROOT; };
 		66C7A1FB1920A419006C293B /* RFBInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RFBInputView.h; path = Vendor/iOSVNCInputClient/UI/RFBInputView.h; sourceTree = SOURCE_ROOT; };
 		66C7A1FC1920A419006C293B /* RFBInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RFBInputView.m; path = Vendor/iOSVNCInputClient/UI/RFBInputView.m; sourceTree = SOURCE_ROOT; };
-		FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F2B23765BA52F286193F7A20 /* libPods-NicolaEditor.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NicolaEditor.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,8 +268,8 @@
 				14B3F42E18030DEC00F7E91A /* Foundation.framework in Frameworks */,
 				14B3F43018030DEC00F7E91A /* CoreGraphics.framework in Frameworks */,
 				14B3F43418030DEC00F7E91A /* CoreData.framework in Frameworks */,
-				149E0C17191FF11600913673 /* libcrypto.a in Frameworks */,
-				C631213B1BE745BBA45EA37C /* libPods.a in Frameworks */,
+				14017BE21F7843BD00DAA862 /* libcrypto.a in Frameworks */,
+				99CA521D453432968489AF62 /* libPods-NicolaEditor.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,7 +520,7 @@
 				14B3F43518030DEC00F7E91A /* NicolaEditor */,
 				14B3F42C18030DEC00F7E91A /* Frameworks */,
 				14B3F42B18030DEC00F7E91A /* Products */,
-				FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */,
+				C70E55EEB66F4FF66DB641DE /* Pods */,
 			);
 			sourceTree = "<group>";
 			wrapsLines = 0;
@@ -538,7 +541,7 @@
 				14B3F43118030DEC00F7E91A /* UIKit.framework */,
 				14B3F43318030DEC00F7E91A /* CoreData.framework */,
 				14B3F45418030DEC00F7E91A /* XCTest.framework */,
-				405DAA10965C4E299C75719A /* libPods.a */,
+				F2B23765BA52F286193F7A20 /* libPods-NicolaEditor.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				1477338E1815A0850045ADFB /* Default-Landscape~ipad.png */,
 				1477338F1815A0850045ADFB /* Default-Portrait@2x~ipad.png */,
 				147733901815A0850045ADFB /* Default-Portrait~ipad.png */,
+				140181091F78ED79006D9C81 /* LaunchScreen.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -618,6 +622,15 @@
 			name = UI;
 			sourceTree = "<group>";
 		};
+		C70E55EEB66F4FF66DB641DE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				01AB617934408CED622D3D2D /* Pods-NicolaEditor.debug.xcconfig */,
+				65F2B65CE531F704379A1FA2 /* Pods-NicolaEditor.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -625,11 +638,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 14B3F46518030DEC00F7E91A /* Build configuration list for PBXNativeTarget "NicolaEditor" */;
 			buildPhases = (
-				CC92CC975BC74A15BD7F8D0D /* Check Pods Manifest.lock */,
+				AE1AECF3839DACB110AE9EC2 /* [CP] Check Pods Manifest.lock */,
 				14B3F42618030DEC00F7E91A /* Sources */,
 				14B3F42718030DEC00F7E91A /* Frameworks */,
 				14B3F42818030DEC00F7E91A /* Resources */,
-				D1958E5B5E1742C5995FCC64 /* Copy Pods Resources */,
+				2CE471A79B52CEECFD04BCFB /* [CP] Embed Pods Frameworks */,
+				AD30D1FEF378CFC2E915D6D1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -647,11 +661,12 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = NCL;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "kishikawa katsumi";
 				TargetAttributes = {
 					14B3F42918030DEC00F7E91A = {
 						DevelopmentTeam = 27AEDK3C9F;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.DataProtection = {
 								enabled = 1;
@@ -696,6 +711,7 @@
 				14BD796B1811BBBE005A6387 /* Settings.bundle in Resources */,
 				145AE70118157C82000459C1 /* Icon-72.png in Resources */,
 				14B3F46C18030EAF00F7E91A /* NCLKeyboardView.xib in Resources */,
+				1401810A1F78ED79006D9C81 /* LaunchScreen.storyboard in Resources */,
 				146B3EEB18085B8600418452 /* Localizable.strings in Resources */,
 				143268391810272E0001BDBC /* NCLSliderPopup.xib in Resources */,
 				149E0BA6191FB39F00913673 /* AppleWirelessKeyboardJIS.json in Resources */,
@@ -714,34 +730,56 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		CC92CC975BC74A15BD7F8D0D /* Check Pods Manifest.lock */ = {
+		2CE471A79B52CEECFD04BCFB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NicolaEditor/Pods-NicolaEditor-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D1958E5B5E1742C5995FCC64 /* Copy Pods Resources */ = {
+		AD30D1FEF378CFC2E915D6D1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-NicolaEditor/Pods-NicolaEditor-resources.sh",
+				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
+				"$PODS_CONFIGURATION_BUILD_DIR/uservoice-iphone-sdk/UserVoice.bundle",
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NicolaEditor/Pods-NicolaEditor-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE1AECF3839DACB110AE9EC2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NicolaEditor-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -844,23 +882,34 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -877,7 +926,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -888,23 +937,33 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -915,7 +974,7 @@
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
@@ -924,14 +983,18 @@
 		};
 		14B3F46618030DEC00F7E91A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */;
+			baseConfigurationReference = 01AB617934408CED622D3D2D /* Pods-NicolaEditor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = NicolaEditor/NicolaEditor.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 27AEDK3C9F;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NicolaEditor/NicolaEditor-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
 					"\"${PODS_ROOT}/Headers\"",
 					"\"${PODS_ROOT}/Headers/CrittercismSDK\"",
 					"\"${PODS_ROOT}/Headers/Dropbox-iOS-SDK\"",
@@ -950,21 +1013,27 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/iOSVNCInputClient/3rdParty/OpenSSL",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kishikawakatsumi.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		14B3F46718030DEC00F7E91A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FFEBC4BDF8EC434D8B7F2CBC /* Pods.xcconfig */;
+			baseConfigurationReference = 65F2B65CE531F704379A1FA2 /* Pods-NicolaEditor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = NicolaEditor/NicolaEditor.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 27AEDK3C9F;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NicolaEditor/NicolaEditor-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
 					"\"${PODS_ROOT}/Headers\"",
 					"\"${PODS_ROOT}/Headers/CrittercismSDK\"",
 					"\"${PODS_ROOT}/Headers/Dropbox-iOS-SDK\"",
@@ -983,7 +1052,9 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendor/iOSVNCInputClient/3rdParty/OpenSSL",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kishikawakatsumi.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

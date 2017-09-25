@@ -11,12 +11,13 @@
 #import "NCLConstants.h"
 #import "NCLNote+Helper.h"
 #import "NSString+Helper.h"
+#import <SVProgressHUD/SVProgressHUD.h>
 #import <JLRoutes/JLRoutes.h>
 #import <NLCoreData/NLCoreData.h>
 #import <Evernote-SDK-iOS/EvernoteSDK.h>
-#import <DropboxSDK/DropboxSDK.h>
+#import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 #import <uservoice-iphone-sdk/UserVoice.h>
-#import <CrittercismSDK/Crittercism.h>
+#import <Crittercism/Crittercism.h>
 
 @import CoreText;
 
@@ -30,6 +31,9 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+    [SVProgressHUD setDefaultMaskType:SVProgressHUDMaskTypeClear];
+
     UVConfig *config = [UVConfig configWithSite:@"kishikawakatsumi.uservoice.com"];
     config.forumId = 251764;
     [UserVoice initialize:config];
@@ -37,9 +41,8 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     [Crittercism enableWithAppID:@"5264f50ea7928a4f07000005"];
     
     [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringUS consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
-    
-    DBSession* session = [[DBSession alloc] initWithAppKey:DropboxAppKey appSecret:DropboxAppSecret root:kDBRootAppFolder];
-    [DBSession setSharedSession:session];
+
+    [DBClientsManager setupWithAppKey:DropboxAppKey];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults registerDefaults:@{NCLSettingsFontNameKey: @"HiraMinProN-W3",
@@ -70,8 +73,8 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     
     [self exportUserDefinedKayboardLayout];
     [self prepareForiCloud];
-    
-    [JLRoutes addRoute:@"/:object/:action" handler:^BOOL(NSDictionary *parameters) {
+
+    [[JLRoutes globalRoutes] addRoute:@"/:object/:action" handler:^BOOL(NSDictionary *parameters) {
         NSString *object = parameters[@"object"];
         NSString *action = parameters[@"action"];
         
@@ -118,6 +121,42 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     [[NSManagedObjectContext mainContext] saveNested];
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    BOOL canHandle = NO;
+    NSString *scheme = url.scheme.lowercaseString;
+
+    EvernoteSession *session = [EvernoteSession sharedSession];
+    if ([[NSString stringWithFormat:@"en-%@", session.consumerKey] isEqualToString:scheme]) {
+        canHandle = [session canHandleOpenURL:url];
+    }
+
+    DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
+    if (authResult) {
+        if ([authResult isSuccess]) {
+            canHandle = YES;
+        } else if ([authResult isCancel]) {
+            canHandle = NO;
+        } else if ([authResult isError]) {
+            canHandle = NO;
+        }
+    } else {
+        canHandle = NO;
+    }
+
+    if (url.isFileURL) {
+        NSError *error = nil;
+        NSString *text = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
+        if (text.length > 0 &&!error) {
+            [NCLNote insertNewNoteWithContent:text];
+        }
+    }
+
+    canHandle = [JLRoutes routeURL:url];
+
+    return canHandle;
+}
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     BOOL canHandle = NO;
@@ -127,10 +166,18 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     if ([[NSString stringWithFormat:@"en-%@", session.consumerKey] isEqualToString:scheme]) {
         canHandle = [session canHandleOpenURL:url];
     }
-    
-    DBSession *sharedSession = [DBSession sharedSession];
-    if ([sharedSession.appScheme isEqualToString:scheme]) {
-        canHandle = [sharedSession handleOpenURL:url];
+
+    DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
+    if (authResult) {
+        if ([authResult isSuccess]) {
+            canHandle = YES;
+        } else if ([authResult isCancel]) {
+            canHandle = NO;
+        } else if ([authResult isError]) {
+            canHandle = NO;
+        }
+    } else {
+        canHandle = NO;
     }
     
     if (url.isFileURL) {

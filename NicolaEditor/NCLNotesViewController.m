@@ -32,11 +32,7 @@
 - (void)awakeFromNib
 {
     self.clearsSelectionOnViewWillAppear = NO;
-    if ([self respondsToSelector:@selector(setPreferredContentSize:)]) {
-        self.preferredContentSize = CGSizeMake(320.0, 600.0);
-    } else {
-        self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
-    }
+    self.preferredContentSize = CGSizeMake(320.0, 600.0);
     [super awakeFromNib];
 }
 
@@ -301,7 +297,7 @@
     
     NCLRFBInputViewController *controller = [self.storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([NCLRFBInputViewController class])];
     controller.serverProfile = notification.userInfo[NCLVNCServerProfileKey];
-    [self presentModalViewController:controller animated:YES];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)settingsViewControllerShouldShowUserVoice:(NCLSettingsViewController *)controller

@@ -43,6 +43,7 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
     _serverProfile =  [[ServerProfile alloc] init];
     _successfulAuthProbe = NO;
     _successfulSecurityProbe = NO;
@@ -357,7 +358,7 @@
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[blockSafeSelf stopSpinner];
             
-            if (!probeResults || !probeResults.count == ProbeResultFieldCount) {
+            if (!probeResults || !(probeResults.count == ProbeResultFieldCount)) {
                 NSString *header = NSLocalizedString(@"Connection Error: ", nil);
                 [blockSafeSelf handleDisplayErrors:[NSString stringWithFormat:@"%@ %@", header, error.localizedDescription]];
                 DLogErr(@"Error: Probe problem - %@", [error localizedDescription]);

@@ -461,8 +461,12 @@ static NSCache *cache;
     CGFloat verticalSpacing;
     CGFloat keyWidth;
     CGFloat keyHeight;
+    CGFloat offset;
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        leftMargin = 6.0;
+        CGFloat width = CGRectGetWidth(self.frame);
+        offset = (width - 768.0) / 2;
+
+        leftMargin = 6.0 + offset;
         leftPadding = 32.0;
         topMargin = 8.0;
         horizontalSpacing = 6.5;
@@ -470,7 +474,10 @@ static NSCache *cache;
         keyWidth = 57.0;
         keyHeight = 56.0;
     } else {
-        leftMargin = 7.0;
+        CGFloat width = CGRectGetWidth(self.frame);
+        offset = (width - 1024.0) / 2;
+
+        leftMargin = 7.0 + offset;
         leftPadding = 38.0;
         topMargin = 9.0;
         horizontalSpacing = 9.0;
@@ -502,27 +509,27 @@ static NSCache *cache;
                                        keyWidth,
                                        keyHeight);
             }
-            
+
             counter++;
         }
     }
     
     if (UIInterfaceOrientationIsPortrait(orientation)) {
-        self.returnKeyButton.frame = CGRectMake(674.0, 72.0, 88.0, keyHeight);
-        self.numberKeyButton.frame = CGRectMake(5.0, 200.0, keyWidth, keyHeight);
-        self.alphabetKeyButton.frame = CGRectMake(68.5, 200.0, keyWidth, keyHeight);
-        self.leftShiftKeyButton.frame = CGRectMake(132.0, 200.0, 217.0, keyHeight);
-        self.rightShiftKeyButton.frame = CGRectMake(356.0, 200.0, 216.0, keyHeight);
-        self.spaceKeyButton.frame = CGRectMake(578.5, 200.0, 121.0, keyHeight);
-        self.keyboardKeyButton.frame = CGRectMake(706.0, 200.0, keyWidth, keyHeight);
+        self.returnKeyButton.frame = CGRectMake(674.0 + offset, 72.0, 88.0, keyHeight);
+        self.numberKeyButton.frame = CGRectMake(5.0 + offset, 200.0, keyWidth, keyHeight);
+        self.alphabetKeyButton.frame = CGRectMake(68.5 + offset, 200.0, keyWidth, keyHeight);
+        self.leftShiftKeyButton.frame = CGRectMake(132.0 + offset, 200.0, 217.0, keyHeight);
+        self.rightShiftKeyButton.frame = CGRectMake(356.0 + offset, 200.0, 216.0, keyHeight);
+        self.spaceKeyButton.frame = CGRectMake(578.5 + offset, 200.0, 121.0, keyHeight);
+        self.keyboardKeyButton.frame = CGRectMake(706.0 + offset, 200.0, keyWidth, keyHeight);
     } else {
-        self.returnKeyButton.frame = CGRectMake(895.0, 95.0, 122.0, keyHeight);
-        self.numberKeyButton.frame = CGRectMake(7.0, 267.0, keyWidth, keyHeight);
-        self.alphabetKeyButton.frame = CGRectMake(92.0, 267.0, keyWidth, keyHeight);
-        self.leftShiftKeyButton.frame = CGRectMake(177.0, 267.0, 289.0, keyHeight);
-        self.rightShiftKeyButton.frame = CGRectMake(475.0, 267.0, 288.0, keyHeight);
-        self.spaceKeyButton.frame = CGRectMake(772.0, 267.0, 161.0, keyHeight);
-        self.keyboardKeyButton.frame = CGRectMake(942.0, 267.0, keyWidth, keyHeight);
+        self.returnKeyButton.frame = CGRectMake(895.0 + offset, 95.0, 122.0, keyHeight);
+        self.numberKeyButton.frame = CGRectMake(7.0 + offset, 267.0, keyWidth, keyHeight);
+        self.alphabetKeyButton.frame = CGRectMake(92.0 + offset, 267.0, keyWidth, keyHeight);
+        self.leftShiftKeyButton.frame = CGRectMake(177.0 + offset, 267.0, 289.0, keyHeight);
+        self.rightShiftKeyButton.frame = CGRectMake(475.0 + offset, 267.0, 288.0, keyHeight);
+        self.spaceKeyButton.frame = CGRectMake(772.0 + offset, 267.0, 161.0, keyHeight);
+        self.keyboardKeyButton.frame = CGRectMake(942.0 + offset, 267.0, keyWidth, keyHeight);
     }
 }
 
@@ -919,6 +926,16 @@ static NSCache *cache;
     }
     
     return nil;
+}
+
+- (CGSize)intrinsicContentSize {
+    UIScreen *mainScreen = [UIScreen mainScreen];
+    if(mainScreen.bounds.size.width < mainScreen.bounds.size.height){
+        return CGSizeMake(UIViewNoIntrinsicMetric, 264.0);
+    }
+    else{
+        return CGSizeMake(UIViewNoIntrinsicMetric, 352.0);
+    }
 }
 
 @end

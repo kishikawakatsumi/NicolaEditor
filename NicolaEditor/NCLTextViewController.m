@@ -18,7 +18,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <NLCoreData/NLCoreData.h>
 #import <Evernote-SDK-iOS/EvernoteSDK.h>
-#import <DropboxSDK/DropboxSDK.h>
+#import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 @import MobileCoreServices;
 @import ObjectiveC;
@@ -34,7 +34,7 @@ static NSString *ag2hWVYaGi9H7hDQEtMV;
 // _UICompatibilityTextView
 static NSString *nuAcYW37RZfT9A3gNRm3;
 
-@interface NCLTextViewController () <UITextViewDelegate, UIDocumentInteractionControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate, DBRestClientDelegate>
+@interface NCLTextViewController () <UITextViewDelegate, UIDocumentInteractionControllerDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
 
 @property (nonatomic) UIBarButtonItem *addButton;
 @property (nonatomic) UIBarButtonItem *shareButton;
@@ -52,8 +52,6 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 
 @property (nonatomic) UIEdgeInsets textViewContentInset;
 @property (nonatomic) UIEdgeInsets textViewScrollIndicatorInsets;
-
-@property (nonatomic) DBRestClient *restClient;
 
 @end
 
@@ -96,6 +94,11 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     self.inputAccessoryView.hidden = NO;
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self.inputView invalidateIntrinsicContentSize];
 }
 
 - (void)viewDidUnload
@@ -437,8 +440,7 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
     
     UIActionSheet *actionSheet;
     
-    DBSession *sharedSession = [DBSession sharedSession];
-    if (sharedSession.isLinked) {
+    if (DBClientsManager.authorizedClient) {
         actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                   delegate:self
                                          cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
@@ -451,7 +453,7 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
                                     destructiveButtonTitle:nil
                                          otherButtonTitles:NSLocalizedString(@"Send to Evernote", nil), NSLocalizedString(@"Login to Dropbox", nil), nil];
     }
-    
+
     [[NCLPopoverManager sharedManager] presentActionSheet:actionSheet fromBarButtonItem:self.cloudUploadButton];
 }
 
@@ -476,7 +478,7 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 
 - (void)evernoteCreateNote:(NSString *)title image:(UIImage *)image contentBody:(NSString *)contentBody tagNames:(NSArray *)tagNames
 {
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [SVProgressHUD show];
     
     NSMutableString *content = [[NSMutableString alloc] init];
     [content setString:@"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"];
@@ -533,40 +535,28 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 
 - (void)saveToDropbox:(NCLNote *)note
 {
-    DBSession *session = [DBSession sharedSession];
-    if (!session.isLinked) {
-        [session linkFromController:self];
-    } else {
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-        
+    if (DBClientsManager.authorizedClient) {
+        [SVProgressHUD show];
+
         NSURL *fileURL = [self saveNoteWithFilename:self.note.title];
         NSString *localPath = fileURL.path;
-        NSString *filename = fileURL.lastPathComponent;
-        NSString *destDir = @"/";
-        [[self restClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:localPath];
+        NSString *remotePath = [NSString stringWithFormat:@"/%@", fileURL.lastPathComponent];
+        [[DBClientsManager.authorizedClient.filesRoutes uploadUrl:remotePath inputUrl:localPath] setResponseBlock:^(DBFILESFileMetadata * _Nullable result, DBFILESUploadError * _Nullable routeError, DBRequestError * _Nullable networkError) {
+            if (result) {
+                [SVProgressHUD dismiss];
+                [SVProgressHUD showSuccessWithStatus:nil];
+
+            } else {
+                [SVProgressHUD dismiss];
+                [SVProgressHUD showErrorWithStatus:nil];
+            }
+        }];
+
+    } else {
+        [DBClientsManager authorizeFromController:UIApplication.sharedApplication controller:self openURL:^(NSURL * _Nonnull url) {
+            [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+        }];
     }
-}
-
-- (DBRestClient *)restClient
-{
-    if (!_restClient) {
-        _restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-        _restClient.delegate = self;
-    }
-    
-    return _restClient;
-}
-
-- (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath from:(NSString *)srcPath metadata:(DBMetadata *)metadata
-{
-    [SVProgressHUD dismiss];
-    [SVProgressHUD showSuccessWithStatus:nil];
-}
-
-- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error
-{
-    [SVProgressHUD dismiss];
-    [SVProgressHUD showErrorWithStatus:nil];
 }
 
 #pragma mark -
@@ -812,7 +802,9 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
     if ([buttonTitle isEqualToString:NSLocalizedString(@"Send to Evernote", nil)]) {
         [self sendToEvernote:self.note];
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Login to Dropbox", nil)]) {
-        [[DBSession sharedSession] linkFromController:self];
+        [DBClientsManager authorizeFromController:UIApplication.sharedApplication controller:self openURL:^(NSURL * _Nonnull url) {
+            [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+        }];
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Save to Dropbox", nil)]) {
         [self saveToDropbox:self.note];
     }
