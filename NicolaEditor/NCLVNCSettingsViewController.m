@@ -116,16 +116,6 @@
     return 0;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
-        cell.detailTextLabel.highlightedTextColor = [UIColor whiteColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-    }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell;

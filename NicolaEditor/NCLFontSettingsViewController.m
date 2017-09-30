@@ -38,12 +38,8 @@
     self = [super initWithFrame:CGRectMake(0.0, 0.0, 44.0, 44.0)];
     if (self) {
         self.backgroundColor = [UIColor clearColor];
-        
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-            self.progressView = [[FFCircularProgressView alloc] initWithFrame:CGRectMake(10.0, 10.0, 24.0, 24.0)];
-        } else {
-            self.progressView = [[FFCircularProgressView alloc] initWithFrame:CGRectMake(20.0, 10.0, 24.0, 24.0)];
-        }
+
+        self.progressView = [[FFCircularProgressView alloc] initWithFrame:CGRectMake(20.0, 10.0, 24.0, 24.0)];
         
         [self addSubview:self.progressView];
         
@@ -110,17 +106,9 @@
     [super viewDidLoad];
     
     self.navigationItem.title = NSLocalizedString(@"Font", nil);
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
-        self.fontNames = @[@"HiraMinProN-W3", @"HiraKakuProN-W3"];
-        self.boldFontNames = @[@"HiraMinProN-W6", @"HiraKakuProN-W6"];
-    } else if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        self.fontNames = @[@"HiraMinProN-W3", @"HiraKakuProN-W3", @"HiraMaruProN-W4", @"YuMin-Medium", @"YuGo-Medium"];
-        self.boldFontNames = @[@"HiraMinProN-W6", @"HiraKakuProN-W6", @"HiraMaruProN-W4", @"YuMin-Demibold", @"YuGo-Bold"];
-    } else {
-        self.fontNames = @[@"HiraMinProN-W3", @"HiraKakuProN-W3", @"HiraMaruProN-W4", @"YuMin-Medium", @"YuGo-Medium", @"Osaka", @"Osaka-Mono"];
-        self.boldFontNames = @[@"HiraMinProN-W6", @"HiraKakuProN-W6", @"HiraMaruProN-W4", @"YuMin-Demibold", @"YuGo-Bold", @"Osaka", @"Osaka-Mono"];
-    }
+
+    self.fontNames = @[@"HiraMinProN-W3", @"HiraKakuProN-W3", @"HiraMaruProN-W4", @"YuMin-Medium", @"YuGo-Medium", @"Osaka", @"Osaka-Mono"];
+    self.boldFontNames = @[@"HiraMinProN-W6", @"HiraKakuProN-W6", @"HiraMaruProN-W4", @"YuMin-Demibold", @"YuGo-Bold", @"Osaka", @"Osaka-Mono"];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontManagerMatchingDidFinish:) name:NCLFontManagerMatchingDidFinishNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontManagerMatchingDidFail:) name:NCLFontManagerMatchingDidFailNotification object:nil];
@@ -140,12 +128,6 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.accessoryView = nil;
     cell.selectionStyle = UITableViewCellSelectionStyleDefault;
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
-        cell.selectionStyle = UITableViewCellSelectionStyleBlue;
-    }
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *selectedFontName = [userDefaults stringForKey:NCLSettingsFontNameKey];

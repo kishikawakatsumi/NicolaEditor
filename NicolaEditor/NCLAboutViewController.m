@@ -32,12 +32,4 @@
     self.creditCell.detailTextLabel.text = NSLocalizedString(@"kishikawa katsumi", nil);
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
-    }
-}
-
 @end

@@ -45,37 +45,6 @@
 {
     [super viewDidLoad];
     
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]) {
-            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
-            [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"shadow"]];
-            
-            UIView *backgroundView = [[UIView alloc] initWithFrame:self.view.bounds];
-            backgroundView.backgroundColor = [UIColor clearColor];
-            
-            UIImageView *shadowImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, CGRectGetWidth(self.navigationController.navigationBar.bounds), 1.0 / [[UIScreen mainScreen] scale])];
-            shadowImageView.image = [[UIImage imageNamed:@"shadow"] resizableImageWithCapInsets:UIEdgeInsetsZero];
-            [backgroundView addSubview:shadowImageView];
-            
-            self.tableView.backgroundView = backgroundView;
-        } else {
-            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg_with_shadow"] forBarMetrics:UIBarMetricsDefault];
-        }
-        
-        UIButton *settingsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        settingsButton.exclusiveTouch = NO;
-        [settingsButton setImage:[UIImage imageNamed:@"settings"] forState:UIControlStateNormal];
-        [settingsButton sizeToFit];
-        CGRect frame = settingsButton.frame;
-        frame.size.width = 44.0;
-        settingsButton.frame = frame;
-        settingsButton.showsTouchWhenHighlighted = YES;
-        [settingsButton addTarget:self action:@selector(presentSettings:) forControlEvents:UIControlEventTouchUpInside];
-        
-        UIBarButtonItem *settingsBarButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButton];
-        self.navigationItem.leftBarButtonItem = settingsBarButton;
-    }
-    
     self.navigationItem.title = NSLocalizedString(@"Notes", nil);
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
@@ -222,9 +191,6 @@
     NCLNote *note = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = note.title;
     cell.detailTextLabel.text = [self.dateFormatter stringFromDate:note.createdAt];
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-    }
     
     [cell setNeedsLayout];
 }

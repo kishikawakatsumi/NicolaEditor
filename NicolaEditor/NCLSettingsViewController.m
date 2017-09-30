@@ -43,15 +43,7 @@
     UIStepper *stepper = self.fontSizeStepper;
     [stepper removeFromSuperview];
     self.fontSizeCell.accessoryView = stepper;
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        CGRect frame = self.swapKeyLabel.frame;
-        frame.origin.x = 10.0;
-        frame.origin.y += 4.0;
-        frame.size.width = 200.0;
-        self.swapKeyLabel.frame = frame;
-        self.swapKeyLabel.font = [UIFont fontWithName:@"HiraKakuProN-W6" size:16.0];
-    }
+
     self.swapKeyLabel.text = NSLocalizedString(@"Swap ⌫ Key for ⏎ Key", nil);
     
     UISwitch *sw = self.swapKeySwitch;
@@ -64,12 +56,7 @@
     
     double fontSize = [userDefaults doubleForKey:NCLSettingsFontSizeKey];
     self.fontSizeStepper.value = fontSize;
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        CGRect frame = self.timeShiftDurationLabel.frame;
-        frame.origin.x = 10.0;
-        self.timeShiftDurationLabel.frame = frame;
-    }
+
     self.timeShiftDurationLabel.text = NSLocalizedString(@"Shift Key Delay", nil);
     
     float timeShiftDuration = [userDefaults doubleForKey:NCLSettingsTimeShiftDurationKey];
@@ -147,11 +134,8 @@
     CGPoint center = CGPointMake(CGRectGetMinX(thumbRect) + CGRectGetMinX(self.timeShiftDurationSlider.frame),
                                  CGRectGetMinY(self.timeShiftDurationSlider.frame) - 44.0);
     center = [self.timeShiftDurationSlider convertPoint:center toView:self.view];
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        center.x -= CGRectGetWidth(thumbRect) / 4;
-    } else {
-        center.x -= 2.0;
-    }
+    center.x -= 2.0;
+
     self.popup.center = center;
     self.popup.alpha = 1.0;
     self.popup.valueLabel.text = [NSString stringWithFormat:@"%d", (int)(timeShiftDuration * 1000)];
@@ -203,20 +187,9 @@
             cell.textLabel.text = NSLocalizedString(@"External Keyboard", nil);
         } else if (row == 2) {
             cell.textLabel.text = NSLocalizedString(@"Connect to a Computer", nil);
-            if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
-                cell.textLabel.textColor = [UIColor grayColor];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.accessoryType = UITableViewCellAccessoryNone;
-                cell.userInteractionEnabled = NO;
-            }
         }
     } else if (section == 4) {
         cell.textLabel.text = NSLocalizedString(@"Help", nil);
-    }
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
     }
 }
 

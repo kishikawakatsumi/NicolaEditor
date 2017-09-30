@@ -121,118 +121,26 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 
 - (void)prepareForLegacy
 {
-    {
-        NSString *className = NKpUsnTSGEypVViLAF8r;
-        NSString *original = m4RUtJ6WRZjaZSsAgy23;
-        NSString *replacement = [NSString stringWithFormat:@"__%@",  m4RUtJ6WRZjaZSsAgy23];
-        
-        BOOL (^block)(id) = ^(id s) {
-            return NO;
-        };
-        
-        addClassMethod(className, replacement, block, @"c@:");
-        swizzleClassMethod(className, original, replacement);
-    }
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        if ([UINavigationBar instancesRespondToSelector:@selector(setShadowImage:)]) {
-            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg"] forBarMetrics:UIBarMetricsDefault];
-            [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"shadow"]];
-        } else {
-            [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar_bg_with_shadow"] forBarMetrics:UIBarMetricsDefault];
-        }
-    }
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
-        {
-            NSString *className = pVMFNL8kttj7sP5jkXmW;
-            NSString *original = ag2hWVYaGi9H7hDQEtMV;
-            NSString *replacement = [NSString stringWithFormat:@"__%@", ag2hWVYaGi9H7hDQEtMV];
-           
-            void (^block)(id, CGRect) = ^(id s, CGRect frame)
-            {
-                UIView *view = self.inputAccessoryView.superview;
-                if (view) {
-                    if (CGRectGetMaxY([self.textView convertRect:frame toView:view]) > 0.0) {
-                        CGRect rect = [self.textView caretRectForPosition:self.textView.selectedTextRange.end];
-                        frame.origin.y = rect.origin.y - CGRectGetHeight(frame);
-                    }
-                }
-                
-                [s __setFrame:frame];
-            };
-            
-            addInstanceMethod(className, replacement, block, @"v@:*");
-            swizzleInstanceMethod(className, original, replacement);
-        }
-        {
-            BOOL (^block)(id, UIDocumentInteractionController *, SEL) = ^(id s, UIDocumentInteractionController *controller, SEL action)
-            {
-                if (action == @selector(copy:)) {
-                    return YES;
-                }
-                return NO;
-            };
-            
-            addInstanceMethod(NSStringFromClass(self.class), @"documentInteractionController:canPerformAction:", block, @"c@:@:");
-        }
-        {
-            BOOL (^block)(id, UIDocumentInteractionController *, SEL) = ^(id s, UIDocumentInteractionController *controller, SEL action)
-            {
-                if (action == @selector(copy:)) {
-                    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-                    pasteboard.string = self.note.content;
-                    return YES;
-                }
-                
-                return NO;
-            };
-            
-            addInstanceMethod(NSStringFromClass(self.class), @"documentInteractionController:performAction:", block, @"c@:@:");
-        }
-    }
+    NSString *className = NKpUsnTSGEypVViLAF8r;
+    NSString *original = m4RUtJ6WRZjaZSsAgy23;
+    NSString *replacement = [NSString stringWithFormat:@"__%@",  m4RUtJ6WRZjaZSsAgy23];
+
+    BOOL (^block)(id) = ^(id s) {
+        return NO;
+    };
+
+    addClassMethod(className, replacement, block, @"c@:");
+    swizzleClassMethod(className, original, replacement);
 }
 
 - (void)setupUI
 {
-    UITextView *textView;
-    UIBarButtonItem *addButton;
-    UIBarButtonItem *shareButton;
-    UIBarButtonItem *actionButton;
-    UIBarButtonItem *cloudUploadButton;
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        textView = [[UITextView alloc] initWithFrame:self.view.bounds];
-        
-        UIButton *addButtonView = [self customButtonWithImage:[UIImage imageNamed:@"add"]];
-        addButtonView.exclusiveTouch = YES;
-        [addButtonView addTarget:self action:@selector(add:) forControlEvents:UIControlEventTouchUpInside];
-        addButton = [[UIBarButtonItem alloc] initWithCustomView:addButtonView];
-        
-        UIButton *shareButtonView = [self customButtonWithImage:[UIImage imageNamed:@"share"]];
-        shareButtonView.exclusiveTouch = YES;
-        [shareButtonView addTarget:self action:@selector(share:) forControlEvents:UIControlEventTouchUpInside];
-        shareButton = [[UIBarButtonItem alloc] initWithCustomView:shareButtonView];
-        
-        UIButton *actionButtonView = [self customButtonWithImage:[UIImage imageNamed:@"action"]];
-        actionButtonView.exclusiveTouch = YES;
-        [actionButtonView addTarget:self action:@selector(action:) forControlEvents:UIControlEventTouchUpInside];
-        actionButton = [[UIBarButtonItem alloc] initWithCustomView:actionButtonView];
-        
-        UIButton *cloudUploadButtonView = [self customButtonWithImage:[UIImage imageNamed:@"cloud_upload"]];
-        cloudUploadButtonView.exclusiveTouch = YES;
-        [cloudUploadButtonView addTarget:self action:@selector(cloudUpload:) forControlEvents:UIControlEventTouchUpInside];
-        cloudUploadButton = [[UIBarButtonItem alloc] initWithCustomView:cloudUploadButtonView];
-    } else {
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_7_1) {
-            textView = [[NSClassFromString(nuAcYW37RZfT9A3gNRm3) alloc] initWithFrame:self.view.bounds];
-        } else {
-            textView = [[UITextView alloc] initWithFrame:self.view.bounds];
-        }
-        
-        addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
-        shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
-        actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(action:)];
-        cloudUploadButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cloud_upload"] style:UIBarButtonItemStylePlain target:self action:@selector(cloudUpload:)];
-    }
+    UITextView *textView = [[UITextView alloc] initWithFrame:self.view.bounds];
+
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(add:)];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+    UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(action:)];
+    UIBarButtonItem *cloudUploadButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cloud_upload"] style:UIBarButtonItemStylePlain target:self action:@selector(cloudUpload:)];
     
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     textView.delegate = self;
@@ -244,12 +152,8 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
     shareButton.enabled = NO;
     actionButton.enabled = NO;
     cloudUploadButton.enabled = NO;
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
-        self.navigationItem.rightBarButtonItems = @[addButton, actionButton, cloudUploadButton];
-    } else {
-        self.navigationItem.rightBarButtonItems = @[addButton, shareButton, actionButton, cloudUploadButton];
-    }
+
+    self.navigationItem.rightBarButtonItems = @[addButton, shareButton, actionButton, cloudUploadButton];
     self.addButton = addButton;
     self.shareButton = shareButton;
     self.actionButton = actionButton;

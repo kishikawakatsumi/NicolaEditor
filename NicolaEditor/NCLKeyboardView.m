@@ -128,12 +128,7 @@ static NSCache *cache;
 
 - (void)commonInit
 {
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        self.backgroundColor = [UIColor colorWithWhite:0.97 alpha:1.0];
-        self.keyboardBackgroundView.backgroundColor = self.backgroundColor;
-    } else {
-        self.keyboardBackgroundView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.5];
-    }
+    self.keyboardBackgroundView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:0.5];
     
     [self setupInputEngine];
     [self setupKeyboardView];
@@ -407,15 +402,8 @@ static NSCache *cache;
     frame.size.height = 0.0;
     
     [UIView animateWithDuration:0.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
-            self.keyboardBackgroundView.hidden = YES;
-        } else {
-            self.frame = frame;
-        }
+        self.frame = frame;
     } completion:^(BOOL finished) {
-        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_5_1) {
-            self.hidden = YES;
-        }
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [UIView setAnimationsEnabled:YES];
         });
@@ -434,10 +422,6 @@ static NSCache *cache;
         frame.size.height = 264.0;
     } else {
         frame.size.height = 352.0;
-    }
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_5_1) {
-        self.keyboardBackgroundView.hidden = NO;
     }
     
     [UIView animateWithDuration:0.0 delay:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
@@ -795,28 +779,7 @@ static NSCache *cache;
 - (void)keyboardInputEngine:(NCLKeyboardInputEngine *)engine processedText:(NSString *)text keyIndex:(NSInteger)keyIndex
 {
     if (text.length > 0) {
-        if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
-            NSString *key = CsLigQ6mK4n6e6ChunPz;
-            if ([self.internalKeyboard respondsToSelector:NSSelectorFromString(key)]) {
-                BOOL userSelectedCurrentCandidate = [[self.internalKeyboard valueForKey:key] boolValue];
-                if (userSelectedCurrentCandidate) {
-                    [self sendMessage:self.internalKeyboard
-                              forName:wsjiFCKRrgQ3ipQpec6L
-                          attachments:nil];
-                }
-            }
-            double delayInSeconds = 0.0;
-            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-                [self sendMessage:self.internalKeyboard
-                          forName:mb6FzfJW6t9XaDQkna7m
-                      attachments:@[@{@"Object": text}]];
-            });
-        } else {
-            [self sendMessage:self.internalKeyboard
-                      forName:mb6FzfJW6t9XaDQkna7m
-                  attachments:@[@{@"Object": text}]];
-        }
+        [self sendMessage:self.internalKeyboard forName:mb6FzfJW6t9XaDQkna7m attachments:@[@{@"Object": text}]];
         
         if ([self.delegate respondsToSelector:@selector(keyboardView:inputText:)]) {
             [self.delegate keyboardView:self inputText:text];

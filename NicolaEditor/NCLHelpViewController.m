@@ -29,11 +29,6 @@
     } else if (section == 1 && row == 0) {
         cell.textLabel.text = NSLocalizedString(@"About N+Note", nil);
     }
-    
-    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
-        cell.textLabel.font = [UIFont boldSystemFontOfSize:[UIFont labelFontSize]];
-        cell.textLabel.highlightedTextColor = [UIColor whiteColor];
-    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
