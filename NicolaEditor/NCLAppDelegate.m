@@ -17,7 +17,6 @@
 #import <Evernote-SDK-iOS/EvernoteSDK.h>
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 #import <uservoice-iphone-sdk/UserVoice.h>
-#import <Crittercism/Crittercism.h>
 
 @import CoreText;
 
@@ -37,8 +36,6 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     UVConfig *config = [UVConfig configWithSite:@"kishikawakatsumi.uservoice.com"];
     config.forumId = 251764;
     [UserVoice initialize:config];
-    
-    [Crittercism enableWithAppID:@"5264f50ea7928a4f07000005"];
     
     [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringUS consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
 
@@ -84,7 +81,6 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
             
             return YES;
         }
-        
         return NO;
     }];
     

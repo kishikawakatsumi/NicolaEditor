@@ -8,7 +8,6 @@
 
 #import "NCLNote.h"
 
-
 @implementation NCLNote
 
 @dynamic content;

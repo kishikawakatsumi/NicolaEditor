@@ -1,5 +1,4 @@
 PODS:
-  - CrittercismSDK (5.7.2)
   - Evernote-SDK-iOS (1.3.1):
     - SSKeychain (~> 1.2.2)
   - FFCircularProgressView (0.5)
@@ -11,7 +10,6 @@ PODS:
   - uservoice-iphone-sdk (3.2.10)
 
 DEPENDENCIES:
-  - CrittercismSDK
   - Evernote-SDK-iOS
   - FFCircularProgressView
   - JLRoutes
@@ -21,7 +19,6 @@ DEPENDENCIES:
   - uservoice-iphone-sdk
 
 SPEC CHECKSUMS:
-  CrittercismSDK: f41868f2e2618f641175adefaaea35c2579fb426
   Evernote-SDK-iOS: beab0882c4bcdc05117ea0b56119da12cff47fbb
   FFCircularProgressView: 683a4ab1e1bd613246a3dffa61503ffdebcde8d8
   JLRoutes: 2a5ee61d739b51a98c9d8112bee5149a19de8854
@@ -31,6 +28,6 @@ SPEC CHECKSUMS:
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
   uservoice-iphone-sdk: 67ad1f4bd30b763a1875334b810872e99e7ef035
 
-PODFILE CHECKSUM: 1f2339108ba643978719e057e133722bd5592bd3
+PODFILE CHECKSUM: fd44f8816fd0f62595fe2c4d16c0764190c16ffa
 
 COCOAPODS: 1.3.1

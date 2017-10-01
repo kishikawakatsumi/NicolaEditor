@@ -713,7 +713,7 @@ static NSCache *cache;
 
 - (IBAction)touchUpSpaceKey:(id)sender
 {
-    [self sendMessage:self.internalKeyboard　forName:mb6FzfJW6t9XaDQkna7m　attachments:@[@{@"Object": @" "}]];
+    [self sendMessage:self.internalKeyboard forName:mb6FzfJW6t9XaDQkna7m attachments:@[@{@"Object": @" "}]];
     
     if ([self.delegate respondsToSelector:@selector(keyboardViewInputSpace:)]) {
         [self.delegate keyboardViewInputSpace:self];

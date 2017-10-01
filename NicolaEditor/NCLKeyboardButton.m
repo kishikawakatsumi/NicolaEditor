@@ -20,7 +20,6 @@
     if (self) {
         _index = index;
     }
-    
     return self;
 }
 

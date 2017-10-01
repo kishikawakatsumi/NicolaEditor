@@ -10,7 +10,6 @@ target 'NicolaEditor' do
   pod 'Evernote-SDK-iOS'
   pod 'ObjectiveDropboxOfficial'
   pod 'uservoice-iphone-sdk'
-  pod 'CrittercismSDK'
 
   post_install do | installer |
     require 'fileutils'

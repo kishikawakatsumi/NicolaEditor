@@ -15,7 +15,6 @@
 
 @end
 
-
 @implementation NCLKeyboardInputDisplayView
 
 - (id)initWithFrame:(CGRect)frame
