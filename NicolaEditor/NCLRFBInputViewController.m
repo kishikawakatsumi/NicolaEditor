@@ -21,6 +21,8 @@
 #define XK_LATIN1
 #import "keysymdef.h"
 
+static dispatch_queue_t queue;
+
 @interface NCLRFBInputViewController () <UITextViewDelegate, RFBInputConnManagerDelegate>
 
 @property (nonatomic) RFBInputConnManager *rfbInputConnMgr;
@@ -44,6 +46,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    if (!queue) {
+        queue = dispatch_queue_create("com.kishikawakatsumi.NicolaEditor.rfb", DISPATCH_QUEUE_SERIAL);
+    }
     
 	[self setupGestureRecognizers];
     [self setupInputView];
@@ -187,7 +193,7 @@
 
 - (void)keyboardView:(NCLKeyboardView *)view inputText:(NSString *)text
 {
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Zenkaku];
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
@@ -204,7 +210,7 @@
     for (int i = 0; i < string.length; i++) {
         unichar keycode = [string characterAtIndex:i];
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:keycode];
-        dispatch_async(dispatch_get_current_queue(), ^{
+        dispatch_async(queue, ^{
             [self.rfbInputConnMgr sendEvent:keyEvent];
         });
     }
@@ -244,7 +250,7 @@
 
 - (void)keyboardViewInputNextCandidate:(NCLKeyboardView *)view
 {
-    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Zenkaku];
+    RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Down];
     [self.rfbInputConnMgr sendEvent:keyEvent];
 }
 
@@ -297,22 +303,22 @@
 
 - (void)accessoryViewCut:(NCLKeyboardAccessoryView *)accessoryView
 {
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
         keyEvent.up = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_x];
         keyEvent.up = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_x];
         keyEvent.down = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
         keyEvent.down = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
@@ -321,22 +327,22 @@
 
 - (void)accessoryViewCopy:(NCLKeyboardAccessoryView *)accessoryView
 {
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
         keyEvent.up = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_c];
         keyEvent.up = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_c];
         keyEvent.down = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
         keyEvent.down = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
@@ -345,22 +351,22 @@
 
 - (void)accessoryViewPaste:(NCLKeyboardAccessoryView *)accessoryView
 {
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
         keyEvent.up = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_v];
         keyEvent.up = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_v];
         keyEvent.down = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];
     });
-    dispatch_async(dispatch_get_current_queue(), ^{
+    dispatch_async(queue, ^{
         RFBKeyEvent *keyEvent = [[RFBKeyEvent alloc] initWithKeysym:XK_Super_L];
         keyEvent.down = NO;
         [self.rfbInputConnMgr sendEvent:keyEvent];

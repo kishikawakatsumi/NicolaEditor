@@ -8,6 +8,7 @@
 
 #import "NCLTextViewController.h"
 #import "NCLSettingsViewController.h"
+#import "NCLPhysicalKeyboardManager.h"
 #import "NCLPopoverManager.h"
 #import "NCLKeyboardView.h"
 #import "NCLKeyboardAccessoryView.h"
@@ -47,7 +48,7 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 
 @property (nonatomic) UIAlertView *alertView;
 
-@property (nonatomic) NSString *previousKeyboardInputMethod;
+@property (nonatomic) NCLKeyboardType previousKeyboardType;
 @property (nonatomic) BOOL wasTextViewEditing;
 
 @property (nonatomic) UIEdgeInsets textViewContentInset;
@@ -176,24 +177,36 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 
 - (void)setupInputView
 {
-    NCLKeyboardView *inputView = [[[UINib nibWithNibName:NSStringFromClass([NCLKeyboardView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
-    inputView.delegate = self;
-    inputView.textView = self.textView;
-    if (self.previousKeyboardInputMethod) {
-        inputView.keyboardInputMethod = self.previousKeyboardInputMethod;
+    if (!self.inputView) {
+        NCLKeyboardView *inputView = [[[UINib nibWithNibName:NSStringFromClass([NCLKeyboardView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+        inputView.delegate = self;
+        inputView.textView = self.textView;
+        self.inputView = inputView;
     }
-    
-    self.textView.inputView = inputView;
-    self.inputView = inputView;
-    
-    NCLKeyboardAccessoryView *inputAccessoryView = [[[UINib nibWithNibName:NSStringFromClass([NCLKeyboardAccessoryView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
-    inputAccessoryView.delegate = self;
-    self.textView.inputAccessoryView = inputAccessoryView;
-    self.inputAccessoryView = inputAccessoryView;
+    if (!self.inputAccessoryView) {
+        NCLKeyboardAccessoryView *inputAccessoryView = [[[UINib nibWithNibName:NSStringFromClass([NCLKeyboardAccessoryView class]) bundle:nil] instantiateWithOwner:nil options:nil] firstObject];
+        inputAccessoryView.keyboardType = self.previousKeyboardType;
+        inputAccessoryView.delegate = self;
+        self.inputAccessoryView = inputAccessoryView;
+    }
+
+    NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
+    if (self.inputAccessoryView.keyboardType == NCLKeyboardTypeNICOLA) {
+        if (keyboardManager.isPhysicalKeyboardAttached) {
+            self.textView.inputView = nil;
+        } else {
+            self.textView.inputView = self.inputView;
+        }
+        self.textView.inputAccessoryView = self.inputAccessoryView;
+    } else {
+        self.textView.inputView = nil;
+        self.textView.inputAccessoryView = nil;
+    }
 }
 
 - (void)setupNotifications
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(physicalKeyboardAvailabilityChanged:) name:NCLPhysicalKeyboardAvailabilityChangedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fontDidChange:) name:NCLSettingsFontDidChangeNodification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -489,9 +502,14 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
     return YES;
 }
 
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self.textView reloadInputViews];
+}
+
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-    self.previousKeyboardInputMethod = self.inputView.keyboardInputMethod;
+    self.previousKeyboardType = self.inputAccessoryView.keyboardType;
     self.textView.inputView = nil;
     self.textView.inputAccessoryView = nil;
     self.inputView = nil;
@@ -598,6 +616,11 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 
 #pragma mark -
 
+- (void)physicalKeyboardAvailabilityChanged:(NSNotification *)notification
+{
+    [self accessoryView:self.inputAccessoryView keyboardTypeDidChange:self.inputAccessoryView.keyboardType];
+}
+
 - (void)fontDidChange:(NSNotification *)notification
 {
     [self applyFontSettings];
@@ -607,13 +630,7 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 
 - (void)accessoryView:(NCLKeyboardAccessoryView *)accessoryView keyboardTypeDidChange:(NSInteger)keyboardType
 {
-    if (keyboardType == NCLKeyboardTypeNICOLA) {
-        [self setupInputView];
-    } else {
-        self.previousKeyboardInputMethod = self.inputView.keyboardInputMethod;
-        self.textView.inputView = nil;
-    }
-    
+    [self setupInputView];
     [self.textView reloadInputViews];
 }
 

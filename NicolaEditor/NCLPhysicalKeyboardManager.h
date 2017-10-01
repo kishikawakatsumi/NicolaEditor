@@ -16,6 +16,7 @@
 @property (nonatomic, readonly, getter = isPhysicalKeyboardAttached) BOOL physicalKeyboardAttached;
 
 @property (nonatomic) NSString *keyboardInputMethod;
+@property (nonatomic) BOOL isNicolaKeyboardType;
 
 + (instancetype)sharedManager;
 - (BOOL)isPhysicalKeyboardAttached;

@@ -38,14 +38,26 @@ static NSString *L98fTVmwP43UFtL579EB;
 static NSString *GUU2JdGW8jGWuc388rJR;
 // setShowsCandidateInline:
 static NSString *SxYmcXP2AFEYh4CXYBMJ;
-// acceptCurrentCandidate
-static NSString *wsjiFCKRrgQ3ipQpec6L;
 // userSelectedCurrentCandidate
 static NSString *CsLigQ6mK4n6e6ChunPz;
+// acceptCurrentCandidate
+static NSString *wsjiFCKRrgQ3ipQpec6L;
 // en_US@hw=US;sw=QWERTY
 static NSString *en_US;
 // ja_JP-Kana@sw=Kana-Flick;hw=US
 static NSString *ja_JP;
+// defaultCandidate
+static NSString *ejUGacPiwpO2dAdcF02M;
+// acceptCandidate:
+static NSString *Eqo0llHPe80vNAN1bvDB;
+// acceptCurrentCandidateIfSelected
+static NSString *uNTmdpaswc3OpK7Q3JxE;
+// _collectionViewController
+static NSString *JrWofcSm4A8qSWOcgTEg;
+// m_candidateList
+static NSString *khK6OMhSKZlcaj4VrGn3;
+// m_candidateResultSet
+static NSString *zfojM79sdi9CCtYPwy3H;
 
 static NSCache *cache;
 
@@ -106,7 +118,19 @@ static NSCache *cache;
     en_US = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"e", @"n", @"_", @"U", @"S", @"@", @"h", @"w", @"=", @"U", @"S", @";", @"s", @"w", @"=", @"Q", @"W", @"E", @"R", @"T", @"Y"];
     // ja_JP-Kana@sw=Kana-Flick;hw=US
     ja_JP = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"j", @"a", @"_", @"J", @"P", @"-", @"K", @"a", @"n", @"a", @"@", @"s", @"w", @"=", @"K", @"a", @"n", @"a", @"-", @"F", @"l", @"i", @"c", @"k", @";", @"h", @"w", @"=", @"U", @"S"];
-    
+    // defaultCandidate
+    ejUGacPiwpO2dAdcF02M = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"d", @"e", @"f", @"a", @"u", @"l", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e"];
+    // acceptCandidate:
+    Eqo0llHPe80vNAN1bvDB = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @":"];
+    // acceptCurrentCandidateIfSelected
+    uNTmdpaswc3OpK7Q3JxE = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"a", @"c", @"c", @"e", @"p", @"t", @"C", @"u", @"r", @"r", @"e", @"n", @"t", @"C", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"I", @"f", @"S", @"e", @"l", @"e", @"c", @"t", @"e", @"d"];
+    // _collectionViewController
+    JrWofcSm4A8qSWOcgTEg = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"_", @"c", @"o", @"l", @"l", @"e", @"c", @"t", @"i", @"o", @"n", @"V", @"i", @"e", @"w", @"C", @"o", @"n", @"t", @"r", @"o", @"l", @"l", @"e", @"r"];
+    // m_candidateList
+    khK6OMhSKZlcaj4VrGn3 = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"m", @"_", @"c", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"L", @"i", @"s", @"t"];
+    // m_candidateResultSet
+    zfojM79sdi9CCtYPwy3H = [NSString stringWithFormat:@"%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@%@", @"m", @"_", @"c", @"a", @"n", @"d", @"i", @"d", @"a", @"t", @"e", @"R", @"e", @"s", @"u", @"l", @"t", @"S", @"e", @"t"];
+
     cache = [[NSCache alloc] init];
 }
 
@@ -134,8 +158,6 @@ static NSCache *cache;
     [self setupKeyboardView];
     
     self.keyboardInputMethod = NCLKeyboardInputMethodKana;
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(physicalKeyboardAvailabilityChangedNotification:) name:NCLPhysicalKeyboardAvailabilityChangedNotification object:nil];
 }
 
 - (void)dealloc
@@ -169,9 +191,7 @@ static NSCache *cache;
     if ([[NCLPhysicalKeyboardManager sharedManager] isPhysicalKeyboardAttached] && ![inputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
         inputMode = en_US;
     }
-    [self sendMessage:self.internalKeyboard
-              forName:HTcj2RHKk78UgtYwx3Z8
-          attachments:@[@{@"Object": inputMode}]];
+    [self sendMessage:self.internalKeyboard forName:HTcj2RHKk78UgtYwx3Z8 attachments:@[@{@"Object": inputMode}]];
     
     NSString *keyboardType;
     if ([inputMethod isEqualToString:NCLKeyboardInputMethodKana]) {
@@ -217,9 +237,7 @@ static NSCache *cache;
     if (hasCandidates) {
         NSString *name = L98fTVmwP43UFtL579EB;
         if ([self.internalKeyboard respondsToSelector:NSSelectorFromString(name)]) {
-            [self sendMessage:self.internalKeyboard
-                      forName:name
-                  attachments:nil];
+            [self sendMessage:self.internalKeyboard forName:name attachments:nil];
         }
     } else {
         UITextRange *selectedTextRange = self.textView.selectedTextRange;
@@ -237,9 +255,7 @@ static NSCache *cache;
 {
     BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
     if (hasCandidates) {
-        [self sendMessage:self.internalKeyboard
-                  forName:GUU2JdGW8jGWuc388rJR
-              attachments:nil];
+        [self sendMessage:self.internalKeyboard forName:GUU2JdGW8jGWuc388rJR attachments:nil];
     } else {
         UITextRange *selectedTextRange = self.textView.selectedTextRange;
         CGRect rect = [self.textView caretRectForPosition:selectedTextRange.start];
@@ -255,9 +271,7 @@ static NSCache *cache;
 - (void)cursorLeft
 {
     if (self.textView.markedTextRange) {
-        [self sendMessage:self.internalKeyboard
-                  forName:c4TdPa3m8nDVPeha877N
-              attachments:@[@{@"NSInteger": @(1)}]];
+        [self sendMessage:self.internalKeyboard forName:c4TdPa3m8nDVPeha877N attachments:@[@{@"NSInteger": @(1)}]];
     } else if (self.isShifted) {
         NSRange selectedRange = self.textView.selectedRange;
         if (selectedRange.location > 0) {
@@ -291,9 +305,7 @@ static NSCache *cache;
 - (void)cursorRight
 {
     if (self.textView.markedTextRange) {
-        [self sendMessage:self.internalKeyboard
-                  forName:c4TdPa3m8nDVPeha877N
-              attachments:@[@{@"NSInteger": @(0)}]];
+        [self sendMessage:self.internalKeyboard forName:c4TdPa3m8nDVPeha877N attachments:@[@{@"NSInteger": @(0)}]];
     } else if (self.isShifted) {
         NSRange selectedRange = self.textView.selectedRange;
         if (selectedRange.location < self.textView.text.length) {
@@ -359,78 +371,17 @@ static NSCache *cache;
         [self.keyboardBackgroundView addSubview:keyButton];
         [self.keyButtons addObject:keyButton];
     }
-    
-    NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
-    if (keyboardManager.isPhysicalKeyboardAttached) {
-        [self physicalKeyboardAttached];
-    } else {
-        [self physicalKeyboardDettached];
-    }
 }
 
 - (void)setupKeyboardIfNeeded
 {
     if (!self.internalKeyboard) {
         self.internalKeyboard = self.textView.inputDelegate;
-        [self sendMessage:self.internalKeyboard
-                  forName:HTcj2RHKk78UgtYwx3Z8
-              attachments:@[@{@"Object": ja_JP}]];
-        [self sendMessage:self.internalKeyboard
-                  forName:SxYmcXP2AFEYh4CXYBMJ
-              attachments:@[@{@"BOOL": @YES}]];
+        [self sendMessage:self.internalKeyboard forName:HTcj2RHKk78UgtYwx3Z8 attachments:@[@{@"Object": ja_JP}]];
+        [self sendMessage:self.internalKeyboard forName:SxYmcXP2AFEYh4CXYBMJ attachments:@[@{@"BOOL": @YES}]];
         
         [[NCLPhysicalKeyboardManager sharedManager] setKeyboardView:self];
     }
-}
-
-- (void)physicalKeyboardAvailabilityChangedNotification:(NSNotification *)notification
-{
-    NSDictionary *userInfo = notification.userInfo;
-    BOOL isInHardwareKeyboardMode = [userInfo[NCLPhysicalKeyboardAvailabilityKey] boolValue];
-    if (isInHardwareKeyboardMode) {
-        [self physicalKeyboardAttached];
-    } else {
-        [self physicalKeyboardDettached];
-    }
-}
-
-- (void)physicalKeyboardAttached
-{
-    [UIView setAnimationsEnabled:NO];
-    
-    CGRect frame = self.frame;
-    frame.size.height = 0.0;
-    
-    [UIView animateWithDuration:0.0 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.frame = frame;
-    } completion:^(BOOL finished) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [UIView setAnimationsEnabled:YES];
-        });
-    }];
-    
-    [self.textView performSelector:@selector(reloadInputViews) withObject:nil afterDelay:0.0];
-}
-
-- (void)physicalKeyboardDettached
-{
-    UIApplication *app = [UIApplication sharedApplication];
-    UIInterfaceOrientation orientation = app.statusBarOrientation;
-    
-    CGRect frame = self.frame;
-    if (UIInterfaceOrientationIsPortrait(orientation)) {
-        frame.size.height = 264.0;
-    } else {
-        frame.size.height = 352.0;
-    }
-    
-    [UIView animateWithDuration:0.0 delay:0.25 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        self.frame = frame;
-    } completion:^(BOOL finished) {
-        self.hidden = NO;
-    }];
-    
-    [self.textView performSelector:@selector(reloadInputViews) withObject:nil afterDelay:0.0];
 }
 
 - (void)layoutKeyButtons
@@ -593,20 +544,14 @@ static NSCache *cache;
     if (!self.swapBackspaceReturnEnabled) {
         [self processReturnKey];
     } else {
-        [self sendMessage:self.internalKeyboard
-                  forName:jLdpi9URsHKDRWf36aE6
-              attachments:nil];
+        [self sendMessage:self.internalKeyboard forName:jLdpi9URsHKDRWf36aE6 attachments:nil];
     }
 }
 
 - (void)processDeleteKeyDown
 {
-    [self sendMessage:self.internalKeyboard
-              forName:PArjMGcJEYULesZzYbwp
-          attachments:nil];
-    [self sendMessage:self.internalKeyboard
-              forName:G2AmM5eQZ4RxKLM3TCKZ
-          attachments:nil];
+    [self sendMessage:self.internalKeyboard forName:PArjMGcJEYULesZzYbwp attachments:nil];
+    [self sendMessage:self.internalKeyboard forName:G2AmM5eQZ4RxKLM3TCKZ attachments:nil];
     
     if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
         [self.delegate keyboardViewInputBackspace:self];
@@ -615,28 +560,40 @@ static NSCache *cache;
 
 - (void)processDeleteKeyUp
 {
-    [self sendMessage:self.internalKeyboard
-              forName:jLdpi9URsHKDRWf36aE6
-          attachments:nil];
+    [self sendMessage:self.internalKeyboard forName:jLdpi9URsHKDRWf36aE6 attachments:nil];
 }
 
 - (void)processReturnKey
 {
-    BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
-    if (hasCandidates) {
-        [self sendMessage:self.internalKeyboard
-                  forName:wsjiFCKRrgQ3ipQpec6L
-              attachments:nil];
-        return;
+    if (![self acceptCandidate]) {
+        [self sendMessage:self.internalKeyboard forName:mb6FzfJW6t9XaDQkna7m attachments:@[@{@"Object": @"\n"}]];
     }
-    
-    [self sendMessage:self.internalKeyboard
-              forName:mb6FzfJW6t9XaDQkna7m
-          attachments:@[@{@"Object": @"\n"}]];
-    
     if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
         [self.delegate keyboardViewInputEnter:self];
     }
+}
+
+- (BOOL)acceptCandidate {
+    BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
+    if (hasCandidates) {
+        id candidateResultSet = [self.internalKeyboard valueForKey:zfojM79sdi9CCtYPwy3H];
+        id candidateList = [self.internalKeyboard valueForKey:khK6OMhSKZlcaj4VrGn3];
+
+        UICollectionViewController *collectionViewController = [candidateList valueForKey:JrWofcSm4A8qSWOcgTEg];
+        UICollectionView *collectionView = collectionViewController.collectionView;
+        NSArray *selectedIndexPaths = collectionView.indexPathsForSelectedItems;
+        if (selectedIndexPaths.count > 0) {
+            [self sendMessage:self.internalKeyboard forName:uNTmdpaswc3OpK7Q3JxE attachments:nil];
+            return YES;
+        } else {
+            id defaultCandidate = [candidateResultSet valueForKey:ejUGacPiwpO2dAdcF02M];
+            if (defaultCandidate) {
+                [self sendMessage:self.internalKeyboard forName:Eqo0llHPe80vNAN1bvDB attachments:@[@{@"Object": defaultCandidate}]];
+                return YES;
+            }
+        }
+    }
+    return NO;
 }
 
 #pragma mark -
@@ -756,9 +713,7 @@ static NSCache *cache;
 
 - (IBAction)touchUpSpaceKey:(id)sender
 {
-    [self sendMessage:self.internalKeyboard
-              forName:mb6FzfJW6t9XaDQkna7m
-          attachments:@[@{@"Object": @" "}]];
+    [self sendMessage:self.internalKeyboard　forName:mb6FzfJW6t9XaDQkna7m　attachments:@[@{@"Object": @" "}]];
     
     if ([self.delegate respondsToSelector:@selector(keyboardViewInputSpace:)]) {
         [self.delegate keyboardViewInputSpace:self];
@@ -792,23 +747,16 @@ static NSCache *cache;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *shiftKeyFunction = [userDefaults stringForKey:NCLSettingsLeftShiftFunctionKey];
     if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
-        [self sendMessage:self.internalKeyboard
-                  forName:GUU2JdGW8jGWuc388rJR
-              attachments:nil];
+        [self sendMessage:self.internalKeyboard forName:GUU2JdGW8jGWuc388rJR attachments:nil];
         
         if ([self.delegate respondsToSelector:@selector(keyboardViewInputNextCandidate:)]) {
             [self.delegate keyboardViewInputNextCandidate:self];
         }
     } else if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
-        BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
-        if (hasCandidates) {
-            [self sendMessage:self.internalKeyboard
-                      forName:wsjiFCKRrgQ3ipQpec6L
-                  attachments:nil];
-            
-            if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
-                [self.delegate keyboardViewInputEnter:self];
-            }
+        [self acceptCandidate];
+
+        if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
+            [self.delegate keyboardViewInputEnter:self];
         }
     }
 }
@@ -818,23 +766,16 @@ static NSCache *cache;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     NSString *shiftKeyFunction = [userDefaults stringForKey:NCLSettingsRightShiftFunctionKey];
     if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionNextCandidate]) {
-        [self sendMessage:self.internalKeyboard
-                  forName:GUU2JdGW8jGWuc388rJR
-              attachments:nil];
+        [self sendMessage:self.internalKeyboard forName:GUU2JdGW8jGWuc388rJR attachments:nil];
         
         if ([self.delegate respondsToSelector:@selector(keyboardViewInputNextCandidate:)]) {
             [self.delegate keyboardViewInputNextCandidate:self];
         }
     } else if ([shiftKeyFunction isEqualToString:NCLShiftKeyFunctionAcceptCandidate]) {
-        BOOL hasCandidates = [[self.internalKeyboard valueForKey:TBH2nEKQNPBmyDkQdzCx] boolValue];
-        if (hasCandidates) {
-            [self sendMessage:self.internalKeyboard
-                      forName:wsjiFCKRrgQ3ipQpec6L
-                  attachments:nil];
-            
-            if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
-                [self.delegate keyboardViewInputEnter:self];
-            }
+        [self acceptCandidate];
+
+        if ([self.delegate respondsToSelector:@selector(keyboardViewInputEnter:)]) {
+            [self.delegate keyboardViewInputEnter:self];
         }
     }
 }
@@ -892,6 +833,10 @@ static NSCache *cache;
 }
 
 - (CGSize)intrinsicContentSize {
+    NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
+    if (keyboardManager.isPhysicalKeyboardAttached) {
+        return CGSizeMake(UIViewNoIntrinsicMetric, 0.0);
+    }
     UIScreen *mainScreen = [UIScreen mainScreen];
     if(mainScreen.bounds.size.width < mainScreen.bounds.size.height){
         return CGSizeMake(UIViewNoIntrinsicMetric, 264.0);
@@ -899,6 +844,7 @@ static NSCache *cache;
     else{
         return CGSizeMake(UIViewNoIntrinsicMetric, 352.0);
     }
+
 }
 
 @end

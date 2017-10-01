@@ -188,7 +188,7 @@ static BOOL RCMD;
 {
     if ([event isKindOfClass:XNDPIT6GE263kMwAOUcr]) {
         NCLPhysicalKeyboardManager *keyboardManager = [NCLPhysicalKeyboardManager sharedManager];
-        if (keyboardManager.isPhysicalKeyboardAttached) {
+        if (keyboardManager.isPhysicalKeyboardAttached && keyboardManager.isNicolaKeyboardType) {
             BOOL result = [self processEvent:event];
             if (result) {
                 return;

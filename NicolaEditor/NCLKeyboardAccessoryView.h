@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, NCLKeyboardType) {
 @interface NCLKeyboardAccessoryView : UIView
 
 @property (nonatomic, weak) id delegate;
+@property (nonatomic) NCLKeyboardType keyboardType;
 
 @end
 

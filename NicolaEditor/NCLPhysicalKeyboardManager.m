@@ -9,6 +9,7 @@
 #import "NCLPhysicalKeyboardManager.h"
 #import "NCLKeyboardInputEngine.h"
 #import "NCLKeyboardView.h"
+#import "NCLKeyboardAccessoryView.h"
 #import "NCLConstants.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
@@ -133,6 +134,15 @@ static NSString *xfS9MiWvpygnCQtUh483;
 {
     id internalKeyboard = self.keyboardView.textView.inputDelegate;
     return [[internalKeyboard valueForKey:xfS9MiWvpygnCQtUh483] boolValue];
+}
+
+- (BOOL)isNicolaKeyboardType
+{
+    NCLKeyboardAccessoryView *inputAccessoryView = (NCLKeyboardAccessoryView *)self.keyboardView.textView.inputAccessoryView;
+    if ([inputAccessoryView isKindOfClass:[NCLKeyboardAccessoryView class]]) {
+        return inputAccessoryView.keyboardType == NCLKeyboardTypeNICOLA;
+    }
+    return NO;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context

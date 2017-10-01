@@ -7,6 +7,7 @@
 //
 
 #import "NCLKeyboardAccessoryView.h"
+#import "NCLPhysicalKeyboardManager.h"
 
 @interface NCLKeyboardAccessoryView ()
 
@@ -68,11 +69,20 @@
 
 #pragma mark -
 
+- (NCLKeyboardType)keyboardType
+{
+    return self.keyboardChooser.selectedSegmentIndex;
+}
+
+- (void)setKeyboardType:(NCLKeyboardType)keyboardType
+{
+    self.keyboardChooser.selectedSegmentIndex = keyboardType;
+}
+
 - (IBAction)selectionChanged:(id)sender
 {
-    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
     if ([self.delegate respondsToSelector:@selector(accessoryView:keyboardTypeDidChange:)]) {
-        [self.delegate accessoryView:self keyboardTypeDidChange:segmentedControl.selectedSegmentIndex];
+        [self.delegate accessoryView:self keyboardTypeDidChange:self.keyboardType];
     }
 }
 
