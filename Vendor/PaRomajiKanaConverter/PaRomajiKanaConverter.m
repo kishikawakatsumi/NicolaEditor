@@ -153,7 +153,7 @@
         //@"t":@"ト", @"v":@"ヴ", @"w":@"ゥ", @"x":@"クス", @"y":@"ィ", @"z":@"ズ"
     };
 
-    NSDictionary *kanaAssist = @{ @"xa":@"ァ", @"xi":@"ィ", @"xu":@"ゥ", @"xe":@"ェ", @"xo":@"ォ", @"xtu":@"ッ", @"xya":@"ャ", @"xyu":@"ュ", @"xyo":@"ョ" };
+    NSDictionary *kanaAssist = @{ @"a":@"ァ", @"i":@"ィ", @"u":@"ゥ", @"e":@"ェ", @"o":@"ォ" };
     
     NSMutableDictionary *romajiToKanaMap = [NSMutableDictionary dictionaryWithDictionary:master];
     [romajiToKanaMap addEntriesFromDictionary:romajiAssist];
@@ -266,6 +266,7 @@
             NSLog(@"kanaN regex error:%@", error);
         }
     }
+    /*
     { //oosaka → osaka
         NSError *error = nil;
         _reKanaOo = [NSRegularExpression regularExpressionWithPattern:@"([aiueo])\\1" options:0 error:&error];
@@ -273,6 +274,7 @@
             NSLog(@"kanaOo regex error:%@", error);
         }
     }
+     */
 
 }
 
