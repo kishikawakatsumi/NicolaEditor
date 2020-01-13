@@ -70,12 +70,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverWillConnect:) name:NCLVNCServerWillConnectNodification object:nil];
 }
 
-- (void)viewDidUnload
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super viewDidUnload];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;

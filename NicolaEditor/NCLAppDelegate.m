@@ -14,7 +14,7 @@
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <JLRoutes/JLRoutes.h>
 #import <NLCoreData/NLCoreData.h>
-#import <Evernote-SDK-iOS/EvernoteSDK.h>
+#import <EvernoteSDK/EvernoteSDK.h>
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 #import <uservoice-iphone-sdk/UserVoice.h>
 
@@ -36,8 +36,8 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
     UVConfig *config = [UVConfig configWithSite:@"kishikawakatsumi.uservoice.com"];
     config.forumId = 251764;
     [UserVoice initialize:config];
-    
-    [EvernoteSession setSharedSessionHost:BootstrapServerBaseURLStringUS consumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret];
+
+    [ENSession setSharedSessionConsumerKey:EvernoteConsumerKey consumerSecret:EvernoteConsumerSecret optionalHost:nil];
 
     [DBClientsManager setupWithAppKey:DropboxAppKey];
     
@@ -93,7 +93,6 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
-    [[EvernoteSession sharedSession] handleDidBecomeActive];
     [[NSManagedObjectContext mainContext] saveNested];
 }
 
@@ -120,12 +119,6 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
 {
     BOOL canHandle = NO;
-    NSString *scheme = url.scheme.lowercaseString;
-
-    EvernoteSession *session = [EvernoteSession sharedSession];
-    if ([[NSString stringWithFormat:@"en-%@", session.consumerKey] isEqualToString:scheme]) {
-        canHandle = [session canHandleOpenURL:url];
-    }
 
     DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
     if (authResult) {
@@ -156,12 +149,6 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     BOOL canHandle = NO;
-    NSString *scheme = url.scheme.lowercaseString;
-    
-    EvernoteSession *session = [EvernoteSession sharedSession];
-    if ([[NSString stringWithFormat:@"en-%@", session.consumerKey] isEqualToString:scheme]) {
-        canHandle = [session canHandleOpenURL:url];
-    }
 
     DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
     if (authResult) {

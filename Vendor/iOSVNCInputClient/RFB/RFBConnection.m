@@ -346,8 +346,8 @@
 	//map movement
 	if ((pointerEvent.dx != 0 || pointerEvent.dy != 0) && !CGPointEqualToPoint(CGPointZero, pointerEvent.v)) {
         //Adjust velocity to points per ?centisecond
-        float xSpeed = fabsf(pointerEvent.v.x/100);
-        float ySpeed = fabsf(pointerEvent.v.y/100);
+        float xSpeed = fabs(pointerEvent.v.x/100);
+        float ySpeed = fabs(pointerEvent.v.y/100);
         
         //Average speed...
         float speed = (xSpeed+ySpeed)/2;

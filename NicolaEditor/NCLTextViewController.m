@@ -18,7 +18,7 @@
 #import "NCLRuntimeUtils.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <NLCoreData/NLCoreData.h>
-#import <Evernote-SDK-iOS/EvernoteSDK.h>
+#import <EvernoteSDK/EvernoteSDK.h>
 #import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 
 @import MobileCoreServices;
@@ -376,7 +376,7 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 
 - (void)sendToEvernote:(NCLNote *)note
 {
-    EvernoteSession *session = [EvernoteSession sharedSession];
+    ENSession *session = [ENSession sharedSession];
     if (session.isAuthenticated) {
         NSString *title = note.title;
         NSString *content = note.content;
@@ -408,26 +408,27 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
     EDAMNote *note = [[EDAMNote alloc] init];
     note.title = title;
     note.content = content;
-//    note.tagNames = tagNames.mutableCopy;
     note.attributes = noteAttributes;
-    note.created = (long long)[[NSDate date] timeIntervalSince1970] * 1000;
+    note.created = @([[NSDate date] timeIntervalSince1970] * 1000);
     
-    EvernoteNoteStore *noteStore = [EvernoteNoteStore noteStore];
-    [noteStore createNote:note success:^(EDAMNote *note) {
-        [SVProgressHUD dismiss];
-        [SVProgressHUD showSuccessWithStatus:nil];
-    } failure:^(NSError *error) {
-        [SVProgressHUD dismiss];
-        [SVProgressHUD showErrorWithStatus:nil];
+    ENNoteStoreClient *noteStore = [[ENSession sharedSession] primaryNoteStore];
+    [noteStore createNote:note completion:^(EDAMNote * _Nullable note, NSError * _Nullable error) {
+        if (error) {
+            [SVProgressHUD dismiss];
+            [SVProgressHUD showErrorWithStatus:nil];
+        } else {
+            [SVProgressHUD dismiss];
+            [SVProgressHUD showSuccessWithStatus:nil];
+        }
     }];
 }
 
 - (void)authenticateEvernote
 {
-    EvernoteSession *session = [EvernoteSession sharedSession];
-    [session authenticateWithViewController:self completionHandler:^(NSError *error) {
+    ENSession *session = [ENSession sharedSession];
+    [session authenticateWithViewController:self preferRegistration:NO completion:^(NSError * _Nullable error) {
         if (error) {
-            if (error.code == EvernoteSDKErrorCode_USER_CANCELLED) {
+            if (error.code == ENErrorCodeCancelled) {
                 return;
             }
             
@@ -439,11 +440,13 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
             return;
         }
         
-        EvernoteUserStore *userStore = [EvernoteUserStore userStore];
-        [userStore getUserWithSuccess:^(EDAMUser *user) {
-            [self sendToEvernote:nil];
-        } failure:^(NSError *error) {
-            [self presentError:error message:nil];
+        ENUserStoreClient *userStore = [session userStore];
+        [userStore fetchUserWithCompletion:^(EDAMUser * _Nullable user, NSError * _Nullable error) {
+            if (error) {
+                [self presentError:error message:nil];
+            } else {
+                [self sendToEvernote:nil];
+            }
         }];
     }];
 }
@@ -721,13 +724,19 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     if ([buttonTitle isEqualToString:NSLocalizedString(@"Send to Evernote", nil)]) {
-        [self sendToEvernote:self.note];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self sendToEvernote:self.note];
+        });
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Login to Dropbox", nil)]) {
-        [DBClientsManager authorizeFromController:UIApplication.sharedApplication controller:self openURL:^(NSURL * _Nonnull url) {
-            [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
-        }];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [DBClientsManager authorizeFromController:UIApplication.sharedApplication controller:self openURL:^(NSURL * _Nonnull url) {
+                [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+            }];
+        });
     } else if ([buttonTitle isEqualToString:NSLocalizedString(@"Save to Dropbox", nil)]) {
-        [self saveToDropbox:self.note];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self saveToDropbox:self.note];
+        });
     }
 }
 

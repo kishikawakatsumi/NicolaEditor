@@ -156,8 +156,15 @@ static NSCache *cache;
     
     [self setupInputEngine];
     [self setupKeyboardView];
-    
-    self.keyboardInputMethod = NCLKeyboardInputMethodKana;
+
+    if (@available(iOS 11.0, *)) {
+        self.keyboardInputMethod = NCLKeyboardInputMethodAlphabet;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.keyboardInputMethod = NCLKeyboardInputMethodKana;
+        });
+    } else {
+        self.keyboardInputMethod = NCLKeyboardInputMethodKana;
+    }
 }
 
 - (void)dealloc
@@ -579,15 +586,24 @@ static NSCache *cache;
         id candidateResultSet = [self.internalKeyboard valueForKey:zfojM79sdi9CCtYPwy3H];
         id candidateList = [self.internalKeyboard valueForKey:khK6OMhSKZlcaj4VrGn3];
 
-        UICollectionViewController *collectionViewController = [candidateList valueForKey:JrWofcSm4A8qSWOcgTEg];
-        UICollectionView *collectionView = collectionViewController.collectionView;
-        NSArray *selectedIndexPaths = collectionView.indexPathsForSelectedItems;
-        if (selectedIndexPaths.count > 0) {
-            [self sendMessage:self.internalKeyboard forName:uNTmdpaswc3OpK7Q3JxE attachments:nil];
-            return YES;
-        } else {
+        @try {
+            UICollectionViewController *collectionViewController = [candidateList valueForKey:JrWofcSm4A8qSWOcgTEg];
+            UICollectionView *collectionView = collectionViewController.collectionView;
+            NSArray *selectedIndexPaths = collectionView.indexPathsForSelectedItems;
+            if (selectedIndexPaths.count > 0) {
+                [self sendMessage:self.internalKeyboard forName:uNTmdpaswc3OpK7Q3JxE attachments:nil];
+                return YES;
+            } else {
+                id defaultCandidate = [candidateResultSet valueForKey:ejUGacPiwpO2dAdcF02M];
+                if (defaultCandidate) {
+                    [self sendMessage:self.internalKeyboard forName:Eqo0llHPe80vNAN1bvDB attachments:@[@{@"Object": defaultCandidate}]];
+                    return YES;
+                }
+            }
+        } @catch (NSException *exception) {
             id defaultCandidate = [candidateResultSet valueForKey:ejUGacPiwpO2dAdcF02M];
             if (defaultCandidate) {
+                [self sendMessage:self.internalKeyboard forName:mb6FzfJW6t9XaDQkna7m attachments:@[@{@"Object": @""}]];
                 [self sendMessage:self.internalKeyboard forName:Eqo0llHPe80vNAN1bvDB attachments:@[@{@"Object": defaultCandidate}]];
                 return YES;
             }

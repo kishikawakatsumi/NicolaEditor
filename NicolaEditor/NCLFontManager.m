@@ -91,8 +91,8 @@
                 }
 			});
 		} else if (state == kCTFontDescriptorMatchingDidFinish) {
-            _downloading = NO;
-            _finished = YES;
+            self->_downloading = NO;
+            self->_finished = YES;
             
             if (errorDuringDownload) {
                 if ([self.delegate respondsToSelector:@selector(download:matchingDidFailWithError:)]) {
@@ -130,7 +130,7 @@
                 }
 			});
 		} else if (state == kCTFontDescriptorMatchingWillBeginDownloading) {
-            _downloading = YES;
+            self->_downloading = YES;
             
 			dispatch_async( dispatch_get_main_queue(), ^ {
                 if ([self.delegate respondsToSelector:@selector(downloadMatchingWillBeginDownloading:)]) {
@@ -145,7 +145,7 @@
 			});
 		} else if (state == kCTFontDescriptorMatchingDownloading) {
 			dispatch_async( dispatch_get_main_queue(), ^ {
-                _progress = progressValue;
+                self->_progress = progressValue;
                 if ([self.delegate respondsToSelector:@selector(downloadMatchingDownloading:progress:)]) {
                     [self.delegate downloadMatchingDownloading:self progress:progressValue];
                 }

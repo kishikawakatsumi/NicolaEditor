@@ -1,4 +1,4 @@
-platform :ios, '8.0'
+platform :ios, '10.0'
 
 inhibit_all_warnings!
 
@@ -7,7 +7,7 @@ target 'NicolaEditor' do
   pod 'FFCircularProgressView'
   pod 'JLRoutes'
   pod 'NLCoreData'
-  pod 'Evernote-SDK-iOS'
+  pod 'EvernoteSDK'
   pod 'ObjectiveDropboxOfficial'
   pod 'uservoice-iphone-sdk'
 
