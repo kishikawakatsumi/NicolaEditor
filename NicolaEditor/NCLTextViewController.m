@@ -634,7 +634,11 @@ static NSString *nuAcYW37RZfT9A3gNRm3;
 - (void)accessoryView:(NCLKeyboardAccessoryView *)accessoryView keyboardTypeDidChange:(NSInteger)keyboardType
 {
     [self setupInputView];
-    [self.textView reloadInputViews];
+    if (@available(iOS 15, *)) {
+        // no-op
+    } else {
+        [self.textView reloadInputViews];
+    }
 }
 
 - (void)accessoryViewDidComplete:(NCLKeyboardAccessoryView *)accessoryView

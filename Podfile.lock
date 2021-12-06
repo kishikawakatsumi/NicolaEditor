@@ -3,7 +3,7 @@ PODS:
   - FFCircularProgressView (0.5)
   - JLRoutes (2.1)
   - NLCoreData (0.5.3)
-  - ObjectiveDropboxOfficial (3.10.0)
+  - ObjectiveDropboxOfficial (6.2.0)
   - SVProgressHUD (2.2.5)
   - uservoice-iphone-sdk (3.2.12)
 
@@ -31,10 +31,10 @@ SPEC CHECKSUMS:
   FFCircularProgressView: 683a4ab1e1bd613246a3dffa61503ffdebcde8d8
   JLRoutes: d755245322b94227662ea3e43492fdca94e05c5b
   NLCoreData: 0c1e54193e6aef4619822e63a4dbfeba53610787
-  ObjectiveDropboxOfficial: 19a4913d4d52fba035d41f40da71df0d6b303327
+  ObjectiveDropboxOfficial: 2115db7fc21d267c6f0606557a6ea0b69aa37d30
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   uservoice-iphone-sdk: 4b82c3fb1fc335567aefa2314ee99a864bfac60c
 
 PODFILE CHECKSUM: 50be0088ae8a04a07eee8a920534e5f0ec5c17df
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.11.2

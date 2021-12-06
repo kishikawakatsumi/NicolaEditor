@@ -120,18 +120,7 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
 {
     BOOL canHandle = NO;
 
-    DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
-    if (authResult) {
-        if ([authResult isSuccess]) {
-            canHandle = YES;
-        } else if ([authResult isCancel]) {
-            canHandle = NO;
-        } else if ([authResult isError]) {
-            canHandle = NO;
-        }
-    } else {
-        canHandle = NO;
-    }
+    canHandle = [DBClientsManager handleRedirectURL:url completion:^(DBOAuthResult * _Nullable authResult) {}];
 
     if (url.isFileURL) {
         NSError *error = nil;
@@ -141,27 +130,13 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
         }
     }
 
-    canHandle = [JLRoutes routeURL:url];
-
-    return canHandle;
+    return canHandle || [JLRoutes routeURL:url];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     BOOL canHandle = NO;
-
-    DBOAuthResult *authResult = [DBClientsManager handleRedirectURL:url];
-    if (authResult) {
-        if ([authResult isSuccess]) {
-            canHandle = YES;
-        } else if ([authResult isCancel]) {
-            canHandle = NO;
-        } else if ([authResult isError]) {
-            canHandle = NO;
-        }
-    } else {
-        canHandle = NO;
-    }
+    canHandle = [DBClientsManager handleRedirectURL:url completion:^(DBOAuthResult * _Nullable authResult) {}];
     
     if (url.isFileURL) {
         NSError *error = nil;
@@ -171,9 +146,7 @@ static NSString * const DropboxAppSecret = @"ki02ksylrv77a7y";
         }
     }
     
-    canHandle = [JLRoutes routeURL:url];
-    
-    return canHandle;
+    return canHandle || [JLRoutes routeURL:url];
 }
 
 #pragma mark -
