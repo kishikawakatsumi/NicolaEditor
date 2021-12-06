@@ -12,7 +12,10 @@ target 'NicolaEditor' do
   pod 'uservoice-iphone-sdk'
 
   post_install do | installer |
-    require 'fileutils'
-    FileUtils.cp_r('Pods/Target Support Files/Pods-NicolaEditor/Pods-NicolaEditor-acknowledgements.plist', 'NicolaEditor/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+    begin
+      require 'fileutils'
+      FileUtils.cp_r('Pods/Target Support Files/Pods-NicolaEditor/Pods-NicolaEditor-acknowledgements.plist', 'NicolaEditor/Settings.bundle/Acknowledgements.plist', :remove_destination => true)
+    rescue => e
+    end
   end
 end
